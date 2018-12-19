@@ -2,7 +2,7 @@
 // *************************PROFILE****************************
 // ________________________________________________________
 
-let profile = "dev";
+let profile = "prod";
 export const fixedWorkFlowListUrl = profile == "dev" ? 'http://localhost:65453/GestionFlujoService.svc/ListarFlujo/1' : 'http://10.80.2.89/WCF_CasasDeCobro/GestionFlujoService.svc/ListarFlujo/1';
 export const workFlowAddUrl = profile == "dev" ? 'http://localhost:65453/GestionFlujoService.svc/CrearFlujo' : 'http://10.80.2.89/WCF_CasasDeCobro/GestionFlujoService.svc/CrearFlujo';
 export const symbolsListUrl = profile == "dev" ? 'http://localhost:65453/CategoriaService.svc/CategoriaFlujo/1' : 'http://10.80.2.89/WCF_CasasDeCobro/CategoriaService.svc/CategoriaFlujo/1';
