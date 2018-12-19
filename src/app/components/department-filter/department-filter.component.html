@@ -1,0 +1,26 @@
+<div class="filter" [ngClass]="">
+  <button class="btnradio" (click)="toggleItem()" [ngClass]="getClassComponent(0)">
+    <h6 class="custom-control-label">
+      Departamento
+    </h6>
+  </button>
+  <form [formGroup]="filterFixedForm">
+    <div class="items">
+      <div class="containerActivation" [ngClass]="getClassComponent(1)"></div>
+      <div class="selector">
+        <select class="custom-select" formControlName="departmentsSelect" (change)="change()" required>
+          <option *ngFor="let department of departmentsList" value="{{department}}" selected>{{department}}</option>
+        </select>
+        <button *ngIf="btnAddView" type="button" class="btn btn-outline-primary btnAdd" (click)="addDepartment()">
+          <fa-icon [icon]="iconADD"></fa-icon>
+        </button>
+      </div>
+      <div *ngIf="!validation" class="error">
+        <div>Debe elegir un departamento </div>
+      </div>
+      <div class="departmentsContainer">
+        <div *ngFor="let department of departmentsSelected" class="divDepartment">{{department}}<span (click)="removeDepartment(department)">x</span></div>
+      </div>
+    </div>
+  </form>
+</div>

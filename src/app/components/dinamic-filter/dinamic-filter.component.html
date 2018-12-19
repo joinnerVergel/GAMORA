@@ -1,0 +1,14 @@
+<div class="checkboxItem">
+  <h6>
+    {{brand}}
+  </h6>
+  <div class="items">
+      <div *ngFor="let item of options">
+        <button class="btnradio" (click)="toggleItem(item)" [ngClass]="readClass(item)">
+            <label class="custom-control-label">
+                {{item}}
+            </label>
+        </button>
+      </div>
+    </div>
+</div>

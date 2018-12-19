@@ -1,0 +1,39 @@
+.navbar{
+    background: url('../../resources/img/bg-header.png');
+    background-size: 100%;
+    background-position-y: center;
+}
+.logo{
+    background: url('../../resources/img/company_logo.png');
+    background-size: 100%;
+    background-position-y: center;
+    width:100px;
+    height:30px;
+    margin:10px;
+    margin-left: 50px;
+    float: left;
+}
+.container-fluid{
+    padding: 0;
+}
+.body-content{
+    padding: 20px 40px 20px 0;
+    overflow: auto;
+    max-height: calc(95vh - 4rem);
+}
+.rowContainer{
+    overflow: scroll;
+}
+
+.navbar-header{
+    width: 100%;
+}
+
+
+
+@media (max-width: 768px) {
+    .body-content{
+        padding: 20px 40px 20px 40px;
+    }
+
+}

@@ -1,0 +1,17 @@
+<div class="symbolContainer holdSymbol" ngDraggable [bounds]="data.container" (endOffset)="onMoveEnd()"
+  [inBounds]="true" [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol">
+  <div class="btnProperties" (click)="viewProperties=!viewProperties" *ngIf="getClassContainer()=='selected'">
+      <fa-icon [icon]="propertiesIcon" class="icon"></fa-icon>
+  </div>
+  <div class="divProperties" *ngIf="viewProperties && getClassContainer()=='selected'">
+    <form [formGroup]="holdForm">
+        <input type="number" formControlName="value" placeholder="Dias" min="1" max="7" (blur)="viewProperties=false; onMoveEnd();" (keypress)="false">
+    </form>
+  </div>
+  <div class="circularSymbol" (click)="symbolSelectedChanged()">
+      <span>{{f.value.value}}</span>
+      <fa-icon [icon]="clockIcon" class="icon"></fa-icon>
+    <div class="divIn" (click)="pointIn()"></div>
+    <div class="divOut" (click)="pointOut()"></div>
+  </div>
+</div>

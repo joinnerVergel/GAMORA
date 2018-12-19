@@ -1,0 +1,31 @@
+.divOutLeft {
+    width: 7px;
+    height: 7px;
+    border: 2px solid skyblue;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.divOutRight {
+    width: 7px;
+    height: 7px;
+    border: 2px solid skyblue;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.divIn {
+    width: 7px;
+    height: 7px;
+    border: 2px solid skyblue;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}

@@ -1,0 +1,26 @@
+<div class="filter" [ngClass]="">
+  <button class="btnradio" (click)="toggleItem()" [ngClass]="classFilterSelected">
+    <h6 class="custom-control-label">
+      Segmento
+    </h6>
+  </button>
+  <form [formGroup]="filterFixedForm">
+    <div class="items">
+      <div class="containerActivation" [ngClass]="classSelected"></div>
+      <div class="selector">
+        <select class="custom-select" formControlName="segmentsSelect" (change)="change()" required>
+          <option *ngFor="let segment of segmentsList" value="{{segment}}" selected>{{segment}}</option>
+        </select>
+        <button *ngIf="btnAddView" type="button" class="btn btn-outline-primary btnAdd" (click)="addSegment()">
+          <fa-icon [icon]="iconADD"></fa-icon>
+        </button>
+      </div>
+      <div *ngIf="!validation" class="error">
+        <div>Debe elegir un segmento </div>
+      </div>
+      <div class="segmentsContainer">
+        <div *ngFor="let segment of segmentsSelected" class="divSegment">{{segment}}<span (click)="removeSegment(segment)">x</span></div>
+      </div>
+    </div>
+  </form>
+</div>

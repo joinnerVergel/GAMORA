@@ -1,0 +1,24 @@
+<div class="filter" [ngClass]="">
+  <button class="btnradio" (click)="toggleItem()" [ngClass]="classFilterSelected">
+    <h6 class="custom-control-label">
+      Saldo
+    </h6>
+  </button>
+  <form [formGroup]="filterFixedForm">
+    <div class="items">
+      <div class="containerActivation" [ngClass]="classSelected"></div>
+      <select class="custom-select" formControlName="condition" (change)="change()" required>
+        <option *ngFor="let option of optionsDebtValue" value="{{option.value}}" selected>{{option.text}}</option>
+      </select>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <input type="number" class="form-control" formControlName="value" placeholder="Saldo" min="0" (blur)="change()" required>
+      </div>
+      <div *ngIf="!validation" class="error">
+          <div>*Todos los campos son obligatorios</div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,45 @@
+<div class="btntoolbox" *ngIf="!viewToolbox" (click)="viewToolbox=!viewToolbox">Herramientas
+  <!-- <fa-icon [icon]="toolsIcon" class="icon"></fa-icon> -->
+</div>
+<div class="toolbox" *ngIf="viewToolbox">
+  <div class="titleToolbox">Cuadro de herramientas
+    <span class="btnHideToolbox" *ngIf="viewToolbox" (click)="viewToolbox=!viewToolbox">
+      <fa-icon [icon]="arrowRightIcon" class="icon"></fa-icon>
+    </span>
+  </div>
+  <div class="bodyToolbox">
+    <ngb-accordion #acc="ngbAccordion">
+      <ngb-panel title="Eventos">
+        <ng-template ngbPanelContent>
+          <div class="eventItem" *ngFor="let SymbolCategory of symbolsList">
+            <div class="titleCategory">{{SymbolCategory.Category}}</div>
+            <div class="divCenter">
+              <div class="rectangularSymbol" mwlDraggable dropData="{{getDropData(SymbolSubcategory)}}" dragActiveClass="drag-active"
+                *ngFor="let SymbolSubcategory of SymbolCategory.Subcategory">
+                <span>{{SymbolSubcategory.Subcategory}}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+    <ngb-accordion #acc="ngbAccordion">
+      <ngb-panel id="toggle-2" title="Símbolos especiales">
+        <ng-template ngbPanelContent>
+          <div class="titleCategory"></div>
+          <div class="divCenter">
+            <div class="circularSymbol" mwlDraggable dropData="hold" dragActiveClass="drag-active">
+              <fa-icon [icon]="clockIcon" class="icon"></fa-icon>
+            </div>
+            <div  class="diamondSymbol" mwlDraggable dropData="decision" dragActiveClass="drag-active">
+              <div class="diamond">
+                <fa-icon [icon]="payIcon" class="icon"></fa-icon>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+</div>

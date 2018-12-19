@@ -1,0 +1,26 @@
+<div class="symbolContainer eventSymbol" ngDraggable [bounds]="data.container" (endOffset)="onMoveEnd()" [inBounds]="true"
+  [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol">
+  <div class="btnProperties" (click)="viewProperties=!viewProperties" *ngIf="getClassContainer()=='selected'">
+    <fa-icon [icon]="propertiesIcon" class="icon"></fa-icon>
+  </div>
+  <div class="divProperties" *ngIf="viewProperties && getClassContainer()=='selected'">
+    <form [formGroup]="eventSymbolForm">
+      <input type="number" formControlName="attempts" placeholder="Intentos" min="1" max="4" (blur)="viewProperties=false; onMoveEnd();"
+        (keypress)="false">
+      <select formControlName="scheduleSelect" (blur)="viewProperties=false; onMoveEnd();">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+        <option value="INDIFERENTE">&#60;&#62;</option>
+      </select>
+    </form>
+  </div>
+  <div class="rectangularSymbol" (click)="symbolSelectedChanged()">
+    {{data.eventName}}
+    <div class="divIn" (click)="pointIn()"></div>
+    <div class="divOut" (click)="pointOut()"></div>
+    <div class="bubble" *ngIf="!(getClassContainer()=='selected' && viewProperties)">
+      <span>{{f.attempts.value}}</span>
+      <span innerHtml="{{getSchedule()}}"></span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="filter" [ngClass]="">
+  <button class="btnradio" (click)="toggleItem()" [ngClass]=" getClassComponent(0)">
+    <h6 class="custom-control-label">
+      Regional
+    </h6>
+  </button>
+  <form [formGroup]="filterFixedForm">
+    <div class="items">
+      <div class="containerActivation" [ngClass]=" getClassComponent(1)"></div>
+      <div class="selector">
+        <select class="custom-select" formControlName="regionalsSelect" (change)="change()" required>
+          <option *ngFor="let regional of regionalsList" value="{{regional}}" selected>{{regional}}</option>
+        </select>
+        <button *ngIf="btnAddView" type="button" class="btn btn-outline-primary btnAdd" (click)="addRegional()">
+          <fa-icon [icon]="iconADD"></fa-icon>
+        </button>
+      </div>
+      <div *ngIf="!validation" class="error">
+        <div>Debe elegir una regional </div>
+      </div>
+      <div class="regionalsContainer">
+        <div *ngFor="let regional of regionalsSelected" class="divTenure">{{regional}}<span (click)="removeRegional(regional)">x</span></div>
+      </div>
+    </div>
+  </form>
+</div>

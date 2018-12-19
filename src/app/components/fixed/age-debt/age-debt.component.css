@@ -1,0 +1,30 @@
+form{
+    min-width: 45%;
+    clear: both;
+}
+
+.form-group{
+    margin: 10px;
+    padding: 10px;
+    border: 2px inset #fff;
+    border-radius: 5px;
+}
+
+.validateLimit{
+    display: block;
+}
+.reduceFont{
+    font-size: 0.7em;
+}
+
+.Validation{
+    display: block;
+}
+
+.radiosContainer .btn-group{
+    display: inline-block;
+    margin: 0 10px 10px;
+}
+.radiosContainer .btn-group label{
+    font-size: 0.5em;
+}

@@ -1,0 +1,58 @@
+.toolbox{
+    width: 250px;
+    height: 396px;
+    border-radius: 5px;
+    background: linear-gradient(to bottom,rgba(13,62,80,0.3),rgba(13,157,174,0.1));
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    border: 2px outset #aaa;
+    padding: 50px 0 0 0;
+  }
+  .bodyToolbox{
+    overflow-y: auto;
+    height: 340px;
+  }
+
+ .btntoolbox{
+    writing-mode: vertical-lr;
+    background: linear-gradient(to bottom,rgba(13,62,80,0.3),rgba(13,157,174,0.1));
+    position: absolute;
+    z-index: 10;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+    font-weight: bold;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    border:2px outset #aaa;
+    color: rgba(13,62,80,1);
+    font-size: 0.7em;
+  }
+  .btnHideToolbox{
+    cursor: pointer;
+    position: absolute;
+    top: -2px;
+    left: -15px;
+    background: #ddd;
+    padding: 4px;
+    border: 1px solid #aaa;
+    border-radius: 5px 0 0 5px;
+    font-weight: bold;
+    color: #777;
+    border-right: none;
+  }
+
+  .titleToolbox {
+    background: linear-gradient(to bottom,rgba(13,62,80,.5),rgba(13,157,174,.2));
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 3px inset #fff;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000000;
+}

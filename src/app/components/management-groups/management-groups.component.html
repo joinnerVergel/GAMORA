@@ -1,0 +1,80 @@
+<h4 class="title">Grupos de Gestión</h4>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link" [ngClass]="getFixedClass()" data-toggle="tab" routerLink="/management-groups/fixed" role="tab" aria-selected="true">Operación Fija</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [ngClass]="getMobileClass()" data-toggle="tab" routerLink="/management-groups/mobile" role="tab" aria-selected="false">Operación Móvil</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active"  role="tabpanel">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+<!-- <h4 class="title">Grupos de gestión</h4>
+<button type="button" class="btn btn-primary" [routerLink]='["/management-groups/new-group"]'>Crear Grupo</button>
+<div class="table-responsive-md listaTabla">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col" rowspan="2">#</th>
+        <th scope="col" rowspan="2">Grupo</th>
+        <th scope="col" rowspan="2" class="date">Fecha de Creacion</th>
+        <th scope="col" rowspan="2">Autor</th>
+        <th scope="col" rowspan="2">No. Cuentas</th>
+        <th scope="col">Filtros Fijos</th>
+        <th scope="col">Filtros Dinámicos</th>
+        <th scope="col" rowspan="2">Acciones</th>
+      </tr>
+      <tr>
+        <th class="colFixedContainer">
+          <div class="colFixed">Filtro</div>
+          <div class="colFixed">Condición</div>
+        </th>
+        <th class="colFixedContainer">
+          <div class="colFixed">Filtro</div>
+          <div class="colFixed">Condición</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group of groupsList">
+        <th scope="row">{{group.item}}</th>
+        <td>{{group.name}}</td>
+        <td>{{group.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+        <td>{{group.createdBy}}</td>
+        <td>{{group.accountsQuantity}}</td>
+        <td class="colFixedContainer">
+          <table class="table table-sm">
+            <tr *ngFor="let filter of group.fixedFiltersList">
+              <td class="colFixed">{{filter.nameFilter}}</td>
+              <td class="colFixed">{{filter.valueFilter}}</td>
+            </tr>
+          </table>
+        </td>
+        <td class="colFixedContainer">
+          <table class="table table-sm">
+            <tr *ngFor="let filter of group.dinamicFiltersList">
+              <td class="colFixed">{{filter.nameFilter}}</td>
+              <td class="colFixed">{{filter.valueFilter}}</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <div class="actions">
+            <button type="button" class="btnAction btnDelete" title="Eliminar" (click)="deleteGroupChange(group);open(content);">
+              <fa-icon [icon]="deleteIcon"></fa-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <app-confirm-dialog [description]="'Esta a punto de eliminar este grupo.'" [question]="'Esta seguro de ejecutar esta accion?'"
+      (result)="action($event)"></app-confirm-dialog>
+  </ng-template>
+</div> -->

@@ -1,0 +1,6 @@
+<div class="symbolContainer endSymbol" ngDraggable [bounds]="data.container" (endOffset)="onMoveEnd()" [inBounds]="true"
+    [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol">
+    <div class="ovalSymbol" (click)="symbolSelectedChanged()">Fin
+        <div class="divIn" (click)="pointIn()"></div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.building{
+    background: url('../../resources/img/logo-pagina-en-construccion.png') no-repeat top/500px;
+    width: 100%;
+    height: 350px;
+}
+
+
+@media (max-width: 768px) {
+    .building{
+        background-size:90% 
+    }
+}

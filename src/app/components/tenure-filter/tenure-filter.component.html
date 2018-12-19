@@ -1,0 +1,26 @@
+<div class="filter" [ngClass]="">
+  <button class="btnradio" (click)="toggleItem()" [ngClass]="classFilterSelected">
+    <h6 class="custom-control-label">
+      Tenencia
+    </h6>
+  </button>
+  <form [formGroup]="filterFixedForm">
+    <div class="items">
+      <div class="containerActivation" [ngClass]="classSelected"></div>
+      <div class="selector">
+        <select class="custom-select" formControlName="tenuresSelect" (change)="change()" required>
+          <option *ngFor="let tenure of tenuresList" value="{{tenure}}" selected>{{tenure}}</option>
+        </select>
+        <button *ngIf="btnAddView" type="button" class="btn btn-outline-primary btnAdd" (click)="addTenure()">
+          <fa-icon [icon]="iconADD"></fa-icon>
+        </button>
+      </div>
+      <div *ngIf="!validation" class="error">
+        <div>Debe elegir una tenencia </div>
+      </div>
+      <div class="tenuresContainer">
+        <div *ngFor="let tenure of tenuresSelected" class="divTenure">{{tenure}}<span (click)="removeTenure(tenure)">x</span></div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,11 @@
+<form [formGroup]="contactElementForm">
+  <div class="form-group">
+    <label>Contacto</label>
+    <select class="form-control" formControlName="contactElement" (change)="dataChange()" [ngClass]="{ 'is-invalid': submitted && f.contactElement.errors }">
+      <option *ngFor="let option of contactOptions" value="{{option.id}}">{{option.contactOption}}</option>
+    </select>
+    <div *ngIf="submitted && f.contactElement.errors" class="invalid-feedback">
+      <div *ngIf="f.contactElement.errors.required">Debe seleccionar una opción de contacto</div>
+    </div>
+  </div>
+</form>

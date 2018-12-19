@@ -1,0 +1,5 @@
+<div id="messageLogContainer" >
+  <div *ngFor="let message of logService.MessageList">
+    <ngb-alert (close)="logService.removeMessage(message)" [type]="message.type">{{message.message}}</ngb-alert>
+  </div>
+</div>

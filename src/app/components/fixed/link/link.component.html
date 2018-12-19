@@ -1,0 +1,48 @@
+<form [formGroup]="linkElementForm">
+  <div class="form-group">
+    <div class="info" [ngbPopover]="popInfoContent"  triggers="mouseenter:mouseleave"
+      container="body">i</div>
+    <ng-template #popInfoContent>
+      <div class=tagsInfo>
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr><th colspan="2">Tag</th><th>N° caracteres</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tag of tagsList">
+              <td>@{{tag.tag}}</td>
+              <td><span class="tag">{{tag.tag}}</span></td>
+              <td>{{tag.size}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+    <label>Link</label>
+    <mwl-text-input-autocomplete-container>
+      <textarea placeholder="Enlace Web" class="form-control" mwlTextInputAutocomplete [findChoices]="findChoices"
+        [getChoiceLabel]="getChoiceLabel" formControlName="linkElement" rows="1" (input)="dataChange()" (keypress)="keyPressEvent($event.key)"
+        [ngbPopover]="popContent" popoverTitle="Enlace" triggers="mouseenter:mouseleave"
+        [ngClass]="{ 'is-invalid': submitted && f.linkElement.errors}">
+      </textarea>
+      <div *ngIf="submitted  && f.linkElement.errors" class="invalid-feedback">
+        <div *ngIf="f.linkElement.errors.required">La url del enlace es obligatoria</div>
+      </div>
+      <ng-template #popContent>
+        <div [innerHTML]="msgHTML"></div>
+      </ng-template>
+    </mwl-text-input-autocomplete-container>
+    <span class="reduceFont">Cantidad de caracteres restantes:{{getCharactersSize()}}</span>
+    <div *ngIf="limitExceeded" class="invalid-feedback validateLimit">
+      <div>Se ha excedido el tamaño máximo de carácteres permitidos</div>
+    </div>
+    <div *ngIf="linkExist">
+      <label>Tag Link</label>
+      <input type="text" formControlName="tagLinkElement" class="form-control"  placeholder="Tag (Nombre del Enlace)" (input)="dataTagChange()" (keypress)="generalKeyPressEvent($event.key,50,f.tagLinkElement,true,true)"
+        [ngClass]="{ 'is-invalid': submitted && f.tagLinkElement.errors && linkExist }"/>
+      <div *ngIf="submitted  && f.tagLinkElement.errors && linkExist" class="invalid-feedback">
+        <div *ngIf="f.tagLinkElement.errors.required">Debe asociar un nombre al enlace</div>
+      </div>
+    </div>
+  </div>
+</form>

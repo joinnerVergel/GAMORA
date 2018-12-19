@@ -1,0 +1,33 @@
+.divOut {
+    width: 7px;
+    height: 7px;
+    border: 2px solid skyblue;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 36px;
+    bottom: -2px;
+}
+.divIn {
+    width: 7px;
+    height: 7px;
+    border: 2px solid skyblue;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 36px;
+    top: -2px;
+}
+.bubble{
+    width: 30px;
+    height: 30px;
+    background:rgba(221,221,221,0.5);
+    border: 1px solid #aaa;
+    position: absolute;
+    right: -30px;
+}
+.bubble span{
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}

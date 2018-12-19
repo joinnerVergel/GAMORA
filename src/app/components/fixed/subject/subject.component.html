@@ -1,0 +1,10 @@
+<form [formGroup]="subjectElementForm">
+  <div class="form-group">
+    <label>Asunto</label>
+    <input type="text" formControlName="subjectElement" class="form-control" (keypress)="generalKeyPressEvent($event.key,50,f.subjectElement,true)"
+     (input)="dataChange()" [ngClass]="{ 'is-invalid': submitted && f.subjectElement.errors }"/>
+    <div *ngIf="submitted && f.subjectElement.errors" class="invalid-feedback">
+      <div *ngIf="f.subjectElement.errors.required">El asunto es obligatorio</div>
+    </div>
+  </div>
+</form>

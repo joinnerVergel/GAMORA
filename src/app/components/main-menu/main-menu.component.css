@@ -1,0 +1,123 @@
+nav{
+    padding: 0;
+}
+.navbar-collapse{
+    background: linear-gradient(to bottom,rgba(13,62,80,1),rgba(13,157,174,1));
+}
+ 
+.nav-item {
+    float: none;
+    font-size: 15px;
+    margin: 6px;
+    border: 1px inset #fff;
+    border-collapse: collapse;
+    border-radius: 10px 0;
+}
+
+.nav-item a {
+    padding: 10px 16px;
+    border-radius: 4px;
+    color: white;
+}
+
+.nav-item.active[_ngcontent-c2] a[_ngcontent-c2]{
+    background: linear-gradient(to bottom,rgb(13, 79, 97),rgba(13,157,174,1));
+    border: 1px dotted #fff;
+}
+
+.nav-item.active a,
+.nav-item a:hover,
+.nav-item a:focus {
+    background: linear-gradient(to bottom,rgb(13, 79, 97),rgba(13,157,174,1));
+    color: white;
+}
+
+.navbar-nav{
+    width: 100%;
+    padding: 10px;
+    position: sticky;
+    top: 4rem;
+    z-index: 1000;
+    height: calc(100vh - 4rem);
+}
+
+button.navbar-toggler{
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    color: #fff;
+    font-weight: lighter;
+    font-size: 1.5em
+}
+.navbar-toggler{
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .show ul {
+        height: auto;
+    } 
+}
+
+.icon {
+    font-size: 1.2em;
+    
+}
+.titleItem{
+    margin-left: 10px;
+}
+
+span.title-collapse{
+    display: none;
+}
+
+div.title-collapse ul li a,
+div.title-collapse ul li,
+div.title-collapse ul{
+    width:fit-content;
+}
+
+.userActions{
+    position: fixed;
+    top: 0;
+    right:0;
+    margin: 10px;
+    z-index: 2000;
+}
+.divUser{
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: rgba(255,255,255,.1);
+    border:none;
+}
+
+.divUser:hover{
+    border: 1px outset #fff;
+}
+
+.menuUserActions{
+    left:-115px!important;
+}
+
+.dropdown-item{
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.dropdown-item:focus, .dropdown-item:hover{
+    background-color: skyblue !important;
+    cursor: pointer;
+    color: #fff;
+
+}
+.nameUser{
+    position: fixed;
+    top: 0;
+    right: 80px;
+    margin: 20px 0;
+    color: #fff;
+}

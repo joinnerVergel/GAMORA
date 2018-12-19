@@ -1,0 +1,58 @@
+.buttonsContainer button{
+    float: right;
+    margin: 10px;
+}
+
+.form-group {
+    width: 240px;
+    float: left;
+    margin: 10px;
+    max-width: 90%;
+    padding: 10px;
+    border: 2px inset #fff;
+    border-radius: 5px;
+}
+
+.newForm{
+    position: relative;
+    padding: 0px;
+}
+.buttonsContainer {
+    display: block;
+    background: #fff;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+}
+.buttonsContainer span{
+    padding: 10px 20px;
+    font-weight: bold;
+    float: left;
+}
+
+.divNameUser{
+    margin: 10px;
+    width: 90%;
+    padding: 10px;
+    border: 2px inset #fff;
+    border-radius: 5px;
+    clear: both;
+}
+
+.radiosContainer .btn-group{
+    display: inline-block;
+    margin: 0 10px 10px;
+}
+.radiosContainer .btn-group label{
+    font-size: 0.5em;
+}
+
+.radiosContainer .btn-group label:not(.active){
+    background-color: #ddd;
+    color: #777;
+    border: 1px solid #777;
+}
+
+table th,tbody tr td {
+    text-align: center;
+}

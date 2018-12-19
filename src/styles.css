@@ -1,1 +1,457 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    overflow: hidden;
+}
+h4.title{
+    border: 3px outset;
+    padding: 5px;
+    text-align: center;
+    border-radius: 25% 25% 0 0;
+    color: #444;
+    margin-bottom: 20px;
+}
+.tab-content {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: 0px;
+    border-radius: 0 0 5px 5px;
+    background: linear-gradient(to bottom,#fff,rgba(0,0,0,.03));
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    /* max-height: 400px;
+    overflow: auto; */
+}
+.table{
+    background-color: #fff !important;
+    border: 1px solid #ddd;
+}
+
+.btnAction{
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+}
+.btnAction:hover{
+    font-size: 20px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+.btnAction.btnDelete{
+    color:#dc3545;
+}
+.tooltipCopy .arrow::before{
+    border-top-color: #aaa;
+}
+.tooltipCopy .tooltip-inner{
+    background: #fff !important;
+    border: 2px inset #aaa;
+    color: #aaa !important;
+}
+
+.tooltipDelete .arrow::before{
+    border-top-color: #dc3545;
+}
+.tooltipDelete .tooltip-inner{
+    background: #fff !important;
+    border: 2px inset #dc3545;
+    color: #dc3545 !important;
+}
+.tooltipEdit .arrow::before{
+    border-top-color: yellowgreen;
+}
+.tooltipEdit .tooltip-inner{
+    background: #fff !important;
+    border: 2px inset yellowgreen;
+    color: yellowgreen !important;
+}
+
+.btnAction.btnView{
+    color:yellowgreen;
+}
+.btnAction.btnDelete{
+    color:#dc3545;
+}
+.btnAction.btnCopy{
+    color:#aaa;
+}
+
+
+.actions{
+    display: table;
+    margin: 0 auto;
+}
+.btnNew {
+    float: right;
+    margin:10px 10px;
+}
+.btnBack{
+    position: relative;
+    width: 80px;
+    height: 37px;
+    border: none !important;
+    background: #6c757d !important;
+}
+.btnBack:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.25)!important;
+    background: linear-gradient(to left,rgba(13,62,80,1),rgba(13,157,174,1)) !important;
+}
+
+.btnBack:hover::before{
+    border-color: rgba(13,157,174,1)!important;
+}
+.btnBack::before{
+    display: block;
+    height: 35px;
+    width: 35px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: -11px;
+    content: "";
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border: 2px solid #6c757d;
+}
+.btnBack span{
+    position: absolute;
+    top: 1.4px;
+    left: 0;
+    background: #fff;
+    padding: 4.5px;
+    color: #6c757d;
+    padding-right: 10px;
+}
+
+.actionsContainer{
+    overflow: hidden;
+    padding: 5px;
+}
+
+
+
+::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 5px 0;
+    background: #fff;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right,rgba(13,62,80,1),rgba(13,157,174,1)); 
+    background-size: 1px;
+    border-radius: 5px 0;
+    border:2px outset #ddd;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-size: 2px;
+}
+
+button.navbar-toggler {
+    background: rgba(255,255,255,.1);
+    border-radius: 5px;
+}
+
+button.navbar-toggler:hover{
+    border: 1px outset #fff;
+}
+
+h5.light{
+    font-weight: lighter;
+    text-align: right;
+    width: 50%;
+    float: right;
+}
+.treeNavigation{
+    height: 60px;
+    float: left;
+    width: 50%;
+    /* position: absolute;
+    top: 10px; */
+}
+.treeNavigation a{
+    position: relative;
+    padding-left: 1.5em;
+    color: #444
+}
+.treeNavigation a.active{
+    color:#007bff !important;
+}
+.treeNavigation a fa-icon{
+    position: absolute;
+    left: 0;
+}
+.treeNavigation li.father{
+    position: relative;
+    font-weight: lighter;
+}
+.treeNavigation li.father::before{
+    content: "";
+    width: 10px;
+    height: 15px;
+    border-left: 1.5px dashed #007bff;
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    border-bottom: 1.5px dashed #007bff;
+}
+
+.treeNavigation ul{
+    margin-left:30px;
+    position: absolute;
+    top: 25px;
+}
+
+.treeNavigation a span{
+    font-weight: bold;
+    margin-left: 5px;
+}
+.newForm{
+    background: linear-gradient(to top,#ddd,rgba(0,0,0,.03));
+    padding: 20px 20px 0 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin: 10px 30px;
+}
+
+span.tag{
+    background: skyblue;
+    border-radius: 5px;
+    padding: 2px;
+    font-size: 0.7em;
+}
+div.info{
+    background: lightgoldenrodyellow;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #aaa;
+    color: darkorange;
+    padding: 2px;
+    overflow: hidden;
+    font-size: 12px;
+    border-radius: 50%;
+    cursor: help;
+    font-family: monospace;
+    position: absolute;
+    right: 20px;
+}
+
+.dropdown-menu li{
+    padding: 0 5px;
+}
+.dropdown-menu li.active{
+    background: linear-gradient(to bottom,rgba(13,62,80,1),rgba(13,157,174,1));
+    
+}
+.dropdown-menu li.active a{
+    color: #fff;
+}
+.listaTabla{
+    overflow: auto;
+}
+
+
+.symbolContainer{
+    display: table;
+}
+.symbolContainer.selected{
+    border: 1px dashed #777;
+}
+.symbolContainer.selected{
+    cursor: move;
+}
+.ovalSymbol{
+    width: 80px;
+    height: 40px;
+    border: 1px solid #777;
+    background: #ddd;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+    color: #777;
+    font-size: 12px;
+}
+.rectangularSymbol{
+    width: 80px;
+    height: 40px;
+    border: 1px solid #777;
+    background: #ddd;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    color: #777;
+    font-size: 0.6em;
+    position: relative;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.accordion .card-body{
+    padding: 0;
+    overflow-y: auto;
+}
+.accordion .eventItem{
+    overflow: hidden;
+}
+.accordion .divCenter{
+    display: table;
+    margin: 0 auto;
+}
+.accordion .rectangularSymbol{
+    margin: 5px;
+}
+.diamondSymbol .diamond{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #777;
+    background: #ddd;
+    text-align: center;
+    vertical-align: middle;
+    color: #777;
+    font-size: 1.5em;
+    position: relative;
+    -webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+    rotation: 45deg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.diamondSymbol .diamond .divOutLeft span{
+    font-size: 0.5em;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    rotation: -45deg;
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: 10px;
+}
+.diamondSymbol .diamond .divOutRight span{
+    font-size: 0.5em;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    rotation: -45deg;
+    display: block;
+    position: absolute;
+    top: -22px;
+    left: -4px;
+}
+.diamondSymbol fa-icon{
+    -webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	rotation: -45deg;
+}
+.accordion .diamondSymbol,.accordion .circularSymbol{
+    float: left;
+    margin: 5px 15px;
+}
+.circularSymbol{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #777;
+    background: #ddd;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    color: #777;
+    font-size: 12px;
+    position: relative;
+}
+.circularSymbol fa-icon{
+    font-size: 1.9em;
+}
+.circularSymbol span{
+    font-size: 20px;
+    font-weight: bold;
+}
+.divOut, .divIn, .divOutRight, .divOutLeft{
+    cursor: pointer;
+}
+.divOut:hover, .divIn:hover, .divOutRight:hover, .divOutLeft:hover{
+    cursor: pointer;
+    border:3px solid rgba(13,62,80,1) !important;
+}
+
+.accordion .card {
+    border-radius: 0 0 10px 10px !important;
+    background: linear-gradient(to bottom,rgba(255,255,255,0.3),rgba(255,255,255,.7));
+    border: 2px outset #fff;
+    margin: 20px 0;
+}
+.accordion .card-header {
+    padding: 0 !important;
+    /* background: linear-gradient(to right,#fff,#ddd); */
+}
+.accordion .titleCategory {
+    background: rgba(13,62,80,.5);
+    text-align: center;
+    color: #fff;
+    font-size: 0.7em;
+    margin: 0 0 10px 0;
+}
+
+.accordion .card-header button,.accordion .card-header button:hover {
+    color:#fff !important;
+    text-decoration: none !important;
+    width: 100%;
+    text-shadow: 1px 2px 4px #000000;
+}
+
+.btnProperties{
+    width: 10px;
+    height: 10px;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    z-index: 20;
+}
+.btnProperties fa-icon{
+    position: absolute;
+    top: -7px;
+    right: 1px;
+    color: #fff;
+}
+
+.divProperties{
+    display: table;
+    position: absolute;
+    border: 1px solid #aaa;
+    top: -20px;
+    right: -60px;
+    border-radius: 5px 5px 5px 0;
+    background: #fff;
+}
+.eventSymbol .divProperties{
+        display: table;
+        position: absolute;
+        border: 1px solid #aaa;
+        top: -45px;
+        right: -110px;
+        border-radius: 5px 5px 5px 0;
+        background: #fff;
+}
+
+.eventSymbol .divProperties form input, 
+.eventSymbol .divProperties form select{
+    width: 100%;
+}
+
+svg{
+    overflow: visible !important;
+}

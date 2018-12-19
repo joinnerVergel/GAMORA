@@ -1,0 +1,24 @@
+.divWorkFlow {
+    position: relative;
+    top: 0px;
+    left:0px;
+    width: 800px;
+    height: 370px;
+    background-color: rgba(255,255,255,1);
+    background-image: linear-gradient(0deg, transparent 24%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1) 76%, transparent 77%, transparent);
+    background-size:50px 50px;
+    z-index: 2;
+  }
+ 
+
+  .homeSymbol{
+    position: absolute;
+    top:0;
+    left: 0;
+  }
+
+  .endSymbol{
+    position: absolute;
+    top:50px;
+    left: 0;
+  }

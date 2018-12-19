@@ -1,0 +1,65 @@
+<div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_GRUPO')"><button type="button" class="btn btn-primary btnNew" [routerLink]='["/management-groups/fixed/new-group"]'>Crear Grupo</button></div>
+<div class="table-responsive-md listaTabla">
+  <table class="table table-striped table-bordered groupList">
+    <thead>
+      <tr>
+        <th scope="col" rowspan="2">#</th>
+        <th scope="col" rowspan="2">Grupo</th>
+        <th scope="col" rowspan="2">Edad de Mora</th>
+        <th scope="col" rowspan="2" class="date">Fecha de Creación</th>
+        <th scope="col" rowspan="2">Creado por</th>
+        <th scope="col" rowspan="2">No. Cuentas</th>
+        <th scope="col">Filtros Fijos</th>
+        <th scope="col">Filtros Dinámicos</th>
+        <th scope="col" rowspan="2">Acciones</th>
+      </tr>
+      <tr>
+        <th class="colFixedContainer col">
+          <div class="colFixed">Filtro</div>
+          <div class="colFixed">Condición</div>
+        </th>
+        <th class="colFixedContainer col">
+          <div class="colFixed">Filtro</div>
+          <div class="colFixed">Condición</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group of groupsList">
+        <th scope="row">{{group.item}}</th>
+        <td>{{group.name}}</td>
+        <td>{{group.debtAge}}</td>
+        <td>{{group.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+        <td>{{group.createdBy}}</td>
+        <td>{{group.accountsQuantity}}</td>
+        <td class="colFixedContainer">
+          <table class="table table-sm">
+            <tr *ngFor="let filter of group.fixedFiltersList">
+              <td class="colFixed">{{filter.nameFilter}}</td>
+              <td class="colFixed">{{filter.valueFilter}}</td>
+            </tr>
+          </table>
+        </td>
+        <td class="colFixedContainer">
+          <table class="table table-sm">
+            <tr *ngFor="let filter of group.dinamicFiltersList">
+              <td class="colFixed">{{filter.nameFilter}}</td>
+              <td class="colFixed">{{filter.valueFilter}}</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <div class="actions" *ngIf="readVisibilityActions('ELIMINAR_GRUPO')">
+            <button type="button" class="btnAction btnDelete" (click)="deleteGroupChange(group);open(content);" placement="bottom" ngbTooltip="Eliminar" tooltipClass="tooltipDelete">
+              <fa-icon [icon]="deleteIcon"></fa-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <app-confirm-dialog [description]="'Se va a eliminar un grupo de gestión.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+      (result)="action($event)"></app-confirm-dialog>
+  </ng-template>
+</div>

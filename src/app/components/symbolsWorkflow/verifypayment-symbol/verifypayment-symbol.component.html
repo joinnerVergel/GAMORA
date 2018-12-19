@@ -1,0 +1,9 @@
+<div class="symbolContainer diamondSymbol" ngDraggable [bounds]="data.container" (endOffset)="onMoveEnd()"
+  [inBounds]="true" [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol">
+  <div class="diamond" (click)="symbolSelectedChanged()">
+      <fa-icon [icon]="payIcon" class="icon"></fa-icon>
+    <div class="divIn" (click)="pointIn()"></div>
+    <div class="divOutLeft" (click)="pointOut('YES')"><span>Si</span></div>
+    <div class="divOutRight" (click)="pointOut('NO')"><span>No</span></div>
+  </div>
+</div>

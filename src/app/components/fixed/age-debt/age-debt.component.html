@@ -1,0 +1,35 @@
+<form [formGroup]="ageDebtElementForm">
+  <div class="form-group radiosContainer">
+    <label>Edad de Mora:</label>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="ageSelectRadio" click="Validation()">
+      <label ngbButtonLabel class="btn-primary">
+        <input ngbButton type="radio" [value]="1" (change)="dataChange()" > Igual
+      </label>
+      <label ngbButtonLabel class="btn-primary">
+        <input ngbButton type="radio" [value]="2" (change)="dataChange()"> Entre
+      </label>
+    </div>
+    <div *ngIf="f.ageSelectRadio.value==1">
+      <input type="number" formControlName="debtAge" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.debtAge.errors && f.ageSelectRadio.value==1}"
+        placeholder="Edad de mora" (input)="dataChange()" />
+      <div *ngIf="submitted && f.debtAge.errors && f.ageSelectRadio.value==1" class="invalid-feedback">
+        <div *ngIf="f.debtAge.errors.required">La edad de mora es obligatoria</div>
+      </div>
+    </div>
+    <div *ngIf="f.ageSelectRadio.value==2">
+      <input type="number" formControlName="fromDebtAge" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fromDebtAge.errors && f.ageSelectRadio.value==2 }"
+        placeholder="Desde" max="60" min="-5" (input)="dataChange()" />
+      <div *ngIf="submitted && f.fromDebtAge.errors && f.ageSelectRadio.value==2" class="invalid-feedback">
+        <div *ngIf="f.fromDebtAge.errors.required">La edad inicial es obligatoria</div>
+      </div>
+      <input type="number" formControlName="untilDebtAge" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.untilDebtAge.errors && f.ageSelectRadio.value==2}"
+        placeholder="Hasta" max="60" min="-5" (input)="dataChange()" />
+      <div *ngIf="submitted && f.untilDebtAge.errors && f.ageSelectRadio.value==2" class="invalid-feedback">
+        <div *ngIf="f.untilDebtAge.errors.required">La edad final es obligatoria</div>
+      </div>
+      <div *ngIf="submitted && ((ageError && fieldRequired)||(ageErrorNoRequired && !fieldRequired)) " class="invalid-feedback Validation">
+        <div>La edad final debe ser mayor a la edad inicial</div>
+      </div>
+    </div>
+  </div>
+</form>

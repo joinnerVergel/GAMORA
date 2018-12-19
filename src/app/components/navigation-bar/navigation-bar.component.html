@@ -1,0 +1,20 @@
+<div class='container-fluid'>
+  <div class='row'>
+    <div class='col-md'>
+      <nav class="navbar navbar-dark bg-primary">
+        <div class='navbar-header'>
+          <div class="logo"></div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class='row rowContainer'>
+    <div [ngClass]="divMenuClassLayout">
+      <app-main-menu (toggleMenu)="divClassLayoutChange($event)"></app-main-menu>
+    </div>
+    <div class='body-content' [ngClass]="divBodyClassLayout">
+      <router-outlet></router-outlet>
+      <app-log-message></app-log-message>
+    </div>
+  </div>
+</div>

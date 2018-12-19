@@ -1,0 +1,94 @@
+<h4 class="title">Gestión de Usuarios</h4>
+<div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_USUARIO')">
+  <button type="button" class="btn btn-primary btnNew" (click)="toggleFormNewUser()" *ngIf="!newUserFormView">Crear
+    Usuario</button>
+</div>
+<form [formGroup]="newUserForm" *ngIf="newUserFormView" class="newForm">
+  <div class="buttonsContainer">
+    <span>Nuevo Usuario</span>
+    <button type="button" class="btn btn-primary" (click)="open(content)">Crear</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="toggleFormNewUser()">Cancelar</button>
+  </div>
+  <div class="form-group">
+    <label>Usuario</label>
+    <input type="text" formControlName="netUser" class="form-control" [ngClass]="{ 'is-invalid': submitted && (f.netUser.errors||!userSearchResult.Estado) }"
+      (blur)="findNetUser()" placeholder="Usuario de Dominio" />
+    <div *ngIf="submitted && (f.netUser.errors||!userSearchResult.Estado)" class="invalid-feedback">
+      <div *ngIf="f.netUser.errors ||!userSearchResult.Estado">Debe digitar un usuario valido</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Rol de Usuario</label>
+    <select class="custom-select" formControlName="profilesSelect" [ngClass]="{ 'is-invalid': submitted && f.profilesSelect.errors }"
+      required>
+      <option *ngFor="let profile of profilesList" value="{{profile.id}}" selected>{{profile.profile}}</option>
+    </select>
+    <div *ngIf="submitted && f.profilesSelect.errors" class="invalid-feedback">
+      <div *ngIf="f.profilesSelect.errors.required">El perfil del usuario es obligatorio</div>
+    </div>
+  </div>
+  <div *ngIf="userSearchResult.NombreUsuario!=null" class="divNameUser">
+    <h6>Nombre del Usuario:</h6>
+    <span>{{userSearchResult.NombreUsuario}}</span>
+  </div>
+</form>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <app-confirm-dialog [description]="'Se va a crear un usuario.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+    (result)="action($event)"></app-confirm-dialog>
+</ng-template>
+
+<div class="table-responsive-md listaTabla">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of usersList">
+        <th scope="row">-</th>
+        <td>{{user.Usuario}}</td>
+        <td>{{user.NombreUsuario}}</td>
+        <td>
+          <div class="actions" *ngIf="userEdit!=user.Usuario">
+            {{user.RolUsuario}}
+            <button type="button" class="btnAction btnView"
+            (click)="viewEditUser(user)">
+              <fa-icon [icon]="editIcon"></fa-icon>
+            </button>
+          </div>
+          <div *ngIf="userEdit==user.Usuario">
+            <select class="custom-select" [(ngModel)]="profileChangeSelected">
+              <option *ngFor="let profile of profilesList" value="{{profile.id}}">{{profile.profile}}</option>
+            </select>
+            <button type="button" class="btnAction btnView">
+              <fa-icon [icon]="saveIcon"></fa-icon>
+            </button>
+            <button type="button" class="btnAction btnDelete"
+            (click)="userEdit=null">
+              <fa-icon [icon]="backIcon"></fa-icon>
+            </button>
+          </div>
+        </td>
+        <td>
+          <div class="actions radiosContainer">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio" [(ngModel)]="user.Estado">
+              <label ngbButtonLabel class="btn-success">
+                <input ngbButton type="radio" [value]="true" (change)="dataChange(user.IdUsuario)"> Activo
+              </label>
+              <label ngbButtonLabel class="btn-danger">
+                <input ngbButton type="radio" [value]="false" (change)="dataChange(user.IdUsuario)"> Inactivo
+              </label>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
