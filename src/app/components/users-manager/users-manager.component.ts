@@ -9,7 +9,6 @@ import { LoginService } from 'src/app/services/login.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UserManager } from 'src/app/models/request/addUser';
 import { Profiles } from 'src/app/models/profiles';
-import { Profile } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-users-manager',
@@ -26,7 +25,7 @@ export class UsersManagerComponent implements OnInit {
   profilesList: Array<Profiles> = Array<Profiles>();
   usersList: Array<UserManager> = Array<UserManager>();
   userEdit:string=null;
-  profileChangeSelected:string="1";
+  profileChangeSelected:number=1;
 
   deleteIcon = faTrashAlt;
   saveIcon = faSave;
@@ -230,11 +229,39 @@ export class UsersManagerComponent implements OnInit {
   viewEditUser(x : UserManager){
     this.profilesList.forEach(element => {
       if(element.profile==x.RolUsuario){
-        this.profileChangeSelected=element.id.toString();
+        this.profileChangeSelected=element.id;
       }
     });
     this.userEdit=x.Usuario;
     // console.log("PERFIL:"+this.profileChangeSelected+" USUARIO:"+this.userEdit);
+  }
+
+  updateProfileUser(x:string){
+    let data:any={Usuario:x,RolUsuario:this.profileChangeSelected};
+    let ok: boolean=false;
+    this.usersService.updateUserProfile(data)
+      .subscribe(
+        respuesta => {
+          if (respuesta["State"]) {
+            this.logService.addMessage(respuesta["Msg"], "success");
+            ok=true;
+          } else {
+            this.logService.addMessage(respuesta["Msg"], "warning");
+          }
+          
+        }, error => {
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+            this.loginService.clearSessionLogin();
+            this.router.navigate(['/login']);
+          }
+        },
+        () =>{
+          if(ok){
+            this.readUsersList();
+            this.userEdit=null;
+          }
+        }
+        );
   }
 
 }

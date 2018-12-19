@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SymbolsService } from 'src/app/services/symbols.service';
@@ -13,6 +13,7 @@ import { LogManagedService } from 'src/app/services/log-managed.service';
 export class EventSymbolComponent implements OnInit {
 
   @Input() data: any;
+  @Input() _ref: any;
   nameSymbol:string="hold";
   propertiesIcon=faCaretRight;
   viewProperties:boolean=false;
@@ -99,5 +100,22 @@ export class EventSymbolComponent implements OnInit {
       }
     }
   }
+
+  //   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+  //   console.log(event);
+  //   if (event.keyCode === 46 || event.keyCode === 8) { 
+  //     if(this.symbolsService.symbolSelected!=null){
+  //       console.log("Eliminando.. "+ this.symbolsService.symbolSelected);
+  //       this._ref.destroy();
+  //       console.log("Eliminado-.................... ");
+  //       // console.log($('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').position());
+  //       // console.log($('div[idchildnode="' + this.symbolsService.symbolSelected + '"]').position());
+  //       // console.log($('div[idfathernode="' + this.symbolsService.symbolSelected + '"]').position());
+  //       // $('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').remove();
+  //       // $('div[idchildnode="' + this.symbolsService.symbolSelected + '"]').remove();
+  //       // $('div[idfathernode="' + this.symbolsService.symbolSelected + '"]').remove();
+  //     }
+  //    }
+  // }
 
 }

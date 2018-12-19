@@ -60,6 +60,7 @@ import { VerifypaymentSymbolComponent } from './components/symbolsWorkflow/verif
 import { EventSymbolComponent } from './components/symbolsWorkflow/event-symbol/event-symbol.component';
 import { NewpropertiesDirective } from './models/dynamicClass/newproperties.directive';
 import { ConnectinglineSymbolComponent } from './components/symbolsWorkflow/connectingline-symbol/connectingline-symbol.component';
+import { PropertiesconectinglineDirective } from './models/dynamicClass/propertiesconectingline.directive';
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import { ConnectinglineSymbolComponent } from './components/symbolsWorkflow/conn
     VerifypaymentSymbolComponent,
     EventSymbolComponent,
     NewpropertiesDirective,
-    ConnectinglineSymbolComponent
+    ConnectinglineSymbolComponent,
+    PropertiesconectinglineDirective
   ],
   imports: [
     DragAndDropModule,

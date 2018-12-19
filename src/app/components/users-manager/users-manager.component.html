@@ -67,7 +67,7 @@
             <select class="custom-select" [(ngModel)]="profileChangeSelected">
               <option *ngFor="let profile of profilesList" value="{{profile.id}}">{{profile.profile}}</option>
             </select>
-            <button type="button" class="btnAction btnView">
+            <button type="button" class="btnAction btnView" (click)="updateProfileUser(user.Usuario)">
               <fa-icon [icon]="saveIcon"></fa-icon>
             </button>
             <button type="button" class="btnAction btnDelete"

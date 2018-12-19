@@ -24,6 +24,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
   @Input() newLine: boolean;
   @ViewChild(AdDirective) adHost: AdDirective;
   @ViewChild("dragBounds") contenedor: ElementRef;
+  
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private cdr: ChangeDetectorRef, private symbolsService: SymbolsService) { }
 
@@ -73,7 +74,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
     switch (dropData) {
       case "line": {
         this.symbolsService.addSuccessorNode();
-        obj = new adSymbol(ConnectinglineSymbolComponent, { out: this.symbolsService.outElement, in: this.symbolsService.inElement, option: this.symbolsService.optionOutElement });
+        obj = new adSymbol(ConnectinglineSymbolComponent, { out: this.symbolsService.outElement, in: this.symbolsService.inElement, option: this.symbolsService.optionOutElement, refSymbol: ref });
         componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
         this.symbolsService.inElement = null;
         this.symbolsService.outElement = null;
@@ -108,8 +109,10 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
         break;
       }
     }
-    const viewContainerRef = this.adHost.viewContainerRef;
-    const componentRef = viewContainerRef.createComponent(componentFactory);
+    
+    var viewContainerRef = this.adHost.viewContainerRef;
+    var componentRef = viewContainerRef.createComponent(componentFactory);
+    (<Ad>componentRef.instance)._ref=componentRef;
     (<Ad>componentRef.instance).data = obj.data;
   }
 

@@ -12,6 +12,7 @@ export const loginUserUrl = profile == "dev" ? 'http://localhost:65453/UsuarioSe
 export const findUserUrl = profile == "dev" ? 'http://localhost:65453/UsuarioService.svc/BuscarUsuarioLDAP/' :'http://10.80.2.89/WCF_CasasDeCobro/UsuarioService.svc/BuscarUsuarioLDAP/';
 export const usersProfilesUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/rolesLista' :'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/rolesLista';
 export const usersAddUrl = profile == "dev" ? 'http://localhost:65453/UsuarioService.svc/CrearUsuario' :'http://10.80.2.89/WCF_CasasDeCobro/UsuarioService.svc/CrearUsuario';
+export const usersProfileUpdateUrl = profile == "dev" ? 'http://localhost:65453/UsuarioService.svc/CambiarPerfilUsuario' :'http://10.80.2.89/WCF_CasasDeCobro/UsuarioService.svc/CambiarPerfilUsuario';
 export const usersListUrl = profile == "dev" ? 'http://localhost:65453/UsuarioService.svc/ListaUsuariosAplicacion' :'http://10.80.2.89/WCF_CasasDeCobro/UsuarioService.svc/ListaUsuariosAplicacion';
 export const usersActionsUrl=profile == "dev" ? 'http://localhost:65453/RolService.svc/FuncionalidadRol' :'http://10.80.2.89/WCF_CasasDeCobro/RolService.svc/FuncionalidadRol';
 export const usersStateUrl=profile == "dev" ? 'http://localhost:65453/UsuarioService.svc/CambiarEstadoUsuario/' :'http://10.80.2.89/WCF_CasasDeCobro/UsuarioService.svc/CambiarEstadoUsuario/';
