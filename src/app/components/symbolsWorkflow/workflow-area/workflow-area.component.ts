@@ -75,7 +75,6 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
       case "line": {
         this.symbolsService.addSuccessorNode();
         obj = new adSymbol(ConnectinglineSymbolComponent, { out: this.symbolsService.outElement, in: this.symbolsService.inElement, option: this.symbolsService.optionOutElement, refSymbol: ref });
-        componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
         this.symbolsService.inElement = null;
         this.symbolsService.outElement = null;
         this.symbolsService.optionOutElement = null;
@@ -84,32 +83,27 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
       }
       case "home": {
         obj = new adSymbol(HomeSymbolComponent, { container: this.contenedor.nativeElement, refSymbol: ref });
-        componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
         break;
       }
       case "end": {
         obj = new adSymbol(EndSymbolComponent, { container: this.contenedor.nativeElement, refSymbol: ref });
-        componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
         break;
       }
       case "hold": {
         obj = new adSymbol(HoldSymbolComponent, { container: this.contenedor.nativeElement, refSymbol: ref });
-        componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
         break;
       }
       case "decision": {
         obj = new adSymbol(VerifypaymentSymbolComponent, { container: this.contenedor.nativeElement, refSymbol: ref });
-        componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
         break;
       }
       default: {
         let dd = JSON.parse(dropData);
         obj = new adSymbol(EventSymbolComponent, { container: this.contenedor.nativeElement, eventName: dd['Subcategory'], eventId: dd['IdSubcategory'], refSymbol: ref });
-        componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
         break;
       }
     }
-    
+    componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
     var viewContainerRef = this.adHost.viewContainerRef;
     var componentRef = viewContainerRef.createComponent(componentFactory);
     (<Ad>componentRef.instance)._ref=componentRef;
@@ -126,5 +120,29 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
   onMouseup(event) {
     console.log(event);
   }
+
+  // @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+  //   console.log(event);
+  //   if (event.keyCode === 46 || event.keyCode === 8) { 
+  //     if(this.symbolsService.symbolSelected!=null){
+  //       console.log("Eliminando.. "+ this.symbolsService.symbolSelected);
+  //       if($('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').position()!=undefined){
+  //         $('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').remove();
+  //         console.log("Simbolo eliminado");
+  //       }
+  //       // if($('div[idchildnode="' + this.symbolsService.symbolSelected + '"]').position()!=undefined){
+  //       //   $('div[idchildnode="' + this.symbolsService.symbolSelected + '"]').remove();
+  //       //   console.log("conector a padre eliminado");
+  //       // }
+
+  //       // if($('div[idfathernode="' + this.symbolsService.symbolSelected + '"]').position()!=undefined){
+  //       //   $('div[idfathernode="' + this.symbolsService.symbolSelected + '"]').remove();
+  //       //   console.log("conector a hijo eliminado");
+  //       // }
+  //       this.symbolsService.removeSymbol();
+  //       console.log("Eliminado-.................... ");
+  //     }
+  //    }
+  // }
 
 }

@@ -61,5 +61,4 @@ export class HomeSymbolComponent implements OnInit {
     }
   }
 
-
 }

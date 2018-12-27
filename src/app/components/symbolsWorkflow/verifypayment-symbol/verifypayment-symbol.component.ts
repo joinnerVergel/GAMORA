@@ -81,5 +81,4 @@ export class VerifypaymentSymbolComponent implements OnInit, AfterViewInit {
     }
   }
 
-
 }

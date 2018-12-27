@@ -61,6 +61,10 @@ import { EventSymbolComponent } from './components/symbolsWorkflow/event-symbol/
 import { NewpropertiesDirective } from './models/dynamicClass/newproperties.directive';
 import { ConnectinglineSymbolComponent } from './components/symbolsWorkflow/connectingline-symbol/connectingline-symbol.component';
 import { PropertiesconectinglineDirective } from './models/dynamicClass/propertiesconectingline.directive';
+import { ManagerComponent } from './components/manager/manager.component';
+import { FixedManagerListComponent } from './components/fixed/fixed-manager-list/fixed-manager-list.component';
+import { NewFixedManagementComponent } from './components/fixed/new-fixed-management/new-fixed-management.component';
+import { CalendarOptionsComponent } from './components/fixed/calendar-options/calendar-options.component';
 
 
 @NgModule({
@@ -109,7 +113,11 @@ import { PropertiesconectinglineDirective } from './models/dynamicClass/properti
     EventSymbolComponent,
     NewpropertiesDirective,
     ConnectinglineSymbolComponent,
-    PropertiesconectinglineDirective
+    PropertiesconectinglineDirective,
+    ManagerComponent,
+    FixedManagerListComponent,
+    NewFixedManagementComponent,
+    CalendarOptionsComponent
   ],
   imports: [
     DragAndDropModule,
@@ -158,6 +166,13 @@ import { PropertiesconectinglineDirective } from './models/dynamicClass/properti
             path: 'workflow', component: WorkflowComponent, children: [
               { path: 'fixed', component: FixedWorkflowListComponent },
               { path: 'fixed/new-workflow', component: NewFixedWorkflowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: DevelopingComponent }
+            ]
+          },
+          {
+            path: 'manager', component: ManagerComponent, children: [
+              { path: 'fixed', component: FixedManagerListComponent },
+              { path: 'fixed/new-management', component: NewFixedManagementComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'mobile', component: DevelopingComponent }
             ]
           }

@@ -1,0 +1,22 @@
+<div class="form-group shadow p-3 mb-5 bg-white rounded calendar">
+  <form [formGroup]="newCalendarForm">
+    <div class="form-check">
+      <input formControlName="calendarName" class="form-check-input" type="checkbox" (change)="changeCheck($event.target.checked)">
+      <label class="form-check-label">
+        {{calendar.name}}
+      </label>
+    </div>
+    <div *ngIf="f.calendarName.value">
+      <label>Desde</label>
+      <input type="number" formControlName="calendarFrom" class="form-control" (keypress)="false" min="8" max="20" (change)="dataChange()" />
+      <label>Hasta</label>
+      <input type="number" formControlName="calendarUntil" class="form-control" (keypress)="false" min="8" max="20" (change)="dataChange()"/>
+      <div *ngIf="submitted && (f.calendarFrom.value>=f.calendarUntil.value ||f.calendarFrom.errors||f.calendarUntil.errors)"
+        class="invalid-feedback Validation">
+        <div *ngIf="f.calendarFrom.value==null||f.calendarUntil.value==null||f.calendarFrom.value==''||f.calendarUntil.value==''">La hora de inicio y la final
+          es obligatoria</div>
+        <div *ngIf="f.calendarFrom.value>=f.calendarUntil.value">La hora de inicio debe ser menor que la hora final</div>
+      </div>
+    </div>
+  </form>
+</div>

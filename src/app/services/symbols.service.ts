@@ -271,14 +271,67 @@ export class SymbolsService {
     return r;
   }
 
-  saveWorkflow(data: any): Observable<any>{
+  saveWorkflow(data: any): Observable<any> {
     return this.http.post<any>(workFlowAddUrl, data, this.loginService.getHttpOptions()).pipe(
 
-      );
+    );
   }
 
   getWorkflowList() {
-    return this.http.get(fixedWorkFlowListUrl,this.loginService.getHttpOptions());
+    return this.http.get(fixedWorkFlowListUrl, this.loginService.getHttpOptions());
+  }
+
+  removeSymbol() {
+    let l = JSON.parse(sessionStorage.getItem('workFlow'));
+    let symbolsList: Array<any> = l['Simbolos'];
+    symbolsList = symbolsList.filter(elm => elm.IdSimbolo != this.symbolSelected);
+    symbolsList.forEach(element => {
+      if (element.IdTipoSimbolo != 5) {
+        if (element.NodoSucesor != null) {
+          if (element.NodoSucesor == this.symbolSelected) {
+            element.NodoSucesor = null;
+          } else {
+            if (element.NodoSucesor.indexOf(this.symbolSelected) != -1) {
+              element.NodoSucesor = element.NodoSucesor.replace(this.symbolSelected, "null");
+            }
+          }
+        }
+      }
+    });
+    l['Simbolos'] = symbolsList;
+    sessionStorage.setItem('workFlow', JSON.stringify(l));
+  }
+
+  showconnectingLine(in_:string,out_:string){
+    let r: boolean = false;
+    let inExist: boolean = false;
+    let outExist: boolean = false;
+    let l = JSON.parse(sessionStorage.getItem('workFlow'));
+    let symbolsList: Array<any> = l['Simbolos'];
+    symbolsList.forEach(element => {
+      if(element.IdSimbolo==in_){
+        inExist=true;
+      }
+      if(element.IdSimbolo==out_){
+        outExist=true;
+      }
+    });
+    if(inExist && outExist){
+      r=true;
+    }
+    return r;
+  }
+
+  showSymbol(id_:string){
+    let r: boolean = false;
+    let l = JSON.parse(sessionStorage.getItem('workFlow'));
+    let symbolsList: Array<any> = l['Simbolos'];
+    symbolsList.forEach(element => {
+      if(element.IdSimbolo==id_){
+       r=true;
+      }
+    });
+    return r;
   }
 
 

@@ -1,0 +1,42 @@
+<div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_GESTION')"><button type="button" class="btn btn-primary btnNew"
+    [routerLink]='["/manager/fixed/new-management"]'>Crear Gestión</button></div>
+<div class="table-responsive-md listaTabla">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre de la Gestión</th>
+        <th scope="col">Fecha Creación</th>
+        <th scope="col">Fecha Activación</th>
+        <th scope="col">Grupo</th>
+        <th scope="col">Flujo</th>
+        <th scope="col" *ngIf="readVisibilityActions('CREAR_GESTION')">Controles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let management of managementList">
+        <th scope="row">{{management.item}}</th>
+        <td>{{management.nameManagement}}</td>
+        <td>{{management.dateCreated}}</td>
+        <td></td>
+        <td>{{management.nameGroup}}</td>
+        <td>{{management.nameWorkflow}}</td>
+        <td *ngIf="readVisibilityActions('CREAR_GESTION')">
+          <div class="actions radiosContainer">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio" [(ngModel)]="management.state">
+              <label ngbButtonLabel class="btn-success">
+                <input ngbButton type="radio" value="PLAY"> <fa-icon [icon]="playIcon"></fa-icon>
+              </label>
+              <label ngbButtonLabel class="btn-warning">
+                <input ngbButton type="radio" value="PAUSE"> <fa-icon [icon]="pauseIcon"></fa-icon>
+              </label>
+              <label ngbButtonLabel class="btn-danger">
+                <input ngbButton type="radio" value="STOP"> <fa-icon [icon]="stopIcon"></fa-icon>
+              </label>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

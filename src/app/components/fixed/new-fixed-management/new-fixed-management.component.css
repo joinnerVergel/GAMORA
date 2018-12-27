@@ -1,0 +1,87 @@
+.card-footer{
+    overflow: hidden;
+}
+.card-footer button{
+    float: right;
+    margin: 10px;
+}
+.form-group{
+    clear: both;
+}
+
+/* .listaTabla{
+    overflow: auto;
+} */
+
+.table{
+    background-color: #fff !important;
+    border: 1px solid #ddd;
+    font-size: 0.8em;
+}
+.table td{
+    vertical-align: middle;
+    text-align: center;
+}
+.table thead th{
+    vertical-align: middle;
+    text-align: center;
+}
+
+table table{
+    table-layout: fixed;
+    margin: 0;
+    border: 0;
+    min-height: calc(24vh - 4rem);
+    background-color: transparent !important;
+}
+
+table table tr{
+    background-color: transparent;
+}
+
+td.colFixed{
+    width: 50%;
+    border: 0;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+}
+div.colFixed{
+    width: 50%;
+    display: inline-block;
+    /* background: linear-gradient(to bottom,rgba(13,62,80,1),#444);
+    color: #fff; */
+    /* background: linear-gradient(to bottom,#fff,#ddd); */
+    color: #555;
+    border: 1px outset #dee2e6;
+    font-size: 12px;
+    border-radius: 0px 10px 0 0
+}
+.colFixedContainer{
+    padding: 0px;
+    min-width: 200px;
+    vertical-align: middle;
+    /* font-size: 0.5em; */
+    text-align: center;
+    border: 3px inset #fff;
+}
+
+.colFixedContainer.col{
+    border:0;
+}
+
+th.date{
+    min-width: 115px;
+}
+th{
+    border-top:none;
+    border-bottom:none !important;
+}
+.groupList>tbody>tr>td,.groupList>tbody>tr>th{
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    vertical-align: middle;
+}
+
+.Validation{
+    display: block;
+}

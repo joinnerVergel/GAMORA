@@ -41,10 +41,11 @@ export class ConnectinglineSymbolComponent implements OnInit, AfterViewInit, OnD
   ngOnInit() {
     this.posOut = this.symbolsService.getPositionSymbol(this.data.out);
     this.posIn = this.symbolsService.getPositionSymbol(this.data.in);
-    const element = this.surfaceElement.nativeElement;
-    this.surface = Surface.create(element);
+
   }
   ngAfterViewInit(): void {
+    const element = this.surfaceElement.nativeElement;
+    this.surface = Surface.create(element);
     console.log("PINTA LINEA INCIAL");
     this.drawScene();
   }
@@ -77,6 +78,12 @@ export class ConnectinglineSymbolComponent implements OnInit, AfterViewInit, OnD
     // Render the group on the surface
     this.surface.clear();
     this.surface.draw(group);
+  }
+
+  show(){
+    let r =this.symbolsService.showconnectingLine(this.data.in,this.data.out);
+    // console.log(r);
+    return r;
   }
 
 }

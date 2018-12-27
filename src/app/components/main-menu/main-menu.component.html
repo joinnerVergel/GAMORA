@@ -44,6 +44,11 @@
           <fa-icon [icon]="workflowIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Administrador de Flujos</span>
         </a>
       </li>
+      <li class="nav-item" [routerLinkActive]="'active'">
+        <a class="nav-link" routerLink="/manager/fixed">
+          <fa-icon [icon]="managerIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Gestor</span>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

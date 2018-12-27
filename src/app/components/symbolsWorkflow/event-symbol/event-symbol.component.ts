@@ -18,6 +18,7 @@ export class EventSymbolComponent implements OnInit {
   propertiesIcon=faCaretRight;
   viewProperties:boolean=false;
   eventSymbolForm: FormGroup;
+  
  
   constructor(private formBuilder: FormBuilder,private symbolsService: SymbolsService, private logService: LogManagedService) { }
 
@@ -28,6 +29,7 @@ export class EventSymbolComponent implements OnInit {
     });
   }
   ngAfterViewInit(){
+    console.log(this.data.refSymbol);
     let pos=$('div[idrefsymbol="'+this.data.refSymbol+'"]').position();
     let objSymbol:any={IdSimbolo:this.data.refSymbol,Nombre:this.data.eventName,NodoSucesor:null,IdTipoSimbolo:1,CoordenadaX:pos.left,CoordenadaY:pos.top,
       Horario:this.f.scheduleSelect.value,Repeticiones:this.f.attempts.value,IdSubcategoria:this.data.eventId};
@@ -101,21 +103,20 @@ export class EventSymbolComponent implements OnInit {
     }
   }
 
-  //   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+
+  // @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
   //   console.log(event);
   //   if (event.keyCode === 46 || event.keyCode === 8) { 
   //     if(this.symbolsService.symbolSelected!=null){
   //       console.log("Eliminando.. "+ this.symbolsService.symbolSelected);
-  //       this._ref.destroy();
+  //       // if($('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').position()!=undefined){
+  //       //   $('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').remove();
+  //       //   console.log("Simbolo eliminado");
+  //       // }
+  //       this.symbolsService.removeSymbol();
+  //       this.showSymbol=false;
   //       console.log("Eliminado-.................... ");
-  //       // console.log($('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').position());
-  //       // console.log($('div[idchildnode="' + this.symbolsService.symbolSelected + '"]').position());
-  //       // console.log($('div[idfathernode="' + this.symbolsService.symbolSelected + '"]').position());
-  //       // $('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').remove();
-  //       // $('div[idchildnode="' + this.symbolsService.symbolSelected + '"]').remove();
-  //       // $('div[idfathernode="' + this.symbolsService.symbolSelected + '"]').remove();
   //     }
   //    }
   // }
-
 }

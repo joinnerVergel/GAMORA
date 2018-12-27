@@ -1,0 +1,130 @@
+<div class="card">
+  <div class="card-header">
+    <h6>Creación de Nueva Gestión</h6>
+  </div>
+  <!-- ********Body********* -->
+  <div class="card-body">
+    <form [formGroup]="newManagementForm">
+      <div class="form-group">
+        <label>Nombre de la gestión</label>
+        <input type="text" formControlName="managementName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.managementName.errors }"
+          (keypress)="generalKeyPressEvent($event.key,50,f.managementName,true)" />
+        <div *ngIf="submitted && f.managementName.errors" class="invalid-feedback">
+          <div *ngIf="f.managementName.errors.required">El nombre de la gestión es obligatorio</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Calendario</label>
+        <div *ngFor="let calendar of calendarList">
+          <app-calendar-options [calendar]="calendar" [submitted]="submitted" (validateChange)="validationCalendarChange($event)"
+            (dataCalendarChange)="calendarChange($event)"></app-calendar-options>
+        </div>
+        <div *ngIf="submitted && dataCalendar.length==0" class="invalid-feedback Validation">
+          <div>Debe seleccionar por lo menos una opción de calendario de la gestión</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Grupo de Gestión</label>
+        <div>
+          <select class="custom-select" formControlName="groupSelect" (change)="changeGroup()" required>
+            <option *ngFor="let group of groupsList" value="{{group.name}}" selected>{{group.name}}</option>
+          </select>
+        </div>
+        <div class="table-responsive-md listaTabla">
+          <table class="table table-striped table-bordered groupList">
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2">Grupo</th>
+                <th scope="col" rowspan="2">Edad de Mora</th>
+                <th scope="col" rowspan="2" class="date">Fecha de Creación</th>
+                <th scope="col" rowspan="2">Creado por</th>
+                <th scope="col" rowspan="2">No. Cuentas</th>
+                <th scope="col">Filtros Fijos</th>
+                <th scope="col">Filtros Dinámicos</th>
+              </tr>
+              <tr>
+                <th class="colFixedContainer col">
+                  <div class="colFixed">Filtro</div>
+                  <div class="colFixed">Condición</div>
+                </th>
+                <th class="colFixedContainer col">
+                  <div class="colFixed">Filtro</div>
+                  <div class="colFixed">Condición</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{groupSelected.name}}</td>
+                <td>{{groupSelected.debtAge}}</td>
+                <td>{{groupSelected.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+                <td>{{groupSelected.createdBy}}</td>
+                <td>{{groupSelected.accountsQuantity}}</td>
+                <td class="colFixedContainer">
+                  <table class="table table-sm">
+                    <tr *ngFor="let filter of groupSelected.fixedFiltersList">
+                      <td class="colFixed">{{filter.nameFilter}}</td>
+                      <td class="colFixed">{{filter.valueFilter}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="colFixedContainer">
+                  <table class="table table-sm">
+                    <tr *ngFor="let filter of groupSelected.dinamicFiltersList">
+                      <td class="colFixed">{{filter.nameFilter}}</td>
+                      <td class="colFixed">{{filter.valueFilter}}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Flujo</label>
+        <div>
+          <select class="custom-select" formControlName="workflowSelect" (change)="changeWorkFlow()" required>
+            <option *ngFor="let workFlow of workFlowList" value="{{workFlow.idWorkFlow}}" selected>{{workFlow.nameWorkFlow}}</option>
+          </select>
+        </div>
+        <div class="table-responsive-md listaTabla">
+          <table class="table table-striped table-bordered workFlowList">
+            <thead>
+              <tr>
+                <th scope="col">Flujo</th>
+                <th scope="col">Q Eventos</th>
+                <th scope="col">Duración</th>
+                <th scope="col">Fecha de Creación</th>
+                <th scope="col">Fecha de Actualización</th>
+                <th scope="col">Eventos por Defecto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{workFlowSelected.nameWorkFlow}}</td>
+                <td>{{workFlowSelected.eventsQuantity}}</td>
+                <td>{{workFlowSelected.duration}}</td>
+                <td>{{workFlowSelected.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+                <td>{{workFlowSelected.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+                <td>{{workFlowSelected.events}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- ********Footer********* -->
+  <div class="card-footer">
+    <ng-template #content let-c="close" let-d="dismiss">
+      <app-confirm-dialog [description]="'Se va a crear una nueva gestión.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+        (result)="action($event)"></app-confirm-dialog>
+    </ng-template>
+    <button type="button" class="btn btn-primary" (click)="open(content)">Crear</button>
+    <button type="button" class="btn btn-outline-secondary" [routerLink]='["/manager/fixed"]'>Cancelar</button>
+  </div>
+</div>
