@@ -12,6 +12,7 @@ import { SymbolsService } from 'src/app/services/symbols.service';
 import { EndSymbolComponent } from '../end-symbol/end-symbol.component';
 import { HomeSymbolComponent } from '../home-symbol/home-symbol.component';
 import { ConnectinglineSymbolComponent } from '../connectingline-symbol/connectingline-symbol.component';
+import { element } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-workflow-area',
@@ -20,11 +21,12 @@ import { ConnectinglineSymbolComponent } from '../connectingline-symbol/connecti
 })
 export class WorkflowAreaComponent implements OnInit, AfterViewInit {
   symbolSelected: string = "";
-
+  dropElement: boolean = false;
+  
   @Input() newLine: boolean;
   @ViewChild(AdDirective) adHost: AdDirective;
   @ViewChild("dragBounds") contenedor: ElementRef;
-  
+
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private cdr: ChangeDetectorRef, private symbolsService: SymbolsService) { }
 
@@ -37,7 +39,22 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
     // this.contenedor.nativeElement.addEventListener('mouseup', this.onMouseup,{passive: false, capture: false});
     this.onDrop({ dropData: "home" });
     this.onDrop({ dropData: "end" });
+    this.dropElement = false;
+
   }
+
+  dropElementFunction(event) {
+    // console.log("dRAGOVER",this.dropElement);
+    if (this.dropElement) {
+      console.log("EVENTO:" + this.dropElement, event.offsetX, event.offsetY);
+      this.symbolsService.dropElementX=event.offsetX;
+      this.symbolsService.dropElementY=event.offsetY;
+      this.symbolsService.ElementReposition=true;
+      this.dropElement = false;
+    }
+
+  }
+
 
   ngOnChanges(changes: SimpleChanges) {
     // console.log("]]]]]]]]]]]]]]]]]]]]]]]]]");
@@ -106,8 +123,17 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
     componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
     var viewContainerRef = this.adHost.viewContainerRef;
     var componentRef = viewContainerRef.createComponent(componentFactory);
-    (<Ad>componentRef.instance)._ref=componentRef;
     (<Ad>componentRef.instance).data = obj.data;
+    if(dropData!='line'&& dropData!='home'&& dropData!='end'){
+      this.dropElement = true;
+    }
+    if(dropData=='end'){
+      this.symbolsService.ElementRepositionId=ref;
+      this.symbolsService.dropElementX=0;
+      this.symbolsService.dropElementY=60;
+      this.symbolsService.ElementReposition=true;
+    }
+    
   }
 
   updateWorkFlow() {
@@ -121,28 +147,95 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
     console.log(event);
   }
 
-  // @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-  //   console.log(event);
-  //   if (event.keyCode === 46 || event.keyCode === 8) { 
-  //     if(this.symbolsService.symbolSelected!=null){
-  //       console.log("Eliminando.. "+ this.symbolsService.symbolSelected);
-  //       if($('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').position()!=undefined){
-  //         $('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').remove();
-  //         console.log("Simbolo eliminado");
-  //       }
-  //       // if($('div[idchildnode="' + this.symbolsService.symbolSelected + '"]').position()!=undefined){
-  //       //   $('div[idchildnode="' + this.symbolsService.symbolSelected + '"]').remove();
-  //       //   console.log("conector a padre eliminado");
-  //       // }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (event.keyCode === 46 || event.keyCode === 8) {
+      if (this.symbolsService.symbolSelected != null) {
+        if (this.symbolsService.isRemovable()) {
+          console.log("Eliminando.. " + this.symbolsService.symbolSelected);
+          if ($('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').position() != undefined) {
+            var viewContainerRef = this.adHost.viewContainerRef;
+            viewContainerRef.clear();
+            this.symbolsService.removeSymbol();
+            this.workFlowRebuild();
+            this.connectingLineRebuild();
+            console.log("Simbolo eliminado");
+          }
+        }
+      }
+    }
+  }
 
-  //       // if($('div[idfathernode="' + this.symbolsService.symbolSelected + '"]').position()!=undefined){
-  //       //   $('div[idfathernode="' + this.symbolsService.symbolSelected + '"]').remove();
-  //       //   console.log("conector a hijo eliminado");
-  //       // }
-  //       this.symbolsService.removeSymbol();
-  //       console.log("Eliminado-.................... ");
-  //     }
-  //    }
-  // }
+
+  workFlowRebuild() {
+    let symbolsList: Array<any> = this.symbolsService.getSymbolsWorkFlow();
+    let obj: adSymbol = null;
+    let componentFactory = null;
+    let ref: string = null;
+    var viewContainerRef = this.adHost.viewContainerRef;
+    symbolsList.forEach(element => {
+      console.log(element.IdTipoSimbolo + "AGREGA SIMBOLO:" + element.Nombre);
+      ref = element.IdSimbolo;
+      switch (element.IdTipoSimbolo) {
+        case 4: {
+          obj = new adSymbol(HomeSymbolComponent, { container: this.contenedor.nativeElement, refSymbol: ref, rebuild: true, symbolData: element });
+          break;
+        }
+        case 5: {
+          obj = new adSymbol(EndSymbolComponent, { container: this.contenedor.nativeElement, refSymbol: ref, rebuild: true, symbolData: element });
+          break;
+        }
+        case 2: {
+          obj = new adSymbol(HoldSymbolComponent, { container: this.contenedor.nativeElement, refSymbol: ref, rebuild: true, symbolData: element });
+          break;
+        }
+        case 3: {
+          obj = new adSymbol(VerifypaymentSymbolComponent, { container: this.contenedor.nativeElement, refSymbol: ref, rebuild: true, symbolData: element });
+          break;
+        }
+        default: {
+          obj = new adSymbol(EventSymbolComponent, { container: this.contenedor.nativeElement, eventName: element.Nombre, eventId: element.IdSubcategoria, refSymbol: ref, rebuild: true, symbolData: element });
+          break;
+        }
+      }
+      componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
+      var componentRef = viewContainerRef.createComponent(componentFactory);
+      (<Ad>componentRef.instance).data = obj.data;
+    });
+  }
+
+  connectingLineRebuild() {
+    let symbolsList: Array<any> = this.symbolsService.getSymbolsWorkFlow();
+    let obj: adSymbol = null;
+    let componentFactory = null;
+    var viewContainerRef = this.adHost.viewContainerRef;
+    symbolsList.forEach(element => {
+      let NS: string = element.NodoSucesor;
+      if (NS != null) {
+        if (NS.indexOf(",") == -1) {
+          obj = new adSymbol(ConnectinglineSymbolComponent, { out: element.IdSimbolo, in: NS, option: null });
+          componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
+          var componentRef = viewContainerRef.createComponent(componentFactory);
+          (<Ad>componentRef.instance).data = obj.data;
+        } else {
+          let Pago: Array<string> = NS.split(",");
+          console.log(Pago);
+          let Entry_: string = "NO";
+          Pago.forEach(opt => {
+            if (opt != "null") {
+              obj = new adSymbol(ConnectinglineSymbolComponent, { out: element.IdSimbolo, in: opt, option: Entry_ });
+              componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
+              var componentRef = viewContainerRef.createComponent(componentFactory);
+              (<Ad>componentRef.instance).data = obj.data;
+            }
+            Entry_ = "YES";
+          });
+
+        }
+
+      }
+
+    });
+  }
+
 
 }

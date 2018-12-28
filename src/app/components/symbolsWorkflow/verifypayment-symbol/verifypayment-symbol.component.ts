@@ -10,22 +10,52 @@ import { LogManagedService } from 'src/app/services/log-managed.service';
   styleUrls: ['./verifypayment-symbol.component.css']
 })
 export class VerifypaymentSymbolComponent implements OnInit, AfterViewInit {
-  
+
   @Input() data: any;
-  nameSymbol:string="decision";
-  payIcon=faDollarSign;
-  viewProperties:boolean=false;
+  nameSymbol: string = "decision";
+  payIcon = faDollarSign;
+  viewProperties: boolean = false;
+  setPosition: any = { x: 0, y: 0 };
   constructor(private symbolsService: SymbolsService, private logService: LogManagedService) { }
 
   ngOnInit() {
   }
 
-
-  ngAfterViewInit(){
-    let pos=$('div[idrefsymbol="'+this.data.refSymbol+'"]').position();
-    let objSymbol:any={IdSimbolo:this.data.refSymbol,Nombre:"PAGO",NodoSucesor:null,IdTipoSimbolo:3,CoordenadaX:pos.left,CoordenadaY:pos.top};
-    this.symbolsService.addSymbol(objSymbol);
+  ngAfterContentInit() {
+    //Entra al condicional unicamente luego de la reconstruccion del flujo (cuando se elimina algun símbolo)
+    //para ubicar el símbolo en la posicion donde se encontraba anteriormente.
+    if (this.data.rebuild) {
+      this.setPosition = { x: this.data.symbolData.CoordenadaX, y: this.data.symbolData.CoordenadaY };
+    }
   }
+  ngAfterViewInit() {
+    //Entra al condicional cuando se agrega el simbolo desde el panel
+    //de herramientas y lo agrega al listado en el sessionStorage.
+    if (!this.data.rebuild) {
+      let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
+      let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "PAGO", NodoSucesor: null, IdTipoSimbolo: 3, CoordenadaX: pos.left, CoordenadaY: pos.top };
+      this.symbolsService.addSymbol(objSymbol);
+      this.symbolsService.ElementRepositionId = this.data.refSymbol;
+    }
+  }
+
+  ngAfterViewChecked() {
+    // Solo se entra al condicional cuando se arrastra un simbolo desde el cuadro de herramientas
+    //Permite reposicionar el simbolo justo en el lugar al que fue arrastrado.
+    if (this.symbolsService.ElementRepositionId == this.data.refSymbol &&
+      this.symbolsService.ElementReposition && this.symbolsService.dropElementX != null &&
+      this.symbolsService.dropElementY != null) {
+      this.setPosition = { x: this.symbolsService.dropElementX, y: this.symbolsService.dropElementY };
+      let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "PAGO", NodoSucesor: null, IdTipoSimbolo: 3, CoordenadaX: this.symbolsService.dropElementX, CoordenadaY: this.symbolsService.dropElementY };
+      this.symbolsService.updateSymbol(objSymbol);
+      this.symbolsService.dropElementX = null;
+      this.symbolsService.dropElementY = null;
+      this.symbolsService.ElementRepositionId = null;
+      this.symbolsService.ElementReposition = false;
+    }
+  }
+
+
   symbolSelectedChanged() {
     if (this.symbolsService.symbolSelected == this.data.refSymbol) {
       this.symbolsService.symbolSelected = null;
@@ -48,23 +78,24 @@ export class VerifypaymentSymbolComponent implements OnInit, AfterViewInit {
       return false;
     }
   }
-  
+
   onMoveEnd() {
-    let pos=$('div[idrefsymbol="'+this.data.refSymbol+'"]').position();
-    let objSymbol:any={IdSimbolo:this.data.refSymbol,Nombre:"PAGO",NodoSucesor:null,IdTipoSimbolo:3,CoordenadaX:pos.left,CoordenadaY:pos.top};
+    let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
+    let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "PAGO", NodoSucesor: null, IdTipoSimbolo: 3, CoordenadaX: pos.left, CoordenadaY: pos.top };
     this.symbolsService.updateSymbol(objSymbol);
+    console.log(pos);
   }
 
-  pointOut(option:string){
-    if(!this.symbolsService.occupiedOut(this.data.refSymbol,option)){
+  pointOut(option: string) {
+    if (!this.symbolsService.occupiedOut(this.data.refSymbol, option)) {
       console.log("CLick en la salida..");
-      this.symbolsService.optionOutElement=option;
-      this.symbolsService.outElement=this.data.refSymbol;
+      this.symbolsService.optionOutElement = option;
+      this.symbolsService.outElement = this.data.refSymbol;
     }
   }
   pointIn() {
     if (this.symbolsService.outElement != null) {
-      if (this.symbolsService.outElement!=this.data.refSymbol) {
+      if (this.symbolsService.outElement != this.data.refSymbol) {
         if (!this.symbolsService.occupiedIn(this.data.refSymbol)) {
           if (!this.symbolsService.crossReference(this.data.refSymbol)) {
             // console.log(this.symbolsService.inElement + "click en entrada" + this.symbolsService.outElement);

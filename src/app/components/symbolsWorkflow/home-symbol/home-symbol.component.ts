@@ -11,16 +11,26 @@ export class HomeSymbolComponent implements OnInit {
 
   @Input() data: any;
   nameSymbol: string = "home";
+  setPosition:any={x:0, y:0};
 
   constructor(private symbolsService: SymbolsService) { }
 
   ngOnInit() {
-    
+   
   }
+
+  ngAfterContentInit(){
+    if (this.data.rebuild) {
+      this.setPosition={x:this.data.symbolData.CoordenadaX,y:this.data.symbolData.CoordenadaY};
+    }
+  }  
   ngAfterViewInit() {
-    let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
-    let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "INICIO",NodoSucesor:null, IdTipoSimbolo: 4, CoordenadaX: pos.left, CoordenadaY: pos.top };
-    this.symbolsService.addSymbol(objSymbol);
+    if (!this.data.rebuild) {
+      let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
+      let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "INICIO", NodoSucesor: null, IdTipoSimbolo: 4, CoordenadaX: pos.left, CoordenadaY: pos.top };
+      this.symbolsService.addSymbol(objSymbol);
+    }
+
   }
 
   symbolSelectedChanged() {
@@ -50,14 +60,15 @@ export class HomeSymbolComponent implements OnInit {
     let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
     let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "INICIO", IdTipoSimbolo: 4, CoordenadaX: pos.left, CoordenadaY: pos.top };
     this.symbolsService.updateSymbol(objSymbol);
+    console.log(pos);
   }
 
 
-  pointOut(){
-    if(!this.symbolsService.occupiedOut(this.data.refSymbol,null)){
+  pointOut() {
+    if (!this.symbolsService.occupiedOut(this.data.refSymbol, null)) {
       console.log("CLick en la salida..");
-      this.symbolsService.optionOutElement=null;
-      this.symbolsService.outElement=this.data.refSymbol;
+      this.symbolsService.optionOutElement = null;
+      this.symbolsService.outElement = this.data.refSymbol;
     }
   }
 

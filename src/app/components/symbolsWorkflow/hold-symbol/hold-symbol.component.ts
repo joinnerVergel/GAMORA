@@ -18,19 +18,49 @@ export class HoldSymbolComponent implements OnInit, AfterViewInit {
   propertiesIcon = faCaretRight;
   viewProperties: boolean = false;
   holdForm: FormGroup;
+  setPosition: any = { x: 0, y: 0 };
   constructor(private formBuilder: FormBuilder, private symbolsService: SymbolsService, private logService: LogManagedService) { }
 
   ngOnInit() {
     this.holdForm = this.formBuilder.group({
       value: [1, Validators.required],
     });
+  }
 
+  ngAfterContentInit() {
+    //Entra al condicional unicamente luego de la reconstruccion del flujo (cuando se elimina algun símbolo)
+    //para ubicar el símbolo en la posicion donde se encontraba anteriormente y setear las propiedades que tenía. 
+    if (this.data.rebuild) {
+      this.setPosition = { x: this.data.symbolData.CoordenadaX, y: this.data.symbolData.CoordenadaY };
+      this.f.value.setValue(this.data.symbolData.TiempoEspera);
+    }
   }
   ngAfterViewInit() {
-    let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
-    let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "HOLD", NodoSucesor: null, TiempoEspera: this.f.value.value, IdTipoSimbolo: 2, CoordenadaX: pos.left, CoordenadaY: pos.top };
-    this.symbolsService.addSymbol(objSymbol);
+    //Entra al condicional cuando se agrega el simbolo desde el panel
+    //de herramientas y lo agrega al listado en el sessionStorage.
+    if (!this.data.rebuild) {
+      let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
+      let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "HOLD", NodoSucesor: null, TiempoEspera: this.f.value.value, IdTipoSimbolo: 2, CoordenadaX: pos.left, CoordenadaY: pos.top };
+      this.symbolsService.addSymbol(objSymbol);
+      this.symbolsService.ElementRepositionId = this.data.refSymbol;
+    }
   }
+  ngAfterViewChecked() {
+    // Solo se entra al condicional cuando se arrastra un simbolo desde el cuadro de herramientas
+    //Permite reposicionar el simbolo justo en el lugar al que fue arrastrado.
+    if (this.symbolsService.ElementRepositionId == this.data.refSymbol &&
+      this.symbolsService.ElementReposition && this.symbolsService.dropElementX != null &&
+      this.symbolsService.dropElementY != null) {
+      this.setPosition = { x: this.symbolsService.dropElementX, y: this.symbolsService.dropElementY };
+      let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "HOLD", NodoSucesor: null, TiempoEspera: this.f.value.value, IdTipoSimbolo: 2, CoordenadaX: this.symbolsService.dropElementX, CoordenadaY: this.symbolsService.dropElementY };
+      this.symbolsService.updateSymbol(objSymbol);
+      this.symbolsService.dropElementX = null;
+      this.symbolsService.dropElementY = null;
+      this.symbolsService.ElementRepositionId = null;
+      this.symbolsService.ElementReposition=false;
+    }
+  }
+
 
   // convenience getter for easy access to form fields
   get f() { return this.holdForm.controls; }
@@ -62,12 +92,13 @@ export class HoldSymbolComponent implements OnInit, AfterViewInit {
     let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
     let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "HOLD", NodoSucesor: null, TiempoEspera: this.f.value.value, IdTipoSimbolo: 2, CoordenadaX: pos.left, CoordenadaY: pos.top };
     this.symbolsService.updateSymbol(objSymbol);
+    console.log(pos);
   }
 
   pointOut() {
     if (!this.symbolsService.occupiedOut(this.data.refSymbol, null)) {
       console.log("CLick en la salida..");
-      this.symbolsService.optionOutElement=null;
+      this.symbolsService.optionOutElement = null;
       this.symbolsService.outElement = this.data.refSymbol;
     }
   }

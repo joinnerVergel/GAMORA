@@ -1,4 +1,4 @@
 <div ngResizable class="divWorkFlow shadow resizable-widget" [rzMinWidth]="400" [rzMinHeight]="370" #dragBounds
-  mwlDroppable (drop)="onDrop($event)" (rzStop)="updateWorkFlow()">
+  mwlDroppable (drop)="onDrop($event)" (rzStop)="updateWorkFlow()" (mouseover)="dropElementFunction($event)">
   <ng-template ad-host></ng-template>
 </div>

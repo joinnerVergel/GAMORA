@@ -1,5 +1,5 @@
 <div class="symbolContainer homeSymbol" ngDraggable [bounds]="data.container" (endOffset)="onMoveEnd()" [inBounds]="true"
-    [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol">
+    [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol" [position]="setPosition">
     <div class="ovalSymbol" (click)="symbolSelectedChanged()">Inicio
         <div class="divOut" (click)="pointOut()"></div>
     </div>

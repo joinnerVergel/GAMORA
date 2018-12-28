@@ -1,5 +1,5 @@
 <div class="symbolContainer holdSymbol" ngDraggable [bounds]="data.container" (endOffset)="onMoveEnd()"
-  [inBounds]="true" [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol">
+  [inBounds]="true" [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol" [position]="setPosition">
   <div class="btnProperties" (click)="viewProperties=!viewProperties" *ngIf="getClassContainer()=='selected'">
       <fa-icon [icon]="propertiesIcon" class="icon"></fa-icon>
   </div>

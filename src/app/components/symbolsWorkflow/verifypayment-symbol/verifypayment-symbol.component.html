@@ -1,5 +1,5 @@
 <div class="symbolContainer diamondSymbol" ngDraggable [bounds]="data.container" (endOffset)="onMoveEnd()"
-  [inBounds]="true" [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol">
+  [inBounds]="true" [ngDraggable]="isDraggableSymbol()" [ngClass]="getClassContainer()" appRefSymbol [idRefSymbol]="data.refSymbol" [position]="setPosition">
   <div class="diamond" (click)="symbolSelectedChanged()">
       <fa-icon [icon]="payIcon" class="icon"></fa-icon>
     <div class="divIn" (click)="pointIn()"></div>

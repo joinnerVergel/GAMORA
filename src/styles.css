@@ -264,6 +264,7 @@ div.info{
 
 .symbolContainer{
     display: table;
+    position: absolute;
 }
 .symbolContainer.selected{
     border: 1px dashed #777;

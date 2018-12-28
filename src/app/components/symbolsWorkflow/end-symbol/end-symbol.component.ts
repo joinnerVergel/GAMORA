@@ -11,17 +11,39 @@ export class EndSymbolComponent implements OnInit {
 
   @Input() data: any;
   nameSymbol: string = "end";
+  setPosition:any={x:0, y:0};
 
 
   constructor(private symbolsService: SymbolsService) { }
 
   ngOnInit() {
-
   }
+  ngAfterContentInit(){
+    if (this.data.rebuild) {
+      this.setPosition={x:this.data.symbolData.CoordenadaX,y:this.data.symbolData.CoordenadaY};
+    }
+  }  
   ngAfterViewInit() {
-    let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
-    let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "FIN", IdTipoSimbolo: 5, CoordenadaX: pos.left, CoordenadaY: pos.top };
-    this.symbolsService.addSymbol(objSymbol);
+    if (!this.data.rebuild) {
+      let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
+      let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "FIN", IdTipoSimbolo: 5, CoordenadaX: pos.left, CoordenadaY: pos.top };
+      this.symbolsService.addSymbol(objSymbol);
+    }
+  }
+  ngAfterViewChecked() {
+    // Solo se entra al condicional cuando se arrastra un agrega el simbolo
+    //Permite reposicionar el simbolo para que aparezca debajo del simbolo de inicio.
+    if (this.symbolsService.ElementRepositionId == this.data.refSymbol &&
+      this.symbolsService.ElementReposition && this.symbolsService.dropElementX != null &&
+      this.symbolsService.dropElementY != null) {
+      this.setPosition = { x: this.symbolsService.dropElementX, y: this.symbolsService.dropElementY };
+      let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "FIN", IdTipoSimbolo: 5, CoordenadaX: this.symbolsService.dropElementX, CoordenadaY: this.symbolsService.dropElementY };
+      this.symbolsService.updateSymbol(objSymbol);
+      this.symbolsService.dropElementX = null;
+      this.symbolsService.dropElementY = null;
+      this.symbolsService.ElementRepositionId = null;
+      this.symbolsService.ElementReposition = false;
+    }
   }
 
   symbolSelectedChanged() {
@@ -51,6 +73,7 @@ export class EndSymbolComponent implements OnInit {
     let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
     let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "FIN", IdTipoSimbolo: 5, CoordenadaX: pos.left, CoordenadaY: pos.top };
     this.symbolsService.updateSymbol(objSymbol);
+    console.log(pos);
   }
 
   pointIn() {

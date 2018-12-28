@@ -14,6 +14,10 @@ export class SymbolsService {
   inElement: string = null;
   optionOutElement: string = null;
   ElementConection: boolean = false;
+  ElementReposition:boolean=false;
+  ElementRepositionId:string=null;
+  dropElementX:number=null;
+  dropElementY:number=null;
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
@@ -334,5 +338,22 @@ export class SymbolsService {
     return r;
   }
 
+  getSymbolsWorkFlow(){
+    let l = JSON.parse(sessionStorage.getItem('workFlow'));
+    let symbolsList: Array<any> = l['Simbolos'];
+    return symbolsList;
+  }
+
+  isRemovable(){
+    let r: boolean = false;
+    let l = JSON.parse(sessionStorage.getItem('workFlow'));
+    let symbolsList: Array<any> = l['Simbolos'];
+    symbolsList.forEach(element => {
+      if(element.IdSimbolo==this.symbolSelected && element.IdTipoSimbolo!=4 && element.IdTipoSimbolo!=5){
+       r=true;
+      }
+    });
+    return r;
+  }
 
 }
