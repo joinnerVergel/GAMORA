@@ -11,6 +11,7 @@
         <th scope="col" rowspan="2">No. Cuentas</th>
         <th scope="col">Filtros Fijos</th>
         <th scope="col">Filtros Dinámicos</th>
+        <th scope="col">Prioridad</th>
         <th scope="col" rowspan="2">Acciones</th>
       </tr>
       <tr>
@@ -21,6 +22,10 @@
         <th class="colFixedContainer col">
           <div class="colFixed">Filtro</div>
           <div class="colFixed">Condición</div>
+        </th>
+        <th class="colFixedContainer col">
+          <div class="colFixed">Básica</div>
+          <div class="colFixed">Especial</div>
         </th>
       </tr>
     </thead>
@@ -45,6 +50,36 @@
             <tr *ngFor="let filter of group.dinamicFiltersList">
               <td class="colFixed">{{filter.nameFilter}}</td>
               <td class="colFixed">{{filter.valueFilter}}</td>
+            </tr>
+          </table>
+        </td>
+        <td class="colFixedContainer">
+          <table class="table table-sm">
+            <tr>
+              <td class="colFixed">
+                <div class="actions" *ngIf="priorityGroupEdit!=group.name">
+                  {{group.basicPriority}}
+                  <button type="button" class="btnAction btnView"
+                  (click)="viewEditPriority(group)">
+                    <fa-icon [icon]="editIcon"></fa-icon>
+                  </button>
+                </div>
+                <div *ngIf="priorityGroupEdit==group.name">
+                  <input type="number" class="form-control" min="1" max="{{maxPriority}}" [(ngModel)]="basicPriorityGroupSelected" (keypress)="false">
+                  <button type="button" class="btnAction btnView" (click)="updatePriorityGroup(group)">
+                    <fa-icon [icon]="saveIcon"></fa-icon>
+                  </button>
+                  <button type="button" class="btnAction btnDelete"
+                  (click)="priorityGroupEdit=null">
+                    <fa-icon [icon]="backIcon"></fa-icon>
+                  </button>
+                </div>
+              </td>
+              <td class="colFixed">
+                <button class="btnradio" (click)="toogleSpecialPriority(group)" [ngClass]="getClassSpecialPriority(group.specialPriority)">
+                  <h6 class="custom-control-label"></h6>
+                </button>
+              </td>
             </tr>
           </table>
         </td>

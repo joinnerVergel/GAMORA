@@ -2,7 +2,7 @@
 // *************************PROFILE****************************
 // ________________________________________________________
 
-let profile = "prod";
+let profile = "dev";
 export const managementsListUrl = profile == "dev" ? 'http://localhost:65453/GestionGruposGestionService.svc/ListarGestiones/1':'http://10.80.2.89/WCF_CasasDeCobro/GestionGruposGestionService.svc/ListarGestiones/1';
 export const managementsAddUrl = profile == "dev" ? 'http://localhost:65453/GestionGruposGestionService.svc/CrearGestion':'http://10.80.2.89/WCF_CasasDeCobro/GestionGruposGestionService.svc/CrearGestion';
 export const groupsListUrl = profile == "dev" ? 'http://localhost:65453/GestionGruposGestionService.svc/ListarGruposDisponiblesFija' : 'http://10.80.2.89/WCF_CasasDeCobro/GestionGruposGestionService.svc/ListarGruposDisponiblesFija';

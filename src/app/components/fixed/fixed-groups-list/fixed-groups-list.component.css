@@ -88,5 +88,24 @@ th{
     vertical-align: middle;
 }
 
+.btnradio{
+    background: none;
+    border: none;
+    display: table;
+    padding-left: 30px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.btnradio.btnSelected label::before{
+    background: rgba(13,62,80,1);
+    border:1px solid #aaa;
+}
+
+.btnradio.active h6::before{
+    background: rgba(13,62,80,1);
+    border:1px solid #aaa;
+}
+
 
 

@@ -10,4 +10,6 @@ export class Groups{
     parameters:string;
     fixedFiltersList:Array<Filters>;
     dinamicFiltersList:Array<Filters>;
+    basicPriority:number;
+    specialPriority:number;
 }

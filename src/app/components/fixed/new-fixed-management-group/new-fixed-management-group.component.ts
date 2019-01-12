@@ -137,7 +137,7 @@ export class NewFixedManagementGroupComponent implements OnInit {
     if(this.f.Age.value=="" && this.f.Age.value!="0"){
       ageSend=null;
     }
-    let FiltroGrupo: FiltroGrupo={NombreGrupo:"",EdadMora:ageSend,ListaFiltros:this.fitersList,tipoTransaccion:1};
+    let FiltroGrupo: FiltroGrupo={NombreGrupo:"",EdadMora:ageSend,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:1};
     var suscripcion = this.mGroupsService.getClientsQuantity(FiltroGrupo)
       .subscribe(
         respuesta => {
@@ -160,7 +160,7 @@ export class NewFixedManagementGroupComponent implements OnInit {
     if(this.f.Age.value=="" && this.f.Age.value!="0"){
       ageSend=null;
     }
-    let FiltroGrupo: FiltroGrupo={NombreGrupo:this.f.groupName.value,EdadMora:ageSend,ListaFiltros:this.fitersList,tipoTransaccion:2};
+    let FiltroGrupo: FiltroGrupo={NombreGrupo:this.f.groupName.value,EdadMora:ageSend,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:2};
     var suscripcion = this.mGroupsService.setManagementGroup(FiltroGrupo)
       .subscribe(
         respuesta => {

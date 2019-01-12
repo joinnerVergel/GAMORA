@@ -53,27 +53,32 @@ export class AgeDebtComponent implements OnInit {
   get f() { return this.ageDebtElementForm.controls; }
 
   Validation() {
-    if (this.fieldRequired && this.f.ageSelectRadio.value == "1" && (this.f.debtAge.value == "" || this.f.debtAge.value == null)) {
+    if (this.fieldRequired && this.f.ageSelectRadio.value == "1" && (this.f.debtAge.value === "" || this.f.debtAge.value === null)) {
+      // console.log(this.f.debtAge.value+"ACA1"+this.fieldRequired, this.f.ageSelectRadio.value == "1" ,(this.f.debtAge.value === "" || this.f.debtAge.value === null) );
       return this.validateChange.emit(false);
     }
     if (this.f.ageSelectRadio.value == "2") {
       this.ageValidate();
       if (this.fieldRequired) {
-        if (this.ageError || this.f.fromDebtAge.value == "" || this.f.untilDebtAge.value == "" || this.f.fromDebtAge.value == null || this.f.untilDebtAge.value == null) {
+        if (this.ageError || this.f.fromDebtAge.value === "" || this.f.untilDebtAge.value === "" || this.f.fromDebtAge.value === null || this.f.untilDebtAge.value === null) {
+          console.log("ACA0",this.ageError , this.f.fromDebtAge.value === "" , this.f.untilDebtAge.value === "" , this.f.fromDebtAge.value === null , this.f.untilDebtAge.value === null);
           return this.validateChange.emit(false);
         }
       } else {
         if (this.ageError) {
-          if ((this.f.fromDebtAge.value == "" || this.f.fromDebtAge.value == null) && (this.f.untilDebtAge.value != "" && this.f.untilDebtAge.value != null)) {
+          if ((this.f.fromDebtAge.value === "" || this.f.fromDebtAge.value === null) && (this.f.untilDebtAge.value != "" && this.f.untilDebtAge.value != null)) {
             this.ageErrorNoRequired=true;
+            console.log("ACA1");
             return this.validateChange.emit(false);
           }
-          if ((this.f.untilDebtAge.value == "" || this.f.untilDebtAge.value == null) && (this.f.fromDebtAge.value != "" && this.f.fromDebtAge.value != null)) {
+          if ((this.f.untilDebtAge.value === "" || this.f.untilDebtAge.value === null) && (this.f.fromDebtAge.value != "" && this.f.fromDebtAge.value != null)) {
             this.ageErrorNoRequired=true;
+            console.log("ACA2");
             return this.validateChange.emit(false);
           }
           if (this.f.untilDebtAge.value != "" && this.f.untilDebtAge.value != null && this.f.fromDebtAge.value != "" && this.f.fromDebtAge.value != null) {
             this.ageErrorNoRequired=true;
+            console.log("ACA3");
             return this.validateChange.emit(false);
           }
           this.ageErrorNoRequired=false;
@@ -86,6 +91,7 @@ export class AgeDebtComponent implements OnInit {
   dataChange() {
     let condition: string = "=";
     let valueCondition: string = this.f.debtAge.value;
+    console.log(valueCondition);
     if (this.f.ageSelectRadio.value == "2") {
       condition = "*";
       valueCondition = this.f.fromDebtAge.value + "*" + this.f.untilDebtAge.value;
@@ -99,7 +105,7 @@ export class AgeDebtComponent implements OnInit {
     if (this.f.untilDebtAge.value <= this.f.fromDebtAge.value) {
       this.ageError = true;
     } else {
-      if(this.f.fromDebtAge.value=="" || this.f.fromDebtAge.value==null){
+      if(this.f.fromDebtAge.value==="" || this.f.fromDebtAge.value===null){
         this.ageError = true;  
       }else{
         this.ageError = false;

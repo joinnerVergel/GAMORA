@@ -39,6 +39,18 @@ export class ManagementGroupsService {
     );
   }
 
+  updateBasicPriorityGroup(data: any) {
+    return this.http.post<any>(clientsQuantityUrl, data, this.loginService.getHttpOptions()).pipe(
+      
+    );
+  }
+
+  updateSpecialPriorityGroup(data: any) {
+    return this.http.post<any>(clientsQuantityUrl, data, this.loginService.getHttpOptions()).pipe(
+      
+    );
+  }
+
 
 
   private handleError(error: HttpErrorResponse) {
