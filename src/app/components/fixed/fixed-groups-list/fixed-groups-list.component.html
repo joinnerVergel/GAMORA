@@ -11,7 +11,7 @@
         <th scope="col" rowspan="2">No. Cuentas</th>
         <th scope="col">Filtros Fijos</th>
         <th scope="col">Filtros Dinámicos</th>
-        <th scope="col">Prioridad</th>
+        <th scope="col" *ngIf="editGroups">Prioridad</th>
         <th scope="col" rowspan="2">Acciones</th>
       </tr>
       <tr>
@@ -23,7 +23,7 @@
           <div class="colFixed">Filtro</div>
           <div class="colFixed">Condición</div>
         </th>
-        <th class="colFixedContainer col">
+        <th class="colFixedContainer col" *ngIf="editGroups">
           <div class="colFixed">Básica</div>
           <div class="colFixed">Especial</div>
         </th>
@@ -53,8 +53,11 @@
             </tr>
           </table>
         </td>
-        <td class="colFixedContainer">
-          <table class="table table-sm">
+        <td class="colFixedContainer" *ngIf="editGroups">
+          <div *ngIf="group.ejecution!=3 && group.ejecution!=0">Asociado a un Flujo en Play o Pause</div>
+          <div *ngIf="group.ejecution!=3 && group.ejecution!=0">Prioridad basica: {{group.basicPriority}}</div>
+          <div *ngIf="group.ejecution!=3 && group.ejecution!=0"> {{getPrioritySpecial(group.specialPriority)}}</div>
+          <table class="table table-sm" *ngIf="group.ejecution==3||group.ejecution==0">
             <tr>
               <td class="colFixed">
                 <div class="actions" *ngIf="priorityGroupEdit!=group.name">

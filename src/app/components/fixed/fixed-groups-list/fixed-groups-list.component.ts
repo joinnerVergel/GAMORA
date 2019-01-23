@@ -26,6 +26,7 @@ export class FixedGroupsListComponent implements OnInit {
   priorityGroupEdit: string = null;
   basicPriorityGroupSelected: number = null;
   maxPriority:number=0;
+  editGroups:boolean=false;
 
   constructor(private manageGroupsService: ManagementGroupsService,
     private logService: LogManagedService, private router: Router,
@@ -35,6 +36,7 @@ export class FixedGroupsListComponent implements OnInit {
     if (!this.loginService.isLogged()) {
       this.router.navigate(['/login']);
     }
+    this.isEditGroup();
     this.readGroupsList();
   }
 
@@ -71,11 +73,11 @@ export class FixedGroupsListComponent implements OnInit {
 
               elementGroup.basicPriority = element['PrioridadBasica'];
               elementGroup.specialPriority = element['PrioridadEspecial'];
-
+              elementGroup.ejecution= element['Ejecucion'];
               this.groupsList.push(elementGroup);
             });
             this.maxPriority=this.groupsList.length;
-            // console.log(this.groupsList);
+            console.log(this.groupsList);
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
@@ -175,6 +177,28 @@ export class FixedGroupsListComponent implements OnInit {
           this.priorityGroupEdit = null;
           this.readGroupsList();
         });
+  }
+
+  isEditGroup() {
+    this.manageGroupsService.getIsEditGroup()
+      .subscribe(
+        item => {
+          if (item.hasOwnProperty('BloqueoEdicionGruposFijaResult')) {
+            this.editGroups=!(item['BloqueoEdicionGruposFijaResult']);
+          }
+        }, error => {
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+            this.loginService.clearSessionLogin();
+            this.router.navigate(['/login']);
+          }
+        });
+  }
+
+  getPrioritySpecial(x:number){
+    if(x==0){
+      return 'Sin prioridad especial'
+    }
+    return 'Con prioridad especial'
   }
 
 }

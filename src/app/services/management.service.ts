@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LogManagedService } from './log-managed.service';
 import { LoginService } from './login.service';
-import { calendarListUrl, ManagementGroupUrl, fixedWorkFlowListUrl, groupsListUrl, managementsAddUrl, managementsListUrl } from './url';
+import { calendarListUrl, ManagementGroupUrl, fixedWorkFlowListUrl, groupsListUrl, managementsAddUrl, managementsListUrl, managementsStateChangeUrl } from './url';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -29,6 +29,12 @@ export class ManagementService {
 
   addManagement (data: any):Observable<any> {
     return this.http.post<any>(managementsAddUrl, data, this.loginService.getHttpOptions()).pipe(
+      
+    );
+  }
+
+  changeStateManagement(data:any):Observable<any> {
+    return this.http.post<any>(managementsStateChangeUrl, data, this.loginService.getHttpOptions()).pipe(
       
     );
   }

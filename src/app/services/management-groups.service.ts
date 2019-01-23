@@ -4,7 +4,7 @@ import { LogManagedService } from './log-managed.service';
 import { throwError } from 'rxjs';
 import { FiltroGrupo } from '../models/request/FiltroGrupo';
 import { catchError } from 'rxjs/operators';
-import { fixedItemsBrandsListUrl, clientsQuantityUrl, ManagementGroupUrl } from './url';
+import { fixedItemsBrandsListUrl, clientsQuantityUrl, ManagementGroupUrl, groupsFixedIsEditUrl } from './url';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -13,6 +13,9 @@ import { LoginService } from './login.service';
 export class ManagementGroupsService {
   constructor(private http: HttpClient, private logService: LogManagedService,private loginService: LoginService) { }
 
+  getIsEditGroup() {
+    return this.http.get(groupsFixedIsEditUrl, this.loginService.getHttpOptions());
+  }
   getItemsBrandsList() {
     return this.http.get(fixedItemsBrandsListUrl, this.loginService.getHttpOptions());
   }

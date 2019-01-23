@@ -12,4 +12,5 @@ export class Groups{
     dinamicFiltersList:Array<Filters>;
     basicPriority:number;
     specialPriority:number;
+    ejecution:number;
 }
