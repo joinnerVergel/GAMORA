@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
-import { symbolsListUrl, workFlowAddUrl, fixedWorkFlowListUrl } from './url';
+import { symbolsListUrl, workFlowAddUrl, fixedWorkFlowListUrl, readFixedWorkFlow } from './url';
 import { Observable } from 'rxjs';
 
 
@@ -23,6 +23,10 @@ export class SymbolsService {
 
   getFixedSymbolsList() {
     return this.http.get(symbolsListUrl, this.loginService.getHttpOptions());
+  }
+
+  getWorkFlow(url:string) {
+    return this.http.get(readFixedWorkFlow+url, this.loginService.getHttpOptions());
   }
 
   addSymbol(symbol: any) {

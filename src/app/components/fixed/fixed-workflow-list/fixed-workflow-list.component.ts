@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { SymbolsService } from 'src/app/services/symbols.service';
 import { Router } from '@angular/router';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-fixed-workflow-list',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 export class FixedWorkflowListComponent implements OnInit {
 
   workFlowList:Array<any>= Array<any> ();
+  editIcon = faEdit;
 
   constructor(private loginService: LoginService,private router: Router,private symbolsService: SymbolsService) { }
 
@@ -65,5 +67,9 @@ export class FixedWorkflowListComponent implements OnInit {
     let dateEpoch = parseInt(x);
     return new Date(dateEpoch);
   };
+
+  editWorkflow(workFlowId: number) {
+    this.router.navigate(['/workflow/fixed/edit-workflow/' + workFlowId])
+  }
 
 }

@@ -85,3 +85,6 @@ th{
 .Validation{
     display: block;
 }
+.listaTabla{
+    overflow: auto;
+}

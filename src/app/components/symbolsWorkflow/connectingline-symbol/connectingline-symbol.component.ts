@@ -44,14 +44,24 @@ export class ConnectinglineSymbolComponent implements OnInit, AfterViewInit, OnD
 
   }
   ngAfterViewInit(): void {
-    const element = this.surfaceElement.nativeElement;
-    this.surface = Surface.create(element);
-    console.log("PINTA LINEA INCIAL");
-    this.drawScene();
+    try {
+      const element = this.surfaceElement.nativeElement;
+      this.surface = Surface.create(element);
+      console.log("PINTA LINEA INCIAL");
+      this.drawScene();
+    } catch (error) {
+
+    }
+
   }
 
   ngOnDestroy() {
-    this.surface.destroy();
+    try {
+      this.surface.destroy();
+    } catch (error) {
+
+    }
+
   }
 
   getClass() {
@@ -71,17 +81,17 @@ export class ConnectinglineSymbolComponent implements OnInit, AfterViewInit, OnD
     let addPositionOut: any = this.symbolsService.getAddPositionSymbol(this.data.out, "out", this.data.option);
     let addPositionIn: any = this.symbolsService.getAddPositionSymbol(this.data.in, "in", null);
     this.path.moveTo(this.posOut.x + addPositionOut.x, this.posOut.y + addPositionOut.y).lineTo(this.posIn.x + addPositionIn.x, this.posIn.y + addPositionIn.y).close();
-    this.arrow.moveTo(this.posIn.x + addPositionIn.x-3, this.posIn.y + addPositionIn.y-6).lineTo(this.posIn.x + addPositionIn.x+6-3, this.posIn.y + addPositionIn.y-6).lineTo(this.posIn.x + addPositionIn.x, this.posIn.y + addPositionIn.y).close();
+    this.arrow.moveTo(this.posIn.x + addPositionIn.x - 3, this.posIn.y + addPositionIn.y - 6).lineTo(this.posIn.x + addPositionIn.x + 6 - 3, this.posIn.y + addPositionIn.y - 6).lineTo(this.posIn.x + addPositionIn.x, this.posIn.y + addPositionIn.y).close();
     let group = new Group();
-    group.append(this.path,this.arrow);
+    group.append(this.path, this.arrow);
 
     // Render the group on the surface
     this.surface.clear();
     this.surface.draw(group);
   }
 
-  show(){
-    let r =this.symbolsService.showconnectingLine(this.data.in,this.data.out);
+  show() {
+    let r = this.symbolsService.showconnectingLine(this.data.in, this.data.out);
     // console.log(r);
     return r;
   }

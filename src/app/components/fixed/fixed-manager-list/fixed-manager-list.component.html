@@ -32,7 +32,7 @@
                 <input ngbButton type="radio" value="1" (change)="open(content,management)">
                 <fa-icon [icon]="playIcon"></fa-icon>
               </label>
-              <label ngbButtonLabel class="btn-warning">
+              <label ngbButtonLabel class="btn-warning" *ngIf="management.state!=3">
                 <input ngbButton type="radio" value="2" (change)="open(content,management)">
                 <fa-icon [icon]="pauseIcon"></fa-icon>
               </label>

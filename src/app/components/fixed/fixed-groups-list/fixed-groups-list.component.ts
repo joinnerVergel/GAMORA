@@ -52,7 +52,8 @@ export class FixedGroupsListComponent implements OnInit {
               let elementGroup: Groups = new Groups();
               elementGroup.item = x++;
               elementGroup.name = element['NombreGrupo'];
-              elementGroup.debtAge = element['EdadMoraGrupo'];
+              elementGroup.firstDebtAge = element['EdadInicialMoraGrupo'];
+              elementGroup.lastDebtAge = element['EdadFinalMoraGrupo'];
               elementGroup.dateCreated = this.formatDate(element['FecCreacion']);
               elementGroup.createdBy = element['CreadoPor'];
               elementGroup.accountsQuantity = element['CantidadCuentas'];
@@ -94,7 +95,7 @@ export class FixedGroupsListComponent implements OnInit {
   };
 
   deleteGroup(g: Groups) {
-    let FiltroGrupo: FiltroGrupo = { NombreGrupo: g.name, EdadMora: null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 3 };
+    let FiltroGrupo: FiltroGrupo = { NombreGrupo: g.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 3 };
     var suscripcion = this.manageGroupsService.deleteManagementGroup(FiltroGrupo)
       .subscribe(
         respuesta => {
@@ -151,7 +152,7 @@ export class FixedGroupsListComponent implements OnInit {
   }
 
   updatePriorityGroup(x: Groups) {
-    let data: FiltroGrupo = { NombreGrupo: x.name, EdadMora: null,PrioridadBasica:this.basicPriorityGroupSelected, ListaFiltros: [], tipoTransaccion: 4 };
+    let data: FiltroGrupo = { NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:this.basicPriorityGroupSelected, ListaFiltros: [], tipoTransaccion: 4 };
     var suscripcion = this.manageGroupsService.updateBasicPriorityGroup(data)
       .subscribe(
         respuesta => {
@@ -165,7 +166,7 @@ export class FixedGroupsListComponent implements OnInit {
         });
   }
   toogleSpecialPriority(x: Groups) {
-    let data: FiltroGrupo = { NombreGrupo: x.name, EdadMora: null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 5 };
+    let data: FiltroGrupo = { NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 5 };
     var suscripcion = this.manageGroupsService.updateSpecialPriorityGroup(data)
       .subscribe(
         respuesta => {
@@ -199,6 +200,13 @@ export class FixedGroupsListComponent implements OnInit {
       return 'Sin prioridad especial'
     }
     return 'Con prioridad especial'
+  }
+
+  getAgeDebt(x:Groups){
+    if(x.lastDebtAge==-100){
+      return x.firstDebtAge;
+    }
+    return x.firstDebtAge+' a '+x.lastDebtAge;
   }
 
 }

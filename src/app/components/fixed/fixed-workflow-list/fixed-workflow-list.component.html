@@ -24,12 +24,12 @@
         <td>{{workFlow.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
         <td>{{workFlow.events}}</td>
         <td>
-          <!-- <div class="actions" *ngIf="readVisibilityActions('ELIMINAR_GRUPO')">
-            <button type="button" class="btnAction btnDelete" (click)="deleteGroupChange(workFlow);open(content);"
-              placement="bottom" ngbTooltip="Eliminar" tooltipClass="tooltipDelete">
-              <fa-icon [icon]="deleteIcon"></fa-icon>
+          <div class="actions">
+            <button type="button" class="btnAction btnEdit" 
+              placement="bottom" ngbTooltip="Editar" tooltipClass="tooltipEdit" (click)="editWorkflow(workFlow.nameWorkFlow)">
+              <fa-icon [icon]="editIcon"></fa-icon>
             </button>
-          </div> -->
+          </div>
         </td>
       </tr>
     </tbody>

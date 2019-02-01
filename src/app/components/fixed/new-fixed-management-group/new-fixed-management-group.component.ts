@@ -26,6 +26,9 @@ export class NewFixedManagementGroupComponent implements OnInit {
   fitersList: Array<Filtros> = [];
 
   quantityClients:number=0;
+  age: string = null;
+  ageCondition: string = null;
+  ageValidation: boolean = false;
 
 
   
@@ -42,7 +45,7 @@ export class NewFixedManagementGroupComponent implements OnInit {
     }
     this.newManagementGroupForm = this.formBuilder.group({
       groupName: ['', Validators.required],
-      Age: ['', Validators.required],
+     // Age: ['', Validators.required],
     });
     this.requestQry();
     this.readItemsBrandsList();
@@ -55,7 +58,7 @@ export class NewFixedManagementGroupComponent implements OnInit {
   Validation() {
     this.submitted = true;
     // stop here if form is invalid
-    if (this.newManagementGroupForm.invalid) {
+    if (this.newManagementGroupForm.invalid || !this.ageValidation) {
       return false;
     }
     return true;
@@ -74,6 +77,21 @@ export class NewFixedManagementGroupComponent implements OnInit {
       this.modalService.dismissAll();
     }
   }
+
+  setAge(textAge: string) {
+    this.age = textAge;
+    console.log("EDAD DE MORA:" + this.age);
+  }
+  setAgeCondition(textAgeCondition: string) {
+    this.ageCondition = textAgeCondition;
+    console.log("CONDICION DE EDAD:" + this.ageCondition);
+  }
+
+  ageValidationChange(x: boolean) {
+    this.ageValidation = x;
+    console.log("VALIDACION EDAD:"+this.ageValidation);
+  }
+
 
   readItemsBrandsList() {
     this.mGroupsService.getItemsBrandsList()
@@ -132,12 +150,18 @@ export class NewFixedManagementGroupComponent implements OnInit {
 
   requestQry(){
     
-    let ageSend:string=this.f.Age.value;
-    
-    if(this.f.Age.value=="" && this.f.Age.value!="0"){
-      ageSend=null;
+    let firstAge:string=this.age+"";
+    let lastAge:string=null;
+    if (firstAge==""){
+      firstAge=null;
     }
-    let FiltroGrupo: FiltroGrupo={NombreGrupo:"",EdadMora:ageSend,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:1};
+
+    if(firstAge!= null && firstAge.indexOf("*")!=-1){
+      let age_:string[]=firstAge.split("*");
+      firstAge=age_[0];
+      lastAge=age_[1];
+    }
+    let FiltroGrupo: FiltroGrupo={NombreGrupo:"",EdadMoraInicial:firstAge,EdadMoraFinal:lastAge,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:1};
     var suscripcion = this.mGroupsService.getClientsQuantity(FiltroGrupo)
       .subscribe(
         respuesta => {
@@ -156,11 +180,19 @@ export class NewFixedManagementGroupComponent implements OnInit {
   }
 
   requestIns(){
-    let ageSend:string=this.f.Age.value;
-    if(this.f.Age.value=="" && this.f.Age.value!="0"){
-      ageSend=null;
+    let firstAge:string=this.age+"";
+    let lastAge:string=null;
+    if (firstAge==""){
+      firstAge=null;
     }
-    let FiltroGrupo: FiltroGrupo={NombreGrupo:this.f.groupName.value,EdadMora:ageSend,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:2};
+    console.log(firstAge);
+    
+    if(firstAge!= null && firstAge.indexOf("*")!=-1){
+      let age_:string[]=firstAge.split("*");
+      firstAge=age_[0];
+      lastAge=age_[1];
+    }
+    let FiltroGrupo: FiltroGrupo={NombreGrupo:this.f.groupName.value,EdadMoraInicial:firstAge,EdadMoraFinal:lastAge,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:2};
     var suscripcion = this.mGroupsService.setManagementGroup(FiltroGrupo)
       .subscribe(
         respuesta => {

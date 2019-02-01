@@ -3,7 +3,8 @@ import { Filters } from "./filter";
 export class Groups{
     item:number;
     name:string;
-    debtAge:number;
+    firstDebtAge:number;
+    lastDebtAge:number
     dateCreated:Date;
     createdBy:string;
     accountsQuantity:number;

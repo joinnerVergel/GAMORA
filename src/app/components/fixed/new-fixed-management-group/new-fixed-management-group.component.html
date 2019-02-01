@@ -14,14 +14,15 @@
           <div *ngIf="f.groupName.errors.required">El nombre del grupo es obligatorio</div>
         </div>
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Edad de Mora Inicial</label>
         <input type="number" formControlName="Age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Age.errors }"
           min="-5" max="60" (blur)="requestQry()" required />
         <div *ngIf="submitted && f.Age.errors" class="invalid-feedback">
           <div *ngIf="f.Age.errors.required">La edad de mora inicial es un parámetro obligatorio</div>
         </div>
-      </div>
+      </div> -->
+      <app-age-debt [submitted]="submitted" [fieldRequired]="true" (ageChange)="setAge($event)"  (ageConditionChange)="setAgeCondition($event)"  (validateChange)="ageValidationChange($event)"></app-age-debt>
       <!-- filtros fijos -->
       <label>
         <fa-icon [icon]="filterIcon" class="icon"></fa-icon>Filtros Fijos

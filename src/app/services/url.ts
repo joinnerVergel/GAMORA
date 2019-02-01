@@ -12,6 +12,7 @@ export const calendarListUrl = profile == "dev" ? 'http://localhost:65453/Gestio
 export const fixedWorkFlowListUrl = profile == "dev" ? 'http://localhost:65453/GestionFlujoService.svc/ListarFlujo/1' : 'http://10.80.2.89/WCF_CasasDeCobro/GestionFlujoService.svc/ListarFlujo/1';
 export const workFlowAddUrl = profile == "dev" ? 'http://localhost:65453/GestionFlujoService.svc/CrearFlujo' : 'http://10.80.2.89/WCF_CasasDeCobro/GestionFlujoService.svc/CrearFlujo';
 export const symbolsListUrl = profile == "dev" ? 'http://localhost:65453/CategoriaService.svc/CategoriaFlujo/1' : 'http://10.80.2.89/WCF_CasasDeCobro/CategoriaService.svc/CategoriaFlujo/1';
+export const readFixedWorkFlow = profile == "dev" ? 'http://localhost:65453/GestionFlujoService.svc/ObtenerFlujo/' : 'http://10.80.2.89/WCF_CasasDeCobro/GestionFlujoService.svc/ObtenerFlujo/';
 
 export const logoutUserUrl = profile == "dev" ? 'http://localhost:65453/UsuarioService.svc/UsuarioLogout' : 'http://10.80.2.89/WCF_CasasDeCobro/UsuarioService.svc/UsuarioLogout';
 export const loginUserUrl = profile == "dev" ? 'http://localhost:65453/UsuarioService.svc/UsuarioLogin' :'http://10.80.2.89/WCF_CasasDeCobro/UsuarioService.svc/UsuarioLogin';

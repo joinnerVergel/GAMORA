@@ -65,6 +65,7 @@ import { ManagerComponent } from './components/manager/manager.component';
 import { FixedManagerListComponent } from './components/fixed/fixed-manager-list/fixed-manager-list.component';
 import { NewFixedManagementComponent } from './components/fixed/new-fixed-management/new-fixed-management.component';
 import { CalendarOptionsComponent } from './components/fixed/calendar-options/calendar-options.component';
+import { FixedEditWorkFlowComponent } from './components/fixed/fixed-edit-work-flow/fixed-edit-work-flow.component';
 
 
 @NgModule({
@@ -117,7 +118,8 @@ import { CalendarOptionsComponent } from './components/fixed/calendar-options/ca
     ManagerComponent,
     FixedManagerListComponent,
     NewFixedManagementComponent,
-    CalendarOptionsComponent
+    CalendarOptionsComponent,
+    FixedEditWorkFlowComponent
   ],
   imports: [
     DragAndDropModule,
@@ -166,6 +168,7 @@ import { CalendarOptionsComponent } from './components/fixed/calendar-options/ca
             path: 'workflow', component: WorkflowComponent, children: [
               { path: 'fixed', component: FixedWorkflowListComponent },
               { path: 'fixed/new-workflow', component: NewFixedWorkflowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed/edit-workflow/:id', component: FixedEditWorkFlowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'mobile', component: DevelopingComponent }
             ]
           },

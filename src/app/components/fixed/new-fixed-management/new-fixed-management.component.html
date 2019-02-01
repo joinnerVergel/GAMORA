@@ -31,7 +31,11 @@
             <option *ngFor="let group of groupsList" value="{{group.name}}" selected>{{group.name}}</option>
           </select>
         </div>
-        <div class="table-responsive-md listaTabla">
+        <div  class="invalid-feedback Validation" *ngIf="groupsList.length==0">
+          <div>No existen grupos que puedan asociarse a una gestion.</div>
+          <div>Debe existir por lo menos un grupo que no este asociado a un flujo para poder crear la gestión.</div>
+        </div>
+        <div class="table-responsive-md listaTabla" *ngIf="groupsList.length>0">
           <table class="table table-striped table-bordered groupList">
             <thead>
               <tr>
@@ -57,7 +61,7 @@
             <tbody>
               <tr>
                 <td>{{groupSelected.name}}</td>
-                <td>{{groupSelected.debtAge}}</td>
+                <td>{{getAgeDebt(groupSelected)}}</td>
                 <td>{{groupSelected.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
                 <td>{{groupSelected.createdBy}}</td>
                 <td>{{groupSelected.accountsQuantity}}</td>

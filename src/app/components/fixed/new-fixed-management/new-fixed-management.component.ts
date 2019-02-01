@@ -150,7 +150,8 @@ export class NewFixedManagementComponent implements OnInit {
               let elementGroup: Groups = new Groups();
               elementGroup.item = x++;
               elementGroup.name = element['NombreGrupo'];
-              elementGroup.debtAge = element['EdadMoraGrupo'];
+              elementGroup.firstDebtAge = element['EdadInicialMoraGrupo'];
+              elementGroup.lastDebtAge = element['EdadFinalMoraGrupo'];
               elementGroup.dateCreated = this.formatDate(element['FecCreacion']);
               elementGroup.createdBy = element['CreadoPor'];
               elementGroup.accountsQuantity = element['CantidadCuentas'];
@@ -252,6 +253,13 @@ export class NewFixedManagementComponent implements OnInit {
     let x = dateParam.substring(dateParam.indexOf("(") + 1, dateParam.indexOf("-0"));
     let dateEpoch = parseInt(x);
     return new Date(dateEpoch);
+  }
+
+  getAgeDebt(x:Groups){
+    if(x.lastDebtAge==-100){
+      return x.firstDebtAge;
+    }
+    return x.firstDebtAge+' a '+x.lastDebtAge;
   }
 
 }

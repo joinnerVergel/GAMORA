@@ -13,6 +13,8 @@ import { EndSymbolComponent } from '../end-symbol/end-symbol.component';
 import { HomeSymbolComponent } from '../home-symbol/home-symbol.component';
 import { ConnectinglineSymbolComponent } from '../connectingline-symbol/connectingline-symbol.component';
 import { element } from '@angular/core/src/render3/instructions';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-workflow-area',
@@ -22,24 +24,42 @@ import { element } from '@angular/core/src/render3/instructions';
 export class WorkflowAreaComponent implements OnInit, AfterViewInit {
   symbolSelected: string = "";
   dropElement: boolean = false;
+
+  wfParameter:any;
+  nameWF:string;
+  wf:any={};
   
   @Input() newLine: boolean;
+  @Input() isRebuildWorkflow: boolean;
   @ViewChild(AdDirective) adHost: AdDirective;
   @ViewChild("dragBounds") contenedor: ElementRef;
 
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private cdr: ChangeDetectorRef, private symbolsService: SymbolsService) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, 
+    private cdr: ChangeDetectorRef, private symbolsService: SymbolsService,
+    private router: Router, private route: ActivatedRoute,private loginService: LoginService) { }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
-
-  }
+    }
 
   ngOnInit() {
     // this.contenedor.nativeElement.addEventListener('mouseup', this.onMouseup,{passive: false, capture: false});
-    this.onDrop({ dropData: "home" });
-    this.onDrop({ dropData: "end" });
-    this.dropElement = false;
+    if(this.isRebuildWorkflow){
+      console.log("RECONSTRUYE");
+      this.wfParameter= this.route.params.subscribe(params => {
+        this.nameWF = params['id'];
+      });
+      this.readWorkFlow();
+      // this.connectingLineRebuild();
+      
+      
+    }else{
+      this.onDrop({ dropData: "home" });
+      this.onDrop({ dropData: "end" });
+      this.dropElement = false;
+    }
+    
 
   }
 
@@ -212,11 +232,13 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
       let NS: string = element.NodoSucesor;
       if (NS != null) {
         if (NS.indexOf(",") == -1) {
+          console.log("otro");
           obj = new adSymbol(ConnectinglineSymbolComponent, { out: element.IdSimbolo, in: NS, option: null });
           componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
           var componentRef = viewContainerRef.createComponent(componentFactory);
           (<Ad>componentRef.instance).data = obj.data;
         } else {
+          console.log("pago");
           let Pago: Array<string> = NS.split(",");
           console.log(Pago);
           let Entry_: string = "NO";
@@ -237,5 +259,27 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
     });
   }
 
+  readWorkFlow() {
+    let x: number = 1;
+    console.log("LEYENDO RUTA: /"+this.nameWF)
+    this.symbolsService.getWorkFlow(this.nameWF)
+      .subscribe(
+        item => {
+          this.wf = {};
+          if (item.hasOwnProperty('ObtenerFlujoResult')) {
+            this.wf= item['ObtenerFlujoResult'];
+            console.log("ENTROOOOOO",this.wf);
+            this.symbolsService.newWorkFlow(this.wf);
+            this.workFlowRebuild();
+            this.connectingLineRebuild();
+          }
+          
+        }, error => {
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+            this.loginService.clearSessionLogin();
+            this.router.navigate(['/login']);
+          }
+        });
+  }
 
 }
