@@ -31,7 +31,7 @@
         <div [innerHTML]="msgHTML"></div>
       </ng-template>
     </mwl-text-input-autocomplete-container>
-    <span class="reduceFont">Cantidad de caracteres restantes:{{getCharactersSize()}}</span>
+    <span class="reduceFont" *ngIf="quantityLimit!=null">Cantidad de caracteres restantes:{{getCharactersSize()}}</span>
 
     <div *ngIf="limitExceeded" class="invalid-feedback validateLimit">
       <div>Se ha excedido el tamaño máximo de caracteres permitidos</div>

@@ -9,4 +9,5 @@ export interface PeticionElementoSubCategoriaNuevo {
     TagLink: string;
     LinkElemento: string;
     idContacto: string;
+    IdPlantilla:number;
 }

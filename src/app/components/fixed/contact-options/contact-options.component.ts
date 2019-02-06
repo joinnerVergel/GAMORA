@@ -18,6 +18,7 @@ export class ContactOptionsComponent implements OnInit {
  
   @Input() submitted: boolean = false;
   @Input() fieldRequired: boolean = false;
+  @Input() selectValue: string = null;
   @Output() contactOptionChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() validateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -48,8 +49,10 @@ export class ContactOptionsComponent implements OnInit {
   Validation() {
     // stop here if form is invalid
     if (this.contactElementForm.invalid) {
+      console.log('EMITE false');
       return this.validateChange.emit(false);
     }
+    console.log('EMITE true');
     return this.validateChange.emit(true);
   }
 
@@ -63,7 +66,11 @@ export class ContactOptionsComponent implements OnInit {
               let elementContactOption = { id: element['Id'], contactOption: element['Valor'] };
               this.contactOptions.push(elementContactOption);
             });
-            
+            if(this.selectValue!=null){
+              this.f.contactElement.setValue(this.selectValue);
+              this.dataChange();
+              this.f.contactElement.disable();
+            }
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {

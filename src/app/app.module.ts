@@ -66,6 +66,7 @@ import { FixedManagerListComponent } from './components/fixed/fixed-manager-list
 import { NewFixedManagementComponent } from './components/fixed/new-fixed-management/new-fixed-management.component';
 import { CalendarOptionsComponent } from './components/fixed/calendar-options/calendar-options.component';
 import { FixedEditWorkFlowComponent } from './components/fixed/fixed-edit-work-flow/fixed-edit-work-flow.component';
+import { EmailTemplatesComponent } from './components/fixed/email-templates/email-templates.component';
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import { FixedEditWorkFlowComponent } from './components/fixed/fixed-edit-work-f
     FixedManagerListComponent,
     NewFixedManagementComponent,
     CalendarOptionsComponent,
-    FixedEditWorkFlowComponent
+    FixedEditWorkFlowComponent,
+    EmailTemplatesComponent
   ],
   imports: [
     DragAndDropModule,

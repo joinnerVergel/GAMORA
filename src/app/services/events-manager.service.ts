@@ -4,7 +4,7 @@ import { LogManagedService } from './log-managed.service';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { PeticionCategoriaNueva } from '../models/request/addCategoryModel';
-import { CategoriesListUrl, CategoryAddUrl, subCategoriesListUrl, subCategoryAddUrl, categoryByIdUrl, subCategoryByIdUrl, subCategoryElementsListUrl, subCategoryElementByIdUrl, subCategoryElementAddUrl, tagsListScriptUrl, contactsOptionsUrl, subCategoryElementFieldsRequiredUrl } from './url';
+import { CategoriesListUrl, CategoryAddUrl, subCategoriesListUrl, subCategoryAddUrl, categoryByIdUrl, subCategoryByIdUrl, subCategoryElementsListUrl, subCategoryElementByIdUrl, subCategoryElementAddUrl, tagsListScriptUrl, contactsOptionsUrl, subCategoryElementFieldsRequiredUrl, templatesOptionsUrl, templateEmailUrl, elementSubcategoryStateUrl, elementSubcategoryDeleteUrl } from './url';
 import { PeticionSubCategoriaNueva } from '../models/request/addSubCategoryModel';
 import { PeticionElementoSubCategoriaNuevo } from '../models/request/addSubCategoryElementModel';
 import { LoginService } from './login.service';
@@ -94,12 +94,27 @@ export class EventsManagerService {
   getContactOptionsList() {
     return this.http.get(contactsOptionsUrl, this.loginService.getHttpOptions());
   }
+
+  getTemplatesOptionsList() {
+    return this.http.get(templatesOptionsUrl, this.loginService.getHttpOptions());
+  }
+
+  getTemplateSelected(x: number) {
+    return this.http.get(templateEmailUrl+x, this.loginService.getHttpOptions());
+  }
   
 
   getElementFieldsRequired(category:number) {
       return this.http.get(subCategoryElementFieldsRequiredUrl + category, this.loginService.getHttpOptions());
   }
 
+  changeElementState(idElementSubcategory:number) {
+    return this.http.put(elementSubcategoryStateUrl+idElementSubcategory, null,this.loginService.getHttpOptions());
+  }
+
+  deleteElement(idElementSubcategory:number) {
+    return this.http.delete(elementSubcategoryDeleteUrl+idElementSubcategory,this.loginService.getHttpOptions());
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // console.error('An error occurred:', error.error.message);

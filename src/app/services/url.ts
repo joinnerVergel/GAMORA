@@ -2,7 +2,7 @@
 // *************************PROFILE****************************
 // ________________________________________________________
 
-let profile = "dev";
+let profile = "prod";
 export const managementsListUrl = profile == "dev" ? 'http://localhost:65453/GestionGruposGestionService.svc/ListarGestiones/1':'http://10.80.2.89/WCF_CasasDeCobro/GestionGruposGestionService.svc/ListarGestiones/1';
 export const managementsAddUrl = profile == "dev" ? 'http://localhost:65453/GestionGruposGestionService.svc/CrearGestion':'http://10.80.2.89/WCF_CasasDeCobro/GestionGruposGestionService.svc/CrearGestion';
 export const managementsStateChangeUrl = profile == "dev" ? 'http://localhost:65453/GestionGruposGestionService.svc/CambiarEstadoGestion':'http://10.80.2.89/WCF_CasasDeCobro/GestionGruposGestionService.svc/CambiarEstadoGestion';
@@ -29,6 +29,8 @@ export const subCategoryElementByIdUrl = profile == "dev" ? 'http://localhost:65
 export const subCategoryElementsListUrl = profile == "dev" ? 'http://localhost:65453/ElementosService.svc/listaElementos/':'http://10.80.2.89/WCF_CasasDeCobro/ElementosService.svc/listaElementos/';
 export const subCategoryElementAddUrl = profile == "dev" ? 'http://localhost:65453/ElementosService.svc/CrearElemento':'http://10.80.2.89/WCF_CasasDeCobro/ElementosService.svc/CrearElemento';
 export const subCategoryElementFieldsRequiredUrl = profile == "dev" ? 'http://localhost:65453/ElementosService.svc/CamposElementos/':'http://10.80.2.89/WCF_CasasDeCobro/ElementosService.svc/CamposElementos/';
+export const elementSubcategoryStateUrl= profile == "dev" ? 'http://localhost:65453/ElementosService.svc/CambiarEstadoElemento/':'http://10.80.2.89/WCF_CasasDeCobro/ElementosService.svc/CambiarEstadoElemento/';
+export const elementSubcategoryDeleteUrl= profile == "dev" ? 'http://localhost:65453/ElementosService.svc/EliminarElemento/':'http://10.80.2.89/WCF_CasasDeCobro/ElementosService.svc/EliminarElemento/';
 
 
 export const subCategoryByIdUrl = profile == "dev" ? 'http://localhost:65453/CategoriaService.svc/SubCategoriaPorId/':'http://10.80.2.89/WCF_CasasDeCobro/CategoriaService.svc/SubCategoriaPorId/';
@@ -44,6 +46,9 @@ export const segmentsListUrl = profile == "dev" ? 'http://localhost:65453/ListaG
 export const tenuresListUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/tenenciaLista/':'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/tenenciaLista/';
 export const regionalsListUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/regionalLista/':'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/regionalLista/';
 export const contactsOptionsUrl = profile == "dev" ? "http://localhost:65453/ListaGenericaService.svc/ListaGenerica/ContactoLista/":"http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/ContactoLista/";
+export const templatesOptionsUrl = profile == "dev" ? "http://localhost:65453/ElementosService.svc/ObtenerPlantillasCorreo":"http://10.80.2.89/WCF_CasasDeCobro/ElementosService.svc/ObtenerPlantillasCorreo";
+export const templateEmailUrl = profile == "dev" ? "http://localhost:65453/ElementosService.svc/PlantillaCorreo/":"http://10.80.2.89/WCF_CasasDeCobro/ElementosService.svc/PlantillaCorreo/";
+
 
 export const fixedBrandsListUrl = profile == "dev" ? 'http://localhost:65453/MarcasService.svc/marcas/1':'http://10.80.2.89/WCF_CasasDeCobro/MarcasService.svc/marcas/1';
 export const BrandsFileListUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/archivosMarcas/':'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/archivosMarcas/';

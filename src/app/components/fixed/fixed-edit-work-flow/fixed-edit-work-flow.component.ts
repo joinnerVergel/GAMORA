@@ -14,6 +14,7 @@ export class FixedEditWorkFlowComponent implements OnInit {
   submitted = false;
   wfParameter:any;
   nameWF:string;
+  isEdit:boolean=false;
   // wf:any;
   constructor(config: NgbModalConfig, private modalService: NgbModal,
     private logService: LogManagedService,
@@ -28,8 +29,8 @@ export class FixedEditWorkFlowComponent implements OnInit {
      this.wfParameter= this.route.params.subscribe(params => {
       this.nameWF = params['id'];
     });
-    // this.readWorkFlow();
-    
+
+    this.readWorkFlowIsEdit();
   }
 
 
@@ -72,7 +73,6 @@ export class FixedEditWorkFlowComponent implements OnInit {
             this.logService.addMessage(respuesta["Msg"], "warning");
           }
           this.modalService.dismissAll();
-          this.router.navigate(['/workflow/fixed']);
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();
@@ -81,6 +81,24 @@ export class FixedEditWorkFlowComponent implements OnInit {
         });
   }
 
+ 
+  readWorkFlowIsEdit() {
+    this.symbolsService.getWorkFlow(this.nameWF)
+      .subscribe(
+        item => {
+          if (item.hasOwnProperty('ObtenerFlujoResult')) {
+            const element = item['ObtenerFlujoResult'];
+              this.isEdit=element['FlujoEditable'];
+              console.log(element);
+              console.log("ENCONTRADO: ",this.isEdit);
+          }
+        }, error => {
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+            this.loginService.clearSessionLogin();
+            this.router.navigate(['/login']);
+          }
+        });
+  }
  
 
 }

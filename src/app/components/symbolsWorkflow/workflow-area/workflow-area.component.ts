@@ -37,7 +37,8 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, 
     private cdr: ChangeDetectorRef, private symbolsService: SymbolsService,
-    private router: Router, private route: ActivatedRoute,private loginService: LoginService) { }
+    private router: Router, private route: ActivatedRoute,private loginService: LoginService,
+    private renderer: Renderer2) { }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
@@ -270,10 +271,11 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
             this.wf= item['ObtenerFlujoResult'];
             console.log("ENTROOOOOO",this.wf);
             this.symbolsService.newWorkFlow(this.wf);
+            this.renderer.setStyle(this.contenedor.nativeElement,"width",this.wf['AnchoPx']+'px');
+            this.renderer.setStyle(this.contenedor.nativeElement,"height",this.wf['AltoPx']+'px');
             this.workFlowRebuild();
             this.connectingLineRebuild();
           }
-          
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();

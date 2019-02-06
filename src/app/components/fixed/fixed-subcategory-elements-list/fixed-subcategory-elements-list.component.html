@@ -26,7 +26,7 @@
     <form [formGroup]="newSubCategoryElementForm" *ngIf="newSubCategoryElementFormView" class="newForm">
       <div class="buttonsContainer">
         <span>Nuevo Elemento</span>
-        <button type="button" class="btn btn-primary" (click)="open(content)">Crear</button>
+        <button type="button" class="btn btn-primary" (click)="open(content,-1)">Crear</button>
         <button type="button" class="btn btn-outline-secondary" (click)=" toggleFormNewSubCategoryElement()">Cancelar</button>
       </div>
       <div class="containerLeft">
@@ -39,17 +39,29 @@
           </div>
         </div>
       </div>
-      <app-age-debt [submitted]="submitted" [fieldRequired]="isRequired('EDAD_MORA')" (ageChange)="setAge($event)"  (ageConditionChange)="setAgeCondition($event)"  (validateChange)="ageValidationChange($event)"></app-age-debt>
-      <app-subject [submitted]="submitted" [fieldRequired]="isRequired('ASUNTO')" (subjectChange)="setSubject($event)" (validateChange)="subjectValidationChange($event)"></app-subject>
-      <app-script-message [submitted]="submitted" [fieldRequired]="isRequired('SCRIPT')" [linkCharactersQuantity]="getLinkCharactersQuantity()" (scriptChange)="setScript($event)" (validateChange)="scriptValidationChange($event)"></app-script-message>
-      <app-link [submitted]="submitted" [fieldRequired]="isRequired('LINK')" [scriptCharactersQuantity]="getScriptCharactersQuantity()" (linkChange)="setLink($event)" (validateChange)="linkValidationChange($event)" (tagLinkChange)="setTagLink($event)"></app-link>
-      <app-contact-options [submitted]="submitted" [fieldRequired]="isRequired('CONTACTO')" (contactOptionChange)="setContactOption($event)" (validateChange)="contactOptionValidationChange($event)"></app-contact-options>
+      <app-age-debt [submitted]="submitted" [fieldRequired]="isRequired('EDAD_MORA')" (ageChange)="setAge($event)"
+        (ageConditionChange)="setAgeCondition($event)" (validateChange)="ageValidationChange($event)"></app-age-debt>
+      <app-subject *ngIf="categoryId==3" [submitted]="submitted" [fieldRequired]="isRequired('ASUNTO')" (subjectChange)="setSubject($event)"
+        (validateChange)="subjectValidationChange($event)"></app-subject>
+      <app-email-templates *ngIf="categoryId==3" [data]="script" [submitted]="submitted" [fieldRequired]="isRequired('PLANTILLA')"
+        (templateOptionChange)="setTemplateOption($event)" (validateChange)="templateEmailOptionValidationChange($event)"></app-email-templates>
+      <app-script-message [submitted]="submitted" [fieldRequired]="isRequired('SCRIPT')" [linkCharactersQuantity]="getLinkCharactersQuantity()"
+        (scriptChange)="setScript($event)" (validateChange)="scriptValidationChange($event)" [quantityLimit]="quantityLimit"></app-script-message>
+      <app-link *ngIf="categoryId==1 ||categoryId==3" [submitted]="submitted" [fieldRequired]="isRequired('LINK')"
+        [scriptCharactersQuantity]="getScriptCharactersQuantity()" (linkChange)="setLink($event)" (validateChange)="linkValidationChange($event)"
+        (tagLinkChange)="setTagLink($event)" [quantityLimit]="quantityLimit"></app-link>
+      <app-contact-options [submitted]="submitted" [fieldRequired]="isRequired('CONTACTO')" (contactOptionChange)="setContactOption($event)"
+        (validateChange)="contactOptionValidationChange($event)" [selectValue]="contactValue"></app-contact-options>
       <!-- <app-attachment></app-attachment> -->
     </form>
     <ng-template #content let-c="close" let-d="dismiss">
       <app-confirm-dialog [description]="'Se va a crear un nuevo elemento.'" [question]="'¿Está seguro de ejecutar esta acción?'"
         (result)="action($event)"></app-confirm-dialog>
     </ng-template>
+    <ng-template #contentDelete let-c="close" let-d="dismiss">
+        <app-confirm-dialog [description]="'Se va a eliminar el elemento.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+          (result)="actionDelete($event)"></app-confirm-dialog>
+      </ng-template>
 
     <div class="table-responsive-md listaTabla">
       <table class="table table-striped">
@@ -79,17 +91,21 @@
             <td>{{subcategoryElement.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
             <td>{{subcategoryElement.createdBy}}</td>
             <td>
-              <div class="actions">
-                <button type="button" *ngIf="readVisibilityActions('EDITAR_ELEMENTO')" class="btnAction btnView" placement="bottom" ngbTooltip="Gestionar" tooltipClass="tooltipEdit">
-                  <fa-icon [icon]="editIcon"></fa-icon>
-                </button>
-                <button type="button" class="btnAction btnCopy" placement="bottom" ngbTooltip="Copiar" tooltipClass="tooltipCopy">
-                  <fa-icon [icon]="copyIcon"></fa-icon>
-                </button>
-                <button type="button" *ngIf="readVisibilityActions('ELIMINAR_ELEMENTO')" class="btnAction btnDelete" placement="bottom" ngbTooltip="Eliminar" tooltipClass="tooltipDelete">
-                  <fa-icon [icon]="deleteIcon"></fa-icon>
-                </button>
+              <div class="actions radiosContainer">
+                  <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio" [(ngModel)]="subcategoryElement.state">
+                    <label ngbButtonLabel class="btn-success">
+                      <input ngbButton type="radio" [value]="true" (change)="dataChange(subcategoryElement.idElement)"> Activo
+                    </label>
+                    <label ngbButtonLabel class="btn-danger">
+                      <input ngbButton type="radio" [value]="false" (change)="dataChange(subcategoryElement.idElement)"> Inactivo
+                    </label>
+                  </div>
               </div>
+              <div class="actions">
+                  <button type="button" *ngIf="readVisibilityActions('ELIMINAR_ELEMENTO') && !subcategoryElement.sended" class="btnAction btnDelete" placement="bottom" ngbTooltip="Eliminar" tooltipClass="tooltipDelete" (click)="open(contentDelete,subcategoryElement.idElement)">
+                    <fa-icon [icon]="deleteIcon"></fa-icon>
+                  </button>
+                </div>
             </td>
           </tr>
         </tbody>

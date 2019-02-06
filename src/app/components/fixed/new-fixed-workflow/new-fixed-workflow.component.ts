@@ -110,7 +110,8 @@ export class NewFixedWorkflowComponent implements OnInit {
             this.logService.addMessage(respuesta["Msg"], "warning");
           }
           this.modalService.dismissAll();
-          this.router.navigate(['/workflow/fixed']);
+          let r:any='/workflow/fixed/edit-workflow/'+this.f.workflowName.value;
+          this.router.navigate([r]);
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();

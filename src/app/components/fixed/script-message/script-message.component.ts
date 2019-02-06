@@ -8,7 +8,7 @@ import { LoginService } from 'src/app/services/login.service';
 let tags = [];
 let tagsArray = [];
 let characterQuantity: number;
-const quantityLimit: number = 140;
+//const quantityLimit: number = 140;
 let charactersSize: number;
 
 @Component({
@@ -25,12 +25,13 @@ export class ScriptMessageComponent implements OnInit {
 
 
   @Input() submitted: boolean = false;
-  @Input()  fieldRequired: boolean = false;
-  @Input()  linkCharactersQuantity: number = 0;
+  @Input() fieldRequired: boolean = false;
+  @Input() linkCharactersQuantity: number = 0;
+  @Input() quantityLimit: number = null;
   @Output() scriptChange: EventEmitter<string> = new EventEmitter<string>();
   @Output() validateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   msgHTML: string = '';
-  componentBegin:boolean=false;
+  componentBegin: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private logService: LogManagedService, private eventsService: EventsManagerService, private router: Router
@@ -50,41 +51,44 @@ export class ScriptMessageComponent implements OnInit {
         });
       }
       characterQuantity = 0;
-      charactersSize = quantityLimit;
+      if (this.quantityLimit != null) {
+        charactersSize = this.quantityLimit;
+      }
+
       this.readTagsList();
       this.Validation();
-      this.componentBegin=true;
+      this.componentBegin = true;
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    for (let propName in changes) {  
-        let change = changes[propName];
-        let curVal  = JSON.stringify(change.currentValue);
-        let prevVal = JSON.stringify(change.previousValue);
-        if(prevVal!="false" && prevVal!="true"){ //indica que el cambio se produjo en la cantidad de caracteres del link
+    for (let propName in changes) {
+      let change = changes[propName];
+      let curVal = JSON.stringify(change.currentValue);
+      let prevVal = JSON.stringify(change.previousValue);
+      if (prevVal != "false" && prevVal != "true") { //indica que el cambio se produjo en la cantidad de caracteres del link
         //  console.log("ACTUAL:"+curVal+" ANTERIOR:"+prevVal);
-         if(this.componentBegin){
+        if (this.componentBegin) {
           this.dataChange();
-         }
-         
         }
+
+      }
     }
- }
+  }
 
   // convenience getter for easy access to form fields
   get f() { return this.scriptElementForm.controls; }
 
   Validation() {
     // stop here if form is invalid
-    if (this.scriptElementForm.invalid ||this.limitExceeded) {
+    if (this.scriptElementForm.invalid || this.limitExceeded) {
       return this.validateChange.emit(false);
     }
     return this.validateChange.emit(true);
   }
 
   keyPressEvent(key: string) {
-    if (key == "Enter" || charactersSize <= 0) {
+    if (key == "Enter" || (charactersSize <= 0 && this.quantityLimit != null)) {
       return false;
     }
     let strangeCharacters: string = "|!#$%&/()=?¡¿'*+[]{}^-_:;,.´¨~`°¬<>\\\"";
@@ -122,16 +126,16 @@ export class ScriptMessageComponent implements OnInit {
       // console.log(text);
     });
 
-    charactersSize = quantityLimit - characterQuantity - text.length-this.linkCharactersQuantity;
-    this.eventsService.scriptQuantity=characterQuantity + text.length;
-    // console.log("CANTIDAD CARACTERES SCRIPT"+this.eventsService.scriptQuantity);
-    // console.log("textLength:" + text.length + "\nCantidadCaracteresTags:" + characterQuantity + "\nRestantes:" + charactersSize);
-    this.limitExceeded = false;
-    if (charactersSize < 0) {
-      this.limitExceeded = true;
-      // console.log("LIMITE EXCEDIDO" + this.limitExceeded);
+    if (this.quantityLimit != null) {
+      charactersSize = this.quantityLimit - characterQuantity - text.length - this.linkCharactersQuantity;
+      this.eventsService.scriptQuantity = characterQuantity + text.length;
+      this.limitExceeded = false;
+      if (charactersSize < 0) {
+        this.limitExceeded = true;
+      }
+    } else {
+      this.limitExceeded = false;
     }
-
     this.scriptChange.emit(valueReturn);
     this.Validation();
   }

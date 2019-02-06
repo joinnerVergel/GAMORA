@@ -31,7 +31,8 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
   categoryIcon = faKaaba;
   subcategoryIcon = faCubes;
   subcategoryElementIcon = faCube;
-
+  quantityLimit: number = 140;
+  contactValue: number = null;
   categoryId: number;
   subCategoryId: number;
   private sub: any;
@@ -43,15 +44,18 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
   contact: string = null;
   tagLink: string = null;
   subject: string = null;
+  templateEmail: number = null
   age: string = null;
   ageCondition: string = null;
   subjectValidation: boolean = false;
+  templateEmailOptionValidation: boolean = false;
   scriptValidation: boolean = false;
   linkValidation: boolean = false;
   contactOptionValidation: boolean = false;
   ageValidation: boolean = false;
   tagsArray: Array<string> = new Array<string>();
   fieldsRequiredList: Array<string> = new Array<string>();
+  subcategoryElementSelected:number;
 
 
 
@@ -83,25 +87,45 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
   Validation() {
     this.submitted = true;
     if (!this.newSubCategoryElementForm.invalid) {
-      if (this.ageValidation && this.scriptValidation && this.linkValidation && this.contactOptionValidation && this.subjectValidation) {
+      console.log(this.ageValidation, this.scriptValidation, this.linkValidation, this.contactOptionValidation, this.subjectValidation);
+      if (this.ageValidation &&
+        this.scriptValidation &&
+        ((!this.linkValidation && this.categoryId == 2) || this.linkValidation) &&
+        this.contactOptionValidation &&
+        ((!this.subjectValidation && this.categoryId == 1) || this.subjectValidation)) {
         return true;
       }
     }
+
     return false;
   }
 
 
 
-  open(content) {
-    let validate: boolean = this.Validation();
-    if (validate) {
+  open(content, x: number) {
+    if (x != -1) {
+      this.subcategoryElementSelected=x;
       this.modalService.open(content);
+    } else {
+      let validate: boolean = this.Validation();
+      if (validate) {
+        this.modalService.open(content);
+      }
     }
+
   }
 
   action(x: boolean) {
     if (x) {
       this.addSubCategoryElement();
+    } else {
+      this.modalService.dismissAll();
+    }
+  }
+
+  actionDelete(x: boolean) {
+    if (x) {
+      this.deleteElement(this.subcategoryElementSelected);
     } else {
       this.modalService.dismissAll();
     }
@@ -114,7 +138,7 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
   }
 
   addSubCategoryElement() {
-    let data: PeticionElementoSubCategoriaNuevo = { ElementoNombre: this.f.subCategoryElementName.value, CreadoPor: "SYSTEM", IdSubCategoria: this.subCategoryId, CondicionEdad: this.ageCondition, EdadMora: this.age, Asunto: this.subject, idContacto: this.contact, LinkElemento: this.link, TagLink: this.tagLink, ScriptElemento: this.script };
+    let data: PeticionElementoSubCategoriaNuevo = { ElementoNombre: this.f.subCategoryElementName.value, CreadoPor: "SYSTEM", IdSubCategoria: this.subCategoryId, CondicionEdad: this.ageCondition, EdadMora: this.age, Asunto: this.subject, idContacto: this.contact, LinkElemento: this.link, TagLink: this.tagLink, ScriptElemento: this.script, IdPlantilla: this.templateEmail || -1 };
     console.log(data);
     var suscripcion = this.eventsService.addSubCategoryElement(data)
       .subscribe(
@@ -158,6 +182,7 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
               elementSubCategoryElement.idElement = element['IdElemento'];
               elementSubCategoryElement.idSubCategory = element['IdSubCategoria'];
               elementSubCategoryElement.state = element['Estado'];
+              elementSubCategoryElement.sended = element['Enviado'];
               elementSubCategoryElement.ageCondition = element['CondicionEdad'];
               elementSubCategoryElement.subjectElement = element['Asunto'];
               elementSubCategoryElement.tagLink = element['TagLink'];
@@ -184,6 +209,13 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
   getFathersElement() {
     this.sub = this.route.params.subscribe(params => {
       this.categoryId = +params['id'];
+      if (this.categoryId == 1) {
+        this.contactValue = 1;
+      }
+      if (this.categoryId == 3) {
+        this.contactValue = 2;
+        this.quantityLimit = null;
+      }
       this.subCategoryId = +params['ref'];
     });
     this.readCategorySelected();
@@ -210,10 +242,10 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
             this.router.navigate(['/login']);
           }
         },
-        () =>  {
-            this.readFieldsRequired();
+        () => {
+          this.readFieldsRequired();
         });
-   
+
   }
 
   readSubCategorySelected() {
@@ -280,6 +312,11 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
     this.contact = textContactOption;
     // console.log("CONTACTO:" + this.contact);
   }
+
+  setTemplateOption(textTemplateOption: number) {
+    this.templateEmail = textTemplateOption;
+    // console.log("PLANTILLA:" + this.templateEmail);
+  }
   setSubject(textSubject: string) {
     this.subject = textSubject;
     // console.log("ASUNTO:" + this.subject);
@@ -312,6 +349,11 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
   contactOptionValidationChange(x: boolean) {
     this.contactOptionValidation = x;
     // console.log("VALIDACION CONTACTO:"+this.contactOptionValidation);
+  }
+
+  templateEmailOptionValidationChange(x: boolean) {
+    this.templateEmailOptionValidation = x;
+    // console.log("VALIDACION PLANTILLA:"+this.templateEmailOptionValidation);
   }
 
   ageValidationChange(x: boolean) {
@@ -378,7 +420,7 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
             });
           }
           // console.log(this.fieldsRequiredList);
-        },error => {
+        }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();
             this.router.navigate(['/login']);
@@ -386,16 +428,72 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
         });
   }
 
-  isRequired(field:string){
-    if(this.fieldsRequiredList.includes(field,0)){
+  isRequired(field: string) {
+    if (this.fieldsRequiredList.includes(field, 0)) {
       // console.log("OBLIGATORIO:"+field);
       return true;
     }
     return false;
   }
 
-  readVisibilityActions(data:string){
+  readVisibilityActions(data: string) {
     // console.log(this.loginService.getActionsRole(data));
     return this.loginService.getActionsRole(data);
   }
+
+  dataChange(idSubcategoryElement: number) {
+    let ok: boolean = false;
+    this.eventsService.changeElementState(idSubcategoryElement)
+      .subscribe(
+        respuesta => {
+          if (respuesta["State"]) {
+            this.logService.addMessage(respuesta["Msg"], "success");
+            ok = true;
+          } else {
+            this.logService.addMessage(respuesta["Msg"], "warning");
+          }
+
+        }, error => {
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+            this.loginService.clearSessionLogin();
+            this.router.navigate(['/login']);
+          }
+        },
+        () => {
+          if (ok) {
+            this.readSubCategoryElementsList();
+          }
+        }
+      );
+
+  }
+
+  deleteElement(idSubcategoryElement: number) {
+    let ok: boolean = false;
+    this.eventsService.deleteElement(idSubcategoryElement)
+      .subscribe(
+        respuesta => {
+          this.modalService.dismissAll();
+          if (respuesta["State"]) {
+            this.logService.addMessage(respuesta["Msg"], "success");
+            ok = true;
+          } else {
+            this.logService.addMessage(respuesta["Msg"], "warning");
+          }
+
+        }, error => {
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+            this.loginService.clearSessionLogin();
+            this.router.navigate(['/login']);
+          }
+        },
+        () => {
+          if (ok) {
+            this.readSubCategoryElementsList();
+          }
+        }
+      );
+
+  }
+
 }

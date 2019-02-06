@@ -7,6 +7,7 @@ export class Elementsubcategory {
     dateCreated: Date;
     dateUpdate: Date;
     state:boolean;
+    sended:boolean;
     idSubCategory: number;
     idElement:number;
     subjectElement:string;

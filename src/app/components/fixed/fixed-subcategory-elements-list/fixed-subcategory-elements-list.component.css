@@ -51,3 +51,17 @@ table tbody td{
 .listaTabla{
     overflow: auto;
 }
+
+.radiosContainer .btn-group{
+    display: inline-block;
+    margin: 0 10px 10px;
+}
+.radiosContainer .btn-group label{
+    font-size: 0.5em;
+}
+
+.radiosContainer .btn-group label:not(.active){
+    background-color: #ddd;
+    color: #777;
+    border: 1px solid #777;
+}
