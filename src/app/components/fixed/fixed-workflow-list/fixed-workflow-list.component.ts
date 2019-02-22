@@ -29,7 +29,7 @@ export class FixedWorkflowListComponent implements OnInit {
   }
 
   readWorkFlowList() {
-    this.symbolsService.getWorkflowList()
+    this.symbolsService.getWorkflowList(1)
       .subscribe(
         item => {
           this.workFlowList = Array<any>();

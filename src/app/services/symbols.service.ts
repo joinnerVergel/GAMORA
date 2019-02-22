@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
-import { symbolsListUrl, workFlowAddUrl, fixedWorkFlowListUrl, readFixedWorkFlow } from './url';
+import { mf_symbolsListUrl, mf_workFlowAddUrl, mf_WorkFlowListUrl, mf_readFixedWorkFlow, mf_readRefFixedWorkFlow } from './url';
 import { Observable } from 'rxjs';
 
 
@@ -21,12 +21,12 @@ export class SymbolsService {
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
-  getFixedSymbolsList() {
-    return this.http.get(symbolsListUrl, this.loginService.getHttpOptions());
+  getFixedSymbolsList(operation:number) {
+    return this.http.get(mf_symbolsListUrl+operation, this.loginService.getHttpOptions());
   }
 
-  getWorkFlow(url:string) {
-    return this.http.get(readFixedWorkFlow+url, this.loginService.getHttpOptions());
+  getWorkFlow(idWorkflow:number) {
+    return this.http.get(mf_readFixedWorkFlow+idWorkflow, this.loginService.getHttpOptions());
   }
 
   addSymbol(symbol: any) {
@@ -280,13 +280,17 @@ export class SymbolsService {
   }
 
   saveWorkflow(data: any): Observable<any> {
-    return this.http.post<any>(workFlowAddUrl, data, this.loginService.getHttpOptions()).pipe(
+    return this.http.post<any>(mf_workFlowAddUrl, data, this.loginService.getHttpOptions()).pipe(
 
     );
   }
 
-  getWorkflowList() {
-    return this.http.get(fixedWorkFlowListUrl, this.loginService.getHttpOptions());
+  getWorkflowList(operation:number) {
+    return this.http.get(mf_WorkFlowListUrl+operation, this.loginService.getHttpOptions());
+  }
+
+  getRefWorkflow(parameter: number,val :string,operation:number) {
+    return this.http.get(mf_readRefFixedWorkFlow+parameter+'/'+val+'/'+operation, this.loginService.getHttpOptions());
   }
 
   removeSymbol() {

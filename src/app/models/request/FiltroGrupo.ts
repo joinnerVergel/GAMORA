@@ -7,4 +7,5 @@ export interface FiltroGrupo {
     PrioridadBasica:number;
     ListaFiltros: Array<Filtros>;
     tipoTransaccion: number;
+    idTipoOperacion:number;
 }

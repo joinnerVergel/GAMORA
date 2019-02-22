@@ -31,7 +31,7 @@ export class FixedBrandsListComponent implements OnInit {
   }
 
   readBrandsList() {
-    this.manageBrandsService.getBrandsList()
+    this.manageBrandsService.getBrandsList(1)
       .subscribe(
         item => {
           this.brandsList = Array<Brands>();
@@ -81,7 +81,7 @@ export class FixedBrandsListComponent implements OnInit {
   }
 
   deleteBrand( g:Brands){
-    var suscripcion = this.manageBrandsService.deleteBrand(g.brand)
+    var suscripcion = this.manageBrandsService.deleteBrand(g.brand,1)
       .subscribe(
         respuesta => {
           if(respuesta["State"]){

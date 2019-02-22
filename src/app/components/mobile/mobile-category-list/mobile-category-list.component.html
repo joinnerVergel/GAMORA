@@ -1,0 +1,55 @@
+<div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_CATEGORIA')">
+  <button type="button" class="btn btn-primary btnNew" (click)="toggleFormNewCategory()" *ngIf="!newCategoryFormView">Crear Categoría</button>
+</div>
+<form [formGroup]="newCategoryForm" *ngIf="newCategoryFormView" class="newForm">
+  <div class="form-group">
+    <label>Nombre de la Categoría</label>
+    <input type="text" formControlName="categoryName" (input)="keyPressValidation(50,f.categoryName,true)" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoryName.errors }"
+      required />
+    <div *ngIf="submitted && f.categoryName.errors" class="invalid-feedback">
+      <div *ngIf="f.categoryName.errors.required">El nombre de la categoría es obligatorio</div>
+    </div>
+  </div>
+  <div class="buttonsContainer">
+    <button type="button" class="btn btn-primary" (click)="open(content)">Crear</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="toggleFormNewCategory()">Cancelar</button>
+  </div>
+</form>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <app-confirm-dialog [description]="'Se va a crear una nueva categoría.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+    (result)="action($event)"></app-confirm-dialog>
+</ng-template>
+
+<!-- <table datatable [dtOptions]="dtOptions" class="row-border hover"></table> -->
+
+<div class="table-responsive-md listaTabla">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Fecha Creación</th>
+        <th scope="col">Última Actualización</th>
+        <th scope="col">Creado por</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categoriesList">
+        <th scope="row">{{category.item}}</th>
+        <td>{{category.nameCategory}}</td>
+        <td>{{category.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+        <td>{{category.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+        <td>{{category.createdBy}}</td>
+        <td>
+          <div class="actions">
+            <button type="button" *ngIf="readVisibilityActions('CONSULTAR_SUBCATEGORIA')" class="btnAction btnView" placement="bottom" ngbTooltip="Gestionar" tooltipClass="tooltipEdit" (click)="editSubcategories(category.idCategory)">
+              <fa-icon [icon]="editIcon"></fa-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

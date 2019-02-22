@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LogManagedService } from './log-managed.service';
-import { departmentsListUrl, segmentsListUrl, tenuresListUrl, regionalsListUrl } from './url';
+import { departmentsListUrl, mf_segmentsListUrl, mf_tenuresListUrl, regionalsListUrl } from './url';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -17,11 +17,11 @@ export class FixedFilterService {
     return this.http.get(departmentsListUrl,this.loginService.getHttpOptions());
   }
 
-  getSegmentsList() {
-    return this.http.get(segmentsListUrl,this.loginService.getHttpOptions());
+  getSegmentsList(operation:number) {
+    return this.http.get(mf_segmentsListUrl+operation,this.loginService.getHttpOptions());
   }
-  getTenurestList() {
-    return this.http.get(tenuresListUrl,this.loginService.getHttpOptions());
+  getTenurestList(operation:number) {
+    return this.http.get(mf_tenuresListUrl+operation,this.loginService.getHttpOptions());
   }
   getRegionalsList() {
     return this.http.get(regionalsListUrl,this.loginService.getHttpOptions());

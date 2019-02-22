@@ -95,7 +95,7 @@ export class FixedCategoryListComponent implements OnInit {
   }
 
   readCategoriesList() {
-    this.eventsService.getCategoriesList()
+    this.eventsService.getCategoriesList(1)
       .subscribe(
         item => {
           this.categoriesList = Array<Categories>();

@@ -1,0 +1,40 @@
+.buttonsContainer button{
+    float: right;
+    margin: 10px;
+}
+.newForm{
+    position: relative;
+    padding: 0px;
+    background: none;
+    border: none;
+}
+.buttonsContainer {
+    display: block;
+    background: #fff;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.buttonsContainer span{
+    padding: 10px 20px;
+    font-weight: bold;
+    float: left;
+}
+
+
+.sheet{
+    overflow: auto;
+    position: relative;
+    height: 400px;
+    padding: 10px 20px;
+    border: 2px outset #ddd;
+    background: linear-gradient(to bottom,rgba(13,62,80,0.1),rgba(13,157,174,0.1));
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.divContainerWorkflow{
+    position: relative;
+    z-index: 0;
+}

@@ -28,7 +28,7 @@
         <label>Grupo de Gestión</label>
         <div>
           <select class="custom-select" formControlName="groupSelect" (change)="changeGroup()" required>
-            <option *ngFor="let group of groupsList" value="{{group.name}}" selected>{{group.name}}</option>
+            <option *ngFor="let group of groupsList" value="{{group.id}}" selected>{{group.name}}</option>
           </select>
         </div>
         <div  class="invalid-feedback Validation" *ngIf="groupsList.length==0">
@@ -91,7 +91,7 @@
         <label>Flujo</label>
         <div>
           <select class="custom-select" formControlName="workflowSelect" (change)="changeWorkFlow()" required>
-            <option *ngFor="let workFlow of workFlowList" value="{{workFlow.idWorkFlow}}" selected>{{workFlow.nameWorkFlow}}</option>
+            <option *ngFor="let workFlow of workFlowList" value="{{workFlow.id}}" selected>{{workFlow.nameWorkFlow}}</option>
           </select>
         </div>
         <div class="table-responsive-md listaTabla">

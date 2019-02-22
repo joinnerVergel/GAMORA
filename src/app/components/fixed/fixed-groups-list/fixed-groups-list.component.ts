@@ -41,13 +41,13 @@ export class FixedGroupsListComponent implements OnInit {
   }
 
   readGroupsList() {
-    this.manageGroupsService.getManagementGroupList()
+    this.manageGroupsService.getManagementGroupList(1)
       .subscribe(
         item => {
           this.groupsList = Array<Groups>();
           let x = 1;
-          if (item.hasOwnProperty('ListarGruposFijaResult')) {
-            const elementList = item['ListarGruposFijaResult'];
+          if (item.hasOwnProperty('ListarGruposResult')) {
+            const elementList = item['ListarGruposResult'];
             elementList.forEach(element => {
               let elementGroup: Groups = new Groups();
               elementGroup.item = x++;
@@ -95,7 +95,7 @@ export class FixedGroupsListComponent implements OnInit {
   };
 
   deleteGroup(g: Groups) {
-    let FiltroGrupo: FiltroGrupo = { NombreGrupo: g.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 3 };
+    let FiltroGrupo: FiltroGrupo = {idTipoOperacion:1, NombreGrupo: g.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 1003 };
     var suscripcion = this.manageGroupsService.deleteManagementGroup(FiltroGrupo)
       .subscribe(
         respuesta => {
@@ -152,7 +152,7 @@ export class FixedGroupsListComponent implements OnInit {
   }
 
   updatePriorityGroup(x: Groups) {
-    let data: FiltroGrupo = { NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:this.basicPriorityGroupSelected, ListaFiltros: [], tipoTransaccion: 4 };
+    let data: FiltroGrupo = { idTipoOperacion:1,NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:this.basicPriorityGroupSelected, ListaFiltros: [], tipoTransaccion: 1004 };
     var suscripcion = this.manageGroupsService.updateBasicPriorityGroup(data)
       .subscribe(
         respuesta => {
@@ -166,7 +166,7 @@ export class FixedGroupsListComponent implements OnInit {
         });
   }
   toogleSpecialPriority(x: Groups) {
-    let data: FiltroGrupo = { NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 5 };
+    let data: FiltroGrupo = { idTipoOperacion:1,NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 1005 };
     var suscripcion = this.manageGroupsService.updateSpecialPriorityGroup(data)
       .subscribe(
         respuesta => {
@@ -181,11 +181,11 @@ export class FixedGroupsListComponent implements OnInit {
   }
 
   isEditGroup() {
-    this.manageGroupsService.getIsEditGroup()
+    this.manageGroupsService.getIsEditGroup(1)
       .subscribe(
         item => {
-          if (item.hasOwnProperty('BloqueoEdicionGruposFijaResult')) {
-            this.editGroups=!(item['BloqueoEdicionGruposFijaResult']);
+          if (item.hasOwnProperty('BloqueoEdicionGruposResult')) {
+            this.editGroups=!(item['BloqueoEdicionGruposResult']);
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {

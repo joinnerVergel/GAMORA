@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { faCaretRight, faClock, faToolbox, faWrench, faProjectDiagram, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { SymbolsService } from 'src/app/services/symbols.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -17,6 +17,7 @@ export class ToolboxWorkflowComponent implements OnInit {
   toolsIcon=faProjectDiagram;
   payIcon=faDollarSign;
   symbolsList:Array<any>=[];
+  @Input() operation: number;
   constructor(private symbolsService: SymbolsService,private router: Router,  private loginService: LoginService) { }
 
   ngOnInit() {
@@ -25,7 +26,7 @@ export class ToolboxWorkflowComponent implements OnInit {
  
 
   getSymbolsEvents(){
-    this.symbolsService.getFixedSymbolsList()
+    this.symbolsService.getFixedSymbolsList(this.operation)
     .subscribe(
       item => {
         if (item.hasOwnProperty('CategoriaFlujoResult')) {

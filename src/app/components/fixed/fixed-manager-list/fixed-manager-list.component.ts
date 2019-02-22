@@ -38,7 +38,7 @@ export class FixedManagerListComponent implements OnInit {
 
   readManagementList() {
     let x: number = 1;
-    this.managementService.getManagementList()
+    this.managementService.getManagementList(1)
       .subscribe(
         item => {
           this.managementList = new Array<any>();
@@ -52,8 +52,10 @@ export class FixedManagerListComponent implements OnInit {
               elementManagement.createdBy = element['CreadoPor'];
               elementManagement.dateActivation = element['FecActivacion'];
               elementManagement.dateCreated = element['FecCreacion'];
+              elementManagement.idWorkflow = element['idFlujo'];
               elementManagement.nameWorkflow = element['NombreFlujo'];
               elementManagement.nameManagement = element['NombreGestion'];
+              elementManagement.idGroup = element['idGrupo'];
               elementManagement.nameGroup = element['NombreGrupo'];
               this.managementList.push(elementManagement);
             });

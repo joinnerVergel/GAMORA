@@ -78,6 +78,7 @@ h4.title{
 .actions{
     display: table;
     margin: 0 auto;
+    position: relative;
 }
 .btnNew {
     float: right;

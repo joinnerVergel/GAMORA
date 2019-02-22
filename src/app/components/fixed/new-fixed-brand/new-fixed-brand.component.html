@@ -14,7 +14,8 @@
     <form [formGroup]="newBrandForm" *ngIf="viewNewBrandsForm && (filesDirectory.length>0)">
       <div class="form-group">
         <label>Nombre de la Marca</label>
-        <input type="text" formControlName="brandName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.brandName.errors }" />
+        <input type="text" formControlName="brandName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.brandName.errors }"
+        (keypress)="generalKeyPressEvent($event.key,50,f.brandName,true)" />
         <div *ngIf="submitted && f.brandName.errors" class="invalid-feedback">
           <div *ngIf="f.brandName.errors.required">El nombre de la marca es obligatorio</div>
         </div>

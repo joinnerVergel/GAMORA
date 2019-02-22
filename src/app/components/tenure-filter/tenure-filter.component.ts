@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Filtros } from 'src/app/models/request/filtro';
 import {faPlusSquare} from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +24,7 @@ export class TenureFilterComponent implements OnInit {
   tenuresList:Array<string>=new Array<string>();
   tenuresSelected:Array<string>=new Array<string>();
 
+  @Input() operationType: number;
   @Output() removeItem: EventEmitter<Filtros> = new EventEmitter<Filtros>();
   @Output() addItem: EventEmitter<Filtros> = new EventEmitter<Filtros>();
 
@@ -97,7 +98,7 @@ export class TenureFilterComponent implements OnInit {
 
 
   requestTenuresList(){
-    this.filterFixedService.getTenurestList()
+    this.filterFixedService.getTenurestList(this.operationType)
       .subscribe(
         item => {
           if (item.hasOwnProperty('listaGenericaResult')) {

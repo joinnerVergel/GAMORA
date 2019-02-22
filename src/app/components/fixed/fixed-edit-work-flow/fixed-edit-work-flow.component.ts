@@ -13,6 +13,7 @@ import { SymbolsService } from 'src/app/services/symbols.service';
 export class FixedEditWorkFlowComponent implements OnInit {
   submitted = false;
   wfParameter:any;
+  idWF:number;
   nameWF:string;
   isEdit:boolean=false;
   // wf:any;
@@ -27,10 +28,11 @@ export class FixedEditWorkFlowComponent implements OnInit {
       this.router.navigate(['/login']);
     }
      this.wfParameter= this.route.params.subscribe(params => {
-      this.nameWF = params['id'];
+      this.idWF = params['id'];
     });
 
     this.readWorkFlowIsEdit();
+    this.readNameWF();
   }
 
 
@@ -81,9 +83,26 @@ export class FixedEditWorkFlowComponent implements OnInit {
         });
   }
 
+  readNameWF(){
+    this.symbolsService.getRefWorkflow(1,this.idWF.toString(),1)
+    .subscribe(
+      respuesta => {
+        if (respuesta.hasOwnProperty('ObtenerReferenciaFlujoResult')) {
+          let elementWF:any = respuesta['ObtenerReferenciaFlujoResult'];
+          this.nameWF=elementWF["Valor"];
+        }
+        
+      }, error => {
+        if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+          this.loginService.clearSessionLogin();
+          this.router.navigate(['/login']);
+        }
+      }
+      );
+    }
  
   readWorkFlowIsEdit() {
-    this.symbolsService.getWorkFlow(this.nameWF)
+    this.symbolsService.getWorkFlow(this.idWF)
       .subscribe(
         item => {
           if (item.hasOwnProperty('ObtenerFlujoResult')) {
@@ -97,7 +116,8 @@ export class FixedEditWorkFlowComponent implements OnInit {
             this.loginService.clearSessionLogin();
             this.router.navigate(['/login']);
           }
-        });
+        }
+        );
   }
  
 

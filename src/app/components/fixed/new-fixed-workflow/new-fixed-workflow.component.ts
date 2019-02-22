@@ -32,7 +32,7 @@ export class NewFixedWorkflowComponent implements OnInit {
     });
     let x = $('.divWorkFlow').width();
     let y = $('.divWorkFlow').height();
-    let wf: any = { NombreFlujo: null, AnchoPx: x, AltoPx: y, IdTipoOperacion: 1, Simbolos: [] }
+    let wf: any = { Creacion:true,NombreFlujo: null, AnchoPx: x, AltoPx: y, IdTipoOperacion: 1, Simbolos: [] }
     this.symbolsService.newWorkFlow(wf);
   }
 
@@ -101,23 +101,45 @@ export class NewFixedWorkflowComponent implements OnInit {
 
   addWorkFlow() {
     let data: any = JSON.parse(sessionStorage.getItem('workFlow'));
+    let workFlowCreated:boolean=false;
     this.symbolsService.saveWorkflow(data)
       .subscribe(
         respuesta => {
           if (respuesta["State"]) {
             this.logService.addMessage(respuesta["Msg"], "success");
+            workFlowCreated=true;
           } else {
             this.logService.addMessage(respuesta["Msg"], "warning");
           }
           this.modalService.dismissAll();
-          let r:any='/workflow/fixed/edit-workflow/'+this.f.workflowName.value;
-          this.router.navigate([r]);
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();
             this.router.navigate(['/login']);
           }
-        });
+        },() => {
+          if(workFlowCreated){
+            this.symbolsService.getRefWorkflow(2,this.f.workflowName.value,1)
+            .subscribe(
+              respuesta => {
+                if (respuesta.hasOwnProperty('ObtenerReferenciaFlujoResult')) {
+                  let elementWF:any = respuesta['ObtenerReferenciaFlujoResult'];
+                  let r:any='/workflow/fixed/edit-workflow/'+elementWF["Id"];
+                  this.router.navigate([r]);
+                }
+                
+              }, error => {
+                if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+                  this.loginService.clearSessionLogin();
+                  this.router.navigate(['/login']);
+                }
+              }
+              );
+            }
+          }
+        );
+
+      
   }
 
 

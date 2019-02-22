@@ -94,7 +94,7 @@ export class NewFixedManagementGroupComponent implements OnInit {
 
 
   readItemsBrandsList() {
-    this.mGroupsService.getItemsBrandsList()
+    this.mGroupsService.getItemsBrandsList(1)
       .subscribe(
         item => {
           this.brandsList = Array<Brands>();
@@ -152,7 +152,8 @@ export class NewFixedManagementGroupComponent implements OnInit {
     
     let firstAge:string=this.age+"";
     let lastAge:string=null;
-    if (firstAge==""){
+    
+    if (firstAge=="" || firstAge=="null"){
       firstAge=null;
     }
 
@@ -161,7 +162,7 @@ export class NewFixedManagementGroupComponent implements OnInit {
       firstAge=age_[0];
       lastAge=age_[1];
     }
-    let FiltroGrupo: FiltroGrupo={NombreGrupo:"",EdadMoraInicial:firstAge,EdadMoraFinal:lastAge,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:1};
+    let FiltroGrupo: FiltroGrupo={idTipoOperacion:1,NombreGrupo:"",EdadMoraInicial:firstAge,EdadMoraFinal:lastAge,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:101};
     var suscripcion = this.mGroupsService.getClientsQuantity(FiltroGrupo)
       .subscribe(
         respuesta => {
@@ -192,7 +193,7 @@ export class NewFixedManagementGroupComponent implements OnInit {
       firstAge=age_[0];
       lastAge=age_[1];
     }
-    let FiltroGrupo: FiltroGrupo={NombreGrupo:this.f.groupName.value,EdadMoraInicial:firstAge,EdadMoraFinal:lastAge,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:2};
+    let FiltroGrupo: FiltroGrupo={idTipoOperacion:1,NombreGrupo:this.f.groupName.value,EdadMoraInicial:firstAge,EdadMoraFinal:lastAge,PrioridadBasica:null,ListaFiltros:this.fitersList,tipoTransaccion:1002};
     var suscripcion = this.mGroupsService.setManagementGroup(FiltroGrupo)
       .subscribe(
         respuesta => {

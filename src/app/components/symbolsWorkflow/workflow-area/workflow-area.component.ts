@@ -26,7 +26,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
   dropElement: boolean = false;
 
   wfParameter:any;
-  nameWF:string;
+  idWF:number;
   wf:any={};
   
   @Input() newLine: boolean;
@@ -49,7 +49,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
     if(this.isRebuildWorkflow){
       console.log("RECONSTRUYE");
       this.wfParameter= this.route.params.subscribe(params => {
-        this.nameWF = params['id'];
+        this.idWF = params['id'];
       });
       this.readWorkFlow();
       // this.connectingLineRebuild();
@@ -262,8 +262,8 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
 
   readWorkFlow() {
     let x: number = 1;
-    console.log("LEYENDO RUTA: /"+this.nameWF)
-    this.symbolsService.getWorkFlow(this.nameWF)
+    console.log("LEYENDO RUTA: /"+this.idWF)
+    this.symbolsService.getWorkFlow(this.idWF)
       .subscribe(
         item => {
           this.wf = {};

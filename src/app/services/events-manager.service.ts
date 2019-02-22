@@ -4,7 +4,7 @@ import { LogManagedService } from './log-managed.service';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { PeticionCategoriaNueva } from '../models/request/addCategoryModel';
-import { CategoriesListUrl, CategoryAddUrl, subCategoriesListUrl, subCategoryAddUrl, categoryByIdUrl, subCategoryByIdUrl, subCategoryElementsListUrl, subCategoryElementByIdUrl, subCategoryElementAddUrl, tagsListScriptUrl, contactsOptionsUrl, subCategoryElementFieldsRequiredUrl, templatesOptionsUrl, templateEmailUrl, elementSubcategoryStateUrl, elementSubcategoryDeleteUrl } from './url';
+import { tagsListScriptUrl, contactsOptionsUrl,templatesOptionsUrl, templateEmailUrl, mf_CategoriesListUrl, mf_CategoryAddUrl, mf_categoryByIdUrl, mf_subCategoryAddUrl, mf_subCategoriesListUrl, mf_subCategoryByIdUrl, mf_subCategoryElementsListUrl, mf_subCategoryElementAddUrl, mf_subCategoryElementFieldsRequiredUrl, mf_elementSubcategoryStateUrl, mf_elementSubcategoryDeleteUrl } from './url';
 import { PeticionSubCategoriaNueva } from '../models/request/addSubCategoryModel';
 import { PeticionElementoSubCategoriaNuevo } from '../models/request/addSubCategoryElementModel';
 import { LoginService } from './login.service';
@@ -20,53 +20,53 @@ export class EventsManagerService {
 
   constructor(private http: HttpClient, private logService: LogManagedService, private loginService: LoginService) { }
 
-  getCategoriesList() {
-    return this.http.get(CategoriesListUrl, this.loginService.getHttpOptions());
+  getCategoriesList(operacion:number) {
+    return this.http.get(mf_CategoriesListUrl+operacion, this.loginService.getHttpOptions());
   }
   getCategoryById(idCategory: number) {
     // console.log(categoryByIdUrl + idCategory);
-    return this.http.get(categoryByIdUrl + idCategory, this.loginService.getHttpOptions());
+    return this.http.get(mf_categoryByIdUrl + idCategory, this.loginService.getHttpOptions());
   }
 
 
 
-  addCategory(data: PeticionCategoriaNueva): Observable<PeticionCategoriaNueva> {
-    return this.http.post<PeticionCategoriaNueva>(CategoryAddUrl, data, this.loginService.getHttpOptions()).pipe(
+  addCategory(data: any): Observable<any> {
+    return this.http.post<any>(mf_CategoryAddUrl, data, this.loginService.getHttpOptions()).pipe(
 
     );
   }
 
   getSubCategoriesList(idCategory: number) {
     // console.log(subCategoriesListUrl + idCategory);
-    return this.http.get(subCategoriesListUrl + idCategory, this.loginService.getHttpOptions());
+    return this.http.get(mf_subCategoriesListUrl + idCategory, this.loginService.getHttpOptions());
   }
 
   getSubCategoryById(idSubCategory: number) {
-    return this.http.get(subCategoryByIdUrl + idSubCategory, this.loginService.getHttpOptions());
+    return this.http.get(mf_subCategoryByIdUrl + idSubCategory, this.loginService.getHttpOptions());
   }
-  addSubCategory(data: PeticionSubCategoriaNueva): Observable<PeticionSubCategoriaNueva> {
-    return this.http.post<PeticionSubCategoriaNueva>(subCategoryAddUrl, data, this.loginService.getHttpOptions()).pipe(
+  addSubCategory(data: any): Observable<any> {
+    return this.http.post<any>(mf_subCategoryAddUrl, data, this.loginService.getHttpOptions()).pipe(
 
     );
   }
 
   getSubCategoryElementsList(idSubCategory: number) {
     // console.log(subCategoryElementsListUrl + idSubCategory);
-    return this.http.get(subCategoryElementsListUrl + idSubCategory, this.loginService.getHttpOptions());
+    return this.http.get(mf_subCategoryElementsListUrl + idSubCategory, this.loginService.getHttpOptions());
   }
 
-  getSubCategoryElementById(idSubCategoryElement: number) {
-    return this.http.get(subCategoryElementByIdUrl + idSubCategoryElement, this.loginService.getHttpOptions());
-  }
-  addSubCategoryElement(data: PeticionElementoSubCategoriaNuevo): Observable<PeticionElementoSubCategoriaNuevo> {
-    return this.http.post<PeticionElementoSubCategoriaNuevo>(subCategoryElementAddUrl, data, this.loginService.getHttpOptions()).pipe(
+  // getSubCategoryElementById(idSubCategoryElement: number) {
+  //   return this.http.get(mf_subCategoryElementByIdUrl + idSubCategoryElement, this.loginService.getHttpOptions());
+  // }
+  addSubCategoryElement(data: any): Observable<any> {
+    return this.http.post<any>(mf_subCategoryElementAddUrl, data, this.loginService.getHttpOptions()).pipe(
 
     );
   }
 
-
+  //PAra el adjunto
   adddSubCategoryElement(data: FormData): Observable<FormData> {
-    return this.http.post<FormData>(subCategoryElementAddUrl, data, this.loginService.getHttpOptionsFormData()).pipe(
+    return this.http.post<FormData>(mf_subCategoryElementAddUrl, data, this.loginService.getHttpOptionsFormData()).pipe(
 
     );
   }
@@ -105,15 +105,15 @@ export class EventsManagerService {
   
 
   getElementFieldsRequired(category:number) {
-      return this.http.get(subCategoryElementFieldsRequiredUrl + category, this.loginService.getHttpOptions());
+      return this.http.get(mf_subCategoryElementFieldsRequiredUrl + category, this.loginService.getHttpOptions());
   }
 
   changeElementState(idElementSubcategory:number) {
-    return this.http.put(elementSubcategoryStateUrl+idElementSubcategory, null,this.loginService.getHttpOptions());
+    return this.http.put(mf_elementSubcategoryStateUrl+idElementSubcategory, null,this.loginService.getHttpOptions());
   }
 
   deleteElement(idElementSubcategory:number) {
-    return this.http.delete(elementSubcategoryDeleteUrl+idElementSubcategory,this.loginService.getHttpOptions());
+    return this.http.delete(mf_elementSubcategoryDeleteUrl+idElementSubcategory,this.loginService.getHttpOptions());
   }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

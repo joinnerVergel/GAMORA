@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header">
     <h6>Creación Nuevo Grupo de Gestión</h6>
-    <h6>Cantidad de Clientes:&nbsp;&nbsp;<span>{{quantityClients}}</span></h6>
+    <h6>Cantidad de Cuentas:&nbsp;&nbsp;<span>{{quantityClients}}</span></h6>
   </div>
   <!-- ********Body********* -->
   <div class="card-body">
@@ -14,14 +14,6 @@
           <div *ngIf="f.groupName.errors.required">El nombre del grupo es obligatorio</div>
         </div>
       </div>
-      <!-- <div class="form-group">
-        <label>Edad de Mora Inicial</label>
-        <input type="number" formControlName="Age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Age.errors }"
-          min="-5" max="60" (blur)="requestQry()" required />
-        <div *ngIf="submitted && f.Age.errors" class="invalid-feedback">
-          <div *ngIf="f.Age.errors.required">La edad de mora inicial es un parámetro obligatorio</div>
-        </div>
-      </div> -->
       <app-age-debt [submitted]="submitted" [fieldRequired]="true" (ageChange)="setAge($event)"  (ageConditionChange)="setAgeCondition($event)"  (validateChange)="ageValidationChange($event)"></app-age-debt>
       <!-- filtros fijos -->
       <label>
@@ -37,8 +29,8 @@
         <app-filter-debt-value (removeItem)="removeFilterFixed($event)" (removeItemSingle)="removeFilterSingle($event)"
           (addItem)="addItemList($event)"></app-filter-debt-value>
         <app-department-filter (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-department-filter>
-        <app-segment-filter (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-segment-filter>
-        <app-tenure-filter (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-tenure-filter>
+        <app-segment-filter [operationType]="1" (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-segment-filter>
+        <app-tenure-filter [operationType]="1" (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-tenure-filter>
         <app-regional-filter (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-regional-filter>
       </div>
       <!-- filtros dinamicos -->

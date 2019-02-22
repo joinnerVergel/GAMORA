@@ -1,0 +1,49 @@
+<div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_GESTION')"><button type="button" class="btn btn-primary btnNew"
+  [routerLink]='["/manager/mobile/new-management"]'>Crear Gestión</button></div>
+<ng-template #content let-c="close" let-d="dismiss">
+<app-confirm-dialog [description]="'Se va a cambiar el estado de la gestion.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+  (result)="action($event)"></app-confirm-dialog>
+</ng-template>
+<div class="table-responsive-md listaTabla">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre de la Gestión</th>
+      <th scope="col">Fecha Creación</th>
+      <th scope="col">Fecha Activación</th>
+      <th scope="col">Grupo</th>
+      <th scope="col">Flujo</th>
+      <th scope="col" *ngIf="readVisibilityActions('CREAR_GESTION')">Controles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let management of managementList">
+      <th scope="row">{{management.item}}</th>
+      <td>{{management.nameManagement}}</td>
+      <td>{{management.dateCreated}}</td>
+      <td></td>
+      <td>{{management.nameGroup}}</td>
+      <td>{{management.nameWorkflow}}</td>
+      <td *ngIf="readVisibilityActions('CREAR_GESTION')">
+        <div class="actions radiosContainer">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio" [(ngModel)]="management.state">
+            <label ngbButtonLabel class="btn-success">
+              <input ngbButton type="radio" value="1" (change)="open(content,management)">
+              <fa-icon [icon]="playIcon"></fa-icon>
+            </label>
+            <label ngbButtonLabel class="btn-warning" *ngIf="management.state!=3">
+              <input ngbButton type="radio" value="2" (change)="open(content,management)">
+              <fa-icon [icon]="pauseIcon"></fa-icon>
+            </label>
+            <label ngbButtonLabel class="btn-danger">
+              <input ngbButton type="radio" value="3" (change)="open(content,management)">
+              <fa-icon [icon]="stopIcon"></fa-icon>
+            </label>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { faHome, faLayerGroup, faCrosshairs, faIndustry, faUser, faBars, faSignOutAlt, faUsers, faCodeBranch, faSitemap, faGamepad } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faLayerGroup, faCrosshairs, faIndustry, faUser, faBars, faSignOutAlt, faUsers, faCodeBranch, faSitemap, faGamepad, faChartBar } from '@fortawesome/free-solid-svg-icons';
 import { LoginService } from 'src/app/services/login.service';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Logout } from 'src/app/models/request/logout';
@@ -24,6 +24,7 @@ export class MainMenuComponent implements OnInit {
   userIcon = faUser;
   usersIcon = faUsers;
   barIcon = faBars;
+  reportsIcon=faChartBar;
   signoutIcon = faSignOutAlt;
   workflowIcon= faSitemap;
   managerIcon= faGamepad;

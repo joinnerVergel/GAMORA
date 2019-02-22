@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ManageBrandsService } from 'src/app/services/manage-brands.service';
 import { Files } from 'src/app/models/files';
 import { PeticionMarcaNueva } from 'src/app/models/addbrandModel';
@@ -66,20 +66,11 @@ export class NewFixedBrandComponent implements OnInit {
 
   onSubmit() {
     this.viewNewBrandsForm = false;
-    // let dataa='{"NombreMarca":"xxx","NombreArchivo":"XXX.txt","UsuarioMarca":"SYSTEM"}';
-    // const data={
-    //   "NombreMarca" : this.f.brandName.value,
-    //   "NombreArchivo" : this.f.fileOption.value,
-    //   "UsuarioMarca" : "SYSTEM"
-    // } 
     let data: PeticionMarcaNueva = new PeticionMarcaNueva();
     data.NombreMarca = this.f.brandName.value;
     data.NombreArchivo = this.f.fileOption.value;
     data.UsuarioMarca = this.getNameUser();
     data.TipoOperacion=1;
-
-    // const myObj = JSON.stringify(data);
-    // console.log(myObj);
     this.addBrands(data);
   }
 
@@ -88,7 +79,7 @@ export class NewFixedBrandComponent implements OnInit {
     return this.dataEncryption.decryptionWord(x['key_1']);
   }
   readBrandsFileList() {
-    this.manageBrandsService.getBrandsFileList()
+    this.manageBrandsService.getBrandsFileList(1)
       .subscribe(
         item => {
           this.filesDirectory = Array<Files>();
@@ -137,5 +128,25 @@ export class NewFixedBrandComponent implements OnInit {
     } else {
       this.modalService.dismissAll();
     }
+  }
+
+  generalKeyPressEvent(key: string, limit: number, control: FormControl, validateStrangeCharacters: boolean) {
+
+    if (key == "Enter") {
+      return false;
+    }
+    if (control.value != null) {
+      if (control.value.length > limit) {
+        return false;
+      }
+    }
+    if (validateStrangeCharacters) {
+      let strangeCharacters: string = "|!#$%&/()=?¡¿'*+[]{}^-_:;,.´¨~`°¬<>\\\"@";
+      if (strangeCharacters.indexOf(key) != -1) {
+        console.log("Caracter Invalido " + key);
+        return false;
+      }
+    }
+    return true;
   }
 }

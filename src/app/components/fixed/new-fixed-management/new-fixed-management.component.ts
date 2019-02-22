@@ -20,8 +20,8 @@ export class NewFixedManagementComponent implements OnInit {
   calendarList: Array<any> = [];
   validationCalendar: boolean = false;
   dataCalendar: Array<any> = [];
-  groupsList: Array<Groups> = Array<Groups>();
-  groupSelected: Groups = new Groups();
+  groupsList: Array<any> = Array<any>();
+  groupSelected: any = {};
   workFlowSelected: any = {};
   workFlowList: Array<any> = Array<any>();
 
@@ -139,16 +139,17 @@ export class NewFixedManagementComponent implements OnInit {
   }
 
   readGroupsList() {
-    this.managementService.getManagementGroupList()
+    this.managementService.getManagementGroupList(1)
       .subscribe(
         item => {
-          this.groupsList = Array<Groups>();
+          this.groupsList = Array<any>();
           let x = 1;
-          if (item.hasOwnProperty('ListarGruposDisponiblesFijaResult')) {
-            const elementList = item['ListarGruposDisponiblesFijaResult'];
+          if (item.hasOwnProperty('ListarGruposDisponiblesResult')) {
+            const elementList = item['ListarGruposDisponiblesResult'];
             elementList.forEach(element => {
-              let elementGroup: Groups = new Groups();
+              let elementGroup: any ={};
               elementGroup.item = x++;
+              elementGroup.id=element['IdGrupo']
               elementGroup.name = element['NombreGrupo'];
               elementGroup.firstDebtAge = element['EdadInicialMoraGrupo'];
               elementGroup.lastDebtAge = element['EdadFinalMoraGrupo'];
@@ -172,7 +173,8 @@ export class NewFixedManagementComponent implements OnInit {
 
               this.groupsList.push(elementGroup);
             });
-            this.f.groupSelect.setValue(this.groupsList[0].name);
+            // console.log(this.groupsList)
+            this.f.groupSelect.setValue(this.groupsList[0].id);
             this.changeGroup();
 
           }
@@ -187,11 +189,11 @@ export class NewFixedManagementComponent implements OnInit {
 
 
   changeGroup() {
-    this.groupSelected = this.groupsList.filter(g => g.name == this.f.groupSelect.value)[0];
+    this.groupSelected = this.groupsList.filter(g => g.id == this.f.groupSelect.value)[0];
   }
 
   readWorkFlowList() {
-    this.managementService.getWorkflowList()
+    this.managementService.getWorkflowList(1)
       .subscribe(
         item => {
           this.workFlowList = Array<any>();
@@ -201,6 +203,7 @@ export class NewFixedManagementComponent implements OnInit {
             elementList.forEach(element => {
               let elementWorkFlow: any = {};
               elementWorkFlow.item = x++;
+              elementWorkFlow.id = element['IdFlujo'];
               elementWorkFlow.nameWorkFlow = element['NombreFlujo'];
               elementWorkFlow.createdBy = element['CreadoPor'];
               elementWorkFlow.dateCreated = this.formatDate(element['FecCreacion']);
@@ -210,11 +213,10 @@ export class NewFixedManagementComponent implements OnInit {
               elementWorkFlow.weightPx = element['AnchoPx'];
               elementWorkFlow.duration = element['Duracion'];
               elementWorkFlow.events = element['Eventos'];
-              elementWorkFlow.idWorkFlow = element['IdFlujo'];
               elementWorkFlow.eventsQuantity = element['QEventos'];
               this.workFlowList.push(elementWorkFlow);
             });
-            this.f.workflowSelect.setValue(this.workFlowList[0].idWorkFlow);
+            this.f.workflowSelect.setValue(this.workFlowList[0].id);
             this.changeWorkFlow();
           }
         }, error => {
@@ -226,11 +228,11 @@ export class NewFixedManagementComponent implements OnInit {
   }
 
   changeWorkFlow() {
-    this.workFlowSelected = this.workFlowList.filter(g => g.idWorkFlow == this.f.workflowSelect.value)[0];
+    this.workFlowSelected = this.workFlowList.filter(g => g.id == this.f.workflowSelect.value)[0];
   }
 
   managementAdd(){
-    let data:any={NombreGestion:this.f.managementName.value,NombreGrupo:this.groupSelected.name,NombreFlujo:this.workFlowSelected.nameWorkFlow,IdTipoOperacion:1,GestionCalendario:this.dataCalendar};
+    let data:any={NombreGestion:this.f.managementName.value,IdGrupo:this.groupSelected.id,IdFlujo:this.workFlowSelected.id,IdTipoOperacion:1,GestionCalendario:this.dataCalendar};
     this.managementService.addManagement(data)
       .subscribe(
         respuesta => {

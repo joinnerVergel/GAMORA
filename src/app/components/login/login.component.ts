@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
       // console.log(this.dataEncryption.decryptionWord(this.dataEncryption.encryptionWord(this.f.userName.value)));
       // console.log(this.dataEncryption.decryptionWord(this.dataEncryption.encryptionWord(this.f.userPassword.value)));
       let user: Usuario = { Usuario: this.dataEncryption.encryptionWord(this.f.userName.value), Contrasena: this.dataEncryption.encryptionWord(this.f.userPassword.value) }
+      console.log(user);
       var suscripcion = this.loginService.getUserToken(user)
         .subscribe(
           respuesta => {

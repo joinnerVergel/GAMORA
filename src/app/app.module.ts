@@ -67,6 +67,20 @@ import { NewFixedManagementComponent } from './components/fixed/new-fixed-manage
 import { CalendarOptionsComponent } from './components/fixed/calendar-options/calendar-options.component';
 import { FixedEditWorkFlowComponent } from './components/fixed/fixed-edit-work-flow/fixed-edit-work-flow.component';
 import { EmailTemplatesComponent } from './components/fixed/email-templates/email-templates.component';
+import { MobileGroupsListComponent } from './components/mobile/mobile-groups-list/mobile-groups-list.component';
+import { MobileWorkflowListComponent } from './components/mobile/mobile-workflow-list/mobile-workflow-list.component';
+import { MobileBrandsListComponent } from './components/mobile/mobile-brands-list/mobile-brands-list.component';
+import { MobileManagerListComponent } from './components/mobile/mobile-manager-list/mobile-manager-list.component';
+import { MobileCategoryListComponent } from './components/mobile/mobile-category-list/mobile-category-list.component';
+import { MobileSubCategoriesListComponent } from './components/mobile/mobile-sub-categories-list/mobile-sub-categories-list.component';
+import { MobileSubCategoryElementsListComponent } from './components/mobile/mobile-sub-category-elements-list/mobile-sub-category-elements-list.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { NewMobileWorkflowComponent } from './components/mobile/new-mobile-workflow/new-mobile-workflow.component';
+import { NewMobileManagementGroupComponent } from './components/mobile/new-mobile-management-group/new-mobile-management-group.component';
+import { NewMobileBrandComponent } from './components/mobile/new-mobile-brand/new-mobile-brand.component';
+import { MobileEditWorkFlowComponent } from './components/mobile/mobile-edit-work-flow/mobile-edit-work-flow.component';
+import { NewMobileManagementComponent } from './components/mobile/new-mobile-management/new-mobile-management.component';
+
 
 
 @NgModule({
@@ -121,7 +135,20 @@ import { EmailTemplatesComponent } from './components/fixed/email-templates/emai
     NewFixedManagementComponent,
     CalendarOptionsComponent,
     FixedEditWorkFlowComponent,
-    EmailTemplatesComponent
+    EmailTemplatesComponent,
+    MobileGroupsListComponent,
+    MobileWorkflowListComponent,
+    MobileBrandsListComponent,
+    MobileManagerListComponent,
+    MobileCategoryListComponent,
+    MobileSubCategoriesListComponent,
+    MobileSubCategoryElementsListComponent,
+    ReportsComponent,
+    NewMobileWorkflowComponent,
+    NewMobileManagementGroupComponent,
+    NewMobileBrandComponent,
+    MobileEditWorkFlowComponent,
+    NewMobileManagementComponent
   ],
   imports: [
     DragAndDropModule,
@@ -145,16 +172,16 @@ import { EmailTemplatesComponent } from './components/fixed/email-templates/emai
             path: 'management-groups', component: ManagementGroupsComponent, children: [
               { path: 'fixed', component: FixedGroupsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'fixed/new-group', component: NewFixedManagementGroupComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: DevelopingComponent },
-              { path: 'mobile/new-group', component: DevelopingComponent }
+              { path: 'mobile', component: MobileGroupsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/new-group', component: NewMobileManagementGroupComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
             path: 'manage-brands', component: ManageBrandsComponent, children: [
               { path: 'fixed', component: FixedBrandsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'fixed/new-brand', component: NewFixedBrandComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: DevelopingComponent },
-              { path: 'mobile/new-brand', component: DevelopingComponent }
+              { path: 'mobile', component: MobileBrandsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/new-brand', component: NewMobileBrandComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
@@ -162,7 +189,9 @@ import { EmailTemplatesComponent } from './components/fixed/email-templates/emai
               { path: 'fixed', component: FixedCategoryListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'fixed/category/:id', component: FixedSubCategoriesListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'fixed/category/:id/sub-category/:ref', component: FixedSubcategoryElementsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile', component: DevelopingComponent }
+              { path: 'mobile', component: MobileCategoryListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/category/:id', component: MobileSubCategoriesListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/category/:id/sub-category/:ref', component: MobileSubCategoryElementsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
             ]
           },
           { path: 'users-manager', component: UsersManagerComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ=='] } },
@@ -171,15 +200,21 @@ import { EmailTemplatesComponent } from './components/fixed/email-templates/emai
               { path: 'fixed', component: FixedWorkflowListComponent },
               { path: 'fixed/new-workflow', component: NewFixedWorkflowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'fixed/edit-workflow/:id', component: FixedEditWorkFlowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: DevelopingComponent }
+              { path: 'mobile', component: MobileWorkflowListComponent },
+              { path: 'mobile/new-workflow', component: NewMobileWorkflowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile/edit-workflow/:id', component: MobileEditWorkFlowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
             path: 'manager', component: ManagerComponent, children: [
               { path: 'fixed', component: FixedManagerListComponent },
               { path: 'fixed/new-management', component: NewFixedManagementComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: DevelopingComponent }
+              { path: 'mobile', component: MobileManagerListComponent },
+              { path: 'mobile/new-management', component: NewMobileManagementComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
+          },
+          {
+            path: 'reports', component: ReportsComponent
           }
         ]
       }

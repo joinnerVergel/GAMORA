@@ -4,7 +4,7 @@ import { LogManagedService } from './log-managed.service';
 import { throwError } from 'rxjs';
 import { FiltroGrupo } from '../models/request/FiltroGrupo';
 import { catchError } from 'rxjs/operators';
-import { fixedItemsBrandsListUrl, clientsQuantityUrl, ManagementGroupUrl, groupsFixedIsEditUrl } from './url';
+import { mf_ItemsBrandsListUrl, mf_ManagementGroupOpUrl, mf_ManagementGroupUrl, mf_groupsIsEditUrl } from './url';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -13,43 +13,43 @@ import { LoginService } from './login.service';
 export class ManagementGroupsService {
   constructor(private http: HttpClient, private logService: LogManagedService,private loginService: LoginService) { }
 
-  getIsEditGroup() {
-    return this.http.get(groupsFixedIsEditUrl, this.loginService.getHttpOptions());
+  getIsEditGroup(operation:number) {
+    return this.http.get(mf_groupsIsEditUrl+operation, this.loginService.getHttpOptions());
   }
-  getItemsBrandsList() {
-    return this.http.get(fixedItemsBrandsListUrl, this.loginService.getHttpOptions());
+  getItemsBrandsList(operation :number) {
+    return this.http.get(mf_ItemsBrandsListUrl+operation, this.loginService.getHttpOptions());
   }
 
   getClientsQuantity(data: FiltroGrupo) {
-    return this.http.post<FiltroGrupo>(clientsQuantityUrl, data, this.loginService.getHttpOptions()).pipe(
+    return this.http.post<FiltroGrupo>(mf_ManagementGroupOpUrl, data, this.loginService.getHttpOptions()).pipe(
       
     );
   }
 
   setManagementGroup(data: FiltroGrupo) {
-    return this.http.post<FiltroGrupo>(clientsQuantityUrl, data, this.loginService.getHttpOptions()).pipe(
+    return this.http.post<FiltroGrupo>(mf_ManagementGroupOpUrl, data, this.loginService.getHttpOptions()).pipe(
       
     );
   }
 
-  getManagementGroupList() {
-    return this.http.get(ManagementGroupUrl, this.loginService.getHttpOptions());
+  getManagementGroupList(operation:number) {
+    return this.http.get(mf_ManagementGroupUrl+operation, this.loginService.getHttpOptions());
   }
 
   deleteManagementGroup(data: FiltroGrupo) {
-    return this.http.post<FiltroGrupo>(clientsQuantityUrl, data, this.loginService.getHttpOptions()).pipe(
+    return this.http.post<FiltroGrupo>(mf_ManagementGroupOpUrl, data, this.loginService.getHttpOptions()).pipe(
       
     );
   }
 
   updateBasicPriorityGroup(data: any) {
-    return this.http.post<any>(clientsQuantityUrl, data, this.loginService.getHttpOptions()).pipe(
+    return this.http.post<any>(mf_ManagementGroupOpUrl, data, this.loginService.getHttpOptions()).pipe(
       
     );
   }
 
   updateSpecialPriorityGroup(data: any) {
-    return this.http.post<any>(clientsQuantityUrl, data, this.loginService.getHttpOptions()).pipe(
+    return this.http.post<any>(mf_ManagementGroupOpUrl, data, this.loginService.getHttpOptions()).pipe(
       
     );
   }

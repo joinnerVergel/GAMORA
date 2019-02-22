@@ -17,8 +17,8 @@ export class FilterDebtValueComponent implements OnInit {
   classSelected: string = "inactive";
   classFilterSelected: string = "";
 
-  optionsDebtValue = [{ text: "Menor que", value: "m" }, { text: "Mayor que", value: ">" },
-  { text: "Menor o igual que", value: "m=" }, { text: "Mayor o igual que", value: ">=" }, { text: "Igual a", value: "=" }];
+  optionsDebtValue = [{ text: "Menor a", value: "m" }, { text: "Mayor a", value: ">" },
+  { text: "Menor o igual a", value: "m=" }, { text: "Mayor o igual a", value: ">=" }, { text: "Igual a", value: "=" }];
 
   filterFixedForm: FormGroup;
 
