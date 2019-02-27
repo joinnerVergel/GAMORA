@@ -1,16 +1,18 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, HostListener } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { SymbolsService } from 'src/app/services/symbols.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-edit-work-flow',
   templateUrl: './mobile-edit-work-flow.component.html',
   styleUrls: ['./mobile-edit-work-flow.component.css']
 })
-export class MobileEditWorkFlowComponent implements OnInit {
+export class MobileEditWorkFlowComponent implements OnInit,ComponentCanDeactivate {
   submitted = false;
   wfParameter:any;
   idWF:number;
@@ -120,5 +122,10 @@ export class MobileEditWorkFlowComponent implements OnInit {
         );
   }
  
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 
 }

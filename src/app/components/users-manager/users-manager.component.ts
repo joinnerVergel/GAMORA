@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { faTrashAlt, faSave, faUndo, faEdit, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,13 +9,15 @@ import { LoginService } from 'src/app/services/login.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UserManager } from 'src/app/models/request/addUser';
 import { Profiles } from 'src/app/models/profiles';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users-manager',
   templateUrl: './users-manager.component.html',
   styleUrls: ['./users-manager.component.css']
 })
-export class UsersManagerComponent implements OnInit {
+export class UsersManagerComponent implements OnInit,ComponentCanDeactivate {
 
   newUserForm: FormGroup;
   stateUserForm:FormGroup;
@@ -262,6 +264,12 @@ export class UsersManagerComponent implements OnInit {
           }
         }
         );
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
   }
 
 }

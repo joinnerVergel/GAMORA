@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { faEdit, faLongArrowAltLeft, faArrowLeft, faKaaba, faCube, faCubes, faTrash, faTrashAlt, faClone } from '@fortawesome/free-solid-svg-icons';
 import { Elementsubcategory } from 'src/app/models/elementsSubcategory';
@@ -10,13 +10,15 @@ import { EventsManagerService } from 'src/app/services/events-manager.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeticionElementoSubCategoriaNuevo } from 'src/app/models/request/addSubCategoryElementModel';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-fixed-subcategory-elements-list',
   templateUrl: './fixed-subcategory-elements-list.component.html',
   styleUrls: ['./fixed-subcategory-elements-list.component.css']
 })
-export class FixedSubcategoryElementsListComponent implements OnInit {
+export class FixedSubcategoryElementsListComponent implements OnInit,ComponentCanDeactivate {
 
   newSubCategoryElementForm: FormGroup;
   submitted = false;
@@ -494,6 +496,12 @@ export class FixedSubcategoryElementsListComponent implements OnInit {
         }
       );
 
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
   }
 
 }

@@ -36,7 +36,7 @@ export class MainMenuComponent implements OnInit {
   constructor(private router: Router, private logService: LogManagedService, private loginService: LoginService, private dataEncryption: DataEncryptionService) { }
 
   ngOnInit() {
-    this.chooseClass();
+    // this.chooseClass();
     if (!this.loginService.isLogged()) {
       this.router.navigate(['/login']);
     } else {
@@ -103,12 +103,13 @@ export class MainMenuComponent implements OnInit {
 
 
   getActions() {
-    let token = localStorage.getItem('tokenUser');
+    // let token = localStorage.getItem('tokenUser');
+    let token = this.loginService.getLocalUserLogged().token;
     // decode the token to get its payload
     let tokenPayload = decode(token);
     let role = tokenPayload['RolUsuario'];
     let data = { Rol: role }
-    // console.log(data);
+     console.log(data);
     let ok: boolean = false;
     let x: Array<string> = new Array<string>();
     var suscripcion = this.loginService.getUserActions(data)
@@ -121,6 +122,7 @@ export class MainMenuComponent implements OnInit {
               // console.log(element);
             });
             ok = true;
+            // console.log(x);
           }
           // console.log(this.fieldsRequiredList);
         }, error => {
@@ -132,6 +134,7 @@ export class MainMenuComponent implements OnInit {
         () => {
           if (ok) {
             this.loginService.setActionsRole(x);
+            console.log(this.loginService.actionsRole)
           }
         }
       );

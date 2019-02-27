@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { faEdit, faKaaba } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,13 +6,15 @@ import { LogManagedService } from 'src/app/services/log-managed.service';
 import { EventsManagerService } from 'src/app/services/events-manager.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-sub-categories-list',
   templateUrl: './mobile-sub-categories-list.component.html',
   styleUrls: ['./mobile-sub-categories-list.component.css']
 })
-export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy {
+export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy,ComponentCanDeactivate {
 
   newSubCategoryForm: FormGroup;
   submitted = false;
@@ -189,6 +191,12 @@ export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy {
   readVisibilityActions(data:string){
     // console.log(this.loginService.getActionsRole(data));
     return this.loginService.getActionsRole(data);
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
   }
 
 }

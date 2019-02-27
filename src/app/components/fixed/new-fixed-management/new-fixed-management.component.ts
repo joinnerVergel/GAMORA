@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { LogManagedService } from 'src/app/services/log-managed.service';
@@ -7,13 +7,15 @@ import { LoginService } from 'src/app/services/login.service';
 import { ManagementService } from 'src/app/services/management.service';
 import { Groups } from 'src/app/models/groups';
 import { Filters } from 'src/app/models/filter';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-fixed-management',
   templateUrl: './new-fixed-management.component.html',
   styleUrls: ['./new-fixed-management.component.css']
 })
-export class NewFixedManagementComponent implements OnInit {
+export class NewFixedManagementComponent implements OnInit,ComponentCanDeactivate {
 
   newManagementForm: FormGroup;
   submitted = false;
@@ -262,6 +264,12 @@ export class NewFixedManagementComponent implements OnInit {
       return x.firstDebtAge;
     }
     return x.firstDebtAge+' a '+x.lastDebtAge;
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
   }
 
 }

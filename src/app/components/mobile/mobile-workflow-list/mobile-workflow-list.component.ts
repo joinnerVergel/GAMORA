@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { SymbolsService } from 'src/app/services/symbols.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-workflow-list',
   templateUrl: './mobile-workflow-list.component.html',
   styleUrls: ['./mobile-workflow-list.component.css']
 })
-export class MobileWorkflowListComponent implements OnInit {
+export class MobileWorkflowListComponent implements OnInit,ComponentCanDeactivate {
 
   workFlowList:Array<any>= Array<any> ();
   editIcon = faEdit;
@@ -70,6 +72,12 @@ export class MobileWorkflowListComponent implements OnInit {
 
   editWorkflow(workFlowId: number) {
     this.router.navigate(['/workflow/mobile/edit-workflow/' + workFlowId])
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
   }
 
 }

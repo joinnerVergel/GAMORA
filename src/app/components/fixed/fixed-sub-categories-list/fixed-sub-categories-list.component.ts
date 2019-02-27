@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Subcategories } from 'src/app/models/Subcategories';
 import { faEdit, faKaaba } from '@fortawesome/free-solid-svg-icons';
@@ -9,13 +9,15 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PeticionSubCategoriaNueva } from 'src/app/models/request/addSubCategoryModel';
 import { Categories } from 'src/app/models/Categories';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-fixed-sub-categories-list',
   templateUrl: './fixed-sub-categories-list.component.html',
   styleUrls: ['./fixed-sub-categories-list.component.css']
 })
-export class FixedSubCategoriesListComponent implements OnInit,OnDestroy {
+export class FixedSubCategoriesListComponent implements OnInit,OnDestroy,ComponentCanDeactivate {
 
   newSubCategoryForm: FormGroup;
   submitted = false;
@@ -195,4 +197,9 @@ export class FixedSubCategoriesListComponent implements OnInit,OnDestroy {
     return this.loginService.getActionsRole(data);
   }
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 }

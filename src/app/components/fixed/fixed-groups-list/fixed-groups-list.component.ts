@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Groups } from 'src/app/models/groups';
 import { ManagementGroupsService } from 'src/app/services/management-groups.service';
 import { Router } from '@angular/router';
@@ -8,13 +8,15 @@ import { faTrashAlt, faPencilAlt, faSave, faUndo } from '@fortawesome/free-solid
 import { Filters } from 'src/app/models/filter';
 import { FiltroGrupo } from 'src/app/models/request/FiltroGrupo';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-fixed-groups-list',
   templateUrl: './fixed-groups-list.component.html',
   styleUrls: ['./fixed-groups-list.component.css']
 })
-export class FixedGroupsListComponent implements OnInit {
+export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
   deleteIcon = faTrashAlt;
   editIcon = faPencilAlt;
   saveIcon = faSave;
@@ -39,6 +41,7 @@ export class FixedGroupsListComponent implements OnInit {
     this.isEditGroup();
     this.readGroupsList();
   }
+
 
   readGroupsList() {
     this.manageGroupsService.getManagementGroupList(1)
@@ -207,6 +210,12 @@ export class FixedGroupsListComponent implements OnInit {
       return x.firstDebtAge;
     }
     return x.firstDebtAge+' a '+x.lastDebtAge;
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+     this.loginService.keepSession();
+    return true;
   }
 
 }

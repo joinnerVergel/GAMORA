@@ -80,6 +80,7 @@ import { NewMobileManagementGroupComponent } from './components/mobile/new-mobil
 import { NewMobileBrandComponent } from './components/mobile/new-mobile-brand/new-mobile-brand.component';
 import { MobileEditWorkFlowComponent } from './components/mobile/mobile-edit-work-flow/mobile-edit-work-flow.component';
 import { NewMobileManagementComponent } from './components/mobile/new-mobile-management/new-mobile-management.component';
+import { PendingChangesGuardService } from './services/pending-changes-guard.service';
 
 
 
@@ -166,55 +167,56 @@ import { NewMobileManagementComponent } from './components/mobile/new-mobile-man
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       {
-        path: '', component: NavigationBarComponent, children: [
-          { path: '', component: HomeComponent },
+        path: '', component: NavigationBarComponent , children: [
+          {path: '',redirectTo: '/home', pathMatch: 'full'},
+          { path: 'home', component: HomeComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
           {
             path: 'management-groups', component: ManagementGroupsComponent, children: [
-              { path: 'fixed', component: FixedGroupsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'fixed/new-group', component: NewFixedManagementGroupComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: MobileGroupsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile/new-group', component: NewMobileManagementGroupComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed', component: FixedGroupsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/new-group', component: NewFixedManagementGroupComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: MobileGroupsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/new-group', component: NewMobileManagementGroupComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
             path: 'manage-brands', component: ManageBrandsComponent, children: [
-              { path: 'fixed', component: FixedBrandsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'fixed/new-brand', component: NewFixedBrandComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: MobileBrandsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile/new-brand', component: NewMobileBrandComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed', component: FixedBrandsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/new-brand', component: NewFixedBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: MobileBrandsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/new-brand', component: NewMobileBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
             path: 'events-manager', component: EventsManagerComponent, children: [
-              { path: 'fixed', component: FixedCategoryListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'fixed/category/:id', component: FixedSubCategoriesListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'fixed/category/:id/sub-category/:ref', component: FixedSubcategoryElementsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile', component: MobileCategoryListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile/category/:id', component: MobileSubCategoriesListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile/category/:id/sub-category/:ref', component: MobileSubCategoryElementsListComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed', component: FixedCategoryListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/category/:id', component: FixedSubCategoriesListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/category/:id/sub-category/:ref', component: FixedSubcategoryElementsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile', component: MobileCategoryListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/category/:id', component: MobileSubCategoriesListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/category/:id/sub-category/:ref', component: MobileSubCategoryElementsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
             ]
           },
-          { path: 'users-manager', component: UsersManagerComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ=='] } },
+          { path: 'users-manager', component: UsersManagerComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ=='] } },
           {
             path: 'workflow', component: WorkflowComponent, children: [
-              { path: 'fixed', component: FixedWorkflowListComponent },
-              { path: 'fixed/new-workflow', component: NewFixedWorkflowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'fixed/edit-workflow/:id', component: FixedEditWorkFlowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: MobileWorkflowListComponent },
-              { path: 'mobile/new-workflow', component: NewMobileWorkflowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile/edit-workflow/:id', component: MobileEditWorkFlowComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed', component: FixedWorkflowListComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']} },
+              { path: 'fixed/new-workflow', component: NewFixedWorkflowComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed/edit-workflow/:id', component: FixedEditWorkFlowComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: MobileWorkflowListComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']} },
+              { path: 'mobile/new-workflow', component: NewMobileWorkflowComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile/edit-workflow/:id', component: MobileEditWorkFlowComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
             path: 'manager', component: ManagerComponent, children: [
-              { path: 'fixed', component: FixedManagerListComponent },
-              { path: 'fixed/new-management', component: NewFixedManagementComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: MobileManagerListComponent },
-              { path: 'mobile/new-management', component: NewMobileManagementComponent, canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed', component: FixedManagerListComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']} },
+              { path: 'fixed/new-management', component: NewFixedManagementComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: MobileManagerListComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']} },
+              { path: 'mobile/new-management', component: NewMobileManagementComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
-            path: 'reports', component: ReportsComponent
+            path: 'reports', component: ReportsComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']}
           }
         ]
       }

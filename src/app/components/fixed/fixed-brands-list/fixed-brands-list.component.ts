@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Brands } from 'src/app/models/brands';
 import { ManageBrandsService } from 'src/app/services/manage-brands.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogManagedService } from 'src/app/services/log-managed.service';
+import { Observable } from 'rxjs';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { LogManagedService } from 'src/app/services/log-managed.service';
   templateUrl: './fixed-brands-list.component.html',
   styleUrls: ['./fixed-brands-list.component.css']
 })
-export class FixedBrandsListComponent implements OnInit {
+export class FixedBrandsListComponent implements OnInit,ComponentCanDeactivate {
 
   brandsList: Array<Brands > = Array<Brands>();
   deleteIcon=faTrashAlt;
@@ -112,6 +114,12 @@ export class FixedBrandsListComponent implements OnInit {
  readVisibilityActions(data:string){
   // console.log(this.loginService.getActionsRole(data));
   return this.loginService.getActionsRole(data);
+}
+
+@HostListener('window:beforeunload')
+canDeactivate(): Observable<boolean> | boolean {
+  this.loginService.keepSession();
+  return true;
 }
 
 }

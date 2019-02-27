@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import { Files } from 'src/app/models/files';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -8,13 +8,15 @@ import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { DataEncryptionService } from 'src/app/services/data-encryption.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-mobile-brand',
   templateUrl: './new-mobile-brand.component.html',
   styleUrls: ['./new-mobile-brand.component.css']
 })
-export class NewMobileBrandComponent implements OnInit {
+export class NewMobileBrandComponent implements OnInit, ComponentCanDeactivate {
 
   folder = faFolderOpen;
   filesDirectory: Array<Files> = Array<Files>();
@@ -148,4 +150,10 @@ export class NewMobileBrandComponent implements OnInit {
     return true;
   }
 
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 }

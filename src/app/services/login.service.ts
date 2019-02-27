@@ -16,19 +16,22 @@ import { DataEncryptionService } from './data-encryption.service';
 export class LoginService {
 
   actionsRole:Array<string>=[];
-
   
+  protected userSession: UserLogged=null;
+
+
 
   constructor(private http: HttpClient, private logService: LogManagedService) { }
 
   getHttpOptionsFormData() {
-    let x = JSON.parse(localStorage.getItem('tokenUser'));
+    // let x = JSON.parse(localStorage.getItem('tokenUser'));
+    let x = this.userSession;
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-        'Authorization': 'Bearer ' + x['token']
+        'Authorization': 'Bearer ' + x.token
       })
     };
     return httpOptions;
@@ -44,14 +47,15 @@ export class LoginService {
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
       })
     };
-    let x = JSON.parse(localStorage.getItem('tokenUser'));
+    // let x = JSON.parse(localStorage.getItem('tokenUser'));
+    let x = this.userSession;
     if (x != null) {
       httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-          'Authorization': 'Bearer ' + x['token']
+          'Authorization': 'Bearer ' + x.token
         })
       };
 
@@ -61,23 +65,27 @@ export class LoginService {
   }
 
   isLogged(){
-    let x = JSON.parse(localStorage.getItem('tokenUser'));
-    if(x!=null){
+    // let x = JSON.parse(localStorage.getItem('tokenUser'));
+    if(this.userSession!=null){
       return true;
     }
     return false;
   }
 
   clearSessionLogin(){
-    localStorage.removeItem('tokenUser');
+    this.userSession=null;
+    // localStorage.removeItem('tokenUser');
   }
 
   setUserLogged(x: UserLogged) {
-    localStorage.setItem('tokenUser', JSON.stringify(x));
+    this.userSession=x;
+    // localStorage.setItem('tokenUser', JSON.stringify(x));
   }
 
+
   getLocalUserLogged() {
-    return JSON.parse(localStorage.getItem('tokenUser'));
+    return this.userSession;
+    // return JSON.parse(localStorage.getItem('tokenUser'));
   }
 
   getUserToken(data: Usuario) {
@@ -96,27 +104,33 @@ export class LoginService {
     );
   }
 
-  setActionsRole(x: Array<string>){
+  setActionsRole(x:any){
     this.actionsRole=x;
   }
+
   getActionsRole(action:string){
     // console.log(this.actionsRole);
     // console.log("INDICE:"+this.actionsRole.indexOf(action));
     if(this.actionsRole.indexOf(action)==-1){
       return false;
+    }else{
+      return true;
     }
-    return true;
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // console.error('An error occurred:', error.error.message);
-      this.logService.addMessage("Ha ocurrido un error al intentar comunicarse con el servidor", "danger");
-    } else {
-      this.logService.addMessage("La comunicacion con el servidor ha devuelto un error", "danger");
+  keepSession(){
+    if(this.userSession!=null){
+      localStorage.setItem('tokenUser', JSON.stringify(this.userSession));
     }
-    // return an observable with a user-facing error message
-    return throwError(
-      'Lo sentimos... algo ha salido mal; por favor intente mas tarde.');
-  };
+  }
+  recoverSession():boolean{
+    if(localStorage.getItem('tokenUser')!=null){
+      this.userSession=JSON.parse(localStorage.getItem('tokenUser'));
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
 }

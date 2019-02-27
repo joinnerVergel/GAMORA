@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,13 +6,15 @@ import { LogManagedService } from 'src/app/services/log-managed.service';
 import { EventsManagerService } from 'src/app/services/events-manager.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-category-list',
   templateUrl: './mobile-category-list.component.html',
   styleUrls: ['./mobile-category-list.component.css']
 })
-export class MobileCategoryListComponent implements OnInit {
+export class MobileCategoryListComponent implements OnInit,ComponentCanDeactivate {
 
   newCategoryForm: FormGroup;
   submitted = false;
@@ -152,4 +154,9 @@ export class MobileCategoryListComponent implements OnInit {
     return this.loginService.getActionsRole(data);
   }
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 }

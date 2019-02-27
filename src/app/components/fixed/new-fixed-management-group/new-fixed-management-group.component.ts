@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
@@ -9,13 +9,15 @@ import { FiltroGrupo } from 'src/app/models/request/FiltroGrupo';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-fixed-management-group',
   templateUrl: './new-fixed-management-group.component.html',
   styleUrls: ['./new-fixed-management-group.component.css']
 })
-export class NewFixedManagementGroupComponent implements OnInit {
+export class NewFixedManagementGroupComponent implements OnInit,ComponentCanDeactivate {
 
   newManagementGroupForm: FormGroup;
   submitted = false;
@@ -210,6 +212,12 @@ export class NewFixedManagementGroupComponent implements OnInit {
             this.router.navigate(['/login']);
           }
         });
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
   }
 
 }

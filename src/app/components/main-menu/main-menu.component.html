@@ -22,18 +22,20 @@
           <fa-icon [icon]="homeIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Inicio</span>
         </a>
       </li>
-      <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_GRUPO')">
-        <a class="nav-link" routerLink="/management-groups/fixed">
-          <fa-icon [icon]="groupsIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Grupos
-            de Gestión</span>
-        </a>
-      </li>
       <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_MARCA')">
         <a class="nav-link" routerLink="/manage-brands/fixed">
           <fa-icon [icon]="brandIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Gestión
             de Marcas</span>
         </a>
       </li>
+
+      <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_GRUPO')">
+        <a class="nav-link" routerLink="/management-groups/fixed">
+          <fa-icon [icon]="groupsIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Grupos
+            de Gestión</span>
+        </a>
+      </li>
+      
       <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_CATEGORIA')">
         <a class="nav-link" routerLink="/events-manager/fixed">
           <fa-icon [icon]="eventIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Administrador

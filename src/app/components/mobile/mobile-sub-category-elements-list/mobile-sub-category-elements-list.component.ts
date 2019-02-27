@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { faEdit, faTrashAlt, faClone, faArrowLeft, faKaaba, faCubes, faCube } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,13 +6,15 @@ import { LogManagedService } from 'src/app/services/log-managed.service';
 import { EventsManagerService } from 'src/app/services/events-manager.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-sub-category-elements-list',
   templateUrl: './mobile-sub-category-elements-list.component.html',
   styleUrls: ['./mobile-sub-category-elements-list.component.css']
 })
-export class MobileSubCategoryElementsListComponent implements OnInit {
+export class MobileSubCategoryElementsListComponent implements OnInit,ComponentCanDeactivate {
 
   newSubCategoryElementForm: FormGroup;
   submitted = false;
@@ -311,7 +313,7 @@ export class MobileSubCategoryElementsListComponent implements OnInit {
 
   setTemplateOption(textTemplateOption: number) {
     this.templateEmail = textTemplateOption;
-    // console.log("PLANTILLA:" + this.templateEmail);
+    console.log("PLANTILLA:" + this.templateEmail);
   }
   setSubject(textSubject: string) {
     this.subject = textSubject;
@@ -492,4 +494,9 @@ export class MobileSubCategoryElementsListComponent implements OnInit {
 
   }
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 }

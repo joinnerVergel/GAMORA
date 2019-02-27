@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -9,6 +9,8 @@ import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { DataEncryptionService } from 'src/app/services/data-encryption.service';
+import { Observable } from 'rxjs';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
 
 
 @Component({
@@ -16,7 +18,7 @@ import { DataEncryptionService } from 'src/app/services/data-encryption.service'
   templateUrl: './new-fixed-brand.component.html',
   styleUrls: ['./new-fixed-brand.component.css']
 })
-export class NewFixedBrandComponent implements OnInit {
+export class NewFixedBrandComponent implements OnInit,ComponentCanDeactivate {
 
   folder = faFolderOpen;
   filesDirectory: Array<Files> = Array<Files>();
@@ -147,6 +149,12 @@ export class NewFixedBrandComponent implements OnInit {
         return false;
       }
     }
+    return true;
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
     return true;
   }
 }

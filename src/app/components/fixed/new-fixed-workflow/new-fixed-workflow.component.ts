@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ResizeEvent } from 'angular-resizable-element';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
@@ -7,13 +7,15 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { SymbolsService } from 'src/app/services/symbols.service';
 import * as $ from 'jquery';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-fixed-workflow',
   templateUrl: './new-fixed-workflow.component.html',
   styleUrls: ['./new-fixed-workflow.component.css']
 })
-export class NewFixedWorkflowComponent implements OnInit {
+export class NewFixedWorkflowComponent implements OnInit,ComponentCanDeactivate {
   newWorkflowForm: FormGroup;
   submitted = false;
 
@@ -142,5 +144,10 @@ export class NewFixedWorkflowComponent implements OnInit {
       
   }
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 
 }

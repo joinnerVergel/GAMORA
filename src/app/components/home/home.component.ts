@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { PortfoliosService } from 'src/app/services/portfolios.service';
 import { DetailPortfolios } from 'src/app/models/request/detailPortfolios';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 
 
@@ -11,7 +13,7 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,ComponentCanDeactivate {
   detailFixedPortfolio: DetailPortfolios={ quantity: null, updateLast: null };
 
   constructor(private portfoliosServices: PortfoliosService, private router: Router,  private loginService: LoginService) { }
@@ -41,5 +43,11 @@ export class HomeComponent implements OnInit {
             this.router.navigate(['/login']);
           }
         });
+  }
+  
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+     this.loginService.keepSession();
+    return true;
   }
 }

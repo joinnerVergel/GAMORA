@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { faTrashAlt, faPencilAlt, faSave, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
@@ -6,13 +6,15 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from 'src/app/services/login.service';
 import { ManagementGroupsService } from 'src/app/services/management-groups.service';
 import { Filters } from 'src/app/models/filter';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-groups-list',
   templateUrl: './mobile-groups-list.component.html',
   styleUrls: ['./mobile-groups-list.component.css']
 })
-export class MobileGroupsListComponent implements OnInit {
+export class MobileGroupsListComponent implements OnInit,ComponentCanDeactivate {
   deleteIcon = faTrashAlt;
   editIcon = faPencilAlt;
   saveIcon = faSave;
@@ -207,5 +209,10 @@ export class MobileGroupsListComponent implements OnInit {
     return x.firstDebtAge+' a '+x.lastDebtAge;
   }
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 
 }

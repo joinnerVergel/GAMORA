@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogManagedService } from 'src/app/services/log-managed.service';
@@ -8,13 +8,15 @@ import { EventsManagerService } from 'src/app/services/events-manager.service';
 import { Categories } from 'src/app/models/Categories';
 import { faEye, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { LoginService } from 'src/app/services/login.service';
+import { Observable } from 'rxjs';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
 
 @Component({
   selector: 'app-fixed-category-list',
   templateUrl: './fixed-category-list.component.html',
   styleUrls: ['./fixed-category-list.component.css']
 })
-export class FixedCategoryListComponent implements OnInit {
+export class FixedCategoryListComponent implements OnInit,ComponentCanDeactivate {
 
   newCategoryForm: FormGroup;
   submitted = false;
@@ -29,6 +31,7 @@ export class FixedCategoryListComponent implements OnInit {
     private router: Router,private loginService: LoginService) { }
 
   ngOnInit() {
+    
     if(!this.loginService.isLogged()){
       this.router.navigate(['/login']);
     }
@@ -153,5 +156,11 @@ export class FixedCategoryListComponent implements OnInit {
   readVisibilityActions(data:string){
     // console.log(this.loginService.getActionsRole(data));
     return this.loginService.getActionsRole(data);
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
   }
 }

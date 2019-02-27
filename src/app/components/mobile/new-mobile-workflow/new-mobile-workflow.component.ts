@@ -1,17 +1,19 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { SymbolsService } from 'src/app/services/symbols.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-mobile-workflow',
   templateUrl: './new-mobile-workflow.component.html',
   styleUrls: ['./new-mobile-workflow.component.css']
 })
-export class NewMobileWorkflowComponent implements OnInit {
+export class NewMobileWorkflowComponent implements OnInit,ComponentCanDeactivate {
   newWorkflowForm: FormGroup;
   submitted = false;
 
@@ -140,5 +142,10 @@ export class NewMobileWorkflowComponent implements OnInit {
       
   }
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 
 }

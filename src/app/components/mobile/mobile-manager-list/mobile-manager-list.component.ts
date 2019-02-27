@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { faPlay, faPause, faStop } from '@fortawesome/free-solid-svg-icons';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ManagementService } from 'src/app/services/management.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-mobile-manager-list',
   templateUrl: './mobile-manager-list.component.html',
   styleUrls: ['./mobile-manager-list.component.css']
 })
-export class MobileManagerListComponent implements OnInit {
+export class MobileManagerListComponent implements OnInit,ComponentCanDeactivate {
 
   managementList: Array<any> = [];
   playIcon = faPlay;
@@ -110,4 +112,9 @@ export class MobileManagerListComponent implements OnInit {
       );
   }
 
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
+  }
 }

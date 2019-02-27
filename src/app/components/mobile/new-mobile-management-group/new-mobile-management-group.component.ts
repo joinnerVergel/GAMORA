@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,13 +6,15 @@ import { ManagementGroupsService } from 'src/app/services/management-groups.serv
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-mobile-management-group',
   templateUrl: './new-mobile-management-group.component.html',
   styleUrls: ['./new-mobile-management-group.component.css']
 })
-export class NewMobileManagementGroupComponent implements OnInit {
+export class NewMobileManagementGroupComponent implements OnInit,ComponentCanDeactivate {
 
   newManagementGroupForm: FormGroup;
   submitted = false;
@@ -207,6 +209,12 @@ export class NewMobileManagementGroupComponent implements OnInit {
             this.router.navigate(['/login']);
           }
         });
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    this.loginService.keepSession();
+    return true;
   }
 
 }
