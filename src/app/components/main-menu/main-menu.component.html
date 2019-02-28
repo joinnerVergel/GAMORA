@@ -58,6 +58,11 @@
           <a class="nav-link" routerLink="/reports">
             <fa-icon [icon]="reportsIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Informes</span>
           </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="'active'">
+          <a class="nav-link" routerLink="/RONAnConfiguration/discounts">
+            <fa-icon [icon]="agreementIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Configuracion de Acuerdos</span>
+          </a>
         </li>
       <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_USUARIO')">
         <a class="nav-link" routerLink="/users-manager">

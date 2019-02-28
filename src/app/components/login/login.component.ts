@@ -28,8 +28,10 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
-    if (this.loginService.isLogged()) {
+    if (this.loginService.isLogged() ||this.loginService.recoverSession()) {
+      console.log("ESTA LOGUEADO")
       this.router.navigate(['/']);
+      
     }
     this.loginForm = this.formBuilder.group({
       userName: ['', Validators.required],

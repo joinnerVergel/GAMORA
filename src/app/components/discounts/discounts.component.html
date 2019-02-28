@@ -1,0 +1,93 @@
+<div class="card">
+    <div class="card-header">
+      <h5 class="light">Configuracion de Descuentos</h5>
+     </div>
+    <!-- ********Body********* -->
+    <div class="card-body">
+      <div class="actionsContainer"  *ngIf="readVisibilityActions('CREAR_SUBCATEGORIA')">
+        <button type="button" class="btn btn-primary btnNew" (click)="toggleFormNewDiscount()" *ngIf="!newDiscountFormView">Agregar Descuento</button>
+      </div>
+      <form [formGroup]="newDiscountForm" *ngIf="newDiscountFormView" class="newForm">
+        <div>
+            <div class="form-group">
+                <label>Edad De Mora Inicial</label>
+                <input type="number" formControlName="firstAge" class="form-control" (input)="changeFirstAge()" [ngClass]="{ 'is-invalid': submitted && f.firstAge.errors }"/>
+                <div *ngIf="submitted && f.firstAge.errors" class="invalid-feedback">
+                  <div *ngIf="f.firstAge.errors.required">La edad de mora inicial es obligatoria</div>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label>Edad De Mora Final</label>
+                  <input type="number" formControlName="lastAge" class="form-control" (input)="false" [ngClass]="{ 'is-invalid': submitted && f.lastAge.errors }"/>
+                  <div *ngIf="submitted && f.lastAge.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastAge.errors.required">La edad de mora final es obligatoria</div>
+                    <div *ngIf="f.lastAge.errors.min">La edad Final debe ser mayor a edad inicial</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label>Dias para pagar</label>
+                  <input type="number" formControlName="payDay" class="form-control" (input)="false" [ngClass]="{ 'is-invalid': submitted && f.payDay.errors }"/>
+                  <div *ngIf="submitted && f.payDay.errors" class="invalid-feedback">
+                    <div *ngIf="f.payDay.errors.required">La cantidad de dias vigencia del acuerdo es obligatoria </div>
+                    <div *ngIf="f.payDay.errors.min">Dias de vigencia Invalidos</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label>% Descuento</label>
+                  <input type="number" formControlName="discount" class="form-control" (input)="false" [ngClass]="{ 'is-invalid': submitted && f.discount.errors }"/>
+                  <div *ngIf="submitted && f.discount.errors" class="invalid-feedback">
+                    <div *ngIf="f.discount.errors.required">El porcentaje de descuento es obligatorio </div>
+                    <div *ngIf="f.discount.errors.min">Porcentaje de descuento invalido</div>
+                  </div>
+              </div>
+              <div class="buttonsContainer">
+                <button type="button" class="btn btn-primary" (click)="open(content,'add')">Crear</button>
+                <button type="button" class="btn btn-outline-secondary" (click)="toggleFormNewDiscount()">Cancelar</button>
+              </div>
+        </div>
+      </form>
+      
+      <ng-template #content let-c="close" let-d="dismiss">
+        <app-confirm-dialog [description]="'Se va a crear un nuevo descuento.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+          (result)="action($event,'add')"></app-confirm-dialog>
+      </ng-template>
+      <div class="table-responsive-md listaTabla">
+          <table class="table table-striped table-hover ">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Edad Inicial</th>
+                <th scope="col">Edad Final</th>
+                <th scope="col">Dias para pago</th>
+                <th scope="col">% Descuento</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let discount of discountsList">
+                <th scope="row">{{discount.item}}</th>
+                <td>{{discount.firstDebtAge}}</td>
+                <td>{{discount.lastDebtAge}}</td>
+                <td>{{discount.payDays}}</td>
+                <td>{{discount.discountValue}}</td>
+                <td>
+                  <div class="actions">
+                    <button type="button" class="btnAction btnDelete" placement="bottom" ngbTooltip="Eliminar"
+                      tooltipClass="tooltipDelete" (click)="discountSelected=discount;open(contentDelete,'delete')">
+                      <fa-icon [icon]="deleteIcon"></fa-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-template #contentDelete let-c="close" let-d="dismiss">
+            <app-confirm-dialog [description]="'Se va a eliminar el descuento seleccionado.'"
+              [question]="'¿Está seguro de ejecutar esta acción?'" (result)="action($event,'delete')"></app-confirm-dialog>
+          </ng-template>
+        </div>      
+    </div>
+  
+  
+
+

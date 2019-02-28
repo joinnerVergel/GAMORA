@@ -5,6 +5,11 @@
 let profile = "prod";
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// RONAnCONFIGURATION
+export const mf_dicountsListUrl = profile == "dev" ? 'http://localhost:65453/GestionDescuentosDispopnibles.svc/ObtenerDescuentos':'http://10.80.2.89/WCF_CasasDeCobro/GestionDescuentosDispopnibles.svc/ObtenerDescuentos';
+export const mf_dicountsSaveUrl = profile == "dev" ? 'http://localhost:65453/GestionDescuentosDispopnibles.svc/EditarDescuentos':'http://10.80.2.89/WCF_CasasDeCobro/GestionDescuentosDispopnibles.svc/EditarDescuentos';
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // MANAGEMENT
 export const mf_managementsListUrl = profile == "dev" ? 'http://localhost:65453/GestionGruposGestionService.svc/ListarGestiones/':'http://10.80.2.89/WCF_CasasDeCobro/GestionGruposGestionService.svc/ListarGestiones/';
 export const mf_calendarListUrl = profile == "dev" ? 'http://localhost:65453/GestionGruposGestionService.svc/ListarFechasGestion' : 'http://10.80.2.89/WCF_CasasDeCobro/GestionGruposGestionService.svc/ListarFechasGestion';

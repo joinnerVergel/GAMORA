@@ -12,33 +12,39 @@ export class RoleGuardServiceService implements CanActivate {
   constructor(private logService: LogManagedService, private router: Router, private loginService: LoginService) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
+    let routeRedirect:any[]=['/'];
 
-    // let token = localStorage.getItem('tokenUser');
-    // console.log("SSSSSSSSSSSSSS");
-    // console.log(this.loginService.getLocalUserLogged());
+    // Esta validacion es util cuando se recarga la pagina para que recupere la sesion 
+    // desde el localStorage en caso de que exista
     if (this.loginService.getLocalUserLogged() == null) {
-      console.log(this.loginService.recoverSession()==true?"Sesion recuperada":"Sesion vencida");
+      if(this.loginService.recoverSession()){
+        console.log("Sesion Recuperada");
+      }else{
+        // si no se pudo recuperar la sesion se redirecionara al login
+        routeRedirect=['/login'];
+        console.log("Sesion Vencida");
+      }
     }
+    // limpia el local Storage
     localStorage.clear();
+
+    //Esta validacion se realiza para identificar si el rol del usuario le permite el acceso 
+    // a la pagina que esta intentando cargar
     if (this.loginService.getLocalUserLogged() != null) {
-      
-    
       let token = this.loginService.getLocalUserLogged().token;
       let tokenPayload = decode(token);
       let role = tokenPayload['RolUsuario'];
-      // console.log(role);
-
       let expectedRoleArray = route.data;
       expectedRoleArray = expectedRoleArray.expectedRole;
 
       if (expectedRoleArray.indexOf(role) != -1) {
-        // console.log("Acceso Autorizado");
         return true;
       }
     }
+
     this.logService.addMessage("Acceso denegado. No tiene permisos para acceder a esta ruta.", "danger");
     console.log("Acceso Denegado");
-    this.router.navigate(['/']);
+    this.router.navigate(routeRedirect);
     return false;
   }
 

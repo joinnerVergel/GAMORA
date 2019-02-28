@@ -3,6 +3,8 @@ nav{
 }
 .navbar-collapse{
     background: linear-gradient(to bottom,rgba(13,62,80,1),rgba(13,157,174,1));
+    /* overflow: auto;
+    height: calc(100vh - 4rem); */
 }
  
 .nav-item {
@@ -39,7 +41,12 @@ nav{
     top: 4rem;
     z-index: 1000;
     height: calc(100vh - 4rem);
+    overflow: auto;
 }
+
+/* .navbar-nav li:first-child{
+    margin-top: 80px;
+} */
 
 button.navbar-toggler{
     position: fixed;
@@ -58,6 +65,9 @@ button.navbar-toggler{
     .show ul {
         height: auto;
     } 
+    /* .navbar-nav li:first-child{
+        margin-top: 0px;
+    } */
 }
 
 .icon {
