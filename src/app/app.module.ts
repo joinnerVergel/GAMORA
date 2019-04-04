@@ -83,6 +83,8 @@ import { NewMobileManagementComponent } from './components/mobile/new-mobile-man
 import { PendingChangesGuardService } from './services/pending-changes-guard.service';
 import { DiscountsComponent } from './components/discounts/discounts.component';
 import { RonanConfigurationComponent } from './components/ronan-configuration/ronan-configuration.component';
+import { UpdateFixedBrandComponent } from './components/fixed/update-fixed-brand/update-fixed-brand.component';
+import { UpdateMobileBrandComponent } from './components/mobile/update-mobile-brand/update-mobile-brand.component';
 
 
 
@@ -153,7 +155,9 @@ import { RonanConfigurationComponent } from './components/ronan-configuration/ro
     MobileEditWorkFlowComponent,
     NewMobileManagementComponent,
     DiscountsComponent,
-    RonanConfigurationComponent
+    RonanConfigurationComponent,
+    UpdateFixedBrandComponent,
+    UpdateMobileBrandComponent
   ],
   imports: [
     DragAndDropModule,
@@ -188,8 +192,10 @@ import { RonanConfigurationComponent } from './components/ronan-configuration/ro
               {path: '',redirectTo: 'fixed', pathMatch: 'full'},
               { path: 'fixed', component: FixedBrandsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'fixed/new-brand', component: NewFixedBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed/updateBrand/:name', component: UpdateFixedBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'mobile', component: MobileBrandsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'mobile/new-brand', component: NewMobileBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile/updateBrand/:name', component: UpdateMobileBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {

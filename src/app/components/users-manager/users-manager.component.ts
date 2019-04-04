@@ -105,7 +105,7 @@ export class UsersManagerComponent implements OnInit,ComponentCanDeactivate {
               } else {
                 this.logService.addMessage(element['Notas'], "warning");
               }
-              console.log(this.profilesList);
+              //console.log(this.profilesList);
             }
             
             
@@ -131,7 +131,7 @@ export class UsersManagerComponent implements OnInit,ComponentCanDeactivate {
               elementProfile.profile = element['Valor'];
               this.profilesList.push(elementProfile);
             });
-            console.log(this.profilesList);
+            // console.log(this.profilesList);
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
@@ -187,7 +187,7 @@ export class UsersManagerComponent implements OnInit,ComponentCanDeactivate {
             });
           }
 
-          console.log(this.usersList);
+          // console.log(this.usersList);
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();

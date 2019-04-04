@@ -92,12 +92,12 @@ export class HoldSymbolComponent implements OnInit, AfterViewInit {
     let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
     let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "HOLD", NodoSucesor: null, TiempoEspera: this.f.value.value, IdTipoSimbolo: 2, CoordenadaX: pos.left, CoordenadaY: pos.top };
     this.symbolsService.updateSymbol(objSymbol);
-    console.log(pos);
+    //console.log(pos);
   }
 
   pointOut() {
     if (!this.symbolsService.occupiedOut(this.data.refSymbol, null)) {
-      console.log("CLick en la salida..");
+      //console.log("CLick en la salida..");
       this.symbolsService.optionOutElement = null;
       this.symbolsService.outElement = this.data.refSymbol;
     }
@@ -107,7 +107,7 @@ export class HoldSymbolComponent implements OnInit, AfterViewInit {
       if (this.symbolsService.outElement != this.data.refSymbol) {
         if (!this.symbolsService.occupiedIn(this.data.refSymbol)) {
           if (!this.symbolsService.crossReference(this.data.refSymbol)) {
-            console.log(this.symbolsService.inElement + "click en entrada" + this.symbolsService.outElement);
+            //console.log(this.symbolsService.inElement + "click en entrada" + this.symbolsService.outElement);
             this.symbolsService.inElement = this.data.refSymbol;
             this.symbolsService.ElementConection = true;
           } else {

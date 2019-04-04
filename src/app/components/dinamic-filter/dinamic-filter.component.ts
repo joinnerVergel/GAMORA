@@ -28,12 +28,12 @@ export class DinamicFilterComponent implements OnInit {
     let itemFind:Array<Filtros>=this.itemsSelectedList.filter(i_=> i_.FiltroValor==item);
     
     if(itemFind.length>0){
-      console.log(" NO incluye");
+      //console.log(" NO incluye");
       this.itemsSelectedList=this.itemsSelectedList.filter(i=> i.FiltroValor!==item);
       itemFilter={FiltroNombre:this.brand,FiltroValor:item,FiltroTipo:"Dinamico"};
       this.removeItem.emit(itemFilter);
     }else{
-      console.log("incluye");
+      //console.log("incluye");
       itemFilter={FiltroNombre:this.brand,FiltroValor:item,FiltroTipo:"Dinamico"};
       this.itemsSelectedList.push(itemFilter);
       this.addItem.emit(itemFilter);

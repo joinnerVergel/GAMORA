@@ -1,0 +1,30 @@
+@font-face {
+  font-family: gamoraText;
+  src: url(fontGamora.ttf) format("truetype");
+       
+}
+@font-face {
+  font-family: telefonicaBold;
+  src: url(TelefonicaText-Bold.otf) format("opentype"),
+       url(TelefonicaText-Bold.ttf) format("truetype"),
+       url(TelefonicaText-Bold.eot);
+}
+@font-face {
+  font-family: telefonicaExtraLight;
+  src: url(TelefonicaWeb-ExtraLight.woff2) format('woff2'),
+      url(TelefonicaWeb-ExtraLight.woff) format("woff"),
+      url(TelefonicaWeb-ExtraLight.eot);
+}
+@font-face {
+  font-family: telefonicaLight;
+  src:  url(TelefonicaWeb-Light.woff2) format("woff2"),
+        url(TelefonicaWeb-Light.woff) format("woff"),
+        url(TelefonicaWeb-Light.eot);
+}
+
+@font-face {
+  font-family: telefonicaRegular;
+  src: url(TelefonicaWeb-Regular.woff2) format("woff2"),
+      url(TelefonicaWeb-Regular.woff) format("woff"),
+      url(TelefonicaWeb-Regular.eot);
+}

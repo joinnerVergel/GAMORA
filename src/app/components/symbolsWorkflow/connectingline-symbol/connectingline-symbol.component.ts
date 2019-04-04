@@ -47,7 +47,7 @@ export class ConnectinglineSymbolComponent implements OnInit, AfterViewInit, OnD
     try {
       const element = this.surfaceElement.nativeElement;
       this.surface = Surface.create(element);
-      console.log("PINTA LINEA INCIAL");
+      //console.log("PINTA LINEA INCIAL");
       this.drawScene();
     } catch (error) {
 
@@ -71,7 +71,7 @@ export class ConnectinglineSymbolComponent implements OnInit, AfterViewInit, OnD
     this.posIn = this.symbolsService.getPositionSymbol(this.data.in);
     if (this.previousPosIn.x != this.posIn.x || this.previousPosIn.y != this.posIn.y
       || this.previousPosOut.x != this.posOut.x || this.previousPosOut.y != this.posOut.y) {
-      console.log("PINTA LINEA CAMBIO");
+      //console.log("PINTA LINEA CAMBIO");
       this.drawScene();
     }
     return "";

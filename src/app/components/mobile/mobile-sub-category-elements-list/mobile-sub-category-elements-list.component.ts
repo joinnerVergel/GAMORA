@@ -85,7 +85,7 @@ export class MobileSubCategoryElementsListComponent implements OnInit,ComponentC
   Validation() {
     this.submitted = true;
     if (!this.newSubCategoryElementForm.invalid) {
-      console.log(this.ageValidation, this.scriptValidation, this.linkValidation, this.contactOptionValidation, this.subjectValidation);
+      //console.log(this.ageValidation, this.scriptValidation, this.linkValidation, this.contactOptionValidation, this.subjectValidation);
       if (this.ageValidation &&
         this.scriptValidation &&
         ((!this.linkValidation && this.categoryId == 10) || this.linkValidation) &&
@@ -137,7 +137,7 @@ export class MobileSubCategoryElementsListComponent implements OnInit,ComponentC
 
   addSubCategoryElement() {
     let data: any = { ElementoNombre: this.f.subCategoryElementName.value, CreadoPor: "SYSTEM", IdSubCategoria: this.subCategoryId, CondicionEdad: this.ageCondition, EdadMora: this.age, Asunto: this.subject, idContacto: this.contact, LinkElemento: this.link, TagLink: this.tagLink, ScriptElemento: this.script, IdPlantilla: this.templateEmail || -1 };
-    console.log(data);
+    //console.log(data);
     var suscripcion = this.eventsService.addSubCategoryElement(data)
       .subscribe(
         respuesta => {
@@ -313,7 +313,7 @@ export class MobileSubCategoryElementsListComponent implements OnInit,ComponentC
 
   setTemplateOption(textTemplateOption: number) {
     this.templateEmail = textTemplateOption;
-    console.log("PLANTILLA:" + this.templateEmail);
+    //console.log("PLANTILLA:" + this.templateEmail);
   }
   setSubject(textSubject: string) {
     this.subject = textSubject;
@@ -417,7 +417,7 @@ export class MobileSubCategoryElementsListComponent implements OnInit,ComponentC
               this.fieldsRequiredList.push(element);
             });
           }
-           console.log(this.fieldsRequiredList);
+           //console.log(this.fieldsRequiredList);
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();

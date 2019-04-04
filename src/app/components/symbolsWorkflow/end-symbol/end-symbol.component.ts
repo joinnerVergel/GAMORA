@@ -73,13 +73,13 @@ export class EndSymbolComponent implements OnInit {
     let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
     let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "FIN", IdTipoSimbolo: 5, CoordenadaX: pos.left, CoordenadaY: pos.top };
     this.symbolsService.updateSymbol(objSymbol);
-    console.log(pos);
+    //console.log(pos);
   }
 
   pointIn() {
     if (this.symbolsService.outElement != null) {
       if (this.symbolsService.outElement != this.data.refSymbol) {
-        console.log(this.symbolsService.inElement + "click en entrada" + this.symbolsService.outElement);
+        //console.log(this.symbolsService.inElement + "click en entrada" + this.symbolsService.outElement);
         this.symbolsService.inElement = this.data.refSymbol;
         this.symbolsService.ElementConection = true;
       }

@@ -83,12 +83,12 @@ export class VerifypaymentSymbolComponent implements OnInit, AfterViewInit {
     let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
     let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "PAGO", NodoSucesor: null, IdTipoSimbolo: 3, CoordenadaX: pos.left, CoordenadaY: pos.top };
     this.symbolsService.updateSymbol(objSymbol);
-    console.log(pos);
+    //console.log(pos);
   }
 
   pointOut(option: string) {
     if (!this.symbolsService.occupiedOut(this.data.refSymbol, option)) {
-      console.log("CLick en la salida..");
+      //console.log("CLick en la salida..");
       this.symbolsService.optionOutElement = option;
       this.symbolsService.outElement = this.data.refSymbol;
     }

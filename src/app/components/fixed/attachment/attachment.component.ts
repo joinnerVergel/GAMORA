@@ -33,10 +33,10 @@ export class AttachmentComponent implements OnInit {
 
   prueba(){
     let formulario: FormData =new FormData();
-    console.log(this.uploader.queue[0]._file.slice(0,this.uploader.queue[0]._file.size ));
+    //console.log(this.uploader.queue[0]._file.slice(0,this.uploader.queue[0]._file.size ));
     formulario.append('archivo',this.uploader.queue[0]._file);
     formulario.append('prueba','asdasda');
-    console.log(formulario.get('prueba'));
+    //console.log(formulario.get('prueba'));
 
     var suscripcion = this.eventsService.adddSubCategoryElement(formulario)
       .subscribe(

@@ -89,7 +89,7 @@ export class FixedSubcategoryElementsListComponent implements OnInit,ComponentCa
   Validation() {
     this.submitted = true;
     if (!this.newSubCategoryElementForm.invalid) {
-      console.log(this.ageValidation, this.scriptValidation, this.linkValidation, this.contactOptionValidation, this.subjectValidation);
+      //console.log(this.ageValidation, this.scriptValidation, this.linkValidation, this.contactOptionValidation, this.subjectValidation);
       if (this.ageValidation &&
         this.scriptValidation &&
         ((!this.linkValidation && this.categoryId == 2) || this.linkValidation) &&
@@ -141,7 +141,7 @@ export class FixedSubcategoryElementsListComponent implements OnInit,ComponentCa
 
   addSubCategoryElement() {
     let data: PeticionElementoSubCategoriaNuevo = { ElementoNombre: this.f.subCategoryElementName.value, CreadoPor: "SYSTEM", IdSubCategoria: this.subCategoryId, CondicionEdad: this.ageCondition, EdadMora: this.age, Asunto: this.subject, idContacto: this.contact, LinkElemento: this.link, TagLink: this.tagLink, ScriptElemento: this.script, IdPlantilla: this.templateEmail || -1 };
-    console.log(data);
+    //console.log(data);
     var suscripcion = this.eventsService.addSubCategoryElement(data)
       .subscribe(
         respuesta => {

@@ -1,0 +1,43 @@
+fa-icon{
+    color:rgba(13,157,174,1);
+    margin: 10px;
+}
+
+.card-footer{
+    overflow: hidden;
+}
+.card-footer button{
+    float: right;
+    margin: 10px;
+}
+
+.loading{
+    width: 100%;
+    height: 200px;
+    background: url(https://app.kangoosave.com/bundles/app/newversion/images/loader.gif) no-repeat center/100px;
+}
+.loading h6{
+    display: block;
+    text-align: center;
+}
+
+.fileValidate{
+    display: block;
+}
+
+div.shadow{
+    margin-bottom: 0px !important;
+}
+
+.card-header h6{
+    display: inline;
+    margin-right: 10px;
+}
+.divInfo{
+    font-size: 0.7em;
+    color: rgba(13,62,80,1);
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

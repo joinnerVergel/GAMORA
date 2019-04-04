@@ -110,8 +110,8 @@ export class FixedEditWorkFlowComponent implements OnInit,ComponentCanDeactivate
           if (item.hasOwnProperty('ObtenerFlujoResult')) {
             const element = item['ObtenerFlujoResult'];
               this.isEdit=element['FlujoEditable'];
-              console.log(element);
-              console.log("ENCONTRADO: ",this.isEdit);
+              //console.log(element);
+              //console.log("ENCONTRADO: ",this.isEdit);
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {

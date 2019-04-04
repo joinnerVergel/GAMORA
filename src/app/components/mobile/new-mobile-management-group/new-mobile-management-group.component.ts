@@ -79,16 +79,16 @@ export class NewMobileManagementGroupComponent implements OnInit,ComponentCanDea
 
   setAge(textAge: string) {
     this.age = textAge;
-    console.log("EDAD DE MORA:" + this.age);
+    //console.log("EDAD DE MORA:" + this.age);
   }
   setAgeCondition(textAgeCondition: string) {
     this.ageCondition = textAgeCondition;
-    console.log("CONDICION DE EDAD:" + this.ageCondition);
+    //console.log("CONDICION DE EDAD:" + this.ageCondition);
   }
 
   ageValidationChange(x: boolean) {
     this.ageValidation = x;
-    console.log("VALIDACION EDAD:"+this.ageValidation);
+    //console.log("VALIDACION EDAD:"+this.ageValidation);
   }
 
 
@@ -124,26 +124,26 @@ export class NewMobileManagementGroupComponent implements OnInit,ComponentCanDea
     this.fitersList.push(filter);
     this.requestQry();
     console.log("AGREGO FILTRO: "+ filter.FiltroNombre);
-    console.log(this.fitersList);
+   //console.log(this.fitersList);
   }
   removeItemList(filter: any) {
     this.fitersList = this.fitersList.filter(item => (item.FiltroNombre != filter.FiltroNombre ||item.FiltroTipo != filter.FiltroTipo ||item.FiltroValor!=filter.FiltroValor));
     this.requestQry();
     console.log("REMOVIO FILTRO: "+ filter.FiltroNombre);
-    console.log(this.fitersList);
+    //console.log(this.fitersList);
   }
 
   removeFilterFixed(filter: any){
     this.fitersList = this.fitersList.filter(item => (item.FiltroNombre != filter.FiltroNombre || item.FiltroTipo != filter.FiltroTipo));
     this.requestQry();
     console.log("REMOVIO FILTRO: "+ filter.FiltroNombre);
-    console.log(this.fitersList);
+    //console.log(this.fitersList);
   }
 
   removeFilterSingle(filter: any){
     this.fitersList = this.fitersList.filter(item => (item.FiltroNombre != filter.FiltroNombre || item.FiltroTipo != filter.FiltroTipo));
     console.log("REMOVIO FILTRO: "+ filter.FiltroNombre);
-    console.log(this.fitersList);
+    //console.log(this.fitersList);
   }
 
 
@@ -185,7 +185,7 @@ export class NewMobileManagementGroupComponent implements OnInit,ComponentCanDea
     if (firstAge==""){
       firstAge=null;
     }
-    console.log(firstAge);
+    //console.log(firstAge);
     
     if(firstAge!= null && firstAge.indexOf("*")!=-1){
       let age_:string[]=firstAge.split("*");

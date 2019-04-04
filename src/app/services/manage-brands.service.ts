@@ -4,7 +4,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { PeticionMarcaNueva } from '../models/addbrandModel';
 import { LogManagedService } from './log-managed.service';
-import { mf_BrandsListUrl, mf_BrandsFileListUrl, mf_BrandsAddUrl, mf_BrandsDeleteUrl} from './url';
+import { mf_BrandsListUrl, mf_BrandsFileListUrl, mf_BrandsAddUrl, mf_BrandsDeleteUrl, mf_BrandsUpdateUrl} from './url';
 import { LoginService } from './login.service';
 
 
@@ -21,12 +21,14 @@ export class ManageBrandsService {
   getBrandsFileList(operation:number) {
     return this.http.get(mf_BrandsFileListUrl+operation,this.loginService.getHttpOptions());
   }
-  addBrand (data: PeticionMarcaNueva):Observable<PeticionMarcaNueva> {
-    let PeticionMarcaNueva:PeticionMarcaNueva=data;
-    return this.http.post<PeticionMarcaNueva>(mf_BrandsAddUrl, PeticionMarcaNueva, this.loginService.getHttpOptions()).pipe(
-      
-    );
+  addBrand (data: PeticionMarcaNueva) {
+    return this.http.post<PeticionMarcaNueva>(mf_BrandsAddUrl, data, this.loginService.getHttpOptions()).pipe();
   }
+
+  updateBrand (data: PeticionMarcaNueva) {
+    return this.http.post<PeticionMarcaNueva>(mf_BrandsUpdateUrl, data, this.loginService.getHttpOptions()).pipe();
+  }
+
   deleteBrand(idBrand: string, operation:number) {
     return this.http.delete(mf_BrandsDeleteUrl+idBrand+'/'+operation,this.loginService.getHttpOptions());
   }

@@ -43,8 +43,9 @@ export class LoginService {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        "Access-Control-Allow-Origin": "*",
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        // 'Access-Control-Allow-Headers':'Authorization, Origin, Content-Type, Accept, X-Requested-With'
       })
     };
     // let x = JSON.parse(localStorage.getItem('tokenUser'));

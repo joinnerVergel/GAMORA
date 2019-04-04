@@ -81,7 +81,7 @@ export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
               this.groupsList.push(elementGroup);
             });
             this.maxPriority=this.groupsList.length;
-            console.log(this.groupsList);
+            //console.log(this.groupsList);
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
@@ -129,7 +129,7 @@ export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
 
   formatParameters(x: string) {
     let y: Array<string> = x.split("></filtro> <filtro")
-    console.log(y);
+    //console.log(y);
     // let items:string="";
     // y.forEach(element => {
     //   items=items+"<div>"+element+"</div>";

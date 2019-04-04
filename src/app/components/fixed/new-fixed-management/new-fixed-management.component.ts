@@ -117,7 +117,7 @@ export class NewFixedManagementComponent implements OnInit,ComponentCanDeactivat
     if (this.dataCalendar.length == 0) {
       this.validationCalendar = false;
     }
-    console.log(this.dataCalendar);
+    //console.log(this.dataCalendar);
   }
 
   requestCalendarList() {

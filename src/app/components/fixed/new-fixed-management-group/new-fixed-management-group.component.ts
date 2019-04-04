@@ -82,16 +82,16 @@ export class NewFixedManagementGroupComponent implements OnInit,ComponentCanDeac
 
   setAge(textAge: string) {
     this.age = textAge;
-    console.log("EDAD DE MORA:" + this.age);
+    //console.log("EDAD DE MORA:" + this.age);
   }
   setAgeCondition(textAgeCondition: string) {
     this.ageCondition = textAgeCondition;
-    console.log("CONDICION DE EDAD:" + this.ageCondition);
+    //console.log("CONDICION DE EDAD:" + this.ageCondition);
   }
 
   ageValidationChange(x: boolean) {
     this.ageValidation = x;
-    console.log("VALIDACION EDAD:"+this.ageValidation);
+    //console.log("VALIDACION EDAD:"+this.ageValidation);
   }
 
 
@@ -133,20 +133,20 @@ export class NewFixedManagementGroupComponent implements OnInit,ComponentCanDeac
     this.fitersList = this.fitersList.filter(item => (item.FiltroNombre != filter.FiltroNombre ||item.FiltroTipo != filter.FiltroTipo ||item.FiltroValor!=filter.FiltroValor));
     this.requestQry();
     console.log("REMOVIO FILTRO: "+ filter.FiltroNombre);
-    console.log(this.fitersList);
+    //console.log(this.fitersList);
   }
 
   removeFilterFixed(filter: Filtros){
     this.fitersList = this.fitersList.filter(item => (item.FiltroNombre != filter.FiltroNombre || item.FiltroTipo != filter.FiltroTipo));
     this.requestQry();
     console.log("REMOVIO FILTRO: "+ filter.FiltroNombre);
-    console.log(this.fitersList);
+    //console.log(this.fitersList);
   }
 
   removeFilterSingle(filter: Filtros){
     this.fitersList = this.fitersList.filter(item => (item.FiltroNombre != filter.FiltroNombre || item.FiltroTipo != filter.FiltroTipo));
     console.log("REMOVIO FILTRO: "+ filter.FiltroNombre);
-    console.log(this.fitersList);
+    //console.log(this.fitersList);
   }
 
 
@@ -174,7 +174,7 @@ export class NewFixedManagementGroupComponent implements OnInit,ComponentCanDeac
             this.logService.addMessage(respuesta["Msg"],"warning");
           }
         }, error => {
-          console.log(error);
+          //console.log(error);
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401){             
             this.loginService.clearSessionLogin();
             this.router.navigate(['/login']);
@@ -188,7 +188,7 @@ export class NewFixedManagementGroupComponent implements OnInit,ComponentCanDeac
     if (firstAge==""){
       firstAge=null;
     }
-    console.log(firstAge);
+    //console.log(firstAge);
     
     if(firstAge!= null && firstAge.indexOf("*")!=-1){
       let age_:string[]=firstAge.split("*");

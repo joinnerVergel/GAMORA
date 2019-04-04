@@ -47,7 +47,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // this.contenedor.nativeElement.addEventListener('mouseup', this.onMouseup,{passive: false, capture: false});
     if(this.isRebuildWorkflow){
-      console.log("RECONSTRUYE");
+      //console.log("RECONSTRUYE");
       this.wfParameter= this.route.params.subscribe(params => {
         this.idWF = params['id'];
       });
@@ -87,7 +87,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
       if (firstChange == "false") {
         let curVal = JSON.stringify(change.currentValue);
         let prevVal = JSON.stringify(change.previousValue);
-        console.log(curVal + prevVal);
+        // console.log(curVal + prevVal);
         if (curVal == "true" && prevVal == "false") {//indica que debe agregarse una linea de conexion
           this.onDrop({ dropData: "line" });
         }
@@ -108,7 +108,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
     var regularExpression = new RegExp("-", "g");
     ref = ref.replace(regularExpression, "");
     ref = ref.substring(0, ref.length - 2);
-    console.log(ref);
+    // console.log(ref);
     switch (dropData) {
       case "line": {
         this.symbolsService.addSuccessorNode();
@@ -165,14 +165,14 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
   }
 
   onMouseup(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.keyCode === 46 || event.keyCode === 8) {
       if (this.symbolsService.symbolSelected != null) {
         if (this.symbolsService.isRemovable()) {
-          console.log("Eliminando.. " + this.symbolsService.symbolSelected);
+          // console.log("Eliminando.. " + this.symbolsService.symbolSelected);
           if ($('div[idrefsymbol="' + this.symbolsService.symbolSelected + '"]').position() != undefined) {
             var viewContainerRef = this.adHost.viewContainerRef;
             viewContainerRef.clear();
@@ -194,7 +194,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
     let ref: string = null;
     var viewContainerRef = this.adHost.viewContainerRef;
     symbolsList.forEach(element => {
-      console.log(element.IdTipoSimbolo + "AGREGA SIMBOLO:" + element.Nombre);
+      // console.log(element.IdTipoSimbolo + "AGREGA SIMBOLO:" + element.Nombre);
       ref = element.IdSimbolo;
       switch (element.IdTipoSimbolo) {
         case 4: {
@@ -233,15 +233,15 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
       let NS: string = element.NodoSucesor;
       if (NS != null) {
         if (NS.indexOf(",") == -1) {
-          console.log("otro");
+          // console.log("otro");
           obj = new adSymbol(ConnectinglineSymbolComponent, { out: element.IdSimbolo, in: NS, option: null });
           componentFactory = this.componentFactoryResolver.resolveComponentFactory(obj.component);
           var componentRef = viewContainerRef.createComponent(componentFactory);
           (<Ad>componentRef.instance).data = obj.data;
         } else {
-          console.log("pago");
+          // console.log("pago");
           let Pago: Array<string> = NS.split(",");
-          console.log(Pago);
+          // console.log(Pago);
           let Entry_: string = "NO";
           Pago.forEach(opt => {
             if (opt != "null") {
@@ -262,14 +262,14 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
 
   readWorkFlow() {
     let x: number = 1;
-    console.log("LEYENDO RUTA: /"+this.idWF)
+    // console.log("LEYENDO RUTA: /"+this.idWF)
     this.symbolsService.getWorkFlow(this.idWF)
       .subscribe(
         item => {
           this.wf = {};
           if (item.hasOwnProperty('ObtenerFlujoResult')) {
             this.wf= item['ObtenerFlujoResult'];
-            console.log("ENTROOOOOO",this.wf);
+            // console.log("ENTROOOOOO",this.wf);
             this.symbolsService.newWorkFlow(this.wf);
             this.renderer.setStyle(this.contenedor.nativeElement,"width",this.wf['AnchoPx']+'px');
             this.renderer.setStyle(this.contenedor.nativeElement,"height",this.wf['AltoPx']+'px');

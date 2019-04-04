@@ -20,10 +20,23 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
+              "src/assets/fonts/TelefonicaWeb-Regular.woff2",
+              "src/assets/fonts/TelefonicaWeb-Regular.woff",
+              "src/assets/fonts/TelefonicaWeb-Regular.eot",
+              "src/assets/fonts/TelefonicaWeb-Light.woff2",
+              "src/assets/fonts/TelefonicaWeb-Light.woff",
+              "src/assets/fonts/TelefonicaWeb-Light.eot",
+              "src/assets/fonts/TelefonicaWeb-ExtraLight.woff2",
+              "src/assets/fonts/TelefonicaWeb-ExtraLight.woff",
+              "src/assets/fonts/TelefonicaWeb-ExtraLight.eot",
+              "src/assets/fonts/TelefonicaWeb-Bold.otf",
+              "src/assets/fonts/TelefonicaWeb-Bold.ttf",
+              "src/assets/fonts/TelefonicaWeb-Bold.eot",
               "src/assets"
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/fonts/fontsTelefonica.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css",
               "node_modules/angular2-draggable/css/resizable.min.css"

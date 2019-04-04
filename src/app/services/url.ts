@@ -2,7 +2,7 @@
 // *************************PROFILE****************************
 // ________________________________________________________
 
-let profile = "prod";
+let profile = "dev";
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // RONAnCONFIGURATION
@@ -45,8 +45,9 @@ export const tagsListScriptUrl = profile == "dev" ? 'http://localhost:65453/List
 // BRANDS
 
 export const mf_BrandsListUrl = profile == "dev" ? 'http://localhost:65453/MarcasService.svc/marcas/':'http://10.80.2.89/WCF_CasasDeCobro/MarcasService.svc/marcas/';
-export const mf_BrandsFileListUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/archivosMarcas/':'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/archivosMarcas/';
+export const mf_BrandsFileListUrl = profile == "dev" ? 'http://localhost:65453/MarcasService.svc/ListarArchivosMarcas/':'http://10.80.2.89/WCF_CasasDeCobro/MarcasService.svc/ListarArchivosMarcas/';
 export const mf_BrandsAddUrl = profile == "dev" ? 'http://localhost:65453/MarcasService.svc/CrearMarca':'http://10.80.2.89/WCF_CasasDeCobro/MarcasService.svc/CrearMarca';
+export const mf_BrandsUpdateUrl = profile == "dev" ? 'http://localhost:65453/MarcasService.svc/ActualizarMarca':'http://10.80.2.89/WCF_CasasDeCobro/MarcasService.svc/ActualizarMarca';
 export const mf_BrandsDeleteUrl = profile == "dev" ? 'http://localhost:65453/MarcasService.svc/EliminarMarca/':'http://10.80.2.89/WCF_CasasDeCobro/MarcasService.svc/EliminarMarca/';
 export const mf_ItemsBrandsListUrl = profile == "dev" ? 'http://localhost:65453/MarcasService.svc/marcasOpciones/':'http://10.80.2.89/WCF_CasasDeCobro/MarcasService.svc/marcasOpciones/';
 

@@ -110,7 +110,7 @@ export class MainMenuComponent implements OnInit {
     let tokenPayload = decode(token);
     let role = tokenPayload['RolUsuario'];
     let data = { Rol: role }
-     console.log(data);
+     //console.log(data);
     let ok: boolean = false;
     let x: Array<string> = new Array<string>();
     var suscripcion = this.loginService.getUserActions(data)
@@ -135,7 +135,7 @@ export class MainMenuComponent implements OnInit {
         () => {
           if (ok) {
             this.loginService.setActionsRole(x);
-            console.log(this.loginService.actionsRole)
+            //console.log(this.loginService.actionsRole)
           }
         }
       );

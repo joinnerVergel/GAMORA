@@ -76,7 +76,7 @@ export class DiscountsComponent implements OnInit, ComponentCanDeactivate {
               elementDiscount.discountValue = element['DescuentoRelativo'];
               this.discountsList.push(elementDiscount);
             });
-            console.log(this.discountsList);
+            //console.log(this.discountsList);
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
@@ -144,7 +144,7 @@ export class DiscountsComponent implements OnInit, ComponentCanDeactivate {
     this.f.lastAge.clearValidators();
     this.f.lastAge.setValidators([Validators.min(this.f.firstAge.value+1)]);
     this.f.lastAge.setValue(this.f.lastAge.value);
-    console.log("cambio");
+    //console.log("cambio");
   }
 
   readVisibilityActions(data:string){

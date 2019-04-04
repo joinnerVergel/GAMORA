@@ -61,24 +61,24 @@ export class AgeDebtComponent implements OnInit {
       this.ageValidate();
       if (this.fieldRequired) {
         if (this.ageError || this.f.fromDebtAge.value === "" || this.f.untilDebtAge.value === "" || this.f.fromDebtAge.value === null || this.f.untilDebtAge.value === null) {
-          console.log("ACA0",this.ageError , this.f.fromDebtAge.value === "" , this.f.untilDebtAge.value === "" , this.f.fromDebtAge.value === null , this.f.untilDebtAge.value === null);
+          //console.log("ACA0",this.ageError , this.f.fromDebtAge.value === "" , this.f.untilDebtAge.value === "" , this.f.fromDebtAge.value === null , this.f.untilDebtAge.value === null);
           return this.validateChange.emit(false);
         }
       } else {
         if (this.ageError) {
           if ((this.f.fromDebtAge.value === "" || this.f.fromDebtAge.value === null) && (this.f.untilDebtAge.value != "" && this.f.untilDebtAge.value != null)) {
             this.ageErrorNoRequired=true;
-            console.log("ACA1");
+            //console.log("ACA1");
             return this.validateChange.emit(false);
           }
           if ((this.f.untilDebtAge.value === "" || this.f.untilDebtAge.value === null) && (this.f.fromDebtAge.value != "" && this.f.fromDebtAge.value != null)) {
             this.ageErrorNoRequired=true;
-            console.log("ACA2");
+            //console.log("ACA2");
             return this.validateChange.emit(false);
           }
           if (this.f.untilDebtAge.value != "" && this.f.untilDebtAge.value != null && this.f.fromDebtAge.value != "" && this.f.fromDebtAge.value != null) {
             this.ageErrorNoRequired=true;
-            console.log("ACA3");
+            //console.log("ACA3");
             return this.validateChange.emit(false);
           }
           this.ageErrorNoRequired=false;
@@ -91,7 +91,7 @@ export class AgeDebtComponent implements OnInit {
   dataChange() {
     let condition: string = "=";
     let valueCondition: string = this.f.debtAge.value;
-    console.log(valueCondition);
+    //console.log(valueCondition);
     if (this.f.ageSelectRadio.value == "2") {
       condition = "*";
       valueCondition = this.f.fromDebtAge.value + "*" + this.f.untilDebtAge.value;

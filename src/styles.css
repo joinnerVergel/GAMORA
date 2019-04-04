@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 body{
     overflow: hidden;
+    font-family: telefonicaRegular !important;
 }
 h4.title{
     border: 3px outset;
@@ -27,13 +28,12 @@ h4.title{
 
 .btnAction{
     cursor: pointer;
-    border: none;
+    border: 1px solid transparent;
+    border-radius:0 50%;
     background: transparent;
-    font-size: 18px;
 }
 .btnAction:hover{
-    font-size: 20px;
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,0.4)!important;
 }
 .btnAction.btnDelete{
     color:#dc3545;
@@ -258,9 +258,10 @@ div.info{
 .dropdown-menu li.active a{
     color: #fff;
 }
-/* .listaTabla{
+.listaTabla{
     overflow: auto;
-} */
+    box-sizing: border-box;
+}
 
 
 .symbolContainer{

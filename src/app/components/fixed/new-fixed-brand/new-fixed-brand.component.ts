@@ -67,6 +67,7 @@ export class NewFixedBrandComponent implements OnInit,ComponentCanDeactivate {
   }
 
   onSubmit() {
+    this.modalService.dismissAll();
     this.viewNewBrandsForm = false;
     let data: PeticionMarcaNueva = new PeticionMarcaNueva();
     data.NombreMarca = this.f.brandName.value;
@@ -85,12 +86,11 @@ export class NewFixedBrandComponent implements OnInit,ComponentCanDeactivate {
       .subscribe(
         item => {
           this.filesDirectory = Array<Files>();
-          if (item.hasOwnProperty('listaGenericaResult')) {
-            const elementList = item['listaGenericaResult'];
+          if (item.hasOwnProperty('ListarArchivosMarcasResult')) {
+            const elementList = item['ListarArchivosMarcasResult'];
             elementList.forEach(element => {
               let elementFile: Files = new Files();
-              elementFile.id = element['Id'];
-              elementFile.file = element['Valor'];
+              elementFile.file = element;
               this.filesDirectory.push(elementFile);
             });
             // console.log(this.filesDirectory);
@@ -114,7 +114,7 @@ export class NewFixedBrandComponent implements OnInit,ComponentCanDeactivate {
           }else{
             this.logService.addMessage(respuesta["Msg"],"warning");
           }
-          this.modalService.dismissAll();
+          // this.modalService.dismissAll();
           this.router.navigate(['/manage-brands/fixed']);
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401){             

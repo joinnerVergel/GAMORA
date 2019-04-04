@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { ManageBrandsService } from 'src/app/services/manage-brands.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
@@ -17,7 +17,7 @@ export class MobileBrandsListComponent implements OnInit,ComponentCanDeactivate 
 
   brandsList: Array<any> = Array<any>();
   deleteIcon=faTrashAlt;
-
+  editIcon= faEdit;
   brandDeletedSelected:any;
 
   constructor(private manageBrandsService: ManageBrandsService,private router: Router,private loginService: LoginService,
@@ -108,6 +108,10 @@ export class MobileBrandsListComponent implements OnInit,ComponentCanDeactivate 
  deleteBrandChange(g:any){
    this.brandDeletedSelected=g;
  }
+
+ editBrand(IdBrand:string){
+  this.router.navigate(['/manage-brands/mobile/updateBrand/'+IdBrand]);
+}
 
  readVisibilityActions(data:string){
   // console.log(this.loginService.getActionsRole(data));

@@ -60,13 +60,13 @@ export class HomeSymbolComponent implements OnInit {
     let pos = $('div[idrefsymbol="' + this.data.refSymbol + '"]').position();
     let objSymbol: any = { IdSimbolo: this.data.refSymbol, Nombre: "INICIO", IdTipoSimbolo: 4, CoordenadaX: pos.left, CoordenadaY: pos.top };
     this.symbolsService.updateSymbol(objSymbol);
-    console.log(pos);
+    //console.log(pos);
   }
 
 
   pointOut() {
     if (!this.symbolsService.occupiedOut(this.data.refSymbol, null)) {
-      console.log("CLick en la salida..");
+      //console.log("CLick en la salida..");
       this.symbolsService.optionOutElement = null;
       this.symbolsService.outElement = this.data.refSymbol;
     }

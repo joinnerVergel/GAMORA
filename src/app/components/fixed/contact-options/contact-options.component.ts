@@ -49,10 +49,10 @@ export class ContactOptionsComponent implements OnInit {
   Validation() {
     // stop here if form is invalid
     if (this.contactElementForm.invalid) {
-      console.log('EMITE false');
+      //console.log('EMITE false');
       return this.validateChange.emit(false);
     }
-    console.log('EMITE true');
+    //console.log('EMITE true');
     return this.validateChange.emit(true);
   }
 

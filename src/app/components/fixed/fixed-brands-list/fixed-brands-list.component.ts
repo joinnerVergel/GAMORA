@@ -3,7 +3,7 @@ import { Brands } from 'src/app/models/brands';
 import { ManageBrandsService } from 'src/app/services/manage-brands.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Observable } from 'rxjs';
@@ -19,6 +19,7 @@ export class FixedBrandsListComponent implements OnInit,ComponentCanDeactivate {
 
   brandsList: Array<Brands > = Array<Brands>();
   deleteIcon=faTrashAlt;
+  editIcon=faEdit;
 
   brandDeletedSelected:Brands;
 
@@ -110,6 +111,10 @@ export class FixedBrandsListComponent implements OnInit,ComponentCanDeactivate {
  deleteBrandChange(g:Brands){
    this.brandDeletedSelected=g;
  }
+
+ editBrand(IdBrand:string){
+  this.router.navigate(['/manage-brands/fixed/updateBrand/'+IdBrand]);
+}
 
  readVisibilityActions(data:string){
   // console.log(this.loginService.getActionsRole(data));
