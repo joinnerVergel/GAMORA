@@ -84,7 +84,7 @@ export class LinkComponent implements OnInit {
 
   Validation() {
     // stop here if form is invalid
-    if (this.linkElementForm.invalid || this.limitExceeded) {
+    if (this.linkElementForm.invalid) {
       return this.validateChange.emit(false);
     } else {
       if (!this.fieldRequired && this.f.linkElement.value.length > 0 && this.f.tagLinkElement.value.length <= 0) {
@@ -111,7 +111,9 @@ export class LinkComponent implements OnInit {
     let control = this.f.linkElement;
     if (control.value.length > 0) {
       this.linkExist = true;
+      this.eventsService.linkQuantity=42
     } else {
+      this.eventsService.linkQuantity=0
       this.linkExist = false;
     }
 
@@ -126,31 +128,9 @@ export class LinkComponent implements OnInit {
         this.msgHTML = this.msgHTML.replace(regularExpression, '<span class="tag">' + element.tag + '</span>');
         valueReturn = valueReturn.replace(regularExpression, '**' + element.tag + '**');
       }
-      let elementSize: number = +element.size;
-      let countComplete: boolean = false;
-      while (!countComplete) {
-        if (text.indexOf(x) != -1) {
-          text = text.replace(x, "");
-          characterQuantity = characterQuantity + elementSize;
-        } else {
-          countComplete = true;
-        }
-      }
     });
-    if (this.quantityLimit != null) {
-      charactersSize = this.quantityLimit - characterQuantity - text.length - this.scriptCharactersQuantity;
-      this.eventsService.linkQuantity = characterQuantity + text.length;
-      this.limitExceeded = false;
-      if (charactersSize < 0) {
-        this.limitExceeded = true;
-      }
-    } else {
-      this.limitExceeded = false;
-    }
-
     this.linkChange.emit(valueReturn);
     this.Validation();
-    
   }
 
 

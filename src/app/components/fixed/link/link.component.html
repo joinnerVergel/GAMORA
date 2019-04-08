@@ -32,16 +32,12 @@
         <div [innerHTML]="msgHTML"></div>
       </ng-template>
     </mwl-text-input-autocomplete-container>
-    <span *ngIf="quantityLimit!=null" class="reduceFont">Cantidad de caracteres restantes:{{getCharactersSize()}}</span>
-    <div *ngIf="limitExceeded" class="invalid-feedback validateLimit">
-      <div>Se ha excedido el tamaño máximo de carácteres permitidos</div>
-    </div>
     <div *ngIf="linkExist">
       <label>Tag Link</label>
       <input type="text" formControlName="tagLinkElement" class="form-control"  placeholder="Tag (Nombre del Enlace)" (input)="dataTagChange()" (keypress)="generalKeyPressEvent($event.key,50,f.tagLinkElement,true,true)"
-        [ngClass]="{ 'is-invalid': submitted && f.tagLinkElement.errors && linkExist }"/>
-      <div *ngIf="submitted  && f.tagLinkElement.errors && linkExist" class="invalid-feedback">
-        <div *ngIf="f.tagLinkElement.errors.required">Debe asociar un nombre al enlace</div>
+        [ngClass]="{ 'is-invalid': submitted && f.tagLinkElement.value.length==0 && linkExist }"/>
+      <div *ngIf="submitted && f.tagLinkElement.value.length==0 && linkExist" class="invalid-feedback">
+        <div>Debe asociar un nombre al enlace</div>
       </div>
     </div>
   </div>
