@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
   templateUrl: './fixed-subcategory-elements-list.component.html',
   styleUrls: ['./fixed-subcategory-elements-list.component.css']
 })
-export class FixedSubcategoryElementsListComponent implements OnInit,ComponentCanDeactivate {
+export class FixedSubcategoryElementsListComponent implements OnInit, ComponentCanDeactivate {
 
   newSubCategoryElementForm: FormGroup;
   submitted = false;
@@ -57,7 +57,7 @@ export class FixedSubcategoryElementsListComponent implements OnInit,ComponentCa
   ageValidation: boolean = false;
   tagsArray: Array<string> = new Array<string>();
   fieldsRequiredList: Array<string> = new Array<string>();
-  subcategoryElementSelected:number;
+  subcategoryElementSelected: number;
 
 
 
@@ -106,7 +106,7 @@ export class FixedSubcategoryElementsListComponent implements OnInit,ComponentCa
 
   open(content, x: number) {
     if (x != -1) {
-      this.subcategoryElementSelected=x;
+      this.subcategoryElementSelected = x;
       this.modalService.open(content);
     } else {
       let validate: boolean = this.Validation();
@@ -140,27 +140,28 @@ export class FixedSubcategoryElementsListComponent implements OnInit,ComponentCa
   }
 
   addSubCategoryElement() {
-    let data: PeticionElementoSubCategoriaNuevo = { ElementoNombre: this.f.subCategoryElementName.value, CreadoPor: "SYSTEM", IdSubCategoria: this.subCategoryId, CondicionEdad: this.ageCondition, EdadMora: this.age, Asunto: this.subject, idContacto: this.contact, LinkElemento: this.link, TagLink: this.tagLink, ScriptElemento: this.script, IdPlantilla: this.templateEmail || -1 };
-    //console.log(data);
-    var suscripcion = this.eventsService.addSubCategoryElement(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.modalService.dismissAll();
-          this.toggleFormNewSubCategoryElement();
-          this.readSubCategoryElementsList();
-          // this.router.navigate(['/events-manager/fixed']);
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        });
-
+    if (this.readVisibilityActions('CREAR_ELEMENTO')) {
+      let data: PeticionElementoSubCategoriaNuevo = { ElementoNombre: this.f.subCategoryElementName.value, CreadoPor: "SYSTEM", IdSubCategoria: this.subCategoryId, CondicionEdad: this.ageCondition, EdadMora: this.age, Asunto: this.subject, idContacto: this.contact, LinkElemento: this.link, TagLink: this.tagLink, ScriptElemento: this.script, IdPlantilla: this.templateEmail || -1 };
+      //console.log(data);
+      var suscripcion = this.eventsService.addSubCategoryElement(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.modalService.dismissAll();
+            this.toggleFormNewSubCategoryElement();
+            this.readSubCategoryElementsList();
+            // this.router.navigate(['/events-manager/fixed']);
+          }, error => {
+            if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+              this.loginService.clearSessionLogin();
+              this.router.navigate(['/login']);
+            }
+          });
+    }
   }
 
   readSubCategoryElementsList() {
@@ -444,58 +445,60 @@ export class FixedSubcategoryElementsListComponent implements OnInit,ComponentCa
   }
 
   dataChange(idSubcategoryElement: number) {
-    let ok: boolean = false;
-    this.eventsService.changeElementState(idSubcategoryElement)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-            ok = true;
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
+    if (this.readVisibilityActions('EDITAR_ELEMENTO')) {
+      let ok: boolean = false;
+      this.eventsService.changeElementState(idSubcategoryElement)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+              ok = true;
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
 
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
+          }, error => {
+            if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+              this.loginService.clearSessionLogin();
+              this.router.navigate(['/login']);
+            }
+          },
+          () => {
+            if (ok) {
+              this.readSubCategoryElementsList();
+            }
           }
-        },
-        () => {
-          if (ok) {
-            this.readSubCategoryElementsList();
-          }
-        }
-      );
-
+        );
+    }
   }
 
   deleteElement(idSubcategoryElement: number) {
-    let ok: boolean = false;
-    this.eventsService.deleteElement(idSubcategoryElement)
-      .subscribe(
-        respuesta => {
-          this.modalService.dismissAll();
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-            ok = true;
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
+    if (this.readVisibilityActions('ELIMINAR_ELEMENTO')) {
+      let ok: boolean = false;
+      this.eventsService.deleteElement(idSubcategoryElement)
+        .subscribe(
+          respuesta => {
+            this.modalService.dismissAll();
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+              ok = true;
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
 
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
+          }, error => {
+            if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+              this.loginService.clearSessionLogin();
+              this.router.navigate(['/login']);
+            }
+          },
+          () => {
+            if (ok) {
+              this.readSubCategoryElementsList();
+            }
           }
-        },
-        () => {
-          if (ok) {
-            this.readSubCategoryElementsList();
-          }
-        }
-      );
-
+        );
+    }
   }
 
   @HostListener('window:beforeunload')

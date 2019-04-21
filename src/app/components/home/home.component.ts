@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
 import { Observable } from 'rxjs';
+import * as decode from 'jwt-decode';
 
 
 
@@ -13,16 +14,20 @@ import { Observable } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit,ComponentCanDeactivate {
-  detailFixedPortfolio: DetailPortfolios={ quantity: null, updateLast: null };
+export class HomeComponent implements OnInit, ComponentCanDeactivate {
+  detailFixedPortfolio: DetailPortfolios = { quantity: null, updateLast: null };
 
-  constructor(private portfoliosServices: PortfoliosService, private router: Router,  private loginService: LoginService) { }
+  constructor(private portfoliosServices: PortfoliosService, private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
-    if(!this.loginService.isLogged()){
+    if (!this.loginService.isLogged()) {
       this.router.navigate(['/login']);
-    }else{
-    this.requestFixedPortfoliosDetail();
+    } else {
+      if (decode(this.loginService.getLocalUserLogged().token)['RolUsuario'] == '/LUXPfDT7FDLXPBKY6D9eQ==') {
+        this.router.navigate(['/users-manager']);
+      } else {
+        this.requestFixedPortfoliosDetail();
+      }
     }
   }
 
@@ -38,16 +43,16 @@ export class HomeComponent implements OnInit,ComponentCanDeactivate {
             });
           }
         }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401){             
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();
             this.router.navigate(['/login']);
           }
         });
   }
-  
+
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
-     this.loginService.keepSession();
+    this.loginService.keepSession();
     return true;
   }
 }

@@ -11,7 +11,7 @@
         <th scope="col">Última Actualización</th>
         <th scope="col">Cantidad</th>
         <th scope="col">Estado</th>
-        <th scope="col">Acciones</th>
+        <th scope="col" *ngIf="readVisibilityActions('ELIMINAR_MARCA') || readVisibilityActions('EDITAR_MARCA')">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
         <td>
           <div class="state" [ngClass]="getStateClass(brand.state)">{{getState(brand.state)}}</div>
         </td>
-        <td>
+        <td *ngIf="readVisibilityActions('ELIMINAR_MARCA') || readVisibilityActions('EDITAR_MARCA')">
           <div class="actions">
             <button type="button" *ngIf="readVisibilityActions('ELIMINAR_MARCA')" class="btnAction btnDelete"
               placement="bottom" ngbTooltip="Eliminar" tooltipClass="tooltipDelete"

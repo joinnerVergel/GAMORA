@@ -17,7 +17,7 @@
   </div>
   <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed" [ngClass]="titleItemClass">
     <ul class="nav flex-column navbar-nav">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!readVisibilityActions('CONSULTAR_USUARIO')">
         <a class="nav-link" routerLink="/">
           <fa-icon [icon]="homeIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Inicio</span>
         </a>
@@ -43,23 +43,23 @@
         </a>
       </li>
 
-      <li class="nav-item" [routerLinkActive]="'active'">
+      <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_FLUJO')">
         <a class="nav-link" routerLink="/workflow/fixed">
           <fa-icon [icon]="workflowIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Administrador
             de Flujos</span>
         </a>
       </li>
-      <li class="nav-item" [routerLinkActive]="'active'">
+      <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_GESTION')">
         <a class="nav-link" routerLink="/manager/fixed">
           <fa-icon [icon]="managerIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Gestor</span>
         </a>
       </li>
-      <li class="nav-item" [routerLinkActive]="'active'">
+      <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_REPORTES')">
           <a class="nav-link" routerLink="/reports">
             <fa-icon [icon]="reportsIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Informes</span>
           </a>
       </li>
-      <li class="nav-item" [routerLinkActive]="'active'">
+      <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_RONAN')">
           <a class="nav-link" routerLink="/RONAnConfiguration/discounts">
             <fa-icon [icon]="agreementIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Configuracion de Acuerdos</span>
           </a>

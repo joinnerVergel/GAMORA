@@ -15,6 +15,11 @@ export class ReportsComponent implements ComponentCanDeactivate  {
   constructor(private router: Router,private loginService: LoginService) { }
 
 
+  readVisibilityActions(data: string) {
+    // console.log(this.loginService.getActionsRole(data));
+    return this.loginService.getActionsRole(data);
+  }
+
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
     this.loginService.keepSession();

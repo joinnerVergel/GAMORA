@@ -12,7 +12,7 @@
         <th scope="col">Filtros Fijos</th>
         <th scope="col">Filtros Dinámicos</th>
         <th scope="col" *ngIf="editGroups">Prioridad</th>
-        <th scope="col" rowspan="2">Acciones</th>
+        <th scope="col" rowspan="2" *ngIf="readVisibilityActions('ELIMINAR_GRUPO')">Acciones</th>
       </tr>
       <tr>
         <th class="colFixedContainer col">
@@ -63,7 +63,7 @@
 
                 <div class="actions" *ngIf="priorityGroupEdit!=group.name">
                   {{group.basicPriority}}
-                  <button type="button" class="btnAction btnView"
+                  <button type="button" class="btnAction btnView" *ngIf="readVisibilityActions('EDITAR_GRUPO')"
                   (click)="viewEditPriority(group)">
                     <fa-icon [icon]="editIcon"></fa-icon>
                   </button>
@@ -87,7 +87,7 @@
             </tr>
           </table>
         </td>
-        <td>
+        <td *ngIf="readVisibilityActions('ELIMINAR_GRUPO')">
           <div class="actions" *ngIf="readVisibilityActions('ELIMINAR_GRUPO')">
             <button type="button" class="btnAction btnDelete" (click)="deleteGroupChange(group);open(content);" placement="bottom" ngbTooltip="Eliminar" tooltipClass="tooltipDelete">
               <fa-icon [icon]="deleteIcon"></fa-icon>

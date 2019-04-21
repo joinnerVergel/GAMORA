@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   templateUrl: './mobile-sub-categories-list.component.html',
   styleUrls: ['./mobile-sub-categories-list.component.css']
 })
-export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy,ComponentCanDeactivate {
+export class MobileSubCategoriesListComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
 
   newSubCategoryForm: FormGroup;
   submitted = false;
@@ -22,7 +22,7 @@ export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy,Compo
   subCategoriesList: Array<any> = Array<any>();
 
   editIcon = faEdit;
-  categoryIcon=faKaaba;
+  categoryIcon = faKaaba;
 
   categoryId: number;
   private sub: any;
@@ -31,10 +31,10 @@ export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy,Compo
   constructor(config: NgbModalConfig, private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private logService: LogManagedService, private eventsService: EventsManagerService,
-    private router: Router, private route: ActivatedRoute,private loginService: LoginService) { }
+    private router: Router, private route: ActivatedRoute, private loginService: LoginService) { }
 
   ngOnInit() {
-    if(!this.loginService.isLogged()){
+    if (!this.loginService.isLogged()) {
       this.router.navigate(['/login']);
     }
     this.newSubCategoryForm = this.formBuilder.group({
@@ -77,29 +77,30 @@ export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy,Compo
   toggleFormNewSubCategory() {
     this.newSubCategoryFormView = !this.newSubCategoryFormView;
     this.newSubCategoryForm.reset();
-    this.submitted=false;
+    this.submitted = false;
   }
 
   addSubCategory() {
-    let data: any = { SubCategoriaNombre: this.f.subCategoryName.value, CreadoPor: "SYSTEM", IdCategoria: this.categoryId };
-    var suscripcion = this.eventsService.addSubCategory(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.modalService.dismissAll();
-          this.toggleFormNewSubCategory();
-          this.readSubCategoriesList();
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401){             
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        });
-
+    if (this.readVisibilityActions('CREAR_SUBCATEGORIA')) {
+      let data: any = { SubCategoriaNombre: this.f.subCategoryName.value, CreadoPor: "SYSTEM", IdCategoria: this.categoryId };
+      var suscripcion = this.eventsService.addSubCategory(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.modalService.dismissAll();
+            this.toggleFormNewSubCategory();
+            this.readSubCategoriesList();
+          }, error => {
+            if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+              this.loginService.clearSessionLogin();
+              this.router.navigate(['/login']);
+            }
+          });
+    }
   }
 
   readSubCategoriesList() {
@@ -124,7 +125,7 @@ export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy,Compo
             // console.log(this.subCategoriesList);
           }
         }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401){             
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();
             this.router.navigate(['/login']);
           }
@@ -160,20 +161,22 @@ export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy,Compo
             this.categorySelected.idOperationType = element['IdTipoOperacion'];
           }
         }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401){             
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();
             this.router.navigate(['/login']);
           }
         });
   }
 
-   editSubcategory(IdSubcategory:number){
-    this.router.navigate(['/events-manager/mobile/category/'+this.categorySelected.idCategory+'/sub-category/'+IdSubcategory])
+  editSubcategory(IdSubcategory: number) {
+    if (this.readVisibilityActions('CONSULTAR_ELEMENTO')) {
+      this.router.navigate(['/events-manager/mobile/category/' + this.categorySelected.idCategory + '/sub-category/' + IdSubcategory])
+    }
   }
 
   keyPressValidation(limit: number, control: FormControl, validateStrangeCharacters: boolean) {
 
-    
+
     if (control.value.length > limit) {
       control.setValue(control.value.substring(0, limit));
     }
@@ -182,13 +185,13 @@ export class MobileSubCategoriesListComponent implements OnInit ,OnDestroy,Compo
       let strangeCharacters: string = "|!#$%&/()=?¡¿'*+[]{}^-_:;,.´¨~`°¬<>\\\"@";
       let lastCharacter: string = control.value;
       if (strangeCharacters.indexOf(lastCharacter[lastCharacter.length - 1]) != -1) {
-        console.log("Caracter Invalido "+lastCharacter[lastCharacter.length-1]);
+        console.log("Caracter Invalido " + lastCharacter[lastCharacter.length - 1]);
         control.setValue(control.value.substring(0, lastCharacter.length - 1));
       }
     }
 
   }
-  readVisibilityActions(data:string){
+  readVisibilityActions(data: string) {
     // console.log(this.loginService.getActionsRole(data));
     return this.loginService.getActionsRole(data);
   }

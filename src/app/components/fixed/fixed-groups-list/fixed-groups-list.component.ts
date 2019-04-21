@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
   templateUrl: './fixed-groups-list.component.html',
   styleUrls: ['./fixed-groups-list.component.css']
 })
-export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
+export class FixedGroupsListComponent implements OnInit, ComponentCanDeactivate {
   deleteIcon = faTrashAlt;
   editIcon = faPencilAlt;
   saveIcon = faSave;
@@ -27,8 +27,8 @@ export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
   groupDeletedSelected: Groups;
   priorityGroupEdit: string = null;
   basicPriorityGroupSelected: number = null;
-  maxPriority:number=0;
-  editGroups:boolean=false;
+  maxPriority: number = 0;
+  editGroups: boolean = false;
 
   constructor(private manageGroupsService: ManagementGroupsService,
     private logService: LogManagedService, private router: Router,
@@ -77,10 +77,10 @@ export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
 
               elementGroup.basicPriority = element['PrioridadBasica'];
               elementGroup.specialPriority = element['PrioridadEspecial'];
-              elementGroup.ejecution= element['Ejecucion'];
+              elementGroup.ejecution = element['Ejecucion'];
               this.groupsList.push(elementGroup);
             });
-            this.maxPriority=this.groupsList.length;
+            this.maxPriority = this.groupsList.length;
             //console.log(this.groupsList);
           }
         }, error => {
@@ -98,18 +98,20 @@ export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
   };
 
   deleteGroup(g: Groups) {
-    let FiltroGrupo: FiltroGrupo = {idTipoOperacion:1, NombreGrupo: g.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 1003 };
-    var suscripcion = this.manageGroupsService.deleteManagementGroup(FiltroGrupo)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.readGroupsList();
-          this.router.navigate(['/management-groups/fixed']);
-        });
+    if (this.readVisibilityActions('ELIMINAR_GRUPO')) {
+      let FiltroGrupo: FiltroGrupo = { idTipoOperacion: 1, NombreGrupo: g.name, EdadMoraInicial: null, EdadMoraFinal: null, PrioridadBasica: null, ListaFiltros: [], tipoTransaccion: 1003 };
+      var suscripcion = this.manageGroupsService.deleteManagementGroup(FiltroGrupo)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.readGroupsList();
+            this.router.navigate(['/management-groups/fixed']);
+          });
+    }
   };
 
   open(content) {
@@ -155,32 +157,36 @@ export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
   }
 
   updatePriorityGroup(x: Groups) {
-    let data: FiltroGrupo = { idTipoOperacion:1,NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:this.basicPriorityGroupSelected, ListaFiltros: [], tipoTransaccion: 1004 };
-    var suscripcion = this.manageGroupsService.updateBasicPriorityGroup(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.priorityGroupEdit = null;
-          this.readGroupsList();
-        });
+    if (this.readVisibilityActions('EDITAR_GRUPO')) {
+      let data: FiltroGrupo = { idTipoOperacion: 1, NombreGrupo: x.name, EdadMoraInicial: null, EdadMoraFinal: null, PrioridadBasica: this.basicPriorityGroupSelected, ListaFiltros: [], tipoTransaccion: 1004 };
+      var suscripcion = this.manageGroupsService.updateBasicPriorityGroup(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.priorityGroupEdit = null;
+            this.readGroupsList();
+          });
+    }
   }
   toogleSpecialPriority(x: Groups) {
-    let data: FiltroGrupo = { idTipoOperacion:1,NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 1005 };
-    var suscripcion = this.manageGroupsService.updateSpecialPriorityGroup(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.priorityGroupEdit = null;
-          this.readGroupsList();
-        });
+    if (this.readVisibilityActions('EDITAR_GRUPO')) {
+      let data: FiltroGrupo = { idTipoOperacion: 1, NombreGrupo: x.name, EdadMoraInicial: null, EdadMoraFinal: null, PrioridadBasica: null, ListaFiltros: [], tipoTransaccion: 1005 };
+      var suscripcion = this.manageGroupsService.updateSpecialPriorityGroup(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.priorityGroupEdit = null;
+            this.readGroupsList();
+          });
+    }
   }
 
   isEditGroup() {
@@ -188,7 +194,7 @@ export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
       .subscribe(
         item => {
           if (item.hasOwnProperty('BloqueoEdicionGruposResult')) {
-            this.editGroups=!(item['BloqueoEdicionGruposResult']);
+            this.editGroups = !(item['BloqueoEdicionGruposResult']);
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
@@ -198,23 +204,23 @@ export class FixedGroupsListComponent implements OnInit,ComponentCanDeactivate{
         });
   }
 
-  getPrioritySpecial(x:number){
-    if(x==0){
+  getPrioritySpecial(x: number) {
+    if (x == 0) {
       return 'Sin prioridad especial'
     }
     return 'Con prioridad especial'
   }
 
-  getAgeDebt(x:Groups){
-    if(x.lastDebtAge==-100){
+  getAgeDebt(x: Groups) {
+    if (x.lastDebtAge == -100) {
       return x.firstDebtAge;
     }
-    return x.firstDebtAge+' a '+x.lastDebtAge;
+    return x.firstDebtAge + ' a ' + x.lastDebtAge;
   }
 
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
-     this.loginService.keepSession();
+    this.loginService.keepSession();
     return true;
   }
 

@@ -15,7 +15,7 @@
         <th scope="col">Grupo</th>
         <th scope="col">Flujo</th>
         <th scope="col">Configuraciones</th>
-        <th scope="col" *ngIf="readVisibilityActions('CREAR_GESTION')">Controles</th>
+        <th scope="col" *ngIf="readVisibilityActions('EDITAR_GESTION')">Controles</th>
       </tr>
     </thead>
     <tbody>
@@ -49,7 +49,7 @@
             </div>
           </ng-template>
         </td>
-        <td *ngIf="readVisibilityActions('CREAR_GESTION')">
+        <td *ngIf="readVisibilityActions('EDITAR_GESTION')">
           <div class="actions radiosContainer">
             <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio"
               [(ngModel)]="management.state">

@@ -13,18 +13,18 @@ import { Observable } from 'rxjs';
   templateUrl: './fixed-manager-list.component.html',
   styleUrls: ['./fixed-manager-list.component.css']
 })
-export class FixedManagerListComponent implements OnInit,ComponentCanDeactivate {
+export class FixedManagerListComponent implements OnInit, ComponentCanDeactivate {
 
   managementList: Array<any> = [];
   playIcon = faPlay;
   pauseIcon = faPause;
   stopIcon = faStop;
   managementStateChange: any = {};
-  viewContainerHistory:boolean=false;
-  editIcon=faEye;
-  idFlujo_V:number;
-  nameManager_V:string;
-  nameGroup_V:string;
+  viewContainerHistory: boolean = false;
+  editIcon = faEye;
+  idFlujo_V: number;
+  nameManager_V: string;
+  nameGroup_V: string;
 
   constructor(private logService: LogManagedService, private router: Router, private loginService: LoginService,
     private managementService: ManagementService, private modalService: NgbModal) { }
@@ -84,44 +84,46 @@ export class FixedManagerListComponent implements OnInit,ComponentCanDeactivate 
       this.modalService.dismissAll();
     }
   }
-  open(content,m) {
-    this.managementStateChange=m;
+  open(content, m) {
+    this.managementStateChange = m;
     this.modalService.open(content);
   }
   dataChange() {
-    let x:any= this.managementStateChange;
-    let ok: boolean = false;
-    let data: any = { idGestion: x.idManagement, transaccion: x.state, IdTipoOperacion: 1 }
-    this.managementService.changeStateManagement(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-            ok = true;
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
+    if (this.readVisibilityActions('EDITAR_GESTION')) {
+      let x: any = this.managementStateChange;
+      let ok: boolean = false;
+      let data: any = { idGestion: x.idManagement, transaccion: x.state, IdTipoOperacion: 1 }
+      this.managementService.changeStateManagement(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+              ok = true;
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
 
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        },
-        () => {
-          if (ok) {
-            this.readManagementList();
-            this.modalService.dismissAll();
+          }, error => {
+            if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+              this.loginService.clearSessionLogin();
+              this.router.navigate(['/login']);
+            }
+          },
+          () => {
+            if (ok) {
+              this.readManagementList();
+              this.modalService.dismissAll();
 
+            }
           }
-        }
-      );
+        );
+    }
   }
-  
-  workflowView(contentWorkflow,id:number,name:string,manager:string){
-    this.idFlujo_V=id;
-    this.nameGroup_V=name;
-    this.nameManager_V=manager;
+
+  workflowView(contentWorkflow, id: number, name: string, manager: string) {
+    this.idFlujo_V = id;
+    this.nameGroup_V = name;
+    this.nameManager_V = manager;
     this.modalService.open(contentWorkflow);
   }
 

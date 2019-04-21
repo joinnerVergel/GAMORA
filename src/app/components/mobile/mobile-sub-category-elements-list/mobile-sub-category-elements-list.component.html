@@ -76,7 +76,7 @@
             <th scope="col">Fecha Creación</th>
             <th scope="col">Última Actualización</th>
             <th scope="col">Creado por</th>
-            <th scope="col">Acciones</th>
+            <th scope="col" *ngIf="readVisibilityActions('EDITAR_ELEMENTO') || readVisibilityActions('ELIMINAR_ELEMENTO')">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -90,8 +90,8 @@
             <td>{{subcategoryElement.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
             <td>{{subcategoryElement.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
             <td>{{subcategoryElement.createdBy}}</td>
-            <td>
-              <div class="actions radiosContainer">
+            <td *ngIf="readVisibilityActions('EDITAR_ELEMENTO') || readVisibilityActions('ELIMINAR_ELEMENTO')">
+              <div class="actions radiosContainer" *ngIf="readVisibilityActions('EDITAR_ELEMENTO')">
                   <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio" [(ngModel)]="subcategoryElement.state">
                     <label ngbButtonLabel class="btn-success">
                       <input ngbButton type="radio" [value]="true" (change)="dataChange(subcategoryElement.idElement)"> Activo

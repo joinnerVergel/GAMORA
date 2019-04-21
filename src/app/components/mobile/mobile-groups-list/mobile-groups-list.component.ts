@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   templateUrl: './mobile-groups-list.component.html',
   styleUrls: ['./mobile-groups-list.component.css']
 })
-export class MobileGroupsListComponent implements OnInit,ComponentCanDeactivate {
+export class MobileGroupsListComponent implements OnInit, ComponentCanDeactivate {
   deleteIcon = faTrashAlt;
   editIcon = faPencilAlt;
   saveIcon = faSave;
@@ -25,8 +25,8 @@ export class MobileGroupsListComponent implements OnInit,ComponentCanDeactivate 
   groupDeletedSelected: any;
   priorityGroupEdit: string = null;
   basicPriorityGroupSelected: number = null;
-  maxPriority:number=0;
-  editGroups:boolean=false;
+  maxPriority: number = 0;
+  editGroups: boolean = false;
 
   constructor(private manageGroupsService: ManagementGroupsService,
     private logService: LogManagedService, private router: Router,
@@ -74,10 +74,10 @@ export class MobileGroupsListComponent implements OnInit,ComponentCanDeactivate 
 
               elementGroup.basicPriority = element['PrioridadBasica'];
               elementGroup.specialPriority = element['PrioridadEspecial'];
-              elementGroup.ejecution= element['Ejecucion'];
+              elementGroup.ejecution = element['Ejecucion'];
               this.groupsList.push(elementGroup);
             });
-            this.maxPriority=this.groupsList.length;
+            this.maxPriority = this.groupsList.length;
             //console.log(this.groupsList);
           }
         }, error => {
@@ -95,18 +95,20 @@ export class MobileGroupsListComponent implements OnInit,ComponentCanDeactivate 
   };
 
   deleteGroup(g: any) {
-    let FiltroGrupo: any = {idTipoOperacion:2, NombreGrupo: g.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 1003 };
-    var suscripcion = this.manageGroupsService.deleteManagementGroup(FiltroGrupo)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.readGroupsList();
-          this.router.navigate(['/management-groups/mobile']);
-        });
+    if (this.readVisibilityActions('ELIMINAR_GRUPO')) {
+      let FiltroGrupo: any = { idTipoOperacion: 2, NombreGrupo: g.name, EdadMoraInicial: null, EdadMoraFinal: null, PrioridadBasica: null, ListaFiltros: [], tipoTransaccion: 1003 };
+      var suscripcion = this.manageGroupsService.deleteManagementGroup(FiltroGrupo)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.readGroupsList();
+            this.router.navigate(['/management-groups/mobile']);
+          });
+    }
   };
 
   open(content) {
@@ -152,32 +154,36 @@ export class MobileGroupsListComponent implements OnInit,ComponentCanDeactivate 
   }
 
   updatePriorityGroup(x: any) {
-    let data: any = { idTipoOperacion:2,NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:this.basicPriorityGroupSelected, ListaFiltros: [], tipoTransaccion: 1004 };
-    var suscripcion = this.manageGroupsService.updateBasicPriorityGroup(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.priorityGroupEdit = null;
-          this.readGroupsList();
-        });
+    if (this.readVisibilityActions('EDITAR_GRUPO')) {
+      let data: any = { idTipoOperacion: 2, NombreGrupo: x.name, EdadMoraInicial: null, EdadMoraFinal: null, PrioridadBasica: this.basicPriorityGroupSelected, ListaFiltros: [], tipoTransaccion: 1004 };
+      var suscripcion = this.manageGroupsService.updateBasicPriorityGroup(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.priorityGroupEdit = null;
+            this.readGroupsList();
+          });
+    }
   }
   toogleSpecialPriority(x: any) {
-    let data: any = { idTipoOperacion:2,NombreGrupo: x.name, EdadMoraInicial:null,EdadMoraFinal:null,PrioridadBasica:null, ListaFiltros: [], tipoTransaccion: 1005 };
-    var suscripcion = this.manageGroupsService.updateSpecialPriorityGroup(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.priorityGroupEdit = null;
-          this.readGroupsList();
-        });
+    if (this.readVisibilityActions('EDITAR_GRUPO')) {
+      let data: any = { idTipoOperacion: 2, NombreGrupo: x.name, EdadMoraInicial: null, EdadMoraFinal: null, PrioridadBasica: null, ListaFiltros: [], tipoTransaccion: 1005 };
+      var suscripcion = this.manageGroupsService.updateSpecialPriorityGroup(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.priorityGroupEdit = null;
+            this.readGroupsList();
+          });
+    }
   }
 
   isEditGroup() {
@@ -185,7 +191,7 @@ export class MobileGroupsListComponent implements OnInit,ComponentCanDeactivate 
       .subscribe(
         item => {
           if (item.hasOwnProperty('BloqueoEdicionGruposResult')) {
-            this.editGroups=!(item['BloqueoEdicionGruposResult']);
+            this.editGroups = !(item['BloqueoEdicionGruposResult']);
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
@@ -195,18 +201,18 @@ export class MobileGroupsListComponent implements OnInit,ComponentCanDeactivate 
         });
   }
 
-  getPrioritySpecial(x:number){
-    if(x==0){
+  getPrioritySpecial(x: number) {
+    if (x == 0) {
       return 'Sin prioridad especial'
     }
     return 'Con prioridad especial'
   }
 
-  getAgeDebt(x:any){
-    if(x.lastDebtAge==-100){
+  getAgeDebt(x: any) {
+    if (x.lastDebtAge == -100) {
       return x.firstDebtAge;
     }
-    return x.firstDebtAge+' a '+x.lastDebtAge;
+    return x.firstDebtAge + ' a ' + x.lastDebtAge;
   }
 
   @HostListener('window:beforeunload')

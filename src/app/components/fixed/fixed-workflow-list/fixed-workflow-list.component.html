@@ -11,7 +11,7 @@
         <th scope="col">Fecha de Creación</th>
         <th scope="col">Fecha de Actualización</th>
         <th scope="col">Eventos por Defecto</th>
-        <th scope="col">Acciones</th>
+        <th scope="col" *ngIf="readVisibilityActions('EDITAR_FLUJO')">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -23,9 +23,9 @@
         <td>{{workFlow.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
         <td>{{workFlow.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
         <td>{{workFlow.events}}</td>
-        <td>
+        <td *ngIf="readVisibilityActions('EDITAR_FLUJO')">
           <div class="actions">
-            <button type="button" class="btnAction btnEdit btnView" 
+            <button type="button" class="btnAction btnEdit btnView"  *ngIf="readVisibilityActions('EDITAR_FLUJO')"
               placement="bottom" ngbTooltip="Editar" tooltipClass="tooltipEdit" (click)="editWorkflow(workFlow.idWorkFlow)">
               <fa-icon [icon]="editIcon"></fa-icon>
             </button>

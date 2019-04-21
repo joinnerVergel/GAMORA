@@ -36,9 +36,9 @@ export class DiscountsComponent implements OnInit, ComponentCanDeactivate {
     }
     this.newDiscountForm = this.formBuilder.group({
       firstAge: [0, Validators.required],
-      lastAge: [0,Validators.min(0)],
-      payDay: [0, [Validators.required,Validators.min(0)]],
-      discount: [0, [Validators.required,Validators.min(0)]]
+      lastAge: [0, Validators.min(0)],
+      payDay: [0, [Validators.required, Validators.min(0)]],
+      discount: [0, [Validators.required, Validators.min(0)]]
     });
   }
 
@@ -57,7 +57,7 @@ export class DiscountsComponent implements OnInit, ComponentCanDeactivate {
   toggleFormNewDiscount() {
     this.newDiscountFormView = !this.newDiscountFormView;
     this.newDiscountForm.reset();
-    this.submitted=false;
+    this.submitted = false;
   }
   readDiscountsList() {
     this.agreementService.getDiscountsList()
@@ -89,9 +89,9 @@ export class DiscountsComponent implements OnInit, ComponentCanDeactivate {
 
 
   saveDiscounts() {
-    let Discounts:Array<any>=[];
+    let Discounts: Array<any> = [];
     this.discountsList.forEach(element => {
-      let d:any={DescuentoRelativo: element.discountValue, DiasPago: element.payDays, MoraFinal: (element.lastDebtAge==null?"INDF":element.lastDebtAge), MoraInicial: element.firstDebtAge}
+      let d: any = { DescuentoRelativo: element.discountValue, DiasPago: element.payDays, MoraFinal: (element.lastDebtAge == null ? "INDF" : element.lastDebtAge), MoraInicial: element.firstDebtAge }
       Discounts.push(d);
     });
     var suscripcion = this.agreementService.saveDiscounts(Discounts)
@@ -108,13 +108,17 @@ export class DiscountsComponent implements OnInit, ComponentCanDeactivate {
   }
 
   deleteDiscount(d: any) {
-    this.discountsList = this.discountsList.filter(x => x.item != d.item);
-    this.saveDiscounts();
+    if (this.readVisibilityActions('ELIMINAR_DESCUENTO')) {
+      this.discountsList = this.discountsList.filter(x => x.item != d.item);
+      this.saveDiscounts();
+    }
   }
   addDiscount() {
-    let d:any={item:this.discountsList.length+1,discountValue: this.f.discount.value,payDays: this.f.payDay.value,lastDebtAge: this.f.lastAge.value,firstDebtAge: this.f.firstAge.value};
-    this.discountsList.push(d);
-    this.saveDiscounts();
+    if (this.readVisibilityActions('CREAR_DESCUENTO')) {
+      let d: any = { item: this.discountsList.length + 1, discountValue: this.f.discount.value, payDays: this.f.payDay.value, lastDebtAge: this.f.lastAge.value, firstDebtAge: this.f.firstAge.value };
+      this.discountsList.push(d);
+      this.saveDiscounts();
+    }
   }
 
   open(content, action: string) {
@@ -123,7 +127,7 @@ export class DiscountsComponent implements OnInit, ComponentCanDeactivate {
       if (validate) {
         this.modalService.open(content);
       }
-    }else{
+    } else {
       this.modalService.open(content)
     }
   }
@@ -140,14 +144,14 @@ export class DiscountsComponent implements OnInit, ComponentCanDeactivate {
     this.modalService.dismissAll();
   }
 
-  changeFirstAge(){
+  changeFirstAge() {
     this.f.lastAge.clearValidators();
-    this.f.lastAge.setValidators([Validators.min(this.f.firstAge.value+1)]);
+    this.f.lastAge.setValidators([Validators.min(this.f.firstAge.value + 1)]);
     this.f.lastAge.setValue(this.f.lastAge.value);
     //console.log("cambio");
   }
 
-  readVisibilityActions(data:string){
+  readVisibilityActions(data: string) {
     // console.log(this.loginService.getActionsRole(data));
     return this.loginService.getActionsRole(data);
   }

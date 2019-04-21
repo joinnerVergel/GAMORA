@@ -16,7 +16,7 @@ import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.s
   templateUrl: './fixed-category-list.component.html',
   styleUrls: ['./fixed-category-list.component.css']
 })
-export class FixedCategoryListComponent implements OnInit,ComponentCanDeactivate {
+export class FixedCategoryListComponent implements OnInit, ComponentCanDeactivate {
 
   newCategoryForm: FormGroup;
   submitted = false;
@@ -28,11 +28,11 @@ export class FixedCategoryListComponent implements OnInit,ComponentCanDeactivate
   constructor(config: NgbModalConfig, private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private logService: LogManagedService, private eventsService: EventsManagerService,
-    private router: Router,private loginService: LoginService) { }
+    private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
-    
-    if(!this.loginService.isLogged()){
+
+    if (!this.loginService.isLogged()) {
       this.router.navigate(['/login']);
     }
     this.newCategoryForm = this.formBuilder.group({
@@ -75,26 +75,27 @@ export class FixedCategoryListComponent implements OnInit,ComponentCanDeactivate
   }
 
   addCategory() {
-    let data: PeticionCategoriaNueva = { CategoriaNombre: this.f.categoryName.value, CreadoPor: "SYSTEM", IdTipoOperacion: 1 };
-    var suscripcion = this.eventsService.addCategory(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
-          this.modalService.dismissAll();
-          this.toggleFormNewCategory();
-          this.readCategoriesList();
-          // this.router.navigate(['/events-manager/fixed']);
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401){             
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        });
-
+    if (this.readVisibilityActions('CREAR_CATEGORIA')) {
+      let data: PeticionCategoriaNueva = { CategoriaNombre: this.f.categoryName.value, CreadoPor: "SYSTEM", IdTipoOperacion: 1 };
+      var suscripcion = this.eventsService.addCategory(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
+            this.modalService.dismissAll();
+            this.toggleFormNewCategory();
+            this.readCategoriesList();
+            // this.router.navigate(['/events-manager/fixed']);
+          }, error => {
+            if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+              this.loginService.clearSessionLogin();
+              this.router.navigate(['/login']);
+            }
+          });
+    }
   }
 
   readCategoriesList() {
@@ -119,7 +120,7 @@ export class FixedCategoryListComponent implements OnInit,ComponentCanDeactivate
             // console.log(this.categoriesList);
           }
         }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401){             
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();
             this.router.navigate(['/login']);
           }
@@ -133,12 +134,14 @@ export class FixedCategoryListComponent implements OnInit,ComponentCanDeactivate
   };
 
   editSubcategories(categoryId: number) {
-    this.router.navigate(['/events-manager/fixed/category/' + categoryId])
+    if (this.readVisibilityActions('CONSULTAR_SUBCATEGORIA')) {
+      this.router.navigate(['/events-manager/fixed/category/' + categoryId])
+    }
   }
 
   keyPressValidation(limit: number, control: FormControl, validateStrangeCharacters: boolean) {
 
-    
+
     if (control.value.length > limit) {
       control.setValue(control.value.substring(0, limit));
     }
@@ -147,13 +150,13 @@ export class FixedCategoryListComponent implements OnInit,ComponentCanDeactivate
       let strangeCharacters: string = "|!#$%&/()=?¡¿'*+[]{}^-_:;,.´¨~`°¬<>\\\"@";
       let lastCharacter: string = control.value;
       if (strangeCharacters.indexOf(lastCharacter[lastCharacter.length - 1]) != -1) {
-        console.log("Caracter Invalido "+lastCharacter[lastCharacter.length-1]);
+        console.log("Caracter Invalido " + lastCharacter[lastCharacter.length - 1]);
         control.setValue(control.value.substring(0, lastCharacter.length - 1));
       }
     }
 
   }
-  readVisibilityActions(data:string){
+  readVisibilityActions(data: string) {
     // console.log(this.loginService.getActionsRole(data));
     return this.loginService.getActionsRole(data);
   }

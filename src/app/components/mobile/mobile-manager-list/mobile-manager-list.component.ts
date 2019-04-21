@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   templateUrl: './mobile-manager-list.component.html',
   styleUrls: ['./mobile-manager-list.component.css']
 })
-export class MobileManagerListComponent implements OnInit,ComponentCanDeactivate {
+export class MobileManagerListComponent implements OnInit, ComponentCanDeactivate {
 
   managementList: Array<any> = [];
   playIcon = faPlay;
@@ -78,38 +78,40 @@ export class MobileManagerListComponent implements OnInit,ComponentCanDeactivate
       this.modalService.dismissAll();
     }
   }
-  open(content,m) {
-    this.managementStateChange=m;
+  open(content, m) {
+    this.managementStateChange = m;
     this.modalService.open(content);
   }
   dataChange() {
-    let x:any= this.managementStateChange;
-    let ok: boolean = false;
-    let data: any = { idGestion: x.idManagement, transaccion: x.state, IdTipoOperacion: 2 }
-    this.managementService.changeStateManagement(data)
-      .subscribe(
-        respuesta => {
-          if (respuesta["State"]) {
-            this.logService.addMessage(respuesta["Msg"], "success");
-            ok = true;
-          } else {
-            this.logService.addMessage(respuesta["Msg"], "warning");
-          }
+    if (this.readVisibilityActions('EDITAR_GESTION')) {
+      let x: any = this.managementStateChange;
+      let ok: boolean = false;
+      let data: any = { idGestion: x.idManagement, transaccion: x.state, IdTipoOperacion: 2 }
+      this.managementService.changeStateManagement(data)
+        .subscribe(
+          respuesta => {
+            if (respuesta["State"]) {
+              this.logService.addMessage(respuesta["Msg"], "success");
+              ok = true;
+            } else {
+              this.logService.addMessage(respuesta["Msg"], "warning");
+            }
 
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        },
-        () => {
-          if (ok) {
-            this.readManagementList();
-            this.modalService.dismissAll();
+          }, error => {
+            if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+              this.loginService.clearSessionLogin();
+              this.router.navigate(['/login']);
+            }
+          },
+          () => {
+            if (ok) {
+              this.readManagementList();
+              this.modalService.dismissAll();
 
+            }
           }
-        }
-      );
+        );
+    }
   }
 
   @HostListener('window:beforeunload')

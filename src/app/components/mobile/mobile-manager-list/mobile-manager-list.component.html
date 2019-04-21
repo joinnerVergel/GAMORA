@@ -14,7 +14,7 @@
       <th scope="col">Fecha Activación</th>
       <th scope="col">Grupo</th>
       <th scope="col">Flujo</th>
-      <th scope="col" *ngIf="readVisibilityActions('CREAR_GESTION')">Controles</th>
+      <th scope="col" *ngIf="readVisibilityActions('EDITAR_GESTION')">Controles</th>
     </tr>
   </thead>
   <tbody>
@@ -25,7 +25,7 @@
       <td></td>
       <td>{{management.nameGroup}}</td>
       <td>{{management.nameWorkflow}}</td>
-      <td *ngIf="readVisibilityActions('CREAR_GESTION')">
+      <td *ngIf="readVisibilityActions('EDITAR_GESTION')">
         <div class="actions radiosContainer">
           <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio" [(ngModel)]="management.state">
             <label ngbButtonLabel class="btn-success">

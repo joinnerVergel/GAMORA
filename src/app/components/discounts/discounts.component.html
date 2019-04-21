@@ -4,7 +4,7 @@
      </div>
     <!-- ********Body********* -->
     <div class="card-body">
-      <div class="actionsContainer"  *ngIf="readVisibilityActions('CREAR_SUBCATEGORIA')">
+      <div class="actionsContainer"  *ngIf="readVisibilityActions('CREAR_DESCUENTO')">
         <button type="button" class="btn btn-primary btnNew" (click)="toggleFormNewDiscount()" *ngIf="!newDiscountFormView">Agregar Descuento</button>
       </div>
       <form [formGroup]="newDiscountForm" *ngIf="newDiscountFormView" class="newForm">
@@ -60,7 +60,7 @@
                 <th scope="col">Edad Final</th>
                 <th scope="col">Dias para pago</th>
                 <th scope="col">% Descuento</th>
-                <th scope="col">Acciones</th>
+                <th scope="col" *ngIf="readVisibilityActions('ELIMINAR_DESCUENTO')">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -70,10 +70,11 @@
                 <td>{{discount.lastDebtAge}}</td>
                 <td>{{discount.payDays}}</td>
                 <td>{{discount.discountValue}}</td>
-                <td>
+                <td *ngIf="readVisibilityActions('ELIMINAR_DESCUENTO')">
                   <div class="actions">
                     <button type="button" class="btnAction btnDelete" placement="bottom" ngbTooltip="Eliminar"
-                      tooltipClass="tooltipDelete" (click)="discountSelected=discount;open(contentDelete,'delete')">
+                      tooltipClass="tooltipDelete" (click)="discountSelected=discount;open(contentDelete,'delete')"
+                      *ngIf="readVisibilityActions('ELIMINAR_DESCUENTO')">
                       <fa-icon [icon]="deleteIcon"></fa-icon>
                     </button>
                   </div>
