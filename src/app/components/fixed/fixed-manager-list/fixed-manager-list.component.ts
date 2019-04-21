@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
-import { faPlay, faPause, faStop } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause, faStop, faEdit, faEye } from '@fortawesome/free-solid-svg-icons';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { ManagementService } from 'src/app/services/management.service';
@@ -20,6 +20,11 @@ export class FixedManagerListComponent implements OnInit,ComponentCanDeactivate 
   pauseIcon = faPause;
   stopIcon = faStop;
   managementStateChange: any = {};
+  viewContainerHistory:boolean=false;
+  editIcon=faEye;
+  idFlujo_V:number;
+  nameManager_V:string;
+  nameGroup_V:string;
 
   constructor(private logService: LogManagedService, private router: Router, private loginService: LoginService,
     private managementService: ManagementService, private modalService: NgbModal) { }
@@ -59,6 +64,7 @@ export class FixedManagerListComponent implements OnInit,ComponentCanDeactivate 
               elementManagement.nameManagement = element['NombreGestion'];
               elementManagement.idGroup = element['idGrupo'];
               elementManagement.nameGroup = element['NombreGrupo'];
+              elementManagement.history = element['Historico'];
               this.managementList.push(elementManagement);
             });
           }
@@ -110,6 +116,13 @@ export class FixedManagerListComponent implements OnInit,ComponentCanDeactivate 
           }
         }
       );
+  }
+  
+  workflowView(contentWorkflow,id:number,name:string,manager:string){
+    this.idFlujo_V=id;
+    this.nameGroup_V=name;
+    this.nameManager_V=manager;
+    this.modalService.open(contentWorkflow);
   }
 
   @HostListener('window:beforeunload')

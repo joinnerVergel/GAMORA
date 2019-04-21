@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as $ from 'jquery';
 import { SymbolsService } from 'src/app/services/symbols.service';
 import { LogManagedService } from 'src/app/services/log-managed.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hold-symbol',
@@ -19,7 +20,8 @@ export class HoldSymbolComponent implements OnInit, AfterViewInit {
   viewProperties: boolean = false;
   holdForm: FormGroup;
   setPosition: any = { x: 0, y: 0 };
-  constructor(private formBuilder: FormBuilder, private symbolsService: SymbolsService, private logService: LogManagedService) { }
+  constructor(private formBuilder: FormBuilder, private symbolsService: SymbolsService, private logService: LogManagedService,
+    private router: Router) { }
 
   ngOnInit() {
     this.holdForm = this.formBuilder.group({
@@ -74,7 +76,11 @@ export class HoldSymbolComponent implements OnInit, AfterViewInit {
   }
   getClassContainer() {
     if (this.symbolsService.symbolSelected == this.data.refSymbol) {
-      return "selected";
+      if(this.router.url.includes("/manager/",0)){
+        return "";
+      }else{
+        return "selected";
+      }
     } else {
       return "";
     }

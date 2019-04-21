@@ -1,8 +1,8 @@
-<div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_GESTION')"><button type="button" class="btn btn-primary btnNew"
-    [routerLink]='["/manager/fixed/new-management"]'>Crear Gestión</button></div>
+<div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_GESTION')"><button type="button"
+    class="btn btn-primary btnNew" [routerLink]='["/manager/fixed/new-management"]'>Crear Gestión</button></div>
 <ng-template #content let-c="close" let-d="dismiss">
-  <app-confirm-dialog [description]="'Se va a cambiar el estado de la gestion.'" [question]="'¿Está seguro de ejecutar esta acción?'"
-    (result)="action($event)"></app-confirm-dialog>
+  <app-confirm-dialog [description]="'Se va a cambiar el estado de la gestion.'"
+    [question]="'¿Está seguro de ejecutar esta acción?'" (result)="action($event)"></app-confirm-dialog>
 </ng-template>
 <div class="table-responsive-md listaTabla">
   <table class="table table-striped">
@@ -14,6 +14,7 @@
         <th scope="col">Fecha Activación</th>
         <th scope="col">Grupo</th>
         <th scope="col">Flujo</th>
+        <th scope="col">Configuraciones</th>
         <th scope="col" *ngIf="readVisibilityActions('CREAR_GESTION')">Controles</th>
       </tr>
     </thead>
@@ -25,9 +26,33 @@
         <td></td>
         <td>{{management.nameGroup}}</td>
         <td>{{management.nameWorkflow}}</td>
+        <td class="cHistory">
+          <button class="btn btn-secondary viewH" [ngbPopover]="popContent" placement="left" popoverClass="history">Ver Historial</button>
+          <ng-template #popContent>
+            <div class="containerHistory">
+              <div class="row tittle">
+                <div class="col">FLUJO</div>
+                <div class="col">EFICIENCIA</div>
+                <div class="col"></div>
+              </div>
+              <div class="filas">
+                <div class="row" *ngFor="let x of management.history">
+                  <div class="col">{{x.NombreFlujo}}</div>
+                  <div class="col">{{x.Eficiencia}}</div>
+                  <div class="col">
+                      <button type="button" class="btnAction btnEdit"(click)="workflowView(contentViewWorkflow,x.IdFlujo,x.NombreFlujo,management.nameManagement)">
+                          <fa-icon [icon]="editIcon"></fa-icon>
+                      </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </td>
         <td *ngIf="readVisibilityActions('CREAR_GESTION')">
           <div class="actions radiosContainer">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio" [(ngModel)]="management.state">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio"
+              [(ngModel)]="management.state">
               <label ngbButtonLabel class="btn-success">
                 <input ngbButton type="radio" value="1" (change)="open(content,management)">
                 <fa-icon [icon]="playIcon"></fa-icon>
@@ -47,3 +72,6 @@
     </tbody>
   </table>
 </div>
+<ng-template #contentViewWorkflow let-c="close" let-d="dismiss">
+  <app-view-work-flow [idWF]="idFlujo_V" [nameManager]="nameManager_V" [nameGroup]="nameGroup_V"></app-view-work-flow>
+</ng-template>

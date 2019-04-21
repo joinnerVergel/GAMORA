@@ -85,6 +85,9 @@ import { DiscountsComponent } from './components/discounts/discounts.component';
 import { RonanConfigurationComponent } from './components/ronan-configuration/ronan-configuration.component';
 import { UpdateFixedBrandComponent } from './components/fixed/update-fixed-brand/update-fixed-brand.component';
 import { UpdateMobileBrandComponent } from './components/mobile/update-mobile-brand/update-mobile-brand.component';
+import { ViewWorkFlowComponent } from './components/view-work-flow/view-work-flow.component';
+
+
 
 
 
@@ -157,7 +160,9 @@ import { UpdateMobileBrandComponent } from './components/mobile/update-mobile-br
     DiscountsComponent,
     RonanConfigurationComponent,
     UpdateFixedBrandComponent,
-    UpdateMobileBrandComponent
+    UpdateMobileBrandComponent,
+    ViewWorkFlowComponent
+
   ],
   imports: [
     DragAndDropModule,

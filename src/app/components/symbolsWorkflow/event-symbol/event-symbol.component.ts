@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SymbolsService } from 'src/app/services/symbols.service';
 import * as $ from 'jquery';
 import { LogManagedService } from 'src/app/services/log-managed.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-symbol',
@@ -20,7 +21,8 @@ export class EventSymbolComponent implements OnInit {
   setPosition:any={x:0, y:0};
 
 
-  constructor(private formBuilder: FormBuilder, private symbolsService: SymbolsService, private logService: LogManagedService) { }
+  constructor(private formBuilder: FormBuilder, private symbolsService: SymbolsService, private logService: LogManagedService,
+    private router: Router) { }
 
   ngOnInit() {
     this.eventSymbolForm = this.formBuilder.group({
@@ -83,7 +85,11 @@ export class EventSymbolComponent implements OnInit {
   }
   getClassContainer() {
     if (this.symbolsService.symbolSelected == this.data.refSymbol) {
-      return "selected";
+      if(this.router.url.includes("/manager/",0)){
+        return "";
+      }else{
+        return "selected";
+      }
     } else {
       return "";
     }

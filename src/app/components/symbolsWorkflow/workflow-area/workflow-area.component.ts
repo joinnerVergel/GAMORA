@@ -28,7 +28,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
   wfParameter:any;
   idWF:number;
   wf:any={};
-  
+  @Input() idworkflow_param:number;
   @Input() newLine: boolean;
   @Input() isRebuildWorkflow: boolean;
   @ViewChild(AdDirective) adHost: AdDirective;
@@ -50,7 +50,11 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
       //console.log("RECONSTRUYE");
       this.wfParameter= this.route.params.subscribe(params => {
         this.idWF = params['id'];
+        if(this.idWF==null ||this.idWF==undefined){
+          this.idWF=this.idworkflow_param;
+        }
       });
+      
       this.readWorkFlow();
       // this.connectingLineRebuild();
       
@@ -214,7 +218,7 @@ export class WorkflowAreaComponent implements OnInit, AfterViewInit {
           break;
         }
         default: {
-          obj = new adSymbol(EventSymbolComponent, { container: this.contenedor.nativeElement, eventName: element.Nombre, eventId: element.IdSubcategoria, refSymbol: ref, rebuild: true, symbolData: element });
+          obj = new adSymbol(EventSymbolComponent, { container: this.contenedor.nativeElement, eventName: element.Nombre, eventId: element.IdSubcategoria, refSymbol: ref, rebuild: true, symbolData: element,efficiency:element.EficienciaEvento });
           break;
         }
       }

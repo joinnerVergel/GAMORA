@@ -458,3 +458,16 @@ div.info{
 svg{
     overflow: visible !important;
 }
+
+app-view-work-flow app-workflow-area .divWorkFlow{
+    background-color: transparent !important;
+}
+
+.popover.history{
+    max-width: unset;
+}
+
+.popover.history .popover-body{
+    width: 300px;
+    padding-top: 0;
+}

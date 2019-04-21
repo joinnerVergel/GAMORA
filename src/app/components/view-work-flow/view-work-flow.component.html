@@ -1,0 +1,24 @@
+<div class="viewContent">
+  <span class="tittle">Flujo de eventos</span>
+  <div class="row">
+    <div class="col">
+        <label>GESTION </label>
+        <span>{{nameManager}}</span>
+    </div>
+    <div class="col">
+        <label>FLUJO </label>
+        <span>{{nameWF}}</span>
+    </div>
+    <div class="col">
+        <label>GRUPO </label>
+        <span>{{nameGroup}}</span>
+    </div>
+  </div>
+
+  <div class="divContainerWorkflow">
+    <div class="sheet">
+      <app-workflow-area [idworkflow_param]="idWF" [newLine]="readNewLine()" [isRebuildWorkflow]="true">
+      </app-workflow-area>
+    </div>
+  </div>
+</div>
