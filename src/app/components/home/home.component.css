@@ -1,0 +1,35 @@
+h3{
+    color: #fff;
+    text-align: center;
+    text-shadow: -2px 2px #000;
+    border-bottom: 1px solid #fff;
+}
+
+.cartera{
+    background: linear-gradient(to bottom,rgba(13,62,80,1),rgba(13,157,174,1));
+}
+.col{
+    padding: 0;
+    border: 1px solid #fff;
+}
+
+.col label{
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin: 0px;
+    padding: 5px 0;
+    text-shadow: -2px -1px #000;
+    font-size: 12px !important;
+}
+.col span{
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+    display: block;
+    background: rgba(255,255,255,.2);
+    text-shadow: -1px 1px #000;
+    color: #fff;
+}

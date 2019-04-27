@@ -471,3 +471,7 @@ app-view-work-flow app-workflow-area .divWorkFlow{
     width: 300px;
     padding-top: 0;
 }
+
+.myCustomModalClass .modal-dialog{
+    max-width: 70%;
+}

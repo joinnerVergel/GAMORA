@@ -1,10 +1,11 @@
-import { Component, OnInit, Renderer2, HostListener, Input } from '@angular/core';
+import { Component, OnInit, Renderer2, HostListener, Input, SimpleChanges } from '@angular/core';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { SymbolsService } from 'src/app/services/symbols.service';
 import { Observable } from 'rxjs';
 import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-work-flow',
@@ -14,20 +15,27 @@ import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.s
 export class ViewWorkFlowComponent implements OnInit {
   submitted = false;
   wfParameter:any;
-  @Input() idWF:number;
   @Input() nameManager:string;
   @Input() nameGroup:string;
+  @Input() operation:number;
+  @Input() obj_X:any;
   nameWF:string;
   constructor(
     private router: Router, private loginService: LoginService,
     private symbolsService: SymbolsService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     if (!this.loginService.isLogged()) {
       this.router.navigate(['/login']);
     }
-    this.readNameWF();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes["obj_X"]["currentValue"]!=undefined && changes["obj_X"]["currentValue"]!=null){
+      this.readNameWF();
+    }
   }
 
 
@@ -38,7 +46,7 @@ export class ViewWorkFlowComponent implements OnInit {
 
 
   readNameWF(){
-    this.symbolsService.getRefWorkflow(1,this.idWF.toString(),1)
+    this.symbolsService.getRefWorkflow(1,this.obj_X.IdFlujo,this.operation)
     .subscribe(
       respuesta => {
         if (respuesta.hasOwnProperty('ObtenerReferenciaFlujoResult')) {

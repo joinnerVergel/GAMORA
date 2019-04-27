@@ -4,7 +4,7 @@ import { faPlay, faPause, faStop, faEdit, faEye } from '@fortawesome/free-solid-
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { ManagementService } from 'src/app/services/management.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentCanDeactivate } from 'src/app/services/pending-changes-guard.service';
 import { Observable } from 'rxjs';
 
@@ -22,12 +22,16 @@ export class FixedManagerListComponent implements OnInit, ComponentCanDeactivate
   managementStateChange: any = {};
   viewContainerHistory: boolean = false;
   editIcon = faEye;
-  idFlujo_V: number;
   nameManager_V: string;
   nameGroup_V: string;
+  obj_history:any;
 
   constructor(private logService: LogManagedService, private router: Router, private loginService: LoginService,
-    private managementService: ManagementService, private modalService: NgbModal) { }
+    private managementService: ManagementService, private modalService: NgbModal,
+    config: NgbModalConfig) { 
+      config.backdrop = 'static';
+      config.keyboard = false;
+    }
 
   ngOnInit() {
     if (!this.loginService.isLogged()) {
@@ -120,12 +124,13 @@ export class FixedManagerListComponent implements OnInit, ComponentCanDeactivate
     }
   }
 
-  workflowView(contentWorkflow, id: number, name: string, manager: string) {
-    this.idFlujo_V = id;
+  workflowView(contentWorkflow, name: string, manager: string, x_obj:any) {
     this.nameGroup_V = name;
     this.nameManager_V = manager;
-    this.modalService.open(contentWorkflow);
+    this.obj_history=x_obj;
+    this.modalService.open(contentWorkflow,{ windowClass : "myCustomModalClass"});
   }
+
 
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {

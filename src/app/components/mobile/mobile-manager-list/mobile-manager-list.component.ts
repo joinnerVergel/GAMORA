@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { faPlay, faPause, faStop } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause, faStop, faEye } from '@fortawesome/free-solid-svg-icons';
 import { LogManagedService } from 'src/app/services/log-managed.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
@@ -20,6 +20,11 @@ export class MobileManagerListComponent implements OnInit, ComponentCanDeactivat
   pauseIcon = faPause;
   stopIcon = faStop;
   managementStateChange: any = {};
+  viewContainerHistory: boolean = false;
+  editIcon = faEye;
+  nameManager_V: string;
+  nameGroup_V: string;
+  obj_history:any;
 
   constructor(private logService: LogManagedService, private router: Router, private loginService: LoginService,
     private managementService: ManagementService, private modalService: NgbModal) { }
@@ -59,6 +64,7 @@ export class MobileManagerListComponent implements OnInit, ComponentCanDeactivat
               elementManagement.nameManagement = element['NombreGestion'];
               elementManagement.idGroup = element['idGrupo'];
               elementManagement.nameGroup = element['NombreGrupo'];
+              elementManagement.history = element['Historico'];
               this.managementList.push(elementManagement);
             });
           }
@@ -112,6 +118,13 @@ export class MobileManagerListComponent implements OnInit, ComponentCanDeactivat
           }
         );
     }
+  }
+
+  workflowView(contentWorkflow, name: string, manager: string, x_obj:any) {
+    this.nameGroup_V = name;
+    this.nameManager_V = manager;
+    this.obj_history=x_obj;
+    this.modalService.open(contentWorkflow,{ windowClass : "myCustomModalClass"});
   }
 
   @HostListener('window:beforeunload')

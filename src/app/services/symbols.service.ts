@@ -290,6 +290,7 @@ export class SymbolsService {
   }
 
   getRefWorkflow(parameter: number,val :string,operation:number) {
+    console.log(val)
     return this.http.get(mf_readRefFixedWorkFlow+parameter+'/'+val+'/'+operation, this.loginService.getHttpOptions());
   }
 

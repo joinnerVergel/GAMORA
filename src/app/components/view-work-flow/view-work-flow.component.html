@@ -1,23 +1,38 @@
 <div class="viewContent">
-  <span class="tittle">Flujo de eventos</span>
-  <div class="row">
-    <div class="col">
+  <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <span class="tittle">Flujo de eventos operación {{operation==2?"Móvil":"Fija"}}</span>
+  <div class="tableInformation"> 
+    <div class="row">
+      <div class="col">
         <label>GESTION </label>
         <span>{{nameManager}}</span>
-    </div>
-    <div class="col">
+      </div>
+      <div class="col">
         <label>FLUJO </label>
-        <span>{{nameWF}}</span>
-    </div>
-    <div class="col">
+        <span>{{obj_X.NombreFlujo}}</span>
+      </div>
+      <div class="col">
         <label>GRUPO </label>
         <span>{{nameGroup}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>FECHA ASIGNACIÓN </label>
+        <span>{{obj_X.FechaInicio}}</span>
+      </div>
+      <div class="col">
+        <label>FECHA FIN </label>
+        <span>{{obj_X.FechaFin}}</span>
+      </div>
     </div>
   </div>
-
   <div class="divContainerWorkflow">
+    <div class="workFlowEfficiency" *ngIf="obj_X.Eficiencia!=null">{{obj_X.Eficiencia}}{{obj_X.Eficiencia!=null?"%":""}}</div>
     <div class="sheet">
-      <app-workflow-area [idworkflow_param]="idWF" [newLine]="readNewLine()" [isRebuildWorkflow]="true">
+      <app-workflow-area [idworkflow_param]="obj_X.IdFlujo" [newLine]="readNewLine()" [isRebuildWorkflow]="true">
       </app-workflow-area>
     </div>
   </div>

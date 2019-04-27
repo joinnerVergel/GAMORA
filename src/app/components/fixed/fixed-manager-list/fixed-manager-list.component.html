@@ -40,7 +40,7 @@
                   <div class="col">{{x.NombreFlujo}}</div>
                   <div class="col">{{x.Eficiencia}}</div>
                   <div class="col">
-                      <button type="button" class="btnAction btnEdit"(click)="workflowView(contentViewWorkflow,x.IdFlujo,x.NombreFlujo,management.nameManagement)">
+                      <button type="button" class="btnAction btnEdit"(click)="workflowView(contentViewWorkflow,management.nameGroup,management.nameManagement,x)">
                           <fa-icon [icon]="editIcon"></fa-icon>
                       </button>
                   </div>
@@ -73,5 +73,5 @@
   </table>
 </div>
 <ng-template #contentViewWorkflow let-c="close" let-d="dismiss">
-  <app-view-work-flow [idWF]="idFlujo_V" [nameManager]="nameManager_V" [nameGroup]="nameGroup_V"></app-view-work-flow>
-</ng-template>
+    <app-view-work-flow [obj_X]="obj_history" [operation]="1"  [nameManager]="nameManager_V" [nameGroup]="nameGroup_V"></app-view-work-flow>
+  </ng-template>
