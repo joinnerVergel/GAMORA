@@ -94,4 +94,6 @@ export const templateEmailUrl = profile == "dev" ? "http://localhost:65453/Eleme
 
 
 
-export const portfolioDetailUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/carteraFijaCarga/':'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/carteraFijaCarga/';
+export const portfolioDetailUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/carteraCargaDiaria/':'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/carteraCargaDiaria/';
+export const managementDailyEventsUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenericaConsulta/gestionDiariaEventos/':'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenericaConsulta/gestionDiariaEventos/';
+export const monitoringConsoleUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenericaConsulta/':'http://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenericaConsulta/';

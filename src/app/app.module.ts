@@ -86,6 +86,9 @@ import { RonanConfigurationComponent } from './components/ronan-configuration/ro
 import { UpdateFixedBrandComponent } from './components/fixed/update-fixed-brand/update-fixed-brand.component';
 import { UpdateMobileBrandComponent } from './components/mobile/update-mobile-brand/update-mobile-brand.component';
 import { ViewWorkFlowComponent } from './components/view-work-flow/view-work-flow.component';
+import { ChartsModule } from 'ng2-charts';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { FailedEventsChartComponent } from './components/failed-events-chart/failed-events-chart.component';
 
 
 
@@ -161,10 +164,13 @@ import { ViewWorkFlowComponent } from './components/view-work-flow/view-work-flo
     RonanConfigurationComponent,
     UpdateFixedBrandComponent,
     UpdateMobileBrandComponent,
-    ViewWorkFlowComponent
+    ViewWorkFlowComponent,
+    PieChartComponent,
+    FailedEventsChartComponent
 
   ],
   imports: [
+    ChartsModule,
     DragAndDropModule,
     AngularDraggableModule,
     ResizableModule,

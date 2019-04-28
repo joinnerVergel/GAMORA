@@ -1,14 +1,73 @@
-h3{
-    color: #fff;
+.float_{
+    margin:15px;
+    float: left;
+}
+.float_.cartera{
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    width: 300px;
+}
+.container_float{
+    display: table;
+    margin: 0 auto;
+}
+.row_{
+    padding: 15px 0;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    margin: 30px 0;
+    border-radius: 5px;
+    box-shadow: 4px 3px #ccc;
+}
+h3.tittle{
     text-align: center;
-    text-shadow: -2px 2px #000;
-    border-bottom: 1px solid #fff;
 }
 
-.cartera{
-    background: linear-gradient(to bottom,rgba(13,62,80,1),rgba(13,157,174,1));
+.Monitoreo{
+    height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 200px;
+    margin: 0 auto;
 }
-.col{
+.OK{
+    background: #5bc500;
+}
+.OFF{
+    background: #777;
+}
+.OFF div{
+    display: none;
+}
+.ERROR{
+    background: #e9426d;
+}
+.EJECUCION{
+    background: #f5a623;
+}
+.Monitoreo div{
+    text-align: center;
+    color: #fff;
+}
+.subTitle{
+    background: #fff;
+    text-align: center;
+}
+.console{
+    font-size:10px; 
+}
+.item{
+    margin: 5px 0;
+}
+.item span{
+    margin-right: 10px;
+    width: 15px;
+    height: 10px;
+    display: inline-block;
+}
+/* .col{
     padding: 0;
     border: 1px solid #fff;
 }
@@ -23,6 +82,7 @@ h3{
     padding: 5px 0;
     text-shadow: -2px -1px #000;
     font-size: 12px !important;
+    padding: 0;
 }
 .col span{
     font-size: 12px;
@@ -33,3 +93,4 @@ h3{
     text-shadow: -1px 1px #000;
     color: #fff;
 }
+ */
