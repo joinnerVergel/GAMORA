@@ -18,7 +18,7 @@ export class RoleGuardServiceService implements CanActivate {
     // desde el localStorage en caso de que exista
     if (this.loginService.getLocalUserLogged() == null) {
       if(this.loginService.recoverSession()){
-        console.log(this.loginService.getLocalUserLogged().token);
+        //console.log(this.loginService.getLocalUserLogged().token);
         console.log("Sesion Recuperada");
       }else{
         // si no se pudo recuperar la sesion se redirecionara al login

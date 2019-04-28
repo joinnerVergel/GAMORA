@@ -51,3 +51,6 @@ table th,tbody tr td {
 .viewH{
     font-size: 10px;
 }
+.cHistory{
+    position: relative;
+}

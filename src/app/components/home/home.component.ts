@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit, ComponentCanDeactivate {
           if (item.hasOwnProperty('listaGenericaConsultaResult')) {
             this.dailyEventsRecord= item['listaGenericaConsultaResult'][0];
           }
-          console.log(this.dailyEventsRecord);
+          //console.log(this.dailyEventsRecord);
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
             this.loginService.clearSessionLogin();

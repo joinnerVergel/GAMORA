@@ -24,7 +24,7 @@ export class ViewWorkFlowComponent implements OnInit {
     private router: Router, private loginService: LoginService,
     private symbolsService: SymbolsService,
     private route: ActivatedRoute,
-    private modalService: NgbModal) { }
+    public modalService: NgbModal) { }
 
   ngOnInit() {
     if (!this.loginService.isLogged()) {
