@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, Output,EventEmitter,Renderer2, ViewChild} from '@angular/core';
-import { NgbModalConfig, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -14,15 +14,17 @@ export class ConfirmDialogComponent implements OnInit {
   
   
 
-  constructor() {}
+  constructor(public activeModal: NgbActiveModal, public modal: NgbModal) {}
 
   ngOnInit() {
   }
 
   cancel():void{
+    this.activeModal.close();
     this.result.emit(false);
   }
   confirm():void{
+    this.activeModal.close();
     this.result.emit(true);
   }
 

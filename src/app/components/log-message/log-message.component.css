@@ -2,4 +2,5 @@
     position: fixed;
     top: 150px;
     right: 20px;
+    z-index: 10000;
 } 

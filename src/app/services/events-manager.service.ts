@@ -4,7 +4,7 @@ import { LogManagedService } from './log-managed.service';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { PeticionCategoriaNueva } from '../models/request/addCategoryModel';
-import { tagsListScriptUrl, contactsOptionsUrl,templatesOptionsUrl, templateEmailUrl, mf_CategoriesListUrl, mf_CategoryAddUrl, mf_categoryByIdUrl, mf_subCategoryAddUrl, mf_subCategoriesListUrl, mf_subCategoryByIdUrl, mf_subCategoryElementsListUrl, mf_subCategoryElementAddUrl, mf_subCategoryElementFieldsRequiredUrl, mf_elementSubcategoryStateUrl, mf_elementSubcategoryDeleteUrl } from './url';
+import { tagsListScriptUrl, contactsOptionsUrl,templatesOptionsUrl, templateEmailUrl, mf_CategoriesListUrl, mf_CategoryAddUrl, mf_categoryByIdUrl, mf_subCategoryAddUrl, mf_subCategoriesListUrl, mf_subCategoryByIdUrl, mf_subCategoryElementsListUrl, mf_subCategoryElementAddUrl, mf_subCategoryElementFieldsRequiredUrl, mf_elementSubcategoryStateUrl, mf_elementSubcategoryDeleteUrl, mf_responseListUrl, mf_responseSaveUrl } from './url';
 import { PeticionSubCategoriaNueva } from '../models/request/addSubCategoryModel';
 import { PeticionElementoSubCategoriaNuevo } from '../models/request/addSubCategoryElementModel';
 import { LoginService } from './login.service';
@@ -115,6 +115,19 @@ export class EventsManagerService {
   deleteElement(idElementSubcategory:number) {
     return this.http.delete(mf_elementSubcategoryDeleteUrl+idElementSubcategory,this.loginService.getHttpOptions());
   }
+
+  getResponseList() {
+    return this.http.get(mf_responseListUrl, this.loginService.getHttpOptions());
+  }
+
+  saveResponse(d:Array<any>){
+    return this.http.post<any>(mf_responseSaveUrl, d, this.loginService.getHttpOptions()).pipe(
+      
+      );
+  }
+
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // console.error('An error occurred:', error.error.message);

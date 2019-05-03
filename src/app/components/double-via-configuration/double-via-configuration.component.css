@@ -1,0 +1,25 @@
+.buttonsContainer button {
+    
+    margin: 10px;
+}
+.buttonsContainer{
+    float: right;
+    margin-top: 25px;
+}
+.form-group {
+    max-width: 200px;
+    float: left;
+    margin: 5px;
+}
+
+.form-group label {
+    font-size: 0.7em;
+}
+
+.listaTabla{
+    max-width: 800px;
+    margin: 0 auto;
+}
+th:last-child{
+    text-align: center;
+}

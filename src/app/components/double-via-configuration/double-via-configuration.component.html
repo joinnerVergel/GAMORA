@@ -1,0 +1,67 @@
+  <div class="card">
+    <div class="card-header">
+      <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h5 class="light">Configuracion de SMS doble vía</h5>
+    </div>
+    <!-- ********Body********* -->
+    <div class="card-body">
+      <div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_DESCUENTO')">
+        <button type="button" class="btn btn-primary btnNew" (click)="toggleFormNewResponse()"
+          *ngIf="!newResponseFormView">Agregar Respuesta</button>
+      </div>
+      <form [formGroup]="newResponseForm" *ngIf="newResponseFormView" class="newForm">
+        <div>
+          <div class="form-group">
+            <label>Respuesta del cliente</label>
+            <input type="text" formControlName="clientResponse" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.clientResponse.errors }" (keypress)="generalKeyPressEvent($event.key,50,f.clientResponse,true)"/>
+            <div *ngIf="submitted && f.clientResponse.errors" class="invalid-feedback">
+              <div *ngIf="f.clientResponse.errors.required">La respuesta del cliente es obligatoria</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Respuesta de la aplicación</label>
+            <input type="text" formControlName="toolResponse" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.toolResponse.errors }" (keypress)="generalKeyPressEvent($event.key,50,f.clientResponse,true)"/>
+            <div *ngIf="submitted && f.toolResponse.errors" class="invalid-feedback">
+              <div *ngIf="f.toolResponse.errors.required">La respuesta de la herramienta es obligatoria</div>
+            </div>
+          </div>
+          <div class="buttonsContainer">
+            <button type="button" class="btn btn-primary" (click)="open('add')">Crear</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="toggleFormNewResponse()">Cancelar</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="table-responsive-md listaTabla">
+        <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Respuesta Cliente</th>
+              <th scope="col">Respuesta herramienta</th>
+              <th scope="col" *ngIf="readVisibilityActions('ELIMINAR_DESCUENTO')">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let response of responseList">
+              <th scope="row">{{response.item}}</th>
+              <td>{{response.respuestaCliente}}</td>
+              <td>{{response.respuestaHerramienta}}</td>
+              <td *ngIf="readVisibilityActions('ELIMINAR_DESCUENTO')">
+                <div class="actions">
+                  <button type="button" class="btnAction btnDelete" placement="bottom" ngbTooltip="Eliminar"
+                    tooltipClass="tooltipDelete" (click)="responseSelected=response;open('delete')"
+                    *ngIf="readVisibilityActions('ELIMINAR_DESCUENTO')">
+                    <fa-icon [icon]="deleteIcon"></fa-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

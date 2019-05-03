@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-events-manager',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class EventsManagerComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public modalService: NgbModal) { }
 
   ngOnInit() {
     // alert(this.router.url);
@@ -27,5 +28,12 @@ export class EventsManagerComponent implements OnInit {
     }
     return "";
   }
+
+ 
+
+  ViewModal(content) {
+    this.modalService.open(content,{ windowClass : "myCustomModalClass"});
+  }
+
 
 }

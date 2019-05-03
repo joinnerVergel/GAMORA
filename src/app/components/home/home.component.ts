@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit, ComponentCanDeactivate {
       }
       setInterval(()=>{    
         this.requestManagementDailyEvents();
-      }, 10000);
+      }, 300000);
     }
   }
 

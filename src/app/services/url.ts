@@ -6,6 +6,12 @@ let profile = "prod";
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // RONAnCONFIGURATION
+export const mf_responseListUrl = profile == "dev" ? 'http://localhost:65453/ConfiguracionDobleViaService.svc/ObtenerRespuestas':'https://10.80.2.89/WCF_CasasDeCobro/ConfiguracionDobleViaService.svc/ObtenerRespuestas';
+export const mf_responseSaveUrl = profile == "dev" ? 'http://localhost:65453/ConfiguracionDobleViaService.svc/EditarRespuestas':'https://10.80.2.89/WCF_CasasDeCobro/ConfiguracionDobleViaService.svc/EditarRespuestas';
+
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// RONAnCONFIGURATION
 export const mf_dicountsListUrl = profile == "dev" ? 'http://localhost:65453/GestionDescuentosDispopnibles.svc/ObtenerDescuentos':'https://10.80.2.89/WCF_CasasDeCobro/GestionDescuentosDispopnibles.svc/ObtenerDescuentos';
 export const mf_dicountsSaveUrl = profile == "dev" ? 'http://localhost:65453/GestionDescuentosDispopnibles.svc/EditarDescuentos':'https://10.80.2.89/WCF_CasasDeCobro/GestionDescuentosDispopnibles.svc/EditarDescuentos';
 

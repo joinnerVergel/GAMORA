@@ -8,7 +8,7 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { NewFixedBrandComponent } from './components/fixed/new-fixed-brand/new-fixed-brand.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -89,6 +89,7 @@ import { ViewWorkFlowComponent } from './components/view-work-flow/view-work-flo
 import { ChartsModule } from 'ng2-charts';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { FailedEventsChartComponent } from './components/failed-events-chart/failed-events-chart.component';
+import { DoubleViaConfigurationComponent } from './components/double-via-configuration/double-via-configuration.component';
 
 
 
@@ -166,7 +167,8 @@ import { FailedEventsChartComponent } from './components/failed-events-chart/fai
     UpdateMobileBrandComponent,
     ViewWorkFlowComponent,
     PieChartComponent,
-    FailedEventsChartComponent
+    FailedEventsChartComponent,
+    DoubleViaConfigurationComponent
 
   ],
   imports: [
@@ -256,8 +258,8 @@ import { FailedEventsChartComponent } from './components/failed-events-chart/fai
     ])
   ],
   exports: [AdDirective,NewpropertiesDirective],
-  entryComponents: [HoldSymbolComponent, VerifypaymentSymbolComponent, EventSymbolComponent, EndSymbolComponent, HomeSymbolComponent, ConnectinglineSymbolComponent],
-  providers: [],
+  entryComponents: [HoldSymbolComponent, VerifypaymentSymbolComponent, EventSymbolComponent, EndSymbolComponent, HomeSymbolComponent, ConnectinglineSymbolComponent,ConfirmDialogComponent],
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
