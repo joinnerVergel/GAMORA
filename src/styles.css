@@ -475,3 +475,9 @@ app-view-work-flow app-workflow-area .divWorkFlow{
 .myCustomModalClass .modal-dialog{
     max-width: 70%;
 }
+.tooltipclass .tooltip-inner div{
+    font-size: 8px;
+    text-align: left;
+    margin: 5px 0;
+    
+}

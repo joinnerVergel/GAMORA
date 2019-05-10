@@ -21,4 +21,7 @@ export class PortfoliosService {
   getMonitoring(x:string) {
     return this.http.get(monitoringConsoleUrl+x+"/", this.loginService.getHttpOptions());
   }
+  getDashboard(x:string,filtro:string) {
+    return this.http.get(monitoringConsoleUrl+x+"/"+filtro, this.loginService.getHttpOptions());
+  }
 }

@@ -2,7 +2,7 @@
 // *************************PROFILE****************************
 // ________________________________________________________
 
-let profile = "prod";
+let profile = "dev";
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // RONAnCONFIGURATION
@@ -103,3 +103,4 @@ export const templateEmailUrl = profile == "dev" ? "http://localhost:65453/Eleme
 export const portfolioDetailUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/carteraCargaDiaria/':'https://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/carteraCargaDiaria/';
 export const managementDailyEventsUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenericaConsulta/gestionDiariaEventos/':'https://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenericaConsulta/gestionDiariaEventos/';
 export const monitoringConsoleUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenericaConsulta/':'https://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenericaConsulta/';
+

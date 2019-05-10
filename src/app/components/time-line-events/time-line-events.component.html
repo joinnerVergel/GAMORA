@@ -1,0 +1,12 @@
+<div class="item">
+  <div><span class="green"></span>un elemento</div>
+  <div><span class="yellow"></span>dos elementos</div>
+  <div><span class="red"></span>más de dos elementos</div>
+</div>
+<div class="line">
+  <div class="day" *ngFor="let r of timeline" [ngClass]="r.class" placement="top" [ngbTooltip]="tipContent"
+  tooltipClass="tooltipclass">
+    {{r.age}}
+    <ng-template #tipContent><div *ngFor="let e of r.elements">{{e}}</div></ng-template>
+  </div>
+</div>

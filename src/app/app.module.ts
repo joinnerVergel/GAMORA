@@ -90,6 +90,9 @@ import { ChartsModule } from 'ng2-charts';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { FailedEventsChartComponent } from './components/failed-events-chart/failed-events-chart.component';
 import { DoubleViaConfigurationComponent } from './components/double-via-configuration/double-via-configuration.component';
+import { TimeLineEventsComponent } from './components/time-line-events/time-line-events.component';
+import { SendedEventsComponent } from './components/sended-events/sended-events.component';
+import { ZingchartComponent } from './components/zingchart/zingchart.component';
 
 
 
@@ -168,7 +171,10 @@ import { DoubleViaConfigurationComponent } from './components/double-via-configu
     ViewWorkFlowComponent,
     PieChartComponent,
     FailedEventsChartComponent,
-    DoubleViaConfigurationComponent
+    DoubleViaConfigurationComponent,
+    TimeLineEventsComponent,
+    SendedEventsComponent,
+    ZingchartComponent
 
   ],
   imports: [

@@ -1,6 +1,9 @@
 <h4 class="title">Informes</h4>
 <div class="buttonsContainer" *ngIf="readVisibilityActions('DESCARGAR_REPORTE')">
-    Descarga 
+    Descarga
     <a href="https://nlbevolution/GAMORA/Informe.xlsx">aquí</a>
     un archivo de excel con conexion a reportes.
- </div>
+</div>
+<div class="containerChart">
+    <app-sended-events [operation]="1"></app-sended-events>
+</div>
