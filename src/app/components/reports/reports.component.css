@@ -1,0 +1,9 @@
+.containerChart{
+    width: 300px;
+    float: left;
+    margin: 10px;
+}
+
+.cc{
+    overflow: hidden;
+}

@@ -4,10 +4,18 @@
     <a href="https://nlbevolution/GAMORA/Informe.xlsx">aquí</a>
     un archivo de excel con conexion a reportes.
 </div>
-<div class="containerChart">
-    <app-sended-events [operation]="1"></app-sended-events>
-    <app-table-history-sended-events [operation]="1"></app-table-history-sended-events>
-    <app-table-history-sended-events [operation]="2"></app-table-history-sended-events>
-    <app-table-history-sended-eventsx-account [operation]="1"></app-table-history-sended-eventsx-account>
-    <app-table-history-sended-eventsx-account [operation]="2"></app-table-history-sended-eventsx-account>
+<app-sended-events [operation]="1"></app-sended-events>
+<div class="cc">
+    <div class="containerChart">
+        <app-table-history-sended-events [operation]="1"></app-table-history-sended-events>
+    </div>
+    <div class="containerChart">
+        <app-table-history-sended-eventsx-account [operation]="1"></app-table-history-sended-eventsx-account>
+    </div>
+    <div class="containerChart">
+            <app-table-history-sended-events [operation]="2"></app-table-history-sended-events>
+        </div>
+    <div class="containerChart">
+        <app-table-history-sended-eventsx-account [operation]="2"></app-table-history-sended-eventsx-account>
+    </div>
 </div>

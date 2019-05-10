@@ -4,3 +4,14 @@ table tbody td:not(:first-child),table thead th:not(:first-child) {
 .noData{
     text-align: center;
 }
+
+.listaTabla{
+    box-shadow: -5px 5px #AAA;
+    border-radius: 10px;
+    font-size: 10px;
+}
+table thead tr:first-child{
+    background:linear-gradient(to top,rgba(13,62,80,1),rgba(13,157,174,1));
+    color:#fff;
+    text-shadow: -1px 1px #000;
+}
