@@ -9,6 +9,7 @@ table tbody td:not(:first-child),table thead th:not(:first-child) {
     box-shadow: -5px 5px #AAA;
     border-radius: 10px;
     font-size: 10px;
+    margin: 15px 0;
 }
 table thead tr:first-child{
     background:linear-gradient(to top,rgba(13,62,80,1),rgba(13,157,174,1));

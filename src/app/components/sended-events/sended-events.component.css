@@ -1,6 +1,14 @@
-/* #myChart{
-    padding: 10px;
-    background-color: #ecf2f6;
-    max-height: 300px;
-    max-width: 300px;
-} */
+
+.containerChart{
+    position: relative;
+}
+.containerChart>div{
+    max-width: 40%;
+    margin: 10px
+}
+
+.right{
+    position: absolute;
+    top: 0;
+    right:20px;
+}

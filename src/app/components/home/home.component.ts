@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { PortfoliosService } from 'src/app/services/portfolios.service';
 import { DetailPortfolios } from 'src/app/models/request/detailPortfolios';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import * as decode from 'jwt-decode';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, ComponentCanDeactivate {
+export class HomeComponent implements OnInit,OnDestroy, ComponentCanDeactivate {
   detailFixedPortfolio: DetailPortfolios = { quantity: null, updateLast: null };
   detailMobilePortfolio: DetailPortfolios = { quantity: null, updateLast: null };
   dailyEventsRecord:any=null;
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, ComponentCanDeactivate {
   MonitoringCDFixedDate:string;
   MonitoringCDMobile:string="";
   MonitoringCDMobileDate:string;
-
+  timer:any;
   constructor(private portfoliosServices: PortfoliosService, private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
@@ -44,12 +44,14 @@ export class HomeComponent implements OnInit, ComponentCanDeactivate {
         this.readMonitoringCDFixed();
         this.readMonitoringCDMobile();
       }
-      setInterval(()=>{    
+      this.timer=setInterval(()=>{    
         this.requestManagementDailyEvents();
       }, 300000);
     }
   }
-
+  ngOnDestroy(){
+    clearInterval(this.timer);
+  }
 
   requestFixedPortfoliosDetail() {
     this.portfoliosServices.getPortfolioDetail(1)
