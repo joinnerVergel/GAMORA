@@ -1,0 +1,24 @@
+<div class="table-responsive-md listaTabla">
+  <table class="table table-striped table-hover ">
+    <thead>
+      <tr > <th colspan="4" class="noData">OPERACIÓN {{operation==1?'FIJA':'MÓVIL'}}</th></tr>
+      <tr>
+        <th scope="col">CATEGORIA</th>
+        <th scope="col">SEMANA</th>
+        <th scope="col">MES</th>
+        <th scope="col">TOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categoriesList">
+        <td>{{category.Campo2}}</td>
+        <td>{{category.Campo3}}</td>
+        <td>{{category.Campo4}}</td>
+        <td>{{category.Campo5}}</td>
+      </tr>
+      <tr *ngIf="categoriesList.length==0"> 
+       <td colspan="4" class="noData"> No existe registro de envíos de eventos</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -199,10 +199,6 @@ export class SendedEventsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    // for (let index = 1; index <= 2; index++) {
-      
-      
-    // }
     this.readCategories();
     setInterval(() => {
       if (this.categoriesChart) {

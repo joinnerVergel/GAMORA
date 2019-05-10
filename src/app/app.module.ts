@@ -93,6 +93,8 @@ import { DoubleViaConfigurationComponent } from './components/double-via-configu
 import { TimeLineEventsComponent } from './components/time-line-events/time-line-events.component';
 import { SendedEventsComponent } from './components/sended-events/sended-events.component';
 import { ZingchartComponent } from './components/zingchart/zingchart.component';
+import { TableHistorySendedEventsComponent } from './components/table-history-sended-events/table-history-sended-events.component';
+import { TableHistorySendedEventsxAccountComponent } from './components/table-history-sended-eventsx-account/table-history-sended-eventsx-account.component';
 
 
 
@@ -174,7 +176,9 @@ import { ZingchartComponent } from './components/zingchart/zingchart.component';
     DoubleViaConfigurationComponent,
     TimeLineEventsComponent,
     SendedEventsComponent,
-    ZingchartComponent
+    ZingchartComponent,
+    TableHistorySendedEventsComponent,
+    TableHistorySendedEventsxAccountComponent
 
   ],
   imports: [

@@ -1,0 +1,26 @@
+<div class="table-responsive-md listaTabla">
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr > <th colspan="5" class="noData">OPERACIÓN {{operation==1?'FIJA':'MÓVIL'}}</th></tr>
+        <tr>
+          <th scope="col">GESTIÓN</th>
+          <th scope="col">DÍA</th>
+          <th scope="col">SEMANA</th>
+          <th scope="col">MES</th>
+          <th scope="col">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let manager of managerList">
+          <td>{{manager.Campo2}}</td>
+          <td>{{manager.Campo3}}</td>
+          <td>{{manager.Campo4}}</td>
+          <td>{{manager.Campo5}}</td>
+          <td>{{manager.Campo6}}</td>
+        </tr>
+        <tr *ngIf="managerList.length==0"> 
+         <td colspan="5" class="noData"> No existe registro de envíos de eventos</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

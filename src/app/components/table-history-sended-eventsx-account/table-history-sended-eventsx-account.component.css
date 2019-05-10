@@ -1,0 +1,6 @@
+table tbody td:not(:first-child),table thead th:not(:first-child) {
+    text-align: center
+}
+.noData{
+    text-align: center;
+}
