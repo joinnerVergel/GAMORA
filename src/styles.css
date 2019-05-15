@@ -481,3 +481,54 @@ app-view-work-flow app-workflow-area .divWorkFlow{
     margin: 5px 0;
     
 }
+
+app-effectiveness-gauge text{
+    font-size: 10px;
+    /* fill: #fff */
+}
+app-effectiveness-gauge path+path+path{
+    fill: rgb(217, 63, 114);
+}
+/* app-effectiveness-gauge path+path{
+    fill: rgba(13,157,174,1);
+} */
+app-effectiveness-gauge circle+path{
+    fill:rgba(13,157,174,1)
+}
+
+app-effectiveness-gauge td>div:first-child{
+    padding: 10px;
+    border-radius: 5px;
+    background: transparent;
+}
+
+app-effectiveness-gauge circle:first-child{
+    fill: rgba(13,62,80,1);
+    stroke: #fff;
+}
+app-effectiveness-gauge circle:first-child+circle{
+    fill: #fff;
+    stroke: rgba(13,157,174,1);
+}
+
+
+app-effectiveness-gauge path{
+   fill: rgb(217, 63, 114);
+}
+app-reports .accordion .card{
+    background: linear-gradient(to bottom,rgba(13,62,80,1),#000);
+    margin: 0px;
+}
+app-reports .accordion .card-body{
+    padding: 20px;
+}
+app-reports .accordion .card-header{
+    border: none;
+    background: linear-gradient(to top,rgba(13,62,80,1),rgba(13,157,174,1));
+}
+app-reports .accordion .card-header button{
+    text-shadow: none;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+ 

@@ -95,6 +95,9 @@ import { SendedEventsComponent } from './components/sended-events/sended-events.
 import { ZingchartComponent } from './components/zingchart/zingchart.component';
 import { TableHistorySendedEventsComponent } from './components/table-history-sended-events/table-history-sended-events.component';
 import { TableHistorySendedEventsxAccountComponent } from './components/table-history-sended-eventsx-account/table-history-sended-eventsx-account.component';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { EffectivenessGaugeComponent } from './components/effectiveness-gauge/effectiveness-gauge.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 
@@ -178,10 +181,13 @@ import { TableHistorySendedEventsxAccountComponent } from './components/table-hi
     SendedEventsComponent,
     ZingchartComponent,
     TableHistorySendedEventsComponent,
-    TableHistorySendedEventsxAccountComponent
+    TableHistorySendedEventsxAccountComponent,
+    EffectivenessGaugeComponent
 
   ],
   imports: [
+    GoogleChartsModule.forRoot(),
+    NgxGaugeModule,
     ChartsModule,
     DragAndDropModule,
     AngularDraggableModule,
