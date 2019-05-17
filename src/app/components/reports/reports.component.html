@@ -6,9 +6,23 @@
 </div> -->
 
 <app-sended-events></app-sended-events>
-
+<!-- <app-zingchart [operation]="1"></app-zingchart> -->
 <div class="charts">
     <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span> Envío de eventos - operación fija </span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="center">
+                    <div class="category">
+                        <div class="efControl">
+                                <app-zingchart [operation]="1"></app-zingchart>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
         <ngb-panel>
             <ng-template ngbPanelTitle>
                 <span> Medidor de eficiencia por subcategoria de eventos - operación fija </span>

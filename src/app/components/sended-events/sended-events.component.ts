@@ -365,8 +365,6 @@ var idChart = "";
 })
 export class SendedEventsComponent implements OnInit,OnDestroy {
 
-
-
   categoriesChartFixed: boolean = true;
   categoriesChartMobile: boolean = true;
   viewSubcategoryFixed: string = null;

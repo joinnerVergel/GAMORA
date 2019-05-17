@@ -1,0 +1,13 @@
+.back{
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    background: rgba(13,62,80,1);
+    text-transform: uppercase;
+}
+
+.back fa-icon{
+    cursor: pointer;
+    float: left;
+    margin-left: 20px;
+}
