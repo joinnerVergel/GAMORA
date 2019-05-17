@@ -1,0 +1,19 @@
+
+<div class="title" >
+    <div  class="back" *ngIf="chart.data.length>0">
+      Eventos exitosos y fallidos
+    </div>
+</div>
+<google-chart #googlechart *ngIf="chart.data.length>0"
+[type]="chart.type"
+[data]="chart.data"
+[options]="chart.options"
+[columnNames]="chart.columnNames"
+[roles]="chart.myRoles"
+>
+</google-chart>
+
+<div class="noData" *ngIf="chart.data.length==0">No hay eventos para envíar</div>
+
+
+

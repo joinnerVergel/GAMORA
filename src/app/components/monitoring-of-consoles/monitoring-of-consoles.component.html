@@ -1,0 +1,49 @@
+<div class="container_float">
+  <div class="operation">
+    <div class="console legends">
+      <div class="item"><span class="OK"></span>Ejecución exitosa</div>
+      <div class="item"><span class="ERROR"></span>Ejecución fallida</div>
+      <div class="item"><span class="EJECUCION"></span>En ejecución</div>
+      <div class="item"><span class="OFF"></span>No hay Registro de ejecución</div>
+    </div>
+  </div>
+  <div class="operation">
+    <div>Operación Fija</div>
+    <div class="console">
+      <div class="subTitle">Carga Diaria</div>
+      <div class="Monitoreo" [ngClass]="MonitoringCDFixed">
+        <div>Ultima ejecución:</div>
+        <div>{{MonitoringCDFixedDate}}</div>
+      </div>
+    </div>
+    <div class="console">
+      <div class="subTitle">Armado grupos y ejecución de flujos</div>
+      <div class="Monitoreo" [ngClass]="MonitoringAGFixed">
+        <div>Ultima ejecución:</div>
+        <div>{{MonitoringAGFixedDate}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="operation">
+    <div>Operación Móvil</div>
+
+    <div class="console">
+      <div class="subTitle">Carga Diaria</div>
+      <div class="Monitoreo" [ngClass]="MonitoringCDMobile">
+        <div>Ultima ejecución:</div>
+        <div>{{MonitoringCDMobileDate}}</div>
+      </div>
+    </div>
+    <div class="console">
+      <div class="subTitle">Armado grupos y ejecución de flujos</div>
+      <div class="Monitoreo" [ngClass]="MonitoringAGMobile">
+        <div>Ultima ejecución:</div>
+        <div>{{MonitoringAGMobileDate}}</div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

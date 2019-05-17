@@ -98,6 +98,9 @@ import { TableHistorySendedEventsxAccountComponent } from './components/table-hi
 import { NgxGaugeModule } from 'ngx-gauge';
 import { EffectivenessGaugeComponent } from './components/effectiveness-gauge/effectiveness-gauge.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { EventsSentDailyComponent } from './components/events-sent-daily/events-sent-daily.component';
+import { EventsSentDailyDetailComponent } from './components/events-sent-daily-detail/events-sent-daily-detail.component';
+import { MonitoringOfConsolesComponent } from './components/monitoring-of-consoles/monitoring-of-consoles.component';
 
 
 
@@ -182,7 +185,10 @@ import { GoogleChartsModule } from 'angular-google-charts';
     ZingchartComponent,
     TableHistorySendedEventsComponent,
     TableHistorySendedEventsxAccountComponent,
-    EffectivenessGaugeComponent
+    EffectivenessGaugeComponent,
+    EventsSentDailyComponent,
+    EventsSentDailyDetailComponent,
+    MonitoringOfConsolesComponent
 
   ],
   imports: [

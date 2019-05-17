@@ -1,0 +1,85 @@
+.container_float{
+    color: #fff;
+}
+.Monitoreo{
+    height: 30px;
+    border-radius: 3px;
+    
+}
+.Monitoreo.loading{
+    background: url('../../resources/img/loading.gif') no-repeat center / 70px !important;
+}
+.Monitoreo.loading>div{
+    display: none;
+}
+.OK{
+    background: rgb(13, 157, 174);
+}
+.OFF{
+    background: linear-gradient(to bottom,#aaa,#ccc);
+}
+.OFF div{
+    display: none;
+}
+.ERROR{
+    background: #e9426d;
+}
+.EJECUCION{
+    background: rgba(255, 165, 0,.5);
+}
+.Monitoreo div{
+    text-align: center;
+    color: #fff;
+}
+.console{
+    font-size:10px; 
+    margin: 20px 0;
+}
+.subTitle{
+    text-align: center;
+}
+.item{
+    margin: 5px 0;
+    text-align: left;
+}
+.item span{
+    margin-right: 10px;
+    width: 15px;
+    height: 10px;
+    display: inline-block;
+}
+
+.operation{
+    margin: 15px;
+    float: left;
+    border: 1px solid rgba(13,62,80,1);
+    padding: 10px 20px;
+    position: relative;
+    background: rgba(255,255,255,0.2);
+}
+.operation>div:first-child{
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    background: rgba(13,62,80,1);
+    text-transform: uppercase;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.legends{
+    padding: 10px;
+    border-radius: 5px;
+    position: relative !important;
+}
+.operation:first-child{
+    border: none;
+    padding: 0px;
+    background: none;
+}
+.operation:first-child>div:first-child{
+    background: none;
+}
+

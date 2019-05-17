@@ -14,20 +14,12 @@ import * as decode from 'jwt-decode';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit,OnDestroy, ComponentCanDeactivate {
+export class HomeComponent implements OnInit, ComponentCanDeactivate {
   detailFixedPortfolio: DetailPortfolios = { quantity: null, updateLast: null };
   detailMobilePortfolio: DetailPortfolios = { quantity: null, updateLast: null };
-  dailyEventsRecord:any=null;
 
-  MonitoringAGFixed:string="";
-  MonitoringAGFixedDate:string;
-  MonitoringAGMobile:string="";
-  MonitoringAGMobileDate:string;
-  MonitoringCDFixed:string ="";
-  MonitoringCDFixedDate:string;
-  MonitoringCDMobile:string="";
-  MonitoringCDMobileDate:string;
-  timer:any;
+
+
   constructor(private portfoliosServices: PortfoliosService, private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
@@ -38,19 +30,8 @@ export class HomeComponent implements OnInit,OnDestroy, ComponentCanDeactivate {
         this.router.navigate(['/users-manager']);
       } else {
         this.requestFixedPortfoliosDetail();
-        this.requestManagementDailyEvents();
-        this.readMonitoringAGFixed();
-        this.readMonitoringAGMobile();
-        this.readMonitoringCDFixed();
-        this.readMonitoringCDMobile();
       }
-      this.timer=setInterval(()=>{    
-        this.requestManagementDailyEvents();
-      }, 300000);
     }
-  }
-  ngOnDestroy(){
-    clearInterval(this.timer);
   }
 
   requestFixedPortfoliosDetail() {
@@ -69,102 +50,22 @@ export class HomeComponent implements OnInit,OnDestroy, ComponentCanDeactivate {
             this.router.navigate(['/login']);
           }
         },
-        ()=>{
+        () => {
           this.portfoliosServices.getPortfolioDetail(2)
-          .subscribe(
-            item => {
-              if (item.hasOwnProperty('listaGenericaResult')) {
-                const elementList = item['listaGenericaResult'];
-                elementList.forEach(element => {
-                  this.detailMobilePortfolio = { quantity: element['Id'], updateLast: element['Valor'] };
-                });
-              }
-            }, error => {
-              if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-                this.loginService.clearSessionLogin();
-                this.router.navigate(['/login']);
-              }
-            });
-        });
-  }
-  
-
-  requestManagementDailyEvents() {
-    this.portfoliosServices.getManagementDailyEvents()
-      .subscribe(
-        item => {
-          if (item.hasOwnProperty('listaGenericaConsultaResult')) {
-            this.dailyEventsRecord= item['listaGenericaConsultaResult'][0];
-          }
-          //console.log(this.dailyEventsRecord);
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        });
-  }
-
-  readMonitoringAGFixed(){
-    this.portfoliosServices.getMonitoring("consola_AG_FIJA")
-      .subscribe(
-        item => {
-          if (item.hasOwnProperty('listaGenericaConsultaResult')) {
-            this.MonitoringAGFixedDate=item['listaGenericaConsultaResult'][0].Campo1;
-            this.MonitoringAGFixed=item['listaGenericaConsultaResult'][0].Campo2;
-          }
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        });
-  }
-
-  readMonitoringAGMobile(){
-    this.portfoliosServices.getMonitoring("consola_AG_Movil")
-      .subscribe(
-        item => {
-          if (item.hasOwnProperty('listaGenericaConsultaResult')) {
-            this.MonitoringAGMobileDate=item['listaGenericaConsultaResult'][0].Campo1;
-            this.MonitoringAGMobile=item['listaGenericaConsultaResult'][0].Campo2;
-          }
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        });
-  }
-
-  readMonitoringCDFixed(){
-    this.portfoliosServices.getMonitoring("consola_CD_Fija")
-      .subscribe(
-        item => {
-          if (item.hasOwnProperty('listaGenericaConsultaResult')) {
-            this.MonitoringCDFixedDate=item['listaGenericaConsultaResult'][0].Campo1;
-            this.MonitoringCDFixed=item['listaGenericaConsultaResult'][0].Campo2;
-          }
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
-        });
-  }
-  readMonitoringCDMobile(){
-    this.portfoliosServices.getMonitoring("consola_CD_Movil")
-      .subscribe(
-        item => {
-          if (item.hasOwnProperty('listaGenericaConsultaResult')) {
-            this.MonitoringCDMobileDate=item['listaGenericaConsultaResult'][0].Campo1;
-            this.MonitoringCDMobile=item['listaGenericaConsultaResult'][0].Campo2;
-          }
-        }, error => {
-          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
-            this.loginService.clearSessionLogin();
-            this.router.navigate(['/login']);
-          }
+            .subscribe(
+              item => {
+                if (item.hasOwnProperty('listaGenericaResult')) {
+                  const elementList = item['listaGenericaResult'];
+                  elementList.forEach(element => {
+                    this.detailMobilePortfolio = { quantity: element['Id'], updateLast: element['Valor'] };
+                  });
+                }
+              }, error => {
+                if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+                  this.loginService.clearSessionLogin();
+                  this.router.navigate(['/login']);
+                }
+              });
         });
   }
 

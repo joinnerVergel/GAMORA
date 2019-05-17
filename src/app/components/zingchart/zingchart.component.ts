@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
 import { PortfoliosService } from 'src/app/services/portfolios.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./zingchart.component.css']
 })
 
-export class ZingchartComponent implements OnInit {
+export class ZingchartComponent implements OnInit,OnDestroy {
 
   backIcon = faArrowLeft;
 
@@ -30,6 +30,10 @@ export class ZingchartComponent implements OnInit {
     options: {
       width: 400,
       legend: { position: 'none' },
+      animation:{
+        duration: 500,
+        easing: 'inAndOut',
+      },
       annotations: {
         textStyle: {
           fontName: 'Times-Roman',
@@ -58,7 +62,7 @@ export class ZingchartComponent implements OnInit {
       backgroundColor: "transparent",
     },
     width: 550,
-    height: 400
+    height: 900
   };
 
   stylesList: any = ['color: #0d9dae; stroke-color: #fff; stroke-width: 1;',
@@ -76,12 +80,25 @@ export class ZingchartComponent implements OnInit {
   @Input() operation: number;
   listCategories: any = [];
   categoryActivated: string = null;
-
+  idCategoryActivated:number=null;
+  refCategoryActivated:number=null;
+  timer:any;
   constructor(private portfoliosServices: PortfoliosService, private loginService: LoginService,
     private router: Router) { }
 
   ngOnInit() {
     this.readCategories();
+    this.timer=setInterval(() => {
+      if (this.categoryActivated==null) {
+        this.readCategories();
+      } else {
+        this.readSubCategories(this.idCategoryActivated,this.stylesList[this.refCategoryActivated]);
+      }
+    }, 60000);
+  }
+
+  ngOnDestroy(){
+    clearInterval(this.timer);
   }
 
   readCategories() {
@@ -135,12 +152,15 @@ export class ZingchartComponent implements OnInit {
   ready(x) {
     if (this.listCategories.length > 0) {
       this.categoryActivated = this.listCategories[x[0].row].Campo2;
-      // console.log(this.stylesList[x[0].row]);
-      this.readSubCategories(this.listCategories[x[0].row].Campo1,this.stylesList[x[0].row]);
+      this.idCategoryActivated=this.listCategories[x[0].row].Campo1;
+      this.refCategoryActivated=x[0].row;
+      this.readSubCategories(this.idCategoryActivated,this.stylesList[x[0].row]);
     }
   }
   viewCategories() {
     this.categoryActivated = null;
+    this.idCategoryActivated=null
+    this.refCategoryActivated=null;
     this.readCategories();
   }
 

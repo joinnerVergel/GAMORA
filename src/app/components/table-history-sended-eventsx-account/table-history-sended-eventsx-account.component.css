@@ -5,14 +5,31 @@ table tbody td:not(:first-child),table thead th:not(:first-child) {
     text-align: center;
 }
 
-.listaTabla{
-    box-shadow: -5px 5px #AAA;
-    border-radius: 10px;
+table{
+    background: transparent !important;
     font-size: 10px;
-    margin: 15px 0;
+    border: 0;
+    font-family: telefonicaRegular !important;
+    margin: 0;
+    color: #fff;
 }
 table thead tr:first-child{
-    background:linear-gradient(to top,rgba(13,62,80,1),rgba(13,157,174,1));
-    color:#fff;
-    text-shadow: -1px 1px #000;
+    text-align: center;
+    background: rgba(13,62,80,1);
+    text-transform: uppercase;
+    border-bottom: 0px;
+    font-size: 12px;
+}
+
+table thead tr:last-child{
+    background: transparent;
+    color: rgb(13, 157, 174);
+}
+
+table thead tr:first-child th{
+    font-weight: normal !important;
+}
+
+table thead th,table tr{
+    border: 0px !important;
 }

@@ -483,15 +483,12 @@ app-view-work-flow app-workflow-area .divWorkFlow{
 }
 
 app-effectiveness-gauge text{
-    font-size: 10px;
-    /* fill: #fff */
+    font-size: 8px;
 }
 app-effectiveness-gauge path+path+path{
     fill: rgb(217, 63, 114);
 }
-/* app-effectiveness-gauge path+path{
-    fill: rgba(13,157,174,1);
-} */
+
 app-effectiveness-gauge circle+path{
     fill:rgba(13,157,174,1)
 }
@@ -535,3 +532,8 @@ app-reports .accordion .card-header button{
 app-zingchart rect{
     cursor: pointer !important;
 }
+
+/* app-reports .card{
+    display: table;
+    float: left;
+} */

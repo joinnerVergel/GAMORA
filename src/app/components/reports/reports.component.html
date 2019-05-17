@@ -5,10 +5,43 @@
     un archivo de excel con conexion a reportes.
 </div> -->
 
-<app-sended-events></app-sended-events>
-<!-- <app-zingchart [operation]="1"></app-zingchart> -->
+<!-- <app-sended-events></app-sended-events> -->
+
+
 <div class="charts">
     <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+            <ngb-panel>
+                    <ng-template ngbPanelTitle>
+                        <span> Monitoreo de Consolas </span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="center">
+                            <div class="category">
+                                <div>
+                                    <app-monitoring-of-consoles></app-monitoring-of-consoles>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span> Envío de eventos diario </span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="center">
+                    <div class="category">
+                        <div class="efControl">
+                            <app-events-sent-daily></app-events-sent-daily>
+                        </div>
+                        <div class="efControl">
+                            <app-events-sent-daily-detail></app-events-sent-daily-detail>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
         <ngb-panel>
             <ng-template ngbPanelTitle>
                 <span> Envío de eventos - operación fija </span>
@@ -17,7 +50,35 @@
                 <div class="center">
                     <div class="category">
                         <div class="efControl">
-                                <app-zingchart [operation]="1"></app-zingchart>
+                            <app-zingchart [operation]="1"></app-zingchart>
+                        </div>
+                        <div class="efControl">
+                            <app-table-history-sended-events [operation]="1"></app-table-history-sended-events>
+                        </div>
+                        <div class="efControl">
+                            <app-table-history-sended-eventsx-account [operation]="1">
+                            </app-table-history-sended-eventsx-account>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span> Envío de eventos - operación móvil </span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="center">
+                    <div class="category">
+                        <div class="efControl">
+                            <app-zingchart [operation]="2"></app-zingchart>
+                        </div>
+                        <div class="efControl">
+                            <app-table-history-sended-events [operation]="2"></app-table-history-sended-events>
+                        </div>
+                        <div class="efControl">
+                            <app-table-history-sended-eventsx-account [operation]="2">
+                            </app-table-history-sended-eventsx-account>
                         </div>
                     </div>
                 </div>
@@ -55,7 +116,6 @@
                 </div>
             </ng-template>
         </ngb-panel>
-        <app-sended-events></app-sended-events>
     </ngb-accordion>
 
 </div>

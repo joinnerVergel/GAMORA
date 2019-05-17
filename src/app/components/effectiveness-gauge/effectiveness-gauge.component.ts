@@ -18,8 +18,8 @@ export class EffectivenessGaugeComponent implements OnInit {
       ['SMS SIMPLE', 55],
     ],
     options: {
-      width: 400,
-      height: 150,
+      width: 300,
+      height: 120,
       redFrom: 0,
       redTo: 25,
       greenFrom: 75,
