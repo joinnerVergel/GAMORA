@@ -529,7 +529,7 @@ app-reports .accordion .card-header button{
     font-size: 12px;
 }
 
-app-zingchart rect{
+app-sended-events rect{
     cursor: pointer !important;
 }
 

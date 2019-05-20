@@ -87,20 +87,18 @@ import { UpdateFixedBrandComponent } from './components/fixed/update-fixed-brand
 import { UpdateMobileBrandComponent } from './components/mobile/update-mobile-brand/update-mobile-brand.component';
 import { ViewWorkFlowComponent } from './components/view-work-flow/view-work-flow.component';
 import { ChartsModule } from 'ng2-charts';
-import { PieChartComponent } from './components/pie-chart/pie-chart.component';
-import { FailedEventsChartComponent } from './components/failed-events-chart/failed-events-chart.component';
 import { DoubleViaConfigurationComponent } from './components/double-via-configuration/double-via-configuration.component';
 import { TimeLineEventsComponent } from './components/time-line-events/time-line-events.component';
-import { SendedEventsComponent } from './components/sended-events/sended-events.component';
-import { ZingchartComponent } from './components/zingchart/zingchart.component';
-import { TableHistorySendedEventsComponent } from './components/table-history-sended-events/table-history-sended-events.component';
-import { TableHistorySendedEventsxAccountComponent } from './components/table-history-sended-eventsx-account/table-history-sended-eventsx-account.component';
 import { NgxGaugeModule } from 'ngx-gauge';
-import { EffectivenessGaugeComponent } from './components/effectiveness-gauge/effectiveness-gauge.component';
+
 import { GoogleChartsModule } from 'angular-google-charts';
-import { EventsSentDailyComponent } from './components/events-sent-daily/events-sent-daily.component';
-import { EventsSentDailyDetailComponent } from './components/events-sent-daily-detail/events-sent-daily-detail.component';
-import { MonitoringOfConsolesComponent } from './components/monitoring-of-consoles/monitoring-of-consoles.component';
+import { SendedEventsComponent } from './components/dashBoard/sended-events/sended-events.component';
+import { TableHistorySendedEventsComponent } from './components/dashBoard/table-history-sended-events/table-history-sended-events.component';
+import { TableHistorySendedEventsxAccountComponent } from './components/dashBoard/table-history-sended-eventsx-account/table-history-sended-eventsx-account.component';
+import { EffectivenessGaugeComponent } from './components/dashBoard/effectiveness-gauge/effectiveness-gauge.component';
+import { EventsSentDailyComponent } from './components/dashBoard/events-sent-daily/events-sent-daily.component';
+import { EventsSentDailyDetailComponent } from './components/dashBoard/events-sent-daily-detail/events-sent-daily-detail.component';
+import { MonitoringOfConsolesComponent } from './components/dashBoard/monitoring-of-consoles/monitoring-of-consoles.component';
 
 
 
@@ -177,12 +175,9 @@ import { MonitoringOfConsolesComponent } from './components/monitoring-of-consol
     UpdateFixedBrandComponent,
     UpdateMobileBrandComponent,
     ViewWorkFlowComponent,
-    PieChartComponent,
-    FailedEventsChartComponent,
     DoubleViaConfigurationComponent,
     TimeLineEventsComponent,
     SendedEventsComponent,
-    ZingchartComponent,
     TableHistorySendedEventsComponent,
     TableHistorySendedEventsxAccountComponent,
     EffectivenessGaugeComponent,
@@ -210,77 +205,77 @@ import { MonitoringOfConsolesComponent } from './components/monitoring-of-consol
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       {
-        path: '', component: NavigationBarComponent , children: [
-          {path: '',redirectTo: '/home', pathMatch: 'full'},
-          { path: 'home', component: HomeComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+        path: '', component: NavigationBarComponent, children: [
+          { path: '', redirectTo: '/home', pathMatch: 'full' },
+          { path: 'home', component: HomeComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ==', 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
           {
             path: 'management-groups', component: ManagementGroupsComponent, children: [
-              {path: '',redirectTo: 'fixed', pathMatch: 'full'},
-              { path: 'fixed', component: FixedGroupsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'fixed/new-group', component: NewFixedManagementGroupComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: MobileGroupsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile/new-group', component: NewMobileManagementGroupComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-            ] 
+              { path: '', redirectTo: 'fixed', pathMatch: 'full' },
+              { path: 'fixed', component: FixedGroupsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/new-group', component: NewFixedManagementGroupComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: MobileGroupsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/new-group', component: NewMobileManagementGroupComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+            ]
           },
           {
             path: 'manage-brands', component: ManageBrandsComponent, children: [
-              {path: '',redirectTo: 'fixed', pathMatch: 'full'},
-              { path: 'fixed', component: FixedBrandsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'fixed/new-brand', component: NewFixedBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'fixed/updateBrand/:name', component: UpdateFixedBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: MobileBrandsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile/new-brand', component: NewMobileBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile/updateBrand/:name', component: UpdateMobileBrandComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: '', redirectTo: 'fixed', pathMatch: 'full' },
+              { path: 'fixed', component: FixedBrandsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/new-brand', component: NewFixedBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed/updateBrand/:name', component: UpdateFixedBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: MobileBrandsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/new-brand', component: NewMobileBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile/updateBrand/:name', component: UpdateMobileBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
             path: 'events-manager', component: EventsManagerComponent, children: [
-              {path: '',redirectTo: 'fixed', pathMatch: 'full'},
-              { path: 'fixed', component: FixedCategoryListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'fixed/category/:id', component: FixedSubCategoriesListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'fixed/category/:id/sub-category/:ref', component: FixedSubcategoryElementsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile', component: MobileCategoryListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile/category/:id', component: MobileSubCategoriesListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
-              { path: 'mobile/category/:id/sub-category/:ref', component: MobileSubCategoryElementsListComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: '', redirectTo: 'fixed', pathMatch: 'full' },
+              { path: 'fixed', component: FixedCategoryListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/category/:id', component: FixedSubCategoriesListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/category/:id/sub-category/:ref', component: FixedSubcategoryElementsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile', component: MobileCategoryListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/category/:id', component: MobileSubCategoriesListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/category/:id/sub-category/:ref', component: MobileSubCategoryElementsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
             ]
           },
-          { path: 'users-manager', component: UsersManagerComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ=='] } },
+          { path: 'users-manager', component: UsersManagerComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ=='] } },
           {
             path: 'workflow', component: WorkflowComponent, children: [
-              {path: '',redirectTo: 'fixed', pathMatch: 'full'},
-              { path: 'fixed', component: FixedWorkflowListComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']} },
-              { path: 'fixed/new-workflow', component: NewFixedWorkflowComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'fixed/edit-workflow/:id', component: FixedEditWorkFlowComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: MobileWorkflowListComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']} },
-              { path: 'mobile/new-workflow', component: NewMobileWorkflowComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile/edit-workflow/:id', component: MobileEditWorkFlowComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: '', redirectTo: 'fixed', pathMatch: 'full' },
+              { path: 'fixed', component: FixedWorkflowListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/new-workflow', component: NewFixedWorkflowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'fixed/edit-workflow/:id', component: FixedEditWorkFlowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: MobileWorkflowListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/new-workflow', component: NewMobileWorkflowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile/edit-workflow/:id', component: MobileEditWorkFlowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
             path: 'manager', component: ManagerComponent, children: [
-              {path: '',redirectTo: 'fixed', pathMatch: 'full'},
-              { path: 'fixed', component: FixedManagerListComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']} },
-              { path: 'fixed/new-management', component: NewFixedManagementComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
-              { path: 'mobile', component: MobileManagerListComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']} },
-              { path: 'mobile/new-management', component: NewMobileManagementComponent,canDeactivate:[PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: '', redirectTo: 'fixed', pathMatch: 'full' },
+              { path: 'fixed', component: FixedManagerListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'fixed/new-management', component: NewFixedManagementComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'mobile', component: MobileManagerListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'mobile/new-management', component: NewMobileManagementComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
-            path: 'reports', component: ReportsComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: [ 'WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA==']}
+            path: 'reports', component: ReportsComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] }
           },
           {
-            path: 'RONAnConfiguration', component: RonanConfigurationComponent, children:[
-              {path: '',redirectTo: 'discounts', pathMatch: 'full'},
-              { path: 'discounts', component: DiscountsComponent,canDeactivate:[PendingChangesGuardService],canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==']} }
-            ] 
-          } 
-          
+            path: 'RONAnConfiguration', component: RonanConfigurationComponent, children: [
+              { path: '', redirectTo: 'discounts', pathMatch: 'full' },
+              { path: 'discounts', component: DiscountsComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } }
+            ]
+          }
+
         ]
       }
     ])
   ],
-  exports: [AdDirective,NewpropertiesDirective],
-  entryComponents: [HoldSymbolComponent, VerifypaymentSymbolComponent, EventSymbolComponent, EndSymbolComponent, HomeSymbolComponent, ConnectinglineSymbolComponent,ConfirmDialogComponent],
+  exports: [AdDirective, NewpropertiesDirective],
+  entryComponents: [HoldSymbolComponent, VerifypaymentSymbolComponent, EventSymbolComponent, EndSymbolComponent, HomeSymbolComponent, ConnectinglineSymbolComponent, ConfirmDialogComponent],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })

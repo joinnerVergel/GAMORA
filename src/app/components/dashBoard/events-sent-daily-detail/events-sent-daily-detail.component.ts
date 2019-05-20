@@ -88,11 +88,15 @@ export class EventsSentDailyDetailComponent implements OnInit {
         item => {
           if (item.hasOwnProperty('listaGenericaConsultaResult')) {
             this.dailyEventsRecord = item['listaGenericaConsultaResult'][0];
-            console.log(this.dailyEventsRecord)
-            this.chart.data = [
-              ['Eventos Gestionados', +(this.dailyEventsRecord.Campo1 - this.dailyEventsRecord.Campo5 - this.dailyEventsRecord.Campo6), +this.dailyEventsRecord.Campo5, +this.dailyEventsRecord.Campo6],
-            ];
-            this.chart.options.hAxis.ticks = [0, +this.dailyEventsRecord.Campo1];
+            if (this.dailyEventsRecord.Campo1 != 'NO HAY EVENTOS PARA GESTIONAR') {
+              this.chart.data = [
+                ['Eventos Gestionados', +(this.dailyEventsRecord.Campo1 - this.dailyEventsRecord.Campo5 - this.dailyEventsRecord.Campo6), +this.dailyEventsRecord.Campo5, +this.dailyEventsRecord.Campo6],
+              ];
+              this.chart.options.hAxis.ticks = [0, +this.dailyEventsRecord.Campo1];
+            }else{
+              this.chart.data=[];
+            }
+
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {

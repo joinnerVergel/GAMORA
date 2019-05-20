@@ -5,3 +5,9 @@
     background: rgba(13,62,80,1);
     text-transform: uppercase;
 }
+.noData{
+    width: 400px;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+}

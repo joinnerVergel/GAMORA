@@ -1,12 +1,12 @@
 
 <div class="title" >
-    <div class="back" (click)="viewCategories()" *ngIf="listCategories.length == 0 && chart.data.length>0">
-        <fa-icon [icon]="backIcon"></fa-icon>
-        Categoria {{categoryActivated}}
-    </div>
-    <div  class="back" *ngIf="listCategories.length > 0">
-      Envío de eventos x categoría
-    </div>
+  <div class="back" (click)="viewCategories()" *ngIf="listCategories.length == 0 && chart.data.length>0">
+      <fa-icon [icon]="backIcon"></fa-icon>
+      Categoria {{categoryActivated}}
+  </div>
+  <div  class="back" *ngIf="listCategories.length > 0">
+    Envío de eventos x categoría
+  </div>
 </div>
 <google-chart #googlechart *ngIf="chart.data.length>0"
 [type]="chart.type"

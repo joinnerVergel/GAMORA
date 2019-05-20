@@ -6,14 +6,12 @@ import { GoogleChartComponent } from 'angular-google-charts';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
-
 @Component({
-  selector: 'app-zingchart',
-  templateUrl: './zingchart.component.html',
-  styleUrls: ['./zingchart.component.css']
+  selector: 'app-sended-events',
+  templateUrl: './sended-events.component.html',
+  styleUrls: ['./sended-events.component.css']
 })
-
-export class ZingchartComponent implements OnInit,OnDestroy {
+export class SendedEventsComponent implements OnInit,OnDestroy {
 
   backIcon = faArrowLeft;
 

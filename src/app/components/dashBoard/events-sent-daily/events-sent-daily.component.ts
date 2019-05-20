@@ -57,11 +57,16 @@ export class EventsSentDailyComponent implements OnInit,OnDestroy {
         item => {
           if (item.hasOwnProperty('listaGenericaConsultaResult')) {
             this.dailyEventsRecord = item['listaGenericaConsultaResult'][0];
-            console.log(this.dailyEventsRecord)
-            this.chart.data = [
-              ['Gestionados', +this.dailyEventsRecord.Campo1],
-              ['Pendientes', +this.dailyEventsRecord.Campo3]
-            ]
+            if(this.dailyEventsRecord.Campo1!='NO HAY EVENTOS PARA GESTIONAR'){
+              this.chart.data = [
+                ['Gestionados', +this.dailyEventsRecord.Campo1],
+                ['Pendientes', +this.dailyEventsRecord.Campo3]
+              ]
+            }else{
+              this.chart.data=[];
+            }
+
+            
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {

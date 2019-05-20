@@ -7,7 +7,7 @@
     
 }
 .Monitoreo.loading{
-    background: url('../../resources/img/loading.gif') no-repeat center / 70px !important;
+    background: url('../../../resources/img/loading.gif') no-repeat center / 70px !important;
 }
 .Monitoreo.loading>div{
     display: none;
@@ -25,7 +25,7 @@
     background: #e9426d;
 }
 .EJECUCION{
-    background: rgba(255, 165, 0,.5);
+    background: #ff9b00
 }
 .Monitoreo div{
     text-align: center;
