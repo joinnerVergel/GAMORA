@@ -87,10 +87,10 @@ export class MobileSubCategoryElementsListComponent implements OnInit, Component
     if (!this.newSubCategoryElementForm.invalid) {
       //console.log(this.ageValidation, this.scriptValidation, this.linkValidation, this.contactOptionValidation, this.subjectValidation);
       if (this.ageValidation &&
-        this.scriptValidation &&
-        ((!this.linkValidation && this.categoryId == 10) || this.linkValidation) &&
+        (!this.scriptValidation && this.categoryId == 11 || this.scriptValidation) &&
+        ((!this.linkValidation && (this.categoryId == 9 || this.categoryId == 11)) || this.linkValidation) &&
         this.contactOptionValidation &&
-        ((!this.subjectValidation && this.categoryId == 8) || this.subjectValidation)) {
+        ((!this.subjectValidation && (this.categoryId == 8 || this.categoryId == 11|| this.categoryId==12)) || this.subjectValidation)) {
         return true;
       }
     }
@@ -208,8 +208,11 @@ export class MobileSubCategoryElementsListComponent implements OnInit, Component
   getFathersElement() {
     this.sub = this.route.params.subscribe(params => {
       this.categoryId = +params['id'];
-      if (this.categoryId == 8) {
+      if (this.categoryId == 8 || this.categoryId == 11 || this.categoryId == 12) {
         this.contactValue = 1;
+        if (this.categoryId == 11) {
+          this.quantityLimit = null;
+        }
       }
       if (this.categoryId == 10) {
         this.contactValue = 2;

@@ -16,6 +16,7 @@ export class ManageBrandsService {
   constructor(private http: HttpClient, private logService :LogManagedService,private loginService: LoginService) { }
 
   getBrandsList(operation:number) {
+    console.log(this.loginService.getHttpOptions());
     return this.http.get(mf_BrandsListUrl+operation,this.loginService.getHttpOptions());
   }
   getBrandsFileList(operation:number) {

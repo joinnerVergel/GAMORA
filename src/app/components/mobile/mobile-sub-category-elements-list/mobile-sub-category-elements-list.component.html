@@ -46,9 +46,9 @@
         (validateChange)="subjectValidationChange($event)"></app-subject>
       <app-email-templates *ngIf="categoryId==10" [data]="script" [submitted]="submitted" [fieldRequired]="isRequired('PLANTILLA')"
         (templateOptionChange)="setTemplateOption($event)" (validateChange)="templateEmailOptionValidationChange($event)"></app-email-templates>
-      <app-script-message [submitted]="submitted" [fieldRequired]="isRequired('SCRIPT')" [linkCharactersQuantity]="getLinkCharactersQuantity()"
+      <app-script-message *ngIf="categoryId!=11" [submitted]="submitted" [fieldRequired]="isRequired('SCRIPT')" [linkCharactersQuantity]="getLinkCharactersQuantity()"
         (scriptChange)="setScript($event)" (validateChange)="scriptValidationChange($event)" [quantityLimit]="quantityLimit"></app-script-message>
-      <app-link *ngIf="categoryId==8 ||categoryId==10" [submitted]="submitted" [fieldRequired]="isRequired('LINK')"
+      <app-link *ngIf="categoryId==8 ||categoryId==10 ||categoryId==12" [submitted]="submitted" [fieldRequired]="isRequired('LINK')"
         [scriptCharactersQuantity]="getScriptCharactersQuantity()" (linkChange)="setLink($event)" (validateChange)="linkValidationChange($event)"
         (tagLinkChange)="setTagLink($event)" [quantityLimit]="quantityLimit"></app-link>
       <app-contact-options [submitted]="submitted" [fieldRequired]="isRequired('CONTACTO')" (contactOptionChange)="setContactOption($event)"

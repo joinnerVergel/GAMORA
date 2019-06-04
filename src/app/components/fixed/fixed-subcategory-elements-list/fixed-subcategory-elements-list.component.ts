@@ -89,12 +89,12 @@ export class FixedSubcategoryElementsListComponent implements OnInit, ComponentC
   Validation() {
     this.submitted = true;
     if (!this.newSubCategoryElementForm.invalid) {
-      //console.log(this.ageValidation, this.scriptValidation, this.linkValidation, this.contactOptionValidation, this.subjectValidation);
+      // console.log(this.ageValidation, this.scriptValidation, this.linkValidation, this.contactOptionValidation, this.subjectValidation);
       if (this.ageValidation &&
-        this.scriptValidation &&
-        ((!this.linkValidation && this.categoryId == 2) || this.linkValidation) &&
+        (!this.scriptValidation && this.categoryId == 4 || this.scriptValidation) &&
+        ((!this.linkValidation && (this.categoryId == 2||this.categoryId==4)) || this.linkValidation) &&
         this.contactOptionValidation &&
-        ((!this.subjectValidation && this.categoryId == 1) || this.subjectValidation)) {
+        ((!this.subjectValidation && (this.categoryId == 1 || this.categoryId==4 || this.categoryId==5)) || this.subjectValidation)) {
         return true;
       }
     }
@@ -212,8 +212,11 @@ export class FixedSubcategoryElementsListComponent implements OnInit, ComponentC
   getFathersElement() {
     this.sub = this.route.params.subscribe(params => {
       this.categoryId = +params['id'];
-      if (this.categoryId == 1) {
+      if (this.categoryId == 1 || this.categoryId==4 || this.categoryId == 5) {
         this.contactValue = 1;
+        if(this.categoryId==4){
+          this.quantityLimit = null;
+        }
       }
       if (this.categoryId == 3) {
         this.contactValue = 2;

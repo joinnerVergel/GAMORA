@@ -43,7 +43,7 @@
         <td>{{category.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
         <td>{{category.createdBy}}</td>
         <td>
-          <div class="actions">
+          <div class="actions" *ngIf="category.idCategory!=13 && category.idCategory!=14">
             <button type="button" *ngIf="readVisibilityActions('CONSULTAR_SUBCATEGORIA')" class="btnAction btnView" placement="bottom" ngbTooltip="Gestionar" tooltipClass="tooltipEdit" (click)="editSubcategories(category.idCategory)">
               <fa-icon [icon]="editIcon"></fa-icon>
             </button>
