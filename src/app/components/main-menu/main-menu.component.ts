@@ -39,6 +39,7 @@ export class MainMenuComponent implements OnInit {
   ngOnInit() {
     // this.chooseClass();
     if (!this.loginService.isLogged()) {
+      console.log("PAILA menu");
       this.router.navigate(['/login']);
     } else {
       this.getActions();
@@ -72,8 +73,10 @@ export class MainMenuComponent implements OnInit {
       this.titleItemClassChange();
     }
   }
-  getNameUser() {
+  async getNameUser() {
     let x = this.loginService.getLocalUserLogged();
+    const item = await  this.dataEncryption.getDataEnc();
+    this.dataEncryption.content={a:item['dataResult'][0].Campo1,b:item['dataResult'][0].Campo2,c:item['dataResult'][0].Campo3}
     this.nameUser = this.dataEncryption.decryptionWord(x['key_3']);
   }
   signOut() {

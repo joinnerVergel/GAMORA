@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
-
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { dataEncDec } from './url';
 
 
 
@@ -10,45 +12,28 @@ import { LoginService } from './login.service';
 })
 export class DataEncryptionService {
 
-  constructor(private loginService: LoginService) { }
+  content:any={};
+  VarCrypto=CryptoJS;
+  constructor(private loginService: LoginService,private router: Router,private http: HttpClient) {
+  }
 
-  encryptionWord(wordClear: string) {//método para cifrar una cadena con AES
-    const key = CryptoJS.enc.Utf8.parse('T8tGP6UYhWfBSPxS');//llave de cifrado, debe ser de 16 caracteres
-    const iv = CryptoJS.enc.Utf8.parse('T8tGP6UYhWfBSPxS');
-    const encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(wordClear), key,
-        {
-            keySize: 128 / 8,
-            iv: iv,
-            mode: CryptoJS.mode.CBC,
-            padding: CryptoJS.pad.Pkcs7
-        });
-   
-  //   console.log('Encrypted :' + encrypted);
-  //   console.log('Key :' + encrypted.key);
-  //   console.log('Salt :' + encrypted.salt);
-  //   console.log('iv :' + encrypted.iv);
-  //   console.log('Decrypted : ' + decrypted);
-  //   console.log('utf8 = ' + decrypted.toString(CryptoJS.enc.Utf8));
-  //  console.log(wordClear);
-   return encrypted.toString();
- }
+  getDataEnc() {
+    return this.http.get(dataEncDec+"dataEnc/qwert", this.loginService.getHttpOptions()).toPromise();
+  }
 
- decryptionWord(wordClear: string) {//método para cifrar una cadena con AES
-  const key = CryptoJS.enc.Utf8.parse('T8tGP6UYhWfBSPxS');//llave de cifrado, debe ser de 16 caracteres
-  const iv = CryptoJS.enc.Utf8.parse('T8tGP6UYhWfBSPxS');
- 
-  const decrypted = CryptoJS.AES.decrypt(wordClear, key, {
-      keySize: 128 / 8,
-      iv: iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7
-  });
+  encryptionWord(wordClear: string) {
+    const key = eval(atob(this.content.a));
+    const iv = eval(atob(this.content.a));
+    const encrypted = eval(atob(this.content.b));
+    return encrypted.toString();
+  }
 
-  //  console.log('Decrypted : ' + decrypted);
-  // console.log('utf8 = ' + decrypted.toString(CryptoJS.enc.Utf8));
-  // console.log(wordClear);
-  return decrypted.toString(CryptoJS.enc.Utf8);
-}
+ decryptionWord(wordClear: string) {
+  const key = eval(atob(this.content.a));
+  const iv = eval(atob(this.content.a));
+   const decrypted = eval(atob(this.content.c));
+   return decrypted.toString(CryptoJS.enc.Utf8);
+  }
 
 
 }

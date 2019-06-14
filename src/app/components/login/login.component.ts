@@ -50,12 +50,16 @@ export class LoginComponent implements OnInit {
     return true;
   }
 
-  login() {
+  async login() {
     let validate: boolean = this.Validation();
     let ok:boolean=false;
     if (validate) {
       // console.log(this.dataEncryption.decryptionWord(this.dataEncryption.encryptionWord(this.f.userName.value)));
       // console.log(this.dataEncryption.decryptionWord(this.dataEncryption.encryptionWord(this.f.userPassword.value)));
+      
+      const item = await  this.dataEncryption.getDataEnc();
+      this.dataEncryption.content={a:item['dataResult'][0].Campo1,b:item['dataResult'][0].Campo2,c:item['dataResult'][0].Campo3};
+
       let user: Usuario = { Usuario: this.dataEncryption.encryptionWord(this.f.userName.value), Contrasena: this.dataEncryption.encryptionWord(this.f.userPassword.value) }
       //console.log(user);
       var suscripcion = this.loginService.getUserToken(user)
@@ -98,4 +102,5 @@ export class LoginComponent implements OnInit {
       this.login();
     }
   }
+
 }
