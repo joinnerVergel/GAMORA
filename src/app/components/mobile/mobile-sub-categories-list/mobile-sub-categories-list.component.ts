@@ -154,11 +154,16 @@ export class MobileSubCategoriesListComponent implements OnInit, OnDestroy, Comp
           if (item.hasOwnProperty('CategoriaPorIdResult')) {
             const element = item['CategoriaPorIdResult'];
             this.categorySelected.nameCategory = element['CategoriaNombre'];
-            this.categorySelected.createdBy = element['CreadoPor'];
-            this.categorySelected.dateCreated = this.formatDate(element['FecCreacion']);
-            this.categorySelected.dateUpdate = this.formatDate(element['FecActualizacion']);
             this.categorySelected.idCategory = element['IdCategoria'];
-            this.categorySelected.idOperationType = element['IdTipoOperacion'];
+            if(this.categorySelected.nameCategory==null ||this.categorySelected.idCategory ==9){
+              this.logService.addMessage("La ruta a la que intenta acceder no existe", "warning");
+              this.router.navigate(['/events-manager/mobile']);
+            }else{
+              this.categorySelected.createdBy = element['CreadoPor'];
+              this.categorySelected.dateCreated = this.formatDate(element['FecCreacion']);
+              this.categorySelected.dateUpdate = this.formatDate(element['FecActualizacion']);
+              this.categorySelected.idOperationType = element['IdTipoOperacion'];
+            }
           }
         }, error => {
           if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
