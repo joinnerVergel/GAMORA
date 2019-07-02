@@ -37,41 +37,29 @@
                         <div class="efControl">
                             <app-events-sent-daily-detail></app-events-sent-daily-detail>
                         </div>
-
+                        <div class="efControl">
+                            <app-sended-events [operation]="1"></app-sended-events>
+                        </div>
+                        <div class="efControl">
+                            <app-sended-events [operation]="2"></app-sended-events>
+                        </div>
                     </div>
                 </div>
             </ng-template>
         </ngb-panel>
         <ngb-panel>
             <ng-template ngbPanelTitle>
-                <span> Envío de eventos - operación fija </span>
+                <span> Tablas de envío de eventos</span>
             </ng-template>
             <ng-template ngbPanelContent>
                 <div class="center">
                     <div class="category">
-                        <div class="efControl">
-                            <app-sended-events [operation]="1"></app-sended-events>
-                        </div>
                         <div class="efControl">
                             <app-table-history-sended-events [operation]="1"></app-table-history-sended-events>
                         </div>
                         <div class="efControl">
                             <app-table-history-sended-eventsx-account [operation]="1">
                             </app-table-history-sended-eventsx-account>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </ngb-panel>
-        <ngb-panel>
-            <ng-template ngbPanelTitle>
-                <span> Envío de eventos - operación móvil </span>
-            </ng-template>
-            <ng-template ngbPanelContent>
-                <div class="center">
-                    <div class="category">
-                        <div class="efControl">
-                            <app-sended-events [operation]="2"></app-sended-events>
                         </div>
                         <div class="efControl">
                             <app-table-history-sended-events [operation]="2"></app-table-history-sended-events>
@@ -86,10 +74,10 @@
         </ngb-panel>
         <ngb-panel>
             <ng-template ngbPanelTitle>
-                <span> Medidor de eficiencia por subcategoria de eventos - operación fija </span>
+                <span> Medidor de eficiencia por subcategoria de eventos - operación fija - <span class="date">{{FirtDateFixed}}</span> </span>
             </ng-template>
             <ng-template ngbPanelContent>
-                <div class="center">
+                <div class="center eff">
                     <div class="category" *ngFor="let ItemCategory of FixedCategories">
                         <div class="categoryName">{{ItemCategory.category}}</div>
                         <div class="efControl" *ngFor="let item of ItemCategory.Subcategories">
@@ -102,10 +90,10 @@
         </ngb-panel>
         <ngb-panel>
             <ng-template ngbPanelTitle>
-                <span> Medidor de eficiencia por subcategoria de eventos - operación móvil </span>
+                <span> Medidor de eficiencia por subcategoria de eventos - operación móvil <span class="date">{{FirtDateMobile}}</span></span>
             </ng-template>
             <ng-template ngbPanelContent>
-                <div class="center">
+                <div class="center eff">
                     <div class="category" *ngFor="let ItemCategory of MobileCategories">
                         <div class="categoryName">{{ItemCategory.category}}</div>
                         <div class="efControl" *ngFor="let item of ItemCategory.Subcategories">

@@ -19,11 +19,16 @@ export class ReportsComponent implements ComponentCanDeactivate, OnInit {
   FixedCategories: any = [];
   MobileCategories: any = [];
 
+  FirtDateFixed:string;
+  FirtDateMobile:string;
+
   constructor(private router: Router, private loginService: LoginService, private portfoliosServices: PortfoliosService) { }
 
   ngOnInit() {
     this.readSubCategories(1);
     this.readSubCategories(2);
+    this.readDateHistory(1);
+    this.readDateHistory(2);
   }
 
   readVisibilityActions(data: string) {
@@ -104,5 +109,29 @@ export class ReportsComponent implements ComponentCanDeactivate, OnInit {
       );
   }
 
+
+  readDateHistory(operation: number) {
+    this.portfoliosServices.getDashboard("firstDate", operation.toString())
+      .subscribe(
+        item => {
+          if (item.hasOwnProperty('listaGenericaConsultaResult')) {
+              item['listaGenericaConsultaResult'].forEach(element => {
+                if (operation == 1) {
+                  this.FirtDateFixed = element.Campo1;
+                }
+                if (operation == 2) {
+                  this.FirtDateMobile = element.Campo1;
+                }
+              });
+          }
+        },
+        error => {
+          if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
+            this.loginService.clearSessionLogin();
+            this.router.navigate(['/login']);
+          }
+        }
+      );
+  }
 
 }

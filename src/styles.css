@@ -533,6 +533,10 @@ app-sended-events rect{
     cursor: pointer !important;
 }
 
+app-effectiveness-gauge g>g>text {
+    font-size: 14px;
+}
+
 /* app-reports .card{
     display: table;
     float: left;

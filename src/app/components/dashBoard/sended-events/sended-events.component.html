@@ -5,7 +5,7 @@
       Categoria {{categoryActivated}}
   </div>
   <div  class="back" *ngIf="listCategories.length > 0">
-    Envío de eventos x categoría
+    Envío de eventos x categoría - {{operation==1?'FIJA':'MÓVIL'}}
   </div>
 </div>
 <google-chart #googlechart *ngIf="chart.data.length>0"

@@ -159,7 +159,7 @@ export class FixedSubCategoriesListComponent implements OnInit, OnDestroy, Compo
             const element = item['CategoriaPorIdResult'];
             this.categorySelected.nameCategory = element['CategoriaNombre'];
             this.categorySelected.idCategory = element['IdCategoria'];
-            if(this.categorySelected.nameCategory==null ||this.categorySelected.idCategory ==2){
+            if(this.categorySelected.nameCategory==null){
               this.logService.addMessage("La ruta a la que intenta acceder no existe", "warning");
               this.router.navigate(['/events-manager/fixed']);
             }else{
