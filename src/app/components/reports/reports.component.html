@@ -1,29 +1,44 @@
-<!-- <h4 class="title">Informes</h4> -->
-<!-- <div class="buttonsContainer" *ngIf="readVisibilityActions('DESCARGAR_REPORTE')">
+<!-- <h4 class="title">Informes</h4>
+<div class="buttonsContainer" *ngIf="readVisibilityActions('DESCARGAR_REPORTE')">
     Descarga
     <a href="https://nlbevolution/GAMORA/Informe.xlsx">aquí</a>
     un archivo de excel con conexion a reportes.
 </div> -->
 
-<!-- <app-sended-events></app-sended-events> -->
+
 
 
 <div class="charts">
     <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-            <ngb-panel>
-                    <ng-template ngbPanelTitle>
-                        <span> Monitoreo de Consolas </span>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="center">
-                            <div class="category">
-                                <div>
-                                    <app-monitoring-of-consoles></app-monitoring-of-consoles>
-                                </div>
-                            </div>
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span>Informe Gran Base</span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="center">
+                    <div class="category DW">
+                        <div class="downloadExcel">
+                            <a href="https://nlbevolution/GAMORA/Informe.xlsx"></a>
                         </div>
-                    </ng-template>
-                </ngb-panel>
+                        Descarga el informe
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span> Monitoreo de Consolas </span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="center">
+                    <div class="category">
+                        <div>
+                            <app-monitoring-of-consoles></app-monitoring-of-consoles>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
         <ngb-panel>
             <ng-template ngbPanelTitle>
                 <span> Envío de eventos diario </span>
@@ -58,11 +73,11 @@
                             <app-table-history-sended-events [operation]="1"></app-table-history-sended-events>
                         </div>
                         <div class="efControl">
-                            <app-table-history-sended-eventsx-account [operation]="1">
-                            </app-table-history-sended-eventsx-account>
+                            <app-table-history-sended-events [operation]="2"></app-table-history-sended-events>
                         </div>
                         <div class="efControl">
-                            <app-table-history-sended-events [operation]="2"></app-table-history-sended-events>
+                            <app-table-history-sended-eventsx-account [operation]="1">
+                            </app-table-history-sended-eventsx-account>
                         </div>
                         <div class="efControl">
                             <app-table-history-sended-eventsx-account [operation]="2">
@@ -74,7 +89,8 @@
         </ngb-panel>
         <ngb-panel>
             <ng-template ngbPanelTitle>
-                <span> Medidor de eficiencia por subcategoria de eventos - operación fija - <span class="date">{{FirtDateFixed}}</span> </span>
+                <span> Medidor de eficiencia por subcategoria de eventos - operación fija - <span
+                        class="date">{{FirtDateFixed}}</span> </span>
             </ng-template>
             <ng-template ngbPanelContent>
                 <div class="center eff">
@@ -90,7 +106,8 @@
         </ngb-panel>
         <ngb-panel>
             <ng-template ngbPanelTitle>
-                <span> Medidor de eficiencia por subcategoria de eventos - operación móvil <span class="date">{{FirtDateMobile}}</span></span>
+                <span> Medidor de eficiencia por subcategoria de eventos - operación móvil <span
+                        class="date">{{FirtDateMobile}}</span></span>
             </ng-template>
             <ng-template ngbPanelContent>
                 <div class="center eff">

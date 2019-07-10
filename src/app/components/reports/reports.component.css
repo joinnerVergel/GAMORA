@@ -63,3 +63,21 @@
     border-radius: 7px 0;
     margin: 0 10px;
 }
+
+.downloadExcel{
+    background: transparent url('../../resources/img/excelDownload.png') no-repeat center/50px;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    cursor:pointer;
+}
+
+.downloadExcel a{
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+.DW{
+    color: #fff;
+    font-size: 10px;
+}
