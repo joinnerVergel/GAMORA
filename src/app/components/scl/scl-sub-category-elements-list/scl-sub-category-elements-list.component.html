@@ -1,0 +1,115 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="light">Gestión de Subcategoría</h5>
+    <ul class="nav flex-column treeNavigation">
+      <li class="nav-item father" [routerLinkActive]="'active'">
+        <a class="nav-link" (click)="backPage()" routerLink="/management-groups/fixed">
+          <fa-icon [icon]="categoryIcon"></fa-icon><span>{{categorySelected.nameCategory}}</span>
+        </a>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active">
+              <fa-icon [icon]="subcategoryIcon"></fa-icon><span>{{subCategorySelected.nameSubCategory}}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <app-time-line-events [elementsTimeLine]="subCategoryElementsList"></app-time-line-events>
+  </div>
+  <!-- ********Body********* -->
+  <div class="card-body">
+    <div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_ELEMENTO')">
+      <button type="button" class="btn btn-primary btnNew" (click)=" toggleFormNewSubCategoryElement()" *ngIf="!newSubCategoryElementFormView">Agregar
+        Elemento
+      </button>
+    </div>
+    <form [formGroup]="newSubCategoryElementForm" *ngIf="newSubCategoryElementFormView" class="newForm">
+      <div class="buttonsContainer">
+        <span>Nuevo Elemento</span>
+        <button type="button" class="btn btn-primary" (click)="open(content,-1)">Crear</button>
+        <button type="button" class="btn btn-outline-secondary" (click)=" toggleFormNewSubCategoryElement()">Cancelar</button>
+      </div>
+      <div class="containerLeft">
+        <div class="form-group">
+          <label>Nombre del elemento</label>
+          <input type="text" formControlName="subCategoryElementName" class="form-control" (keypress)="generalKeyPressEvent($event.key,50,f.subCategoryElementName,true)"
+            [ngClass]="{ 'is-invalid': submitted && f.subCategoryElementName.errors }" required />
+          <div *ngIf="submitted && f.subCategoryElementName.errors" class="invalid-feedback">
+            <div *ngIf="f.subCategoryElementName.errors.required">El nombre del elemento es obligatorio</div>
+          </div>
+        </div>
+      </div>
+      <app-age-debt [submitted]="submitted" [fieldRequired]="isRequired('EDAD_MORA')" (ageChange)="setAge($event)"
+        (ageConditionChange)="setAgeCondition($event)" (validateChange)="ageValidationChange($event)"></app-age-debt>
+      <app-subject *ngIf="categoryId==17" [submitted]="submitted" [fieldRequired]="isRequired('ASUNTO')" (subjectChange)="setSubject($event)"
+        (validateChange)="subjectValidationChange($event)"></app-subject>
+      <app-email-templates *ngIf="categoryId==17" [data]="script" [submitted]="submitted" [fieldRequired]="isRequired('PLANTILLA')"
+        (templateOptionChange)="setTemplateOption($event)" (validateChange)="templateEmailOptionValidationChange($event)"></app-email-templates>
+      <app-script-message *ngIf="categoryId!=18" [submitted]="submitted" [fieldRequired]="isRequired('SCRIPT')" [linkCharactersQuantity]="getLinkCharactersQuantity()"
+        (scriptChange)="setScript($event)" (validateChange)="scriptValidationChange($event)" [quantityLimit]="quantityLimit"></app-script-message>
+      <app-link *ngIf="categoryId==15 ||categoryId==17 ||categoryId==19" [submitted]="submitted" [fieldRequired]="isRequired('LINK')"
+        [scriptCharactersQuantity]="getScriptCharactersQuantity()" (linkChange)="setLink($event)" (validateChange)="linkValidationChange($event)"
+        (tagLinkChange)="setTagLink($event)" [quantityLimit]="quantityLimit"></app-link>
+      <app-contact-options [submitted]="submitted" [fieldRequired]="isRequired('CONTACTO')" (contactOptionChange)="setContactOption($event)"
+        (validateChange)="contactOptionValidationChange($event)" [selectValue]="contactValue"></app-contact-options>
+      <!-- <app-attachment></app-attachment> -->
+    </form>
+    <ng-template #content let-c="close" let-d="dismiss">
+      <app-confirm-dialog [description]="'Se va a crear un nuevo elemento.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+        (result)="action($event)"></app-confirm-dialog>
+    </ng-template>
+    <ng-template #contentDelete let-c="close" let-d="dismiss">
+        <app-confirm-dialog [description]="'Se va a eliminar el elemento.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+          (result)="actionDelete($event)"></app-confirm-dialog>
+      </ng-template>
+
+    <div class="table-responsive-md listaTabla">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Elemento</th>
+            <th scope="col">Edad de Mora</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Asunto</th>
+            <th scope="col">Tag Link</th>
+            <th scope="col">Fecha Creación</th>
+            <th scope="col">Última Actualización</th>
+            <th scope="col">Creado por</th>
+            <th scope="col" *ngIf="readVisibilityActions('EDITAR_ELEMENTO') || readVisibilityActions('ELIMINAR_ELEMENTO')">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let subcategoryElement of subCategoryElementsList">
+            <th scope="row">{{subcategoryElement.item}}</th>
+            <td>{{subcategoryElement.nameElement}}</td>
+            <td>{{subcategoryElement.debtAge}}</td>
+            <td>{{subcategoryElement.scriptSms}}</td>
+            <td>{{subcategoryElement.subjectElement}}</td>
+            <td>{{subcategoryElement.tagLink}}</td>
+            <td>{{subcategoryElement.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+            <td>{{subcategoryElement.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+            <td>{{subcategoryElement.createdBy}}</td>
+            <td *ngIf="readVisibilityActions('EDITAR_ELEMENTO') || readVisibilityActions('ELIMINAR_ELEMENTO')">
+              <div class="actions radiosContainer" *ngIf="readVisibilityActions('EDITAR_ELEMENTO')">
+                  <div class="btn-group btn-group-toggle" ngbRadioGroup name="stateSelectRadio" [(ngModel)]="subcategoryElement.state">
+                    <label ngbButtonLabel class="btn-success">
+                      <input ngbButton type="radio" [value]="true" (change)="dataChange(subcategoryElement.idElement)"> Activo
+                    </label>
+                    <label ngbButtonLabel class="btn-danger">
+                      <input ngbButton type="radio" [value]="false" (change)="dataChange(subcategoryElement.idElement)"> Inactivo
+                    </label>
+                  </div>
+              </div>
+              <div class="actions">
+                  <button type="button" *ngIf="readVisibilityActions('ELIMINAR_ELEMENTO') && !subcategoryElement.sended" class="btnAction btnDelete" placement="bottom" ngbTooltip="Eliminar" tooltipClass="tooltipDelete" (click)="open(contentDelete,subcategoryElement.idElement)">
+                    <fa-icon [icon]="deleteIcon"></fa-icon>
+                  </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

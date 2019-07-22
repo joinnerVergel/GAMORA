@@ -30,4 +30,11 @@ export class ManageBrandsComponent implements OnInit {
     return "";
   }
 
+  getSclClass(){
+    if(this.router.url.includes("/manage-brands/scl",0)){
+      return "active";
+    }
+    return "";
+  }
+
 }

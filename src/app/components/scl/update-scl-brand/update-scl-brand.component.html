@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-header">
+    <h6>Actualización de Filtro Dinámico</h6>
+  </div>
+  <div class="card-body">
+    <div *ngIf="!viewNewBrandsForm" class="loading">
+      <h6> Por favor... Espere mientras se carga la información de la marca y se actualiza el filtro dinámico </h6>
+    </div>
+    <div class="shadow p-3 mb-5 bg-white rounded" *ngIf="!(filesDirectory.length>0)">
+      <div>
+        <fa-icon [icon]="folder"></fa-icon>No existen archivos en la ruta que puedan ser cargados....
+      </div>
+    </div>
+    <form [formGroup]="newBrandForm" *ngIf="viewNewBrandsForm && (filesDirectory.length>0)">
+      <div class="form-group">
+        <label>Nombre de la Marca: <span>{{brandName}}</span></label>
+       </div>
+      <label>
+        <fa-icon [icon]="folder"></fa-icon>Seleccione el archivo correspondiente
+      </label>
+      <div class="form-group shadow p-3 mb-5 bg-white rounded">
+        <div class="form-check" *ngFor="let f of filesDirectory">
+          <input class="form-check-input" type="radio" formControlName="fileOption" value="{{f.file}}">
+          <label class="form-check-label" for="radio_FilesList">
+            {{f.file}}
+          </label>
+        </div>
+      </div>
+      <div *ngIf="submitted && f.fileOption.errors" class="invalid-feedback fileValidate">
+        <div *ngIf="f.fileOption.errors.required">Debe seleccionar un archivo con el listado de cuentas que se
+          identificaran con la marca</div>
+      </div>
+    </form>
+    <div class="divInfo">
+        El archivo debe cumplir los siguientes criterios
+        <ul>
+          <li>La extension del archivo debe ser .csv</li>
+          <li>El archivo debe tener dos columnas de texto separadas por punto y coma(;)</li>
+          <li>La primera columna de texto corresponde al numero de cuenta del cliente</li>
+          <li>La segunda columna de texto corresponde al nombre del filtro o marca, que se asocia a la cuenta de la primera columna</li>
+        </ul>
+    </div>
+  </div>
+  <div class="card-footer" *ngIf="viewNewBrandsForm">
+    <ng-template #content let-c="close" let-d="dismiss">
+      <app-confirm-dialog [description]="'Se va a actualizar la marca seleccionada.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+        (result)="action($event)"></app-confirm-dialog>
+    </ng-template>
+    <button type="button" class="btn btn-primary" (click)="open(content)" *ngIf="filesDirectory.length>0">Actualizar</button>
+    <button type="button" class="btn btn-outline-secondary" [routerLink]='["/manage-brands/scl"]'>Cancelar</button>
+  </div>
+</div>

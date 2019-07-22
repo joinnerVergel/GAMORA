@@ -1,0 +1,42 @@
+.filterGroup{
+    display: table-row;
+}
+.filter {
+    display: table-cell;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-top: 0;
+    border-bottom: 0;
+    float: left;
+    width: 200px;
+    height: 170px;
+}
+
+.checkboxItem{
+    background: #ddd;
+    border-radius: 5px 5px 0 0;
+    padding: 3px 2rem;
+}
+.items{
+    padding: 5px 2rem;
+}
+fa-icon{
+    color: rgba(13,157,174,1);
+    margin: 10px;
+}
+
+.card-footer{
+    overflow: hidden;
+}
+.card-footer button{
+    float: right;
+    margin: 10px;
+}
+.divInfo{
+    font-size: 0.7em;
+    color: rgba(13,62,80,1);
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

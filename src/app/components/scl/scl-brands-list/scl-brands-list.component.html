@@ -1,0 +1,47 @@
+<div class="actionsContainer" *ngIf="readVisibilityActions('CREAR_MARCA')"><button type="button"
+  class="btn btn-primary btnNew" [routerLink]='["/manage-brands/scl/new-brand"]'>Crear
+  Filtro</button></div>
+<div class="table-responsive-md listaTabla">
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Fecha Creación</th>
+      <th scope="col">Última Actualización</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Estado</th>
+      <th scope="col" *ngIf="readVisibilityActions('ELIMINAR_MARCA') || readVisibilityActions('EDITAR_MARCA')">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brand of brandsList">
+      <th scope="row">{{brand.item}}</th>
+      <td>{{brand.brand}}</td>
+      <td>{{brand.dateCreated | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+      <td>{{brand.dateUpdate | date: 'yyyy-MM-dd hh:mm:ss a'}}</td>
+      <td>{{brand.quantity}}</td>
+      <td>
+        <div class="state" [ngClass]="getStateClass(brand.state)">{{getState(brand.state)}}</div>
+      </td>
+      <td *ngIf="readVisibilityActions('ELIMINAR_MARCA') || readVisibilityActions('EDITAR_MARCA')">
+        <div class="actions">
+          <button type="button" *ngIf="readVisibilityActions('ELIMINAR_MARCA')" class="btnAction btnDelete"
+            placement="bottom" ngbTooltip="Eliminar" tooltipClass="tooltipDelete"
+            (click)="deleteBrandChange(brand);open(content);">
+            <fa-icon [icon]="deleteIcon"></fa-icon>
+          </button>
+          <button type="button" *ngIf="readVisibilityActions('EDITAR_MARCA')" class="btnAction btnView"
+            placement="bottom" ngbTooltip="Actualizar" tooltipClass="tooltipEdit" (click)="editBrand(brand.brand)">
+            <fa-icon [icon]="editIcon"></fa-icon>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #content let-c="close" let-d="dismiss">
+  <app-confirm-dialog [description]="'Se va a eliminar una marca.'"
+    [question]="'¿Está seguro de ejecutar esta acción?'" (result)="action($event)"></app-confirm-dialog>
+</ng-template>
+</div>

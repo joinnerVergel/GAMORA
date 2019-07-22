@@ -1,0 +1,67 @@
+.buttonsContainer button{
+    float: right;
+    margin: 10px;
+}
+
+.form-group {
+    width: 240px;
+    float: left;
+    margin: 10px;
+    max-width: 90%;
+    padding: 10px;
+    border: 2px inset #fff;
+    border-radius: 5px;
+}
+
+.newForm{
+    position: relative;
+    padding: 0px;
+}
+.buttonsContainer {
+    display: block;
+    background: #fff;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+}
+.buttonsContainer span{
+    padding: 10px 20px;
+    font-weight: bold;
+    float: left;
+}
+.containerLeft{
+    float: left;
+    max-width: 100%;
+}
+
+.Validation{
+    display: block;
+}
+.newForm{
+    overflow: visible;
+}
+
+table thead th:last-child{
+    min-width: 120px;
+}
+table thead th,
+table tbody td{
+    text-align: center;
+}
+.listaTabla{
+    overflow: auto;
+}
+
+.radiosContainer .btn-group{
+    display: inline-block;
+    margin: 0 10px 10px;
+}
+.radiosContainer .btn-group label{
+    font-size: 0.5em;
+}
+
+.radiosContainer .btn-group label:not(.active){
+    background-color: #ddd;
+    color: #777;
+    border: 1px solid #777;
+}

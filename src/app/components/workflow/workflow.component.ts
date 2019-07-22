@@ -28,4 +28,11 @@ export class WorkflowComponent implements OnInit {
     return "";
   }
 
+  getSclClass(){
+    if(this.router.url.includes("/workflow/scl",0)){
+      return "active";
+    }
+    return "";
+  }
+
 }

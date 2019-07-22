@@ -29,6 +29,13 @@ export class EventsManagerComponent implements OnInit {
     return "";
   }
 
+  getSclClass(){
+    if(this.router.url.includes("/events-manager/scl",0)){
+      return "active";
+    }
+    return "";
+  }
+
  
 
   ViewModal(content) {

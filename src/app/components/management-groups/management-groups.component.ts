@@ -28,4 +28,11 @@ export class ManagementGroupsComponent implements OnInit {
     return "";
   }
 
+  getSclClass(){
+    if(this.router.url.includes("/management-groups/scl",0)){
+      return "active";
+    }
+    return "";
+  }
+
 }

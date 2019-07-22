@@ -1,0 +1,25 @@
+<form [formGroup]="newWorkflowForm" class="newForm">
+  <div class="buttonsContainer">
+    <span>Crear flujo de eventos</span>
+    <button type="button" class="btn btn-primary" (click)="open(content)">Crear</button>
+    <button type="button" class="btn btn-outline-secondary" [routerLink]='["/workflow/fixed"]'>Regresar</button>
+  </div>
+  <div class="form-group">
+    <label>Nombre del flujo</label>
+    <input type="text" formControlName="workflowName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.workflowName.errors }"
+      (keypress)="generalKeyPressEvent($event.key,50,f.workflowName,true)" (change)="updateWorkFlow()" />
+    <div *ngIf="submitted && f.workflowName.errors" class="invalid-feedback">
+      <div *ngIf="f.workflowName.errors.required">El nombre del flujo de eventos es obligatorio</div>
+    </div>
+  </div>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <app-confirm-dialog [description]="'Se va a crear un nuevo flujo de eventos.'" [question]="'¿Está seguro de ejecutar esta acción?'"
+      (result)="action($event)"></app-confirm-dialog>
+  </ng-template>
+</form>
+<div class="divContainerWorkflow">
+  <app-toolbox-workflow [operation]="3"></app-toolbox-workflow>
+  <div class="sheet">
+    <app-workflow-area [newLine]="readNewLine()"></app-workflow-area>
+  </div>
+</div>

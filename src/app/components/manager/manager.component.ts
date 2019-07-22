@@ -26,4 +26,11 @@ export class ManagerComponent implements OnInit {
     }
     return "";
   }
+
+  getSclClass(){
+    if(this.router.url.includes("/manager/scl",0)){
+      return "active";
+    }
+    return "";
+  }
 }

@@ -99,6 +99,19 @@ import { EffectivenessGaugeComponent } from './components/dashBoard/effectivenes
 import { EventsSentDailyComponent } from './components/dashBoard/events-sent-daily/events-sent-daily.component';
 import { EventsSentDailyDetailComponent } from './components/dashBoard/events-sent-daily-detail/events-sent-daily-detail.component';
 import { MonitoringOfConsolesComponent } from './components/dashBoard/monitoring-of-consoles/monitoring-of-consoles.component';
+import { SclBrandsListComponent } from './components/scl/scl-brands-list/scl-brands-list.component';
+import { SclCategoryListComponent } from './components/scl/scl-category-list/scl-category-list.component';
+import { SclEditWorkFlowComponent } from './components/scl/scl-edit-work-flow/scl-edit-work-flow.component';
+import { SclGroupsListComponent } from './components/scl/scl-groups-list/scl-groups-list.component';
+import { SclManagerListComponent } from './components/scl/scl-manager-list/scl-manager-list.component';
+import { SclSubCategoriesListComponent } from './components/scl/scl-sub-categories-list/scl-sub-categories-list.component';
+import { SclSubCategoryElementsListComponent } from './components/scl/scl-sub-category-elements-list/scl-sub-category-elements-list.component';
+import { SclWorkflowListComponent } from './components/scl/scl-workflow-list/scl-workflow-list.component';
+import { NewSclBrandComponent } from './components/scl/new-scl-brand/new-scl-brand.component';
+import { NewSclManagementComponent } from './components/scl/new-scl-management/new-scl-management.component';
+import { NewSclManagementGroupComponent } from './components/scl/new-scl-management-group/new-scl-management-group.component';
+import { NewSclWorkflowComponent } from './components/scl/new-scl-workflow/new-scl-workflow.component';
+import { UpdateSclBrandComponent } from './components/scl/update-scl-brand/update-scl-brand.component';
 
 
 
@@ -183,7 +196,20 @@ import { MonitoringOfConsolesComponent } from './components/dashBoard/monitoring
     EffectivenessGaugeComponent,
     EventsSentDailyComponent,
     EventsSentDailyDetailComponent,
-    MonitoringOfConsolesComponent
+    MonitoringOfConsolesComponent,
+    SclBrandsListComponent,
+    SclCategoryListComponent,
+    SclEditWorkFlowComponent,
+    SclGroupsListComponent,
+    SclManagerListComponent,
+    SclSubCategoriesListComponent,
+    SclSubCategoryElementsListComponent,
+    SclWorkflowListComponent,
+    NewSclBrandComponent,
+    NewSclManagementComponent,
+    NewSclManagementGroupComponent,
+    NewSclWorkflowComponent,
+    UpdateSclBrandComponent
 
   ],
   imports: [
@@ -215,6 +241,8 @@ import { MonitoringOfConsolesComponent } from './components/dashBoard/monitoring
               { path: 'fixed/new-group', component: NewFixedManagementGroupComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'mobile', component: MobileGroupsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'mobile/new-group', component: NewMobileManagementGroupComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'scl', component: SclGroupsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'scl/new-group', component: NewSclManagementGroupComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
@@ -226,6 +254,9 @@ import { MonitoringOfConsolesComponent } from './components/dashBoard/monitoring
               { path: 'mobile', component: MobileBrandsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'mobile/new-brand', component: NewMobileBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'mobile/updateBrand/:name', component: UpdateMobileBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'scl', component: SclBrandsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'scl/new-brand', component: NewSclBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'scl/updateBrand/:name', component: UpdateSclBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
@@ -237,6 +268,9 @@ import { MonitoringOfConsolesComponent } from './components/dashBoard/monitoring
               { path: 'mobile', component: MobileCategoryListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'mobile/category/:id', component: MobileSubCategoriesListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'mobile/category/:id/sub-category/:ref', component: MobileSubCategoryElementsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'scl', component: SclCategoryListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'scl/category/:id', component: SclSubCategoriesListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'scl/category/:id/sub-category/:ref', component: SclSubCategoryElementsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
             ]
           },
           { path: 'users-manager', component: UsersManagerComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ=='] } },
@@ -249,6 +283,9 @@ import { MonitoringOfConsolesComponent } from './components/dashBoard/monitoring
               { path: 'mobile', component: MobileWorkflowListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'mobile/new-workflow', component: NewMobileWorkflowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'mobile/edit-workflow/:id', component: MobileEditWorkFlowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'scl', component: SclWorkflowListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'scl/new-workflow', component: NewSclWorkflowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'scl/edit-workflow/:id', component: SclEditWorkFlowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
@@ -258,6 +295,8 @@ import { MonitoringOfConsolesComponent } from './components/dashBoard/monitoring
               { path: 'fixed/new-management', component: NewFixedManagementComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'mobile', component: MobileManagerListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'mobile/new-management', component: NewMobileManagementComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'scl', component: SclManagerListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'scl/new-management', component: NewSclManagementComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
