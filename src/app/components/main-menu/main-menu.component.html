@@ -64,6 +64,11 @@
             <fa-icon [icon]="agreementIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Configuracion de Acuerdos</span>
           </a>
         </li>
+        <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_ENVIOS')">
+          <a class="nav-link" routerLink="/sentEvents">
+            <fa-icon [icon]="sendedIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Registro de envíos</span>
+          </a>
+        </li> 
       <li class="nav-item" [routerLinkActive]="'active'" *ngIf="readVisibilityActions('CONSULTAR_USUARIO')">
         <a class="nav-link" routerLink="/users-manager">
           <fa-icon [icon]="usersIcon" class="icon"></fa-icon><span class="titleItem" [ngClass]="titleItemClass">Gestión

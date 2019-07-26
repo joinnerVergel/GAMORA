@@ -112,6 +112,7 @@ import { NewSclManagementComponent } from './components/scl/new-scl-management/n
 import { NewSclManagementGroupComponent } from './components/scl/new-scl-management-group/new-scl-management-group.component';
 import { NewSclWorkflowComponent } from './components/scl/new-scl-workflow/new-scl-workflow.component';
 import { UpdateSclBrandComponent } from './components/scl/update-scl-brand/update-scl-brand.component';
+import { SentEventsComponent } from './components/sent-events/sent-events.component';
 
 
 
@@ -209,7 +210,8 @@ import { UpdateSclBrandComponent } from './components/scl/update-scl-brand/updat
     NewSclManagementComponent,
     NewSclManagementGroupComponent,
     NewSclWorkflowComponent,
-    UpdateSclBrandComponent
+    UpdateSclBrandComponent,
+    SentEventsComponent
 
   ],
   imports: [
@@ -307,7 +309,11 @@ import { UpdateSclBrandComponent } from './components/scl/update-scl-brand/updat
               { path: '', redirectTo: 'discounts', pathMatch: 'full' },
               { path: 'discounts', component: DiscountsComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } }
             ]
+          },
+          {
+            path: 'sentEvents', component: SentEventsComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] }
           }
+
 
         ]
       }

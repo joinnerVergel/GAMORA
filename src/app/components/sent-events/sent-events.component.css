@@ -1,0 +1,29 @@
+.filter{
+    width: 230px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+.filter *{
+    float: left;
+}
+.filter input{
+    width: 200px;
+}
+
+.btn-primary{
+    color: #fff;
+    background: linear-gradient(to bottom,#fff,#ddd);
+    border-color: #ddd;
+    color: #444;
+}
+.btn-primary:not(:disabled):not(.disabled).active{
+    color: #fff;
+    background: linear-gradient(to bottom,rgba(13,62,80,.7),rgba(13,157,174,.7));
+    border: 3px inset #ddd;
+    color:#fff;
+    box-shadow: none;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active{
+    border: 3px inset skyblue;
+}
