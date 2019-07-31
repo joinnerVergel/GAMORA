@@ -33,4 +33,11 @@ export class ManagerComponent implements OnInit {
     }
     return "";
   }
+
+  getDavoxClass(){
+    if(this.router.url.includes("/manager/davox",0)){
+      return "active";
+    }
+    return "";
+  }
 }

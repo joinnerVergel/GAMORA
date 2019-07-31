@@ -1,0 +1,15 @@
+/* .listaTabla{
+    margin: 20px 0;
+} */
+
+.state{
+    background: darksalmon;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px 0;
+    width: 70px;
+}
+
+.activeState{
+    background: yellowgreen;
+}

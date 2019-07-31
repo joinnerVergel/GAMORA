@@ -35,4 +35,11 @@ export class ManagementGroupsComponent implements OnInit {
     return "";
   }
 
+  getDavoxClass(){
+    if(this.router.url.includes("/management-groups/davox",0)){
+      return "active";
+    }
+    return "";
+  }
+
 }

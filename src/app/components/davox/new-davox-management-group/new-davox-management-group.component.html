@@ -1,0 +1,58 @@
+<div class="card">
+  <div class="card-header">
+    <h6>Creación Nuevo Grupo de Gestión</h6>
+    <h6>Cantidad de Cuentas:&nbsp;&nbsp;<span>{{quantityClients}}</span></h6>
+  </div>
+  <!-- ********Body********* -->
+  <div class="card-body">
+    <form [formGroup]="newManagementGroupForm">
+      <div class="form-group">
+        <label>Nombre del Grupo</label>
+        <input type="text" formControlName="groupName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.groupName.errors }"
+          required />
+        <div *ngIf="submitted && f.groupName.errors" class="invalid-feedback">
+          <div *ngIf="f.groupName.errors.required">El nombre del grupo es obligatorio</div>
+        </div>
+      </div>
+      <app-age-debt [submitted]="submitted" [fieldRequired]="true" (ageChange)="setAge($event)"  (ageConditionChange)="setAgeCondition($event)"  (validateChange)="ageValidationChange($event)"></app-age-debt>
+      <!-- filtros fijos -->
+      <label>
+        <fa-icon [icon]="filterIcon" class="icon"></fa-icon>Filtros Fijos
+      </label>
+      <div class="divInfo">
+        Nota:
+        <ul>
+          <li>Los filtros de Regional y Departamento son excluyentes (solo puede seleccionar uno de los dos)</li>
+        </ul>
+      </div>
+      <div class="form-group shadow p-3 mb-5 bg-white rounded filterGroup">
+        <app-filter-debt-value (removeItem)="removeFilterFixed($event)" (removeItemSingle)="removeFilterSingle($event)"
+          (addItem)="addItemList($event)"></app-filter-debt-value>
+        <app-department-filter (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-department-filter>
+        <app-segment-filter [operationType]="4" (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-segment-filter>
+        <app-tenure-filter [operationType]="4" (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-tenure-filter>
+        <app-regional-filter (removeItem)="removeItemList($event)" (addItem)="addItemList($event)"></app-regional-filter>
+      </div>
+      <!-- filtros dinamicos -->
+      <label>
+        <fa-icon [icon]="filterIcon" class="icon"></fa-icon>Filtros Dinamicos
+      </label>
+      <div class="form-group shadow p-3 mb-5 bg-white rounded filterGroup">
+        <div *ngFor="let brand of brandsList" class="filter">
+          <app-dinamic-filter [brand]="brand.brand" [options]="brand.options" (removeItem)="removeItemList($event)"
+            (addItem)="addItemList($event)"></app-dinamic-filter>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- ********Footer********* -->
+  <div class="card-footer">
+    <ng-template #content let-c="close" let-d="dismiss">
+      <app-confirm-dialog [description]="'Se va a crear un nuevo grupo de gestión.'"
+        [question]="'¿Está seguro de ejecutar esta acción?'" (result)="action($event)"></app-confirm-dialog>
+    </ng-template>
+    <button type="button" class="btn btn-primary" (click)="open(content)">Crear</button>
+    <button type="button" class="btn btn-outline-secondary" [routerLink]='["/management-groups/davox"]'>Cancelar</button>
+  </div>
+</div>

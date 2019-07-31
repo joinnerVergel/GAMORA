@@ -113,6 +113,19 @@ import { NewSclManagementGroupComponent } from './components/scl/new-scl-managem
 import { NewSclWorkflowComponent } from './components/scl/new-scl-workflow/new-scl-workflow.component';
 import { UpdateSclBrandComponent } from './components/scl/update-scl-brand/update-scl-brand.component';
 import { SentEventsComponent } from './components/sent-events/sent-events.component';
+import { DavoxBrandListComponent } from './components/davox/davox-brand-list/davox-brand-list.component';
+import { DavoxCategoryListComponent } from './components/davox/davox-category-list/davox-category-list.component';
+import { DavoxEditWorkFlowComponent } from './components/davox/davox-edit-work-flow/davox-edit-work-flow.component';
+import { DavoxGroupsListComponent } from './components/davox/davox-groups-list/davox-groups-list.component';
+import { DavoxManagerListComponent } from './components/davox/davox-manager-list/davox-manager-list.component';
+import { DavoxSubCategoriesListComponent } from './components/davox/davox-sub-categories-list/davox-sub-categories-list.component';
+import { DavoxSubCategoryElementsListComponent } from './components/davox/davox-sub-category-elements-list/davox-sub-category-elements-list.component';
+import { DavoxWorkflowListComponent } from './components/davox/davox-workflow-list/davox-workflow-list.component';
+import { NewDavoxBrandComponent } from './components/davox/new-davox-brand/new-davox-brand.component';
+import { NewDavoxManagementComponent } from './components/davox/new-davox-management/new-davox-management.component';
+import { NewDavoxManagementGroupComponent } from './components/davox/new-davox-management-group/new-davox-management-group.component';
+import { NewDavoxWorkflowComponent } from './components/davox/new-davox-workflow/new-davox-workflow.component';
+import { UpdateDavoxBrandComponent } from './components/davox/update-davox-brand/update-davox-brand.component';
 
 
 
@@ -211,7 +224,20 @@ import { SentEventsComponent } from './components/sent-events/sent-events.compon
     NewSclManagementGroupComponent,
     NewSclWorkflowComponent,
     UpdateSclBrandComponent,
-    SentEventsComponent
+    SentEventsComponent,
+    DavoxBrandListComponent,
+    DavoxCategoryListComponent,
+    DavoxEditWorkFlowComponent,
+    DavoxGroupsListComponent,
+    DavoxManagerListComponent,
+    DavoxSubCategoriesListComponent,
+    DavoxSubCategoryElementsListComponent,
+    DavoxWorkflowListComponent,
+    NewDavoxBrandComponent,
+    NewDavoxManagementComponent,
+    NewDavoxManagementGroupComponent,
+    NewDavoxWorkflowComponent,
+    UpdateDavoxBrandComponent
 
   ],
   imports: [
@@ -245,6 +271,8 @@ import { SentEventsComponent } from './components/sent-events/sent-events.compon
               { path: 'mobile/new-group', component: NewMobileManagementGroupComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'scl', component: SclGroupsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'scl/new-group', component: NewSclManagementGroupComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'davox', component: DavoxGroupsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'davox/new-group', component: NewDavoxManagementGroupComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
@@ -259,6 +287,9 @@ import { SentEventsComponent } from './components/sent-events/sent-events.compon
               { path: 'scl', component: SclBrandsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'scl/new-brand', component: NewSclBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'scl/updateBrand/:name', component: UpdateSclBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'davox', component: DavoxBrandListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'davox/new-brand', component: NewDavoxBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'davox/updateBrand/:name', component: UpdateDavoxBrandComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
@@ -273,6 +304,9 @@ import { SentEventsComponent } from './components/sent-events/sent-events.compon
               { path: 'scl', component: SclCategoryListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'scl/category/:id', component: SclSubCategoriesListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'scl/category/:id/sub-category/:ref', component: SclSubCategoryElementsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'davox', component: DavoxCategoryListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'davox/category/:id', component: DavoxSubCategoriesListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'davox/category/:id/sub-category/:ref', component: DavoxSubCategoryElementsListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
             ]
           },
           { path: 'users-manager', component: UsersManagerComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['/LUXPfDT7FDLXPBKY6D9eQ=='] } },
@@ -288,6 +322,9 @@ import { SentEventsComponent } from './components/sent-events/sent-events.compon
               { path: 'scl', component: SclWorkflowListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'scl/new-workflow', component: NewSclWorkflowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'scl/edit-workflow/:id', component: SclEditWorkFlowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'davox', component: DavoxWorkflowListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'davox/new-workflow', component: NewDavoxWorkflowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'davox/edit-workflow/:id', component: DavoxEditWorkFlowComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {
@@ -299,6 +336,8 @@ import { SentEventsComponent } from './components/sent-events/sent-events.compon
               { path: 'mobile/new-management', component: NewMobileManagementComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
               { path: 'scl', component: SclManagerListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
               { path: 'scl/new-management', component: NewSclManagementComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
+              { path: 'davox', component: DavoxManagerListComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew==', 'b96MBB6lG83eurS8aj3sUA=='] } },
+              { path: 'davox/new-management', component: NewDavoxManagementComponent, canDeactivate: [PendingChangesGuardService], canActivate: [RoleGuard], data: { expectedRole: ['WTyNx16jQ+WbAgsP8aLHuw==', 'jD0l1JABjCHFXmSPPtR2ew=='] } },
             ]
           },
           {

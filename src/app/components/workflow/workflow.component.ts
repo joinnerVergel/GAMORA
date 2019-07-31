@@ -34,5 +34,11 @@ export class WorkflowComponent implements OnInit {
     }
     return "";
   }
+  getDavoxClass(){
+    if(this.router.url.includes("/workflow/davox",0)){
+      return "active";
+    }
+    return "";
+  }
 
 }

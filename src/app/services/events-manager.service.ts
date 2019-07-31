@@ -75,7 +75,13 @@ export class EventsManagerService {
     if (type == "fixed") {
       return this.http.get(tagsListScriptUrl + "1", this.loginService.getHttpOptions());
     }
-    return this.http.get(tagsListScriptUrl + "2", this.loginService.getHttpOptions());
+    if (type == "mobile") {
+      return this.http.get(tagsListScriptUrl + "2", this.loginService.getHttpOptions());
+    }
+    if (type == "scl") {
+      return this.http.get(tagsListScriptUrl + "3", this.loginService.getHttpOptions());
+    }
+    return this.http.get(tagsListScriptUrl + "4", this.loginService.getHttpOptions());
   }
 
   getBackFormatScript(scriptText: string, tagsList: Array<string>) {

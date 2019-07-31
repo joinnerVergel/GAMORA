@@ -36,5 +36,11 @@ export class ManageBrandsComponent implements OnInit {
     }
     return "";
   }
+  getDavoxClass(){
+    if(this.router.url.includes("/manage-brands/davox",0)){
+      return "active";
+    }
+    return "";
+  }
 
 }

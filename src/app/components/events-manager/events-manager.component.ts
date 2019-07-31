@@ -35,6 +35,12 @@ export class EventsManagerComponent implements OnInit {
     }
     return "";
   }
+  getDavoxClass(){
+    if(this.router.url.includes("/events-manager/davox",0)){
+      return "active";
+    }
+    return "";
+  }
 
  
 
