@@ -57,7 +57,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let j of sentList">
+      <tr *ngFor="let j of sentList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
         <th scope="row">-</th>
         <td>{{j.CodCuenta}}</td>
         <td>{{j.CodCliente}}</td>
@@ -68,13 +68,17 @@
         <td>{{j.Celular}}</td>
         <td>{{j.Correo}}</td>
         <td>{{j.Script}}</td>
-        <td>{{j.FecEnvio}}</td>
+        <td>{{j.FechaEnvio}}</td>
         <td>{{j.HoraEnvio}}</td>
-        <td>{{j.FecAdicion}}</td>
+        <td>{{j.FechaAdicion}}</td>
         <td>{{j.NombreGrupo}}</td>
         <td>{{j.EdadMora}}</td>
         <td>{{j.TipoOperacion}}</td>
       </tr>
     </tbody>
   </table>
+  <ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="items.length"></ngb-pagination>
 </div>

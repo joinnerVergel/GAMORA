@@ -62,7 +62,7 @@ export class SentEventsComponent implements OnInit {
     console.log(r);
 
     this.f.filterText.updateValueAndValidity;
-    console.log(this.f.filterType.value == 'Correo', this.f.filterText.errors.email);
+    // console.log(this.f.filterType.value == 'Correo', this.f.filterText.errors.email);
 
     // if(this.submitted){
     //   let x = this.Validation();
@@ -75,13 +75,14 @@ export class SentEventsComponent implements OnInit {
   applyFilter() {
     let x = this.Validation();
     if (x) {
-      let d:any={campo:this.f.filterType.value,valor:this.f.filterText.value}
+      let d:any={Campo:this.f.filterType.value,Valor:this.f.filterText.value}
       this.sentEvService.readSentEvents(d)
         .subscribe(
           item => {
-            if (item.hasOwnProperty('BuscarUsuarioLDAPResult')) {
-              this.sentList = item['BuscarUsuarioLDAPResult'];
-            }
+            this.sentList = item;
+            // if (item.hasOwnProperty('BuscarUsuarioLDAPResult')) {
+              // this.sentList = item['BuscarUsuarioLDAPResult'];
+            // }
           }, error => {
             if (error['statusText'] == 'Unauthorized' && error['status'] == 401) {
               this.loginService.clearSessionLogin();

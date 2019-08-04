@@ -99,7 +99,7 @@ export const templatesOptionsUrl = profile == "dev" ? "http://localhost:65453/El
 export const templateEmailUrl = profile == "dev" ? "http://localhost:65453/ElementosService.svc/PlantillaCorreo/":"https://10.80.2.89/WCF_CasasDeCobro/ElementosService.svc/PlantillaCorreo/";
 
 
-export const sentEventsUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/carteraCargaDiaria/':'https://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/carteraCargaDiaria/';
+export const sentEventsUrl = profile == "dev" ? 'http://localhost:65453/PqrService.svc/ConsultarPQR':'https://10.80.2.89/WCF_CasasDeCobro/PqrService.svc/ConsultarPQR';
 export const portfolioDetailUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenerica/carteraCargaDiaria/':'https://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenerica/carteraCargaDiaria/';
 export const managementDailyEventsUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenericaConsulta/gestionDiariaEventos/':'https://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenericaConsulta/gestionDiariaEventos/';
 export const monitoringConsoleUrl = profile == "dev" ? 'http://localhost:65453/ListaGenericaService.svc/ListaGenericaConsulta/':'https://10.80.2.89/WCF_CasasDeCobro/ListaGenericaService.svc/ListaGenericaConsulta/';
